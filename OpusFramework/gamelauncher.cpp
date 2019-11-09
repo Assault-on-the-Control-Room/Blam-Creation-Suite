@@ -362,7 +362,6 @@ void GameLauncher::SetupGameContext(GameContext& rGameContext)
 
 
 		int playerCount = GameLauncher::HasCommandLineArg("-multiplayer") ? 2 : 1;
-		playerCount = 1;
 		rGameContext.SessionInfo.PeerIdentifierCount = playerCount;
 		rGameContext.SessionInfo.SessionMembership.Count = playerCount;
 
@@ -386,6 +385,23 @@ void GameLauncher::SetupGameContext(GameContext& rGameContext)
 			FATAL_ERROR("Too many people need to add more data");
 		}
 
+
+		struct sockaddr_in sa;
+		inet_pton(AF_INET, "88.98.242.148", &sa.sin_addr);
+		struct sockaddr_in sa2;
+		inet_pton(AF_INET, "5.67.168.178", &sa2.sin_addr);
+		GameContext context1;
+		GameContext context2;
+		FILE* pPlayer1 = fopen("gamecontext-player1.bin", "rb");
+		FILE* pPlayer2 = fopen("gamecontext-player2.bin", "rb");
+		assert(pPlayer1);
+		assert(pPlayer2);
+		fread(&context1, 1, sizeof(context1), pPlayer1);
+		fread(&context2, 1, sizeof(context2), pPlayer2);
+		static_assert(sizeof(context1) == 178248, "shit");
+
+
+
 		if (rGameContext.SessionInfo.IsHost)
 		{
 			NetworkManager::CreateServerConnection();
@@ -395,20 +411,25 @@ void GameLauncher::SetupGameContext(GameContext& rGameContext)
 			rGameContext.MapId = g_LaunchMapId;
 			rGameContext.CampaignDifficultyLevel = g_LaunchCampaignDifficultyLevel;
 
-			LoadHopperGameVariant(s_pCurrentGameInterface->GetDataAccess(), g_LaunchHopperGameVariant, *reinterpret_cast<s_game_variant*>(rGameContext.GameVariantBuffer));
-			LoadHopperMapVariant(s_pCurrentGameInterface->GetDataAccess(), g_LaunchHopperMapVariant, *reinterpret_cast<s_map_variant*>(rGameContext.MapVariantBuffer));
-			LoadPreviousGamestate("gamestate.hdr", rGameContext);
+			rGameContext.SessionInfo = context1.SessionInfo;
 
-			rGameContext.SessionInfo.LocalMachineID = HostAddress; // this is set
-			rGameContext.SessionInfo.HostAddress = HostAddress;
+			//LoadHopperGameVariant(s_pCurrentGameInterface->GetDataAccess(), g_LaunchHopperGameVariant, *reinterpret_cast<s_game_variant*>(rGameContext.GameVariantBuffer));
+			//LoadHopperMapVariant(s_pCurrentGameInterface->GetDataAccess(), g_LaunchHopperMapVariant, *reinterpret_cast<s_map_variant*>(rGameContext.MapVariantBuffer));
+			//LoadPreviousGamestate("gamestate.hdr", rGameContext);
+
+			//rGameContext.SessionInfo.LocalMachineID = HostAddress; // this is set
+			//rGameContext.SessionInfo.HostAddress = HostAddress;
 		}
 		else
 		{
 			NetworkManager::CreateClientConnection();
 
-			rGameContext.SessionInfo.LocalMachineID = ClientAddress; // this is set
-			rGameContext.SessionInfo.HostAddress = HostAddress;
+			rGameContext.SessionInfo = context2.SessionInfo;
+
+			//rGameContext.SessionInfo.LocalMachineID = ClientAddress; // this is set
+			//rGameContext.SessionInfo.HostAddress = HostAddress;
 		}
+
 	}
 }
 

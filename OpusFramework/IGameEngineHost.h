@@ -101,7 +101,7 @@ public: /* instance functions */
 	/* 34 */ virtual void __fastcall Member34(const wchar_t*, const wchar_t*);
 	/* 35 */ virtual bool __fastcall Member35(wchar_t*, __int64);
 	/* 36 */ virtual __int64 __fastcall NetworkSendTo(NetworkID networkID, char* buffer, uint32_t buffersize, int a5);
-	/* 37 */ virtual __int64 __fastcall NetworkReceiveFrom(char* buffer, uint32_t buffersize, __int64 a4, s_transport_address* transport_address);
+	/* 37 */ virtual __int64 __fastcall NetworkReceiveFrom(char* buffer, uint32_t buffersize, struct sockaddr * from, int * fromlen);
 	/* 38 */ virtual char* __fastcall Member38(unsigned int);
 	/* 39 */ virtual int __fastcall Member39(BYTE* buffer);
 	/* 40 */ virtual bool __fastcall Member40(signed int, __int64, __int64);

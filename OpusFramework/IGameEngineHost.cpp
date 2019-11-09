@@ -348,9 +348,9 @@ __int64 __fastcall IGameEngineHost::NetworkSendTo(NetworkID networkID, char* buf
 	return NetworkManager::SendTo(buffer, buffersize);
 }
 
-__int64 IGameEngineHost::NetworkReceiveFrom(char* buffer, uint32_t buffersize, __int64 a4, s_transport_address* transport_address)
+__int64 IGameEngineHost::NetworkReceiveFrom(char* buffer, uint32_t buffersize, struct sockaddr * from, int * fromlen)
 {
-	return NetworkManager::RecieveFrom(buffer, buffersize);
+	return NetworkManager::RecieveFrom(buffer, buffersize, from, fromlen);
 }
 
 char* __fastcall IGameEngineHost::Member38(unsigned int a1)
