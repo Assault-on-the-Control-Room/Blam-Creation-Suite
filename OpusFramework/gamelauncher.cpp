@@ -241,6 +241,25 @@ void GameLauncher::RegisterTerminationValue(char& rTerminationReference)
 	s_pTerminationFlag = &rTerminationReference;
 }
 
+
+
+
+typedef DWORD (TlsAllocFunc)();
+static TlsAllocFunc* TlsAllocPtr = nullptr;
+DWORD TlsAllocHook()
+{
+	DWORD tlsAllocResult = TlsAllocPtr();
+
+	WriteLineVerbose("TlsAlloc> %d", tlsAllocResult);
+
+	return tlsAllocResult;
+}
+
+void GameLauncher::SetupGlobalHooks()
+{
+	create_dll_hook("Kernel32.dll", "TlsAlloc", TlsAllocHook, TlsAllocPtr);
+}
+
 bool GameLauncher::HasCommandLineArg(LPCSTR pArgument)
 {
 	return strstr(GetCommandLineA(), pArgument) != 0;

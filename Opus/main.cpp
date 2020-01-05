@@ -14,6 +14,7 @@ int WINAPI WinMain(
 
 	GameLauncher::EnsureBink2Win64IsLoaded("bink2w64.dll", "..\\MCC\\Binaries\\Win64");
 
+	GameLauncher::SetupGlobalHooks();
 	GameLauncher::RegisterGameLaunchCallback(EngineVersion::HaloReach, init_halo_reach);
 	GameLauncher::RegisterGameShutdownCallback(EngineVersion::HaloReach, deinit_halo_reach);
 

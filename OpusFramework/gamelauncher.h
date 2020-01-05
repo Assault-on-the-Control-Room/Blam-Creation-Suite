@@ -28,6 +28,7 @@ public:
 	static void Deinit();
 	static void RegisterTerminationValue(char& rTerminationReference);
 
+	static void SetupGlobalHooks();
 	static bool HasCommandLineArg(const char* pArgument);
 	static void Terminate();
 	static void EnsureBink2Win64IsLoaded(const char* pLibName, const char* pFallbackDir = "");
