@@ -609,10 +609,6 @@ void c_game_launcher::render_main_menu()
 		ImGuiWindowFlags_NoResize |
 		ImGuiWindowFlags_NoSavedSettings;
 
-	constexpr ImGuiWindowFlags settings_window_flags =
-		ImGuiWindowFlags_NoResize |
-		ImGuiWindowFlags_NoCollapse |
-		ImGuiWindowFlags_AlwaysAutoResize;
 	if (ImGui::Begin("Main Menu", nullptr, window_flags))
 	{
 		ImGui::Columns(2);
@@ -726,6 +722,11 @@ void c_game_launcher::render_main_menu()
 			ImGui::OpenPopup("Settings");
 		}
 
+	constexpr ImGuiWindowFlags settings_window_flags =
+		ImGuiWindowFlags_NoResize |
+		ImGuiWindowFlags_NoCollapse |
+		ImGuiWindowFlags_AlwaysAutoResize;
+		
 		bool dummy_open = true;
 		if (ImGui::BeginPopupModal("Settings", &dummy_open, settings_window_flags))
 		{
