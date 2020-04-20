@@ -204,8 +204,11 @@ void c_game_launcher::load_settings()
 {
 	float horizontalSensitivity = c_settings_legacy::read_float(_settings_section_legacy_controls, "HorizontalSensitivity", 1.0f);
 	float verticalSensitivity = c_settings_legacy::read_float(_settings_section_legacy_controls, "VerticalSensitivity", 1.0f);
+	horizontalSensitivity = c_settings_legacy::read_float(_settings_section_legacy_controls, "HorizontalSensitivity", 1.0f);
+	verticalSensitivity = c_settings_legacy::read_float(_settings_section_legacy_controls, "VerticalSensitivity", 1.0f);
 	c_mouse_input::set_sensitivity(horizontalSensitivity, verticalSensitivity);
 }
+
 
 void c_game_launcher::opus_tick()
 {
@@ -374,16 +377,16 @@ void c_game_launcher::launch_mcc_game(e_engine_type engine_type)
 				game_context->map_id = static_cast<e_map_id>(selected_map_info->GetMapID());
 
 				c_halo_reach_game_option_selection_legacy::load_game_variant(
-					c_halo_reach_game_host::get_data_access(), 
-					"haloreach", 
-					c_halo_reach_game_option_selection_legacy::s_launch_game_variant.c_str(), 
-					*reinterpret_cast<s_game_variant*>(game_context->game_variant_buffer), 
+					c_halo_reach_game_host::get_data_access(),
+					"haloreach",
+					c_halo_reach_game_option_selection_legacy::s_launch_game_variant.c_str(),
+					*reinterpret_cast<s_game_variant*>(game_context->game_variant_buffer),
 					true);
 				c_halo_reach_game_option_selection_legacy::load_map_variant(
-					c_halo_reach_game_host::get_data_access(), 
+					c_halo_reach_game_host::get_data_access(),
 					"haloreach",
-					c_halo_reach_game_option_selection_legacy::s_launch_map_variant.c_str(), 
-					*reinterpret_cast<s_map_variant*>(game_context->map_variant_buffer), 
+					c_halo_reach_game_option_selection_legacy::s_launch_map_variant.c_str(),
+					*reinterpret_cast<s_map_variant*>(game_context->map_variant_buffer),
 					true);
 				//c_halo_reach_game_option_selection_legacy::load_savegame("gamestate", *game_context);
 				//c_halo_reach_game_option_selection_legacy::load_savefilm(c_halo_reach_game_option_selection_legacy::s_launch_saved_film_filepath.c_str(), *game_context);
@@ -589,6 +592,7 @@ void c_game_launcher::ensure_library_loaded(const char* library_name, const char
 	ASSERT(module_handle != NULL);
 }
 
+
 void c_game_launcher::render_main_menu()
 {
 	if (s_is_game_running) return;
@@ -606,6 +610,11 @@ void c_game_launcher::render_main_menu()
 		ImGuiWindowFlags_NoMove |
 		ImGuiWindowFlags_NoResize |
 		ImGuiWindowFlags_NoSavedSettings;
+
+	constexpr ImGuiWindowFlags settings_window_flags =
+		ImGuiWindowFlags_NoResize |
+		ImGuiWindowFlags_NoCollapse |
+		ImGuiWindowFlags_AlwaysAutoResize;
 	if (ImGui::Begin("Main Menu", nullptr, window_flags))
 	{
 		ImGui::Columns(2);
@@ -697,7 +706,7 @@ void c_game_launcher::render_main_menu()
 		case _engine_type_eldorado:
 			break;
 #endif
-}
+		}
 
 		ImGui::Dummy(ImVec2(0.0f, 30.0f));
 
@@ -712,6 +721,87 @@ void c_game_launcher::render_main_menu()
 			{
 				start_game(g_engine_type, _next_launch_mode_theater);
 			}
+		}
+		
+		if (ImGui::Button("SETTINGS"))
+			ImGui::OpenPopup("Settings");
+
+		bool dummy_open = true;
+		if (ImGui::BeginPopupModal("Settings", &dummy_open, settings_window_flags))
+		{
+			
+			ImGui::Text("Camera");
+			
+			int fov = c_settings_legacy::read_integer(_settings_section_legacy_camera, "FieldOfView", 90);
+			ImGui::InputInt("Field Of View", &fov);
+			c_settings_legacy::write_integer(_settings_section_legacy_camera, "FieldOfView", fov);
+
+			bool center_crosshair = c_settings_legacy::read_boolean(_settings_section_legacy_camera, "CenteredCrosshair", true);
+			ImGui::Checkbox("Centered Crosshair", &center_crosshair);
+			c_settings_legacy::write_boolean(_settings_section_legacy_camera, "CenteredCrosshair", center_crosshair);
+
+			ImGui::Dummy(ImVec2(0.0f, 20.0f));
+
+			ImGui::Text("Player");
+
+			char service_tag_buffer[4] = {};
+			c_settings_legacy::read_string(_settings_section_legacy_player, "ServiceTag", service_tag_buffer, 4, "117");
+			ImGui::InputText("Service Tag", service_tag_buffer,4);
+			c_settings_legacy::write_string(_settings_section_legacy_player, "ServiceTag", service_tag_buffer);
+
+			char player_name_buffer[16] = {};
+			c_settings_legacy::read_string(_settings_section_legacy_player, "Name", player_name_buffer, 16, "Player");
+			ImGui::InputText("Name", player_name_buffer, 16);
+			c_settings_legacy::write_string(_settings_section_legacy_player, "Name", player_name_buffer);
+
+
+			ImGui::Dummy(ImVec2(0.0f, 20.0f));
+
+
+			ImGui::Text("Debug");
+		
+			if (g_engine_type == _engine_type_halo_reach)
+			{
+				bool pancam_enabled = c_settings_legacy::read_boolean(_settings_section_legacy_debug, "PancamEnabled", false);
+				ImGui::Checkbox("Pancam", &pancam_enabled);
+				c_settings_legacy::write_boolean(_settings_section_legacy_debug, "PancamEnabled", pancam_enabled);
+
+				bool allow_night_vision_in_multiplayer = c_settings_legacy::read_boolean(_settings_section_legacy_debug, "AllowNightVisionInMultiplayer", true);
+				ImGui::Checkbox("Allow night vision in multiplayer", &allow_night_vision_in_multiplayer);
+				c_settings_legacy::write_boolean(_settings_section_legacy_debug, "AllowNightVisionInMultiplayer", allow_night_vision_in_multiplayer);
+				
+				bool allow_ai_spawning_with_scripts_and_effects = c_settings_legacy::read_boolean(_settings_section_legacy_debug, "SpawnAiWithScriptsAndEffects", true);
+				ImGui::Checkbox("Allow spawning ai through effects and scripts", &allow_ai_spawning_with_scripts_and_effects);
+				c_settings_legacy::write_boolean(_settings_section_legacy_debug, "SpawnAiWithScriptsAndEffects", allow_ai_spawning_with_scripts_and_effects);
+				
+				bool hs_print_is_replaced = c_settings_legacy::read_boolean(_settings_section_legacy_debug, "ReplacePrintScriptEvaluate", true);
+				ImGui::Checkbox("Replace Print Script Evaluate", &hs_print_is_replaced);
+				c_settings_legacy::write_boolean(_settings_section_legacy_debug, "ReplacePrintScriptEvaluate", hs_print_is_replaced);
+
+				if (hs_print_is_replaced)
+				{
+					bool hs_print_to_hud = c_settings_legacy::read_boolean(_settings_section_legacy_debug, "PrintToHud", false);
+					ImGui::Checkbox("Print to Hud", &hs_print_to_hud);
+					c_settings_legacy::write_boolean(_settings_section_legacy_debug, "PrintToHud", hs_print_to_hud);
+				}
+
+			}
+
+			ImGui::Dummy(ImVec2(0.0f, 20.0f));
+			
+			// Controls
+			ImGui::Text("Sensitivity");
+			float horizontalSensitivity = c_settings_legacy::read_float(_settings_section_legacy_controls, "HorizontalSensitivity", 1.0f);
+			ImGui::InputFloat("Horizontal Sensitivity", &horizontalSensitivity);
+			c_settings_legacy::write_string(_settings_section_legacy_controls, "HorizontalSensitivity", std::to_string(horizontalSensitivity).c_str());
+
+			float verticalSensitivity = c_settings_legacy::read_float(_settings_section_legacy_controls, "VerticalSensitivity", 1.0f);
+			ImGui::InputFloat("Vertical Sensitivity", &verticalSensitivity);
+			c_settings_legacy::write_string(_settings_section_legacy_controls, "VerticalSensitivity", std::to_string(verticalSensitivity).c_str());
+
+			ImGui::Dummy(ImVec2(0.0f, 20.0f));
+
+			ImGui::EndPopup();
 		}
 
 		ImGui::Dummy(ImVec2(0.0f, 20.0f));
