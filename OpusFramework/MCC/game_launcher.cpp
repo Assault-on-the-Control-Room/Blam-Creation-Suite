@@ -722,35 +722,64 @@ void c_game_launcher::render_main_menu()
 		}
 		
 		if (ImGui::Button("SETTINGS"))
+		{
 			ImGui::OpenPopup("Settings");
+		}
 
 		bool dummy_open = true;
 		if (ImGui::BeginPopupModal("Settings", &dummy_open, settings_window_flags))
 		{
+			// initialize variables
+			static int fov;
+			
+			static bool center_crosshair;
+			static bool pancam_enabled;
+			static bool allow_night_vision_in_multiplayer;
+			static bool allow_ai_spawning_with_scripts_and_effects;
+			static bool hs_print_is_replaced;
+			static bool hs_print_to_hud;
+
+			static float horizontalSensitivity;
+			static float verticalSensitivity;
+
+			static char service_tag_buffer[4] = {};
+			static char player_name_buffer[16] = {};
+
+			// Read Settings
+			if (ImGui::IsWindowAppearing())
+			{
+				fov = c_settings_legacy::read_integer(_settings_section_legacy_camera, "FieldOfView", 90);
+				center_crosshair = c_settings_legacy::read_boolean(_settings_section_legacy_camera, "CenteredCrosshair", true);
+				
+				c_settings_legacy::read_string(_settings_section_legacy_player, "ServiceTag", service_tag_buffer, 4, "117");
+				c_settings_legacy::read_string(_settings_section_legacy_player, "Name", player_name_buffer, 16, "Player");
+				
+				pancam_enabled = c_settings_legacy::read_boolean(_settings_section_legacy_debug, "PancamEnabled", false);
+				allow_night_vision_in_multiplayer = c_settings_legacy::read_boolean(_settings_section_legacy_debug, "AllowNightVisionInMultiplayer", true);
+				allow_ai_spawning_with_scripts_and_effects = c_settings_legacy::read_boolean(_settings_section_legacy_debug, "SpawnAiWithScriptsAndEffects", true);
+				hs_print_is_replaced = c_settings_legacy::read_boolean(_settings_section_legacy_debug, "ReplacePrintScriptEvaluate", true);
+				hs_print_to_hud = c_settings_legacy::read_boolean(_settings_section_legacy_debug, "PrintToHud", false);
+
+				horizontalSensitivity = c_settings_legacy::read_float(_settings_section_legacy_controls, "HorizontalSensitivity", 1.0f);
+				verticalSensitivity = c_settings_legacy::read_float(_settings_section_legacy_controls, "VerticalSensitivity", 1.0f);
+			}
 			
 			ImGui::Text("Camera");
 			
-			int fov = c_settings_legacy::read_integer(_settings_section_legacy_camera, "FieldOfView", 90);
-			ImGui::InputInt("Field Of View", &fov);
-			c_settings_legacy::write_integer(_settings_section_legacy_camera, "FieldOfView", fov);
 
-			bool center_crosshair = c_settings_legacy::read_boolean(_settings_section_legacy_camera, "CenteredCrosshair", true);
+			ImGui::InputInt("Field Of View", &fov);
+
+		
 			ImGui::Checkbox("Centered Crosshair", &center_crosshair);
-			c_settings_legacy::write_boolean(_settings_section_legacy_camera, "CenteredCrosshair", center_crosshair);
+
 
 			ImGui::Dummy(ImVec2(0.0f, 20.0f));
 
 			ImGui::Text("Player");
 
-			char service_tag_buffer[4] = {};
-			c_settings_legacy::read_string(_settings_section_legacy_player, "ServiceTag", service_tag_buffer, 4, "117");
 			ImGui::InputText("Service Tag", service_tag_buffer,4);
-			c_settings_legacy::write_string(_settings_section_legacy_player, "ServiceTag", service_tag_buffer);
 
-			char player_name_buffer[16] = {};
-			c_settings_legacy::read_string(_settings_section_legacy_player, "Name", player_name_buffer, 16, "Player");
 			ImGui::InputText("Name", player_name_buffer, 16);
-			c_settings_legacy::write_string(_settings_section_legacy_player, "Name", player_name_buffer);
 
 
 			ImGui::Dummy(ImVec2(0.0f, 20.0f));
@@ -760,47 +789,66 @@ void c_game_launcher::render_main_menu()
 		
 			if (g_engine_type == _engine_type_halo_reach)
 			{
-				bool pancam_enabled = c_settings_legacy::read_boolean(_settings_section_legacy_debug, "PancamEnabled", false);
 				ImGui::Checkbox("Pancam", &pancam_enabled);
-				c_settings_legacy::write_boolean(_settings_section_legacy_debug, "PancamEnabled", pancam_enabled);
 
-				bool allow_night_vision_in_multiplayer = c_settings_legacy::read_boolean(_settings_section_legacy_debug, "AllowNightVisionInMultiplayer", true);
 				ImGui::Checkbox("Allow night vision in multiplayer", &allow_night_vision_in_multiplayer);
-				c_settings_legacy::write_boolean(_settings_section_legacy_debug, "AllowNightVisionInMultiplayer", allow_night_vision_in_multiplayer);
 				
-				bool allow_ai_spawning_with_scripts_and_effects = c_settings_legacy::read_boolean(_settings_section_legacy_debug, "SpawnAiWithScriptsAndEffects", true);
+
 				ImGui::Checkbox("Allow spawning ai through effects and scripts", &allow_ai_spawning_with_scripts_and_effects);
-				c_settings_legacy::write_boolean(_settings_section_legacy_debug, "SpawnAiWithScriptsAndEffects", allow_ai_spawning_with_scripts_and_effects);
 				
-				bool hs_print_is_replaced = c_settings_legacy::read_boolean(_settings_section_legacy_debug, "ReplacePrintScriptEvaluate", true);
 				ImGui::Checkbox("Replace Print Script Evaluate", &hs_print_is_replaced);
-				c_settings_legacy::write_boolean(_settings_section_legacy_debug, "ReplacePrintScriptEvaluate", hs_print_is_replaced);
 
 				if (hs_print_is_replaced)
 				{
-					bool hs_print_to_hud = c_settings_legacy::read_boolean(_settings_section_legacy_debug, "PrintToHud", false);
 					ImGui::Checkbox("Print to Hud", &hs_print_to_hud);
-					c_settings_legacy::write_boolean(_settings_section_legacy_debug, "PrintToHud", hs_print_to_hud);
 				}
 
 			}
 
 			ImGui::Dummy(ImVec2(0.0f, 20.0f));
-			
-			// Controls
-			ImGui::Text("Sensitivity");
-			float horizontalSensitivity = c_settings_legacy::read_float(_settings_section_legacy_controls, "HorizontalSensitivity", 1.0f);
-			ImGui::InputFloat("Horizontal Sensitivity", &horizontalSensitivity);
-			c_settings_legacy::write_string(_settings_section_legacy_controls, "HorizontalSensitivity", std::to_string(horizontalSensitivity).c_str());
 
-			float verticalSensitivity = c_settings_legacy::read_float(_settings_section_legacy_controls, "VerticalSensitivity", 1.0f);
+			
+			ImGui::Text("Sensitivity");
+
+			ImGui::InputFloat("Horizontal Sensitivity", &horizontalSensitivity);
+			
+
 			ImGui::InputFloat("Vertical Sensitivity", &verticalSensitivity);
-			c_settings_legacy::write_string(_settings_section_legacy_controls, "VerticalSensitivity", std::to_string(verticalSensitivity).c_str());
+			
 
 			ImGui::Dummy(ImVec2(0.0f, 20.0f));
 
+			if (ImGui::Button("Save Settings"))
+			{
+				c_settings_legacy::write_integer(_settings_section_legacy_camera, "FieldOfView", fov);
+				c_settings_legacy::write_boolean(_settings_section_legacy_camera, "CenteredCrosshair", center_crosshair);
+				c_settings_legacy::write_string(_settings_section_legacy_player, "ServiceTag", service_tag_buffer);
+				c_settings_legacy::write_string(_settings_section_legacy_player, "Name", player_name_buffer);
+				c_settings_legacy::write_boolean(_settings_section_legacy_debug, "PancamEnabled", pancam_enabled);
+				c_settings_legacy::write_boolean(_settings_section_legacy_debug, "AllowNightVisionInMultiplayer", allow_night_vision_in_multiplayer);
+				c_settings_legacy::write_boolean(_settings_section_legacy_debug, "SpawnAiWithScriptsAndEffects", allow_ai_spawning_with_scripts_and_effects);
+				c_settings_legacy::write_boolean(_settings_section_legacy_debug, "ReplacePrintScriptEvaluate", hs_print_is_replaced);
+				c_settings_legacy::write_boolean(_settings_section_legacy_debug, "PrintToHud", hs_print_to_hud);
+				c_settings_legacy::write_string(_settings_section_legacy_controls, "HorizontalSensitivity", std::to_string(horizontalSensitivity).c_str());
+				c_settings_legacy::write_string(_settings_section_legacy_controls, "VerticalSensitivity", std::to_string(verticalSensitivity).c_str());
+				ImGui::OpenPopup("SettingsSavedDialog");
+			}
+
+			if (ImGui::BeginPopupModal("SettingsSavedDialog", NULL, settings_window_flags | ImGuiWindowFlags_NoTitleBar))
+			{
+				ImGui::Text("Your settings have been saved!");
+				ImGui::Separator();
+				
+				if (ImGui::Button("OK", ImVec2(120, 0))) { ImGui::CloseCurrentPopup(); }
+				ImGui::SetItemDefaultFocus();
+				ImGui::SameLine();
+
+				ImGui::EndPopup();
+			}
 			ImGui::EndPopup();
 		}
+
+
 
 		ImGui::Dummy(ImVec2(0.0f, 20.0f));
 		if (ImGui::Button("QUIT TO DESKTOP"))
