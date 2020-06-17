@@ -380,7 +380,10 @@ namespace blofeld
 
 	TAG_STRUCT(user_interface_globals_definition_struct_definition)
 	{
+		
+		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_long_flags, "flags", &UserInterfaceTagGlobalsFlagsDefinition },
+		
 		{ _field_explanation, "Shared Globals", "This is a reference to the ui shared globals tag" },
 		{ _field_tag_reference, "shared globals", &g_user_interface_shared_globals_reference },
 		{ _field_explanation, "Multiplayer Variant Settings Interface", "This blob defines the ui for setting multiplayer game variant parameters" },
@@ -394,14 +397,22 @@ namespace blofeld
 		{ _field_block, "player model input settings", &cui_player_model_controller_settings_definition_block },
 		{ _field_block, "player model camera transition settings", &cui_player_model_transition_settings_definition_block },
 		{ _field_tag_reference, "purchase globals", &cookie_purchase_globals_reference },
+		
+		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_tag_reference, "infinity mission images{infinity mission images ref}", &Tag::Reference<struct InfinityUIImages>::s_defaultDefinition },
+		
 		{ _field_block, "active roster settings", &cui_active_roster_settings_block_block },
+		
+		{ _field_version_greater, _engine_type_haloreach,2 },
 		{ _field_explanation, "PGCR Categories Definitions", "This is a reference to the tag storing the categories we want to display in the PGCR" },
 		{ _field_tag_reference, "pgcr categories definitions", &pgcr_enemy_to_category_mapping_definition_reference },
 		{ _field_explanation, "PGCR Damage Types Definitions", "This is a reference to the tag storing details about damage types for display in the PGCR" },
 		{ _field_tag_reference, "pgcr damage types definitions", &pgcr_damage_type_image_mapping_definition_reference },
+		
 		{ _field_explanation, "Campaign State Screen Scripts", "Contains a mapping of campaign map IDs and screen scripts used to implement lobby backgrounds that track campaign state. This block should only be non-empty for the main menu." },
 		{ _field_block, "campaign state screen scripts", &campaign_state_screen_script_block_definition_block },
+
+		{ _field_version_greater, _engine_type_haloreach,9 },
 		{ _field_real, "spawn-timer countdown rate:counts/sec" },
 		{ _field_block, "game intro sequence", &UserInterfaceGameScreenSequenceStepDefinition_block },
 		{ _field_block, "game round end sequence", &UserInterfaceGameScreenSequenceStepDefinition_block },
@@ -411,6 +422,7 @@ namespace blofeld
 		{ _field_tag_reference, "HUD globals#global settings for the HUD. Set this for ingame globals.", &Tag::Reference<struct UserInterfaceHUDGlobalsDefinitions>::s_defaultDefinition },
 		{ _field_tag_reference, "portrait poses", &portrait_poses_definition_reference },
 		{ _field_block, "swap tags", &SwapTagReferenceDefinition_block },
+		
 		{ _field_terminator }
 	};
 
@@ -460,9 +472,12 @@ namespace blofeld
 		{ _field_string_id, "elite biped name" },
 		{ _field_string, "elite ai squad name" },
 		{ _field_string_id, "elite ai start pos" },
+		
+		{ _field_version_greater, _engine_type_haloreach,3 },
 		{ _field_explanation, "Player Portrait Model Names", "These specify the name of a scenario-placed biped to be used for the Player Portrait Appearance model\nEnter the scenario-placed biped (non-AI) name in the \'spartan biped name\' and \'elite biped name\' field" },
 		{ _field_string_id, "spartan portrait biped name" },
 		{ _field_string_id, "elite portrait biped name" },
+		
 		{ _field_explanation, "UI Navigation speed", "This controls tabbing around the UI.  The tab delay is how fast you move around normally. \nTab fast wait is how long the UI waits till using the tab fast delay instead of the tab delay." },
 		{ _field_long_integer, "navigation tab delay msec" },
 		{ _field_long_integer, "navigation tab fast wait msec" },
