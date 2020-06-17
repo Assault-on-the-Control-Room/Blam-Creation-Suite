@@ -22,7 +22,7 @@ namespace blofeld
 		{ _field_struct, "bling_count!", &camera_fx_bling_count_struct_struct_definition },
 		{ _field_struct, "self_illum_preferred", &camera_fx_self_illum_preferred_struct_struct_definition },
 
-		{ _field_version_greater, _engine_type_haloreach,4 },
+		{ _field_version_greater, _engine_type_haloreach, 4 },
 		{ _field_struct, "self_illum_scale", &camera_fx_self_illum_scale_struct_struct_definition },
 		{ _field_struct, "color_grading", &camera_fx_color_grading_struct_struct_definition },
 		{ _field_struct, "filmic_tone_curve", &camera_fx_filmic_tone_curve_struct_struct_definition },
