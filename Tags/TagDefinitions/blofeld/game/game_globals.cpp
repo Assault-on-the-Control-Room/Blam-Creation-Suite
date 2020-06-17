@@ -62,6 +62,8 @@ namespace blofeld
 
 	TAG_BLOCK_FROM_STRUCT(patch_globals_block, 1, patch_globals_struct_definition_struct_definition );
 
+	TAG_REFERENCE(haloreach_unknown_globals_reference);
+
 	TAG_STRUCT(globals_struct_definition)
 	{
 		{ _field_pad, "YJLTWDSL", 172 },
@@ -72,6 +74,8 @@ namespace blofeld
 		{ _field_block, "DEPRECATED{ai globals}*!", &ai_globals_data_block_block },
 		{ _field_tag_reference, "ai globals ref", &ai_globals_reference },
 		{ _field_block, "damage table", &game_globals_damage_block_block },
+		{ _field_version_equal, _engine_type_haloreach },
+		{ _field_tag_reference, "unknown@", &haloreach_unknown_globals_reference },
 		{ _field_block, "sounds", &sound_block_block },
 		{ _field_block, "camera", &camera_block_block },
 		{ _field_block, "controller input", &controller_input_block_block },
