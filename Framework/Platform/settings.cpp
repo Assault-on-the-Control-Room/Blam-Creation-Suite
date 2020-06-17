@@ -1,21 +1,21 @@
 #include "platform-private-pch.h"
 
-bool c_settings::read_boolean(e_settings_section section, const char* pName, bool defaultValue /*= false*/)
+bool c_settings::read_boolean(e_settings_section section, const char* name, bool defaultValue /*= false*/)
 {
-	const char* pSectionName = get_section_name_string(section);
-	return !!GetPrivateProfileIntA(pSectionName, pName, defaultValue, k_settings_path);
+	const char* section_name = get_section_name_string(section);
+	return !!GetPrivateProfileIntA(section_name, name, defaultValue, k_settings_path);
 }
 
-int c_settings::read_integer(e_settings_section section, const char* pName, int defaultValue /*= 0*/)
+int c_settings::read_integer(e_settings_section section, const char* name, int defaultValue /*= 0*/)
 {
-	const char* pSectionName = get_section_name_string(section);
-	return GetPrivateProfileIntA(pSectionName, pName, defaultValue, k_settings_path);
+	const char* section_name = get_section_name_string(section);
+	return GetPrivateProfileIntA(section_name, name, defaultValue, k_settings_path);
 }
 
-float c_settings::read_float(e_settings_section section, const char* pName, float defaultValue /*= 0.0*/)
+float c_settings::read_float(e_settings_section section, const char* name, float defaultValue /*= 0.0*/)
 {
 	char floatBuffer[32] = {};
-	uint32_t length = read_string(section, pName, floatBuffer, sizeof(floatBuffer), "");
+	uint32_t length = read_string(section, name, floatBuffer, sizeof(floatBuffer), "");
 
 	if (length)
 	{
@@ -25,61 +25,71 @@ float c_settings::read_float(e_settings_section section, const char* pName, floa
 	return defaultValue;
 }
 
-uint32_t c_settings::read_string(e_settings_section section, const char* pName, char* buffer, uint32_t buffer_size, const char* pDefaultValue /*= nullptr*/)
+uint32_t c_settings::read_string(e_settings_section section, const char* name, char* buffer, uint32_t buffer_size, const char* default_value /*= nullptr*/)
 {
 	if (buffer_size > 0)
 	{
-		const char* pSectionName = get_section_name_string(section);
+		const char* section_name = get_section_name_string(section);
 		memset(buffer, 0, buffer_size);
-		GetPrivateProfileStringA(pSectionName, pName, pDefaultValue, buffer, buffer_size, k_settings_path);
+		GetPrivateProfileStringA(section_name, name, default_value, buffer, buffer_size, k_settings_path);
 		return static_cast<uint32_t>(strlen(buffer));
 	}
 	return 0;
 }
 
-uint32_t c_settings::read_wstring(e_settings_section section, const char* pName, wchar_t* buffer, uint32_t buffer_size, const wchar_t* pDefaultValue /*= nullptr*/)
+uint32_t c_settings::read_wstring(e_settings_section section, const char* name, wchar_t* buffer, uint32_t buffer_size, const wchar_t* default_value /*= nullptr*/)
 {
 	if (buffer_size > 0)
 	{
-		const char* pSectionName = get_section_name_string(section);
+		const char* section_name = get_section_name_string(section);
 		memset(buffer, 0, buffer_size);
 
-		size_t widecharNameBufferSize = (strlen(pName) + 1) * sizeof(wchar_t);
+		size_t widecharNameBufferSize = (strlen(name) + 1) * sizeof(wchar_t);
 		wchar_t* pWidecharNameBuffer = static_cast<wchar_t*>(alloca(widecharNameBufferSize));
 		memset(pWidecharNameBuffer, 0, widecharNameBufferSize);
-		_snwprintf(pWidecharNameBuffer, widecharNameBufferSize / sizeof(wchar_t), L"%S", pName);
+		_snwprintf(pWidecharNameBuffer, widecharNameBufferSize / sizeof(wchar_t), L"%S", name);
 
-		size_t widecharSectionNameBufferSize = (strlen(pSectionName) + 1) * sizeof(wchar_t);
+		size_t widecharSectionNameBufferSize = (strlen(section_name) + 1) * sizeof(wchar_t);
 		wchar_t* pwidecharSectionNameBuffer = static_cast<wchar_t*>(alloca(widecharSectionNameBufferSize));
 		memset(pwidecharSectionNameBuffer, 0, widecharSectionNameBufferSize);
-		_snwprintf(pwidecharSectionNameBuffer, widecharSectionNameBufferSize / sizeof(wchar_t), L"%S", pSectionName);
+		_snwprintf(pwidecharSectionNameBuffer, widecharSectionNameBufferSize / sizeof(wchar_t), L"%S", section_name);
 
-		GetPrivateProfileStringW(pwidecharSectionNameBuffer, pWidecharNameBuffer, pDefaultValue, buffer, buffer_size, k_settings_path_wide);
+		GetPrivateProfileStringW(pwidecharSectionNameBuffer, pWidecharNameBuffer, default_value, buffer, buffer_size, k_settings_path_wide);
 		return static_cast<uint32_t>(wcslen(buffer));
 	}
 	return 0;
 }
 
-bool c_settings::write_boolean(e_settings_section section, const char* pName, bool value)
+bool c_settings::write_boolean(e_settings_section section, const char* name, bool value)
 {
-	const char* pSectionName = get_section_name_string(section);
-	return WritePrivateProfileStringA(pSectionName, pName, value ? "1" : "0", k_settings_path);
+	const char* section_name = get_section_name_string(section);
+	return WritePrivateProfileStringA(section_name, name, value ? "1" : "0", k_settings_path);
 }
 
-bool c_settings::write_integer(e_settings_section section, const char* pName, int value)
+bool c_settings::write_integer(e_settings_section section, const char* name, int value)
 {
-	const char* pSectionName = get_section_name_string(section);
+	const char* section_name = get_section_name_string(section);
 	size_t buffer_length = static_cast<int>(logl(UINT_MAX)) + 2;
 	char* buffer = static_cast<char*>(alloca(buffer_length));
 	memset(buffer, 0, buffer_length);
 	_itoa(value, buffer, 10);
-	return WritePrivateProfileStringA(pSectionName, pName, buffer, k_settings_path);
+	return WritePrivateProfileStringA(section_name, name, buffer, k_settings_path);
 }
 
-bool c_settings::write_string(e_settings_section section, const char* pName, const char* pValue)
+bool c_settings::write_string(e_settings_section section, const char* name, const char* value)
 {
-	const char* pSectionName = get_section_name_string(section);
-	return WritePrivateProfileStringA(pSectionName, pName, pValue, k_settings_path);
+	const char* section_name = get_section_name_string(section);
+	return WritePrivateProfileStringA(section_name, name, value, k_settings_path);
+}
+
+bool c_settings::write_wstring(e_settings_section section, const char* name, const wchar_t* value)
+{
+	const char* section_name = get_section_name_string(section);
+	c_fixed_wide_string_256 section_name_wide;
+	section_name_wide.format(L"%S", section_name);
+	c_fixed_wide_string_256 name_wide;
+	name_wide.format(L"%S", name);
+	return WritePrivateProfileStringW(section_name_wide.c_str(), name_wide.c_str(), value, k_settings_path_wide);
 }
 
 const char* c_settings::get_section_name_string(e_settings_section section)

@@ -7,35 +7,24 @@ c_mandrill_user_interface::c_mandrill_user_interface(c_window& window, bool is_g
 	c_mandrill_tab("Mandrill", "", nullptr),
 	window(window),
 	is_session_restored(false),
-	is_exiting(false),
 	is_game_mode(is_game_mode),
 	window_open(true),
 	show_file_dialogue(false),
 	on_close(),
 	mandrill_theme_color_count(0),
 	mandrill_theme_var_count(0),
-	file_browser(nullptr)
+	file_browser()
 {
-	c_fixed_path previous_file_path;
-	c_settings::read_string(_settings_section_mandrill, k_previous_open_filepath_setting, previous_file_path.str(), previous_file_path.capacity(), "");
-	file_browser = new ImGuiAddons::ImGuiFileBrowser(previous_file_path.c_str());
-
 	restore_previous_session();
 	open_cache_file(startup_file);
 }
 
 c_mandrill_user_interface::~c_mandrill_user_interface()
 {
-	save_current_session();
-
-	is_exiting = true;
-
-	for (c_mandrill_tab& tab : c_reverse_reference_loop(children.data(), children.size()))
+	for (c_mandrill_tab& tab : c_reference_loop(children.data(), children.size()))
 	{
 		delete& tab;
 	}
-
-	delete file_browser;
 }
 
 void c_mandrill_user_interface::open_cache_file(const wchar_t* filepath)
@@ -96,7 +85,7 @@ void c_mandrill_user_interface::restore_previous_session()
 
 void c_mandrill_user_interface::save_current_session()
 {
-	if (!is_session_restored || is_exiting)
+	if (!is_session_restored)
 	{
 		return;
 	}
@@ -115,6 +104,7 @@ void c_mandrill_user_interface::save_current_session()
 	}
 
 	c_settings::write_wstring(_settings_section_mandrill, "open_maps", open_maps_path.c_str());
+	//c_settings::write_wstring(_settings_section_mandrill, "open_maps", L"C:\\!MCC\\haloreach\\maps\\forge_halo.map;C:\\!MCC\\haloreach\\maps\\m45.map");
 }
 
 void c_mandrill_user_interface::render()
@@ -256,22 +246,16 @@ void c_mandrill_user_interface::render_file_dialogue_gui_impl()
 {
 	if (show_file_dialogue)
 	{
-		ASSERT(file_browser != nullptr);
-
 		float file_browser_window_width = std::clamp(window.get_width_float(), 700.0f, 1200.0f);
 		float file_browser_window_height = std::clamp(window.get_height_float(), 310.0f, 675.0f);
-		if (file_browser->show_open_file_dialog("Open File", ImVec2(file_browser_window_width, file_browser_window_height), ".map"))
+		if (file_browser.show_open_file_dialog("Open File", ImVec2(file_browser_window_width, file_browser_window_height), ".map"))
 		{
 			show_file_dialogue = false;
 
-			const char* selected_file_path = file_browser->get_selected_file_name();
-			if (selected_file_path)
-			{
-				c_settings::write_string(_settings_section_mandrill, k_previous_open_filepath_setting, file_browser->get_current_path());
-				c_fixed_wide_path selected_file_path_buffer;
-				selected_file_path_buffer.format(L"%S", selected_file_path);
-				open_cache_file(selected_file_path_buffer.c_str());
-			}
+			const char* selected_file_path = file_browser.get_selected_file_name();
+			c_fixed_wide_path selected_file_path_buffer;
+			selected_file_path_buffer.format(L"%S", selected_file_path);
+			open_cache_file(selected_file_path_buffer.c_str());
 		}
 	}
 	else

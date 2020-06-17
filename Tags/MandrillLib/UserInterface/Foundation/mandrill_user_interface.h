@@ -46,15 +46,14 @@ protected:
 
 	c_window& window;
 	bool is_session_restored;
-	bool is_exiting;
 	bool is_game_mode;
 	bool window_open;
 	bool show_file_dialogue;
 	int mandrill_theme_color_count;
 	int mandrill_theme_var_count;
-	ImGuiAddons::ImGuiFileBrowser* file_browser;
+	ImGuiAddons::ImGuiFileBrowser file_browser;
 
 	static t_get_tag_game_memory_callback* s_get_tag_game_memory;
 	static t_get_tag_section_address_callback* s_get_tag_section_address;
-	static constexpr const char* k_previous_open_filepath_setting = "previous_open_filepath";
+
 };
