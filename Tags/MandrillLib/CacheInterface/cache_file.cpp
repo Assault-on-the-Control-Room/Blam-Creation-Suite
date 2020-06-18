@@ -32,13 +32,14 @@ e_engine_type c_cache_file::get_cache_file_engine_type(const wchar_t* filepath)
 
 		long long header_size = _ftelli64(file_handle);
 
-		const long long  k_halo_reach_header_memory_footprint = 0xA000;
+		const long long  k_haloreach_header_memory_footprint = 0xA000;
+		const long long  k_halo2_header_memory_footprint = 0x1000;
 		const long long  k_halo3_header_memory_footprint = 0x3000;
 		const long long  k_halo4_header_memory_footprint = 0x1E000;
 
 		switch (header_size)
 		{
-		case k_halo_reach_header_memory_footprint:
+		case k_haloreach_header_memory_footprint:
 			c_console::write_line_verbose("cache file type halo reach");
 			engine_type = _engine_type_haloreach;
 			break;
@@ -49,6 +50,10 @@ e_engine_type c_cache_file::get_cache_file_engine_type(const wchar_t* filepath)
 		case k_halo4_header_memory_footprint:
 			c_console::write_line_verbose("cache file type halo 4");
 			engine_type = _engine_type_halo4;
+			break;
+		case k_halo2_header_memory_footprint:
+			c_console::write_line_verbose("cache file type halo 2");
+			engine_type = _engine_type_halo2;
 			break;
 		default:
 			DEBUG_FATAL_ERROR(L"Unknown map type");

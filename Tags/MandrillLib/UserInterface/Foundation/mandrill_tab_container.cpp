@@ -15,6 +15,9 @@ c_mandrill_tab_container::~c_mandrill_tab_container()
 
 void c_mandrill_tab_container::add_tab(c_mandrill_tab& tab)
 {
+	static std::mutex mutex;
+	std::lock_guard lock(mutex);
+
 	REFERENCE_ASSERT(tab);
 	if (std::find(children.begin(), children.end(), &tab) == children.end())
 	{

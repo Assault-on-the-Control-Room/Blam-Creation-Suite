@@ -76,6 +76,8 @@ void c_mandrill_user_interface::restore_previous_session()
 	c_fixed_wide_string<32 * 1024> open_maps_buffer;
 	c_settings::read_wstring(_settings_section_mandrill, "open_maps", open_maps_buffer.str(), open_maps_buffer.capacity(), L"");
 
+	tbb::task_group g;
+
 	c_fixed_wide_path open_maps_path;
 	const wchar_t* read_position = open_maps_buffer.c_str();
 	while (*read_position != 0)
@@ -86,11 +88,13 @@ void c_mandrill_user_interface::restore_previous_session()
 			read_position++;
 		}
 
-		open_cache_file(open_maps_path.c_str());
+		g.run([this, open_maps_path] { open_cache_file(open_maps_path.c_str()); });
 
 		open_maps_path.clear();
 		read_position++;
 	}
+	g.wait();
+
 	is_session_restored = true;
 }
 

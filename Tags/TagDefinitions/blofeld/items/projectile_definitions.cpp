@@ -119,11 +119,17 @@ namespace blofeld
 		{ _field_struct, "object", &object_struct_definition_struct_definition },
 		{ _field_custom, "$$$ PROJECTILE $$$" },
 		{ _field_long_flags, "flags", &projectile_flags },
+
+		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_long_flags, "secondary flags", &secondary_projectile_flags },
+
 		{ _field_enum, "detonation timer starts", &projectile_detonation_timer_modes },
 		{ _field_enum, "impact noise", &ai_sound_volume_enum },
+
+		{ _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_real, "detonation biped proximity:wu#if >0, both \'detonation timer starts\' + a biped must be within this proximity for condition to be met; see \'biped proximity enemies only\' flag" },
 		{ _field_real, "max lifetime to detonate:seconds#if >0, projectile will detonate regardless of other conditions after this total time" },
+
 		{ _field_real, "collision radius:world units" },
 		{ _field_explanation, "detonation", "" },
 		{ _field_real, "arming time:seconds#won\'t detonate before this time elapses" },
@@ -140,15 +146,21 @@ namespace blofeld
 		{ _field_enum, "detonation noise", &ai_sound_volume_enum },
 		{ _field_short_integer, "super det. projectile count" },
 		{ _field_real, "super det. time" },
+
+		{ _field_version_greater, _engine_type_haloreach, 3 },
 		{ _field_real_bounds, "super det. range:world units#The range within which supercombine will happen - outside this range, no supercombine" },
 		{ _field_tag_reference, "super det. behavior#An equipment reference that is attached to the target upon super detonation", &behavior_object_reference },
 		{ _field_real, "tether release safety delay#if the weapon the projectile is tethered to loses its owner, this amount of time will pass before detonation" },
+
 		{ _field_explanation, "tethering", "A detonating tethered projectile attached to an object will use the \'super\' versions of damage ie \'super attached detonation damage\' instead of \'attached detonation damage\'." },
 		{ _field_tag_reference, "detonation started#effect", &global_effect_reference },
 		{ _field_tag_reference, "detonation effect (airborne)", &global_effect_reference },
 		{ _field_tag_reference, "detonation effect (ground)", &global_effect_reference },
 		{ _field_tag_reference, "detonation damage", &global_damage_reference },
+
+		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_tag_reference, "detonation behavior#An equipment reference that is attached to the target upon detonation", &behavior_object_reference },
+
 		{ _field_tag_reference, "attached detonation damage", &global_damage_reference },
 		{ _field_tag_reference, "super detonation", &global_effect_reference },
 		{ _field_struct, "your momma", &super_detonation_damage_struct_struct_definition },
@@ -196,8 +208,11 @@ namespace blofeld
 		{ _field_block, "fire bomb grenade", &fire_bomb_grenade_block_block },
 		{ _field_block, "conical spread", &conical_projection_block_block },
 		{ _field_tag_reference, "grounded friction settings#If not present, the default from global.globals is used.", &global_grounded_friction_reference },
+
+		{ _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_tag_reference, "killcam parameters# if not present, first person will be used.", &Tag::Reference<struct KillCamCameraParameterDefinition>::s_defaultDefinition },
 		{ _field_block, "Sound RTPCs", &ProjectileSoundRTPCBlock_block },
+
 		{ _field_custom },
 		{ _field_terminator }
 	};
