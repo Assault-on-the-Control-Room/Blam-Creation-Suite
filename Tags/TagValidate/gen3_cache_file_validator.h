@@ -29,7 +29,18 @@ private:
 		static ImGuiDataType field_to_imgui_data_type(blofeld::e_field field_type);
 		uint32_t get_struct_size(const blofeld::s_tag_struct_definition& struct_definition);
 		uint32_t get_field_size(const blofeld::s_tag_field& field);
-		uint32_t render_tag_struct_definition(c_tag_interface& tag_interface, int level, char* data, const blofeld::s_tag_struct_definition& struct_definition, bool is_block, bool render, bool& is_struct_valid, bool& is_tag_valid, e_cache_file_validator_struct_type struct_type, uint32_t index = 0);
+		uint32_t render_tag_struct_definition(
+			c_tag_interface& tag_interface, 
+			int level,
+			char* data, 
+			const blofeld::s_tag_struct_definition& struct_definition, 
+			bool is_block, 
+			bool render, 
+			bool& is_struct_valid, 
+			bool& is_tag_valid, 
+			uint32_t parent_offset,
+			e_cache_file_validator_struct_type struct_type, 
+			uint32_t index = 0);
 
 		c_gen3_cache_file& cache_file;
 		e_engine_type engine_type;

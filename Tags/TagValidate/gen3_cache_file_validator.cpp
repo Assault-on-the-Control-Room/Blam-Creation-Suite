@@ -90,7 +90,18 @@ uint32_t __log2u(uint32_t index)
 	return value;
 }
 
-uint32_t c_gen3_cache_file_validator::render_tag_struct_definition(c_tag_interface& tag_interface, int level, char* const data, const blofeld::s_tag_struct_definition& struct_definition, bool is_block, bool render, bool& is_struct_valid, bool& is_tag_valid, e_cache_file_validator_struct_type struct_type, uint32_t index)
+uint32_t c_gen3_cache_file_validator::render_tag_struct_definition(
+	c_tag_interface& tag_interface,
+	int level,
+	char* data,
+	const blofeld::s_tag_struct_definition& struct_definition,
+	bool is_block,
+	bool render,
+	bool& is_struct_valid,
+	bool& is_tag_valid,
+	uint32_t parent_offset,
+	e_cache_file_validator_struct_type struct_type,
+	uint32_t index)
 {
 	float indent_size = 20.0f;
 	uint32_t struct_size = get_struct_size(struct_definition);
@@ -145,6 +156,7 @@ uint32_t c_gen3_cache_file_validator::render_tag_struct_definition(c_tag_interfa
 		result.block_is_out_of_range = false;
 		result.block_struct_is_valid = true;
 		result.field_offset = bytes_traversed;
+		result.absolute_offset = parent_offset + bytes_traversed;
 		result.level = level + 1;
 		bool previously_invalid = !is_struct_valid;
 		{
@@ -316,21 +328,22 @@ uint32_t c_gen3_cache_file_validator::render_tag_struct_definition(c_tag_interfa
 					{
 						result.block_is_out_of_range = tag_block.count > current_field->block_definition->max_count;
 
-						char* block_data_position = data_address;
+						uint32_t total_block_bytes_traversed = 0;
 						for (uint32_t tag_block_index = 0; tag_block_index < tag_block.count; tag_block_index++)
 						{
-							uint32_t bytes_traversed = render_tag_struct_definition(
+							uint32_t block_bytes_traversed = render_tag_struct_definition(
 								tag_interface,
 								level + 2,
-								block_data_position,
+								data_address + total_block_bytes_traversed,
 								current_field->block_definition->struct_definition,
 								true,
 								false,
 								result.block_struct_is_valid,
 								is_tag_valid,
+								total_block_bytes_traversed,
 								_cache_file_validator_struct_type_tag_block,
 								tag_block_index);
-							block_data_position += bytes_traversed;
+							total_block_bytes_traversed += block_bytes_traversed;
 						}
 					}
 				}
@@ -347,26 +360,28 @@ uint32_t c_gen3_cache_file_validator::render_tag_struct_definition(c_tag_interfa
 					render,
 					is_struct_valid,
 					is_tag_valid,
+					parent_offset + bytes_traversed,
 					_cache_file_validator_struct_type_structure);
 				break;
 			}
 			case blofeld::_field_array:
 			{
-				char* array_data_position = current_data_position;
+				uint32_t total_array_struct_bytes_traversed = 0;
 				for (uint32_t array_index = 0; array_index < current_field->array_definition->count; array_index++)
 				{
-					uint32_t bytes_traversed = render_tag_struct_definition(
+					uint32_t array_struct_bytes_traversed = render_tag_struct_definition(
 						tag_interface,
 						level + 2,
-						array_data_position,
+						current_data_position + total_array_struct_bytes_traversed,
 						current_field->array_definition->struct_definition,
 						false,
 						render, 
 						is_struct_valid,
 						is_tag_valid,
+						parent_offset + bytes_traversed,
 						_cache_file_validator_struct_type_array,
 						array_index);
-					array_data_position += bytes_traversed;
+					total_array_struct_bytes_traversed += array_struct_bytes_traversed;
 				}
 				break;
 			}
@@ -401,28 +416,31 @@ uint32_t c_gen3_cache_file_validator::render_tag_struct_definition(c_tag_interfa
 				{
 					bool is_struct_valid = true;
 					char* block_data_position_old = cache_file.get_data_with_page_offset(tag_block.address);
-					char* block_data_position = cache_file.get_tag_block_data(tag_block);
+					char* const block_data = cache_file.get_tag_block_data(tag_block);
+					uint32_t total_block_bytes_traversed = 0;
 					for (uint32_t tag_block_index = 0; tag_block_index < tag_block.count/* && (is_struct_valid || show_broken_block_data)*/; tag_block_index++)
 					{
-						if (!cache_file.is_valid_data_address(block_data_position))
+						char* current_block_data = block_data + total_block_bytes_traversed;
+						if (!cache_file.is_valid_data_address(current_block_data))
 						{
 							ImGui::Dummy({ level * indent_size, 0.0f }); 
 							ImGui::SameLine();
 							ImGui::Text("ERROR: TAG BLOCK READ INTO INVALID MEMORY REGION!!!!!!");
 							break;
 						}
-						uint32_t bytes_traversed = render_tag_struct_definition(
+						uint32_t block_bytes_traversed = render_tag_struct_definition(
 							tag_interface,
 							level + 2,
-							block_data_position,
+							current_block_data,
 							current_field->block_definition->struct_definition,
 							true,
 							render,
 							is_struct_valid,
 							is_tag_valid,
+							total_block_bytes_traversed,
 							_cache_file_validator_struct_type_tag_block,
 							tag_block_index);
-						block_data_position += bytes_traversed;
+						total_block_bytes_traversed += block_bytes_traversed;
 					}
 				}
 				break;
@@ -505,6 +523,7 @@ void c_gen3_cache_file_validator::validate_tag_instance(c_gen3_tag_interface& ta
 			render,
 			is_struct_valid,
 			is_tag_valid,
+			0,
 			_cache_file_validator_struct_type_structure);
 		debug_point;
 	}

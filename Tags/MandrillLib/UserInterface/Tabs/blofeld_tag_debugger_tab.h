@@ -28,12 +28,14 @@ protected:
 	static constexpr const char* k_show_broken_block_data_setting = "show_broken_block_data";
 	static constexpr const char* k_show_field_offsets_setting = "show_field_offsets";
 	static constexpr const char* k_show_custom_fields_setting = "show_custom_fields";
+	static constexpr const char* k_use_absolute_offsets_setting = "use_absolute_offsets";
 
 	static bool show_hex_values;
 	static bool show_hex_values_float;
 	static bool show_broken_block_data;
 	static bool show_field_offsets;
 	static bool show_custom_fields;
+	static bool use_absolute_offsets;
 	
 
 	void setup_render_callbacks();

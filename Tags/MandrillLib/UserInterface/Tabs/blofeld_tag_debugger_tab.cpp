@@ -5,6 +5,7 @@ bool c_blofeld_tag_debugger_tab::show_hex_values_float = c_settings::read_boolea
 bool c_blofeld_tag_debugger_tab::show_broken_block_data = c_settings::read_boolean(_settings_section_mandrill, k_show_broken_block_data_setting, false);
 bool c_blofeld_tag_debugger_tab::show_field_offsets = c_settings::read_boolean(_settings_section_mandrill, k_show_field_offsets_setting, true);
 bool c_blofeld_tag_debugger_tab::show_custom_fields = c_settings::read_boolean(_settings_section_mandrill, k_show_custom_fields_setting, false);
+bool c_blofeld_tag_debugger_tab::use_absolute_offsets = c_settings::read_boolean(_settings_section_mandrill, k_use_absolute_offsets_setting, false);
 
 float indent_size = 20.0f;
 
@@ -25,7 +26,8 @@ void c_blofeld_tag_debugger_tab::render_field_name(const blofeld::s_tag_field& f
 	ImGui::SameLine();
 	if (show_field_offsets)
 	{
-		ImGui::Text("0x%X | %s %s", result->field_offset, blofeld::field_to_string(field.field_type), field.name);
+		uint32_t offset = use_absolute_offsets ? result->absolute_offset : result->field_offset;
+		ImGui::Text("0x%X | %s %s", offset, blofeld::field_to_string(field.field_type), field.name);
 	}
 	else
 	{
@@ -801,6 +803,12 @@ void c_blofeld_tag_debugger_tab::render_menu_gui_impl(e_menu_render_type menu_re
 				show_custom_fields = !show_custom_fields;
 				c_settings::write_boolean(_settings_section_mandrill, k_show_custom_fields_setting, show_custom_fields);
 			}
+			if (ImGui::MenuItem(use_absolute_offsets ? "Use Relative Offsets" : "Use Absolute Offsets"))
+			{
+				use_absolute_offsets = !use_absolute_offsets;
+				c_settings::write_boolean(_settings_section_mandrill, k_use_absolute_offsets_setting, use_absolute_offsets);
+			}
+			
 
 			ImGui::EndMenu();
 		}
