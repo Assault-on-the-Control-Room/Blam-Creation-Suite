@@ -20,6 +20,7 @@ namespace blofeld
 		{ _field_block, "dead sphere shapes*#don\'t be an asshole, edit something else!", &spheres_block_block },
 		{ _field_block, "pill shapes*#don\'t be an asshole, edit something else!", &pills_block_block },
 		{ _field_block, "sphere shapes*#don\'t be an asshole, edit something else!", &spheres_block_block },
+		{ _field_version_greater_or_equal, _engine_type_halo4, 3 },
 		{ _field_block, "list sphere shapes*#don\'t be an asshole, edit something else!", &spheres_block_block },
 		{ _field_block, "list shapes*#don\'t be an asshole, edit something else!", &lists_block_block },
 		{ _field_block, "list shape childInfos*#don\'t be an asshole, edit something else!", &list_shapes_block_block },
