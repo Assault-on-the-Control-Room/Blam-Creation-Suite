@@ -147,15 +147,27 @@ namespace blofeld
 		{ _field_real, "boundary +height" },
 		{ _field_real, "boundary -height" },
 		{ _field_char_enum, "boundary shape", &multiplayer_object_boundary_shape },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_pad, "pad_shape", 1 },
+
+		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_pad, "pad_shape", 3 },
+
 		{ _field_explanation, "SPAWNING DATA", "These fields are used for default spawning times and remapping" },
 		{ _field_short_integer, "default spawn time:seconds" },
 		{ _field_short_integer, "default abandonment time:seconds" },
 		{ _field_word_flags, "flags", &multiplayer_object_flags },
+
+		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_pad, "pad1", 2 },
+
 		{ _field_explanation, "RESPAWN ZONE DATA", "These are respawn zone weights, used only for respawn zones" },
 		{ _field_real, "normal weight:aka natural weight" },
+
+		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_block, "falloff function#Multiplier applied to weight (domain is center to radius, range should be 0 to 1).", &spawn_influence_weight_falloff_function_block_block },
+
 		{ _field_explanation, "MARKER DATA", "These fields are only used for defining certain, special markers to use for positional locations if the default position (object origin) is not sufficient" },
 		{ _field_custom },
 		{ _field_string_id, "boundary center marker" },
