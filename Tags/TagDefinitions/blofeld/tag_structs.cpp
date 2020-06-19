@@ -2077,6 +2077,7 @@ namespace blofeld
 		&compute_entry_point_block_block_struct,
 		&compiled_compute_shader_block_block_struct,
 		&halo3_unit_camera_struct_unknown_block_struct,
+		&unit_hud_interfaces_block_block_struct,
 		nullptr
 	};
 

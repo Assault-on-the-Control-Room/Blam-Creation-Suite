@@ -210,6 +210,14 @@ namespace blofeld
 
 	TAG_REFERENCE(integrated_light_toggle_reference, blofeld::INVALID_TAG);
 
+	TAG_REFERENCE(unit_hud_interface_reference);
+
+	TAG_BLOCK(unit_hud_interfaces_block, 65536)
+	{
+		{ _field_tag_reference, "Unit HUD Interface", &unit_hud_interface_reference },
+		{ _field_terminator }
+	};
+
 	TAG_STRUCT(unit_struct_definition)
 	{
 		{ _field_struct, "object", &object_struct_definition_struct_definition },
@@ -339,14 +347,22 @@ namespace blofeld
 		{ _field_string_id, "grounded equipment variant name" },
 
 		{ _field_block, "postures", &unit_postures_block_block },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_block, "HUD Interfaces", &unit_hud_interfaces_block_block },
+
+		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_block, "Hud audio cues", &hud_unit_sound_block_block },
+
 		{ _field_block, "dialogue variants", &dialogue_variant_block_block },
 
 		{ _field_custom, "standard grenade throw" },
+
 		{ _field_version_greater_or_equal, _engine_type_haloreach, 3 },
 		{ _field_real, "grenade angle:degrees" },
 		{ _field_real, "grenade angle max elevation:degrees" },
 		{ _field_real, "grenade angle min elevation:degrees" },
+
 		{ _field_real, "grenade velocity:world units per second" },
 		{ _field_custom },
 
