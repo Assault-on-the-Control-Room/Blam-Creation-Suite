@@ -1,5 +1,7 @@
 #pragma once
 
+class c_cache_file_tab;
+
 using t_get_tag_game_memory_callback = char* (uint16_t tag_index);
 using t_get_tag_section_address_callback = char* (uint32_t address);
 
@@ -19,7 +21,8 @@ public:
 	c_mandrill_user_interface(c_window& window, bool is_game_mode, const wchar_t* startup_file = nullptr);
 	~c_mandrill_user_interface();
 
-	void open_cache_file(const wchar_t* filepath);
+	void open_cache_file_tab(const wchar_t* filepath);
+	void close_cache_file_tab(c_cache_file_tab& tab);
 	void restore_previous_session();
 	void save_current_session();
 	void render();

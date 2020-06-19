@@ -12,7 +12,6 @@ c_cache_file_tab::c_cache_file_tab(c_cache_file& cache_file, c_mandrill_tab& par
 
 c_cache_file_tab::~c_cache_file_tab()
 {
-
 }
 
 c_tag_interface_tab& c_cache_file_tab::open_tag_interface_tab(c_tag_interface& tag_interface)
@@ -276,7 +275,7 @@ void c_cache_file_tab::render_tags_list_tree()
 			has_valid_tag |= is_tag_valid;
 		}
 		if (is_group_tag_valid) ImGui::PushStyleColor(ImGuiCol_Text, { 0.55f, 1.0f, 0.55f, 1.0f });
-		else if(has_valid_tag) ImGui::PushStyleColor(ImGuiCol_Text, { 1.0f, 1.0f, 0.55f, 1.0f });
+		else if (has_valid_tag) ImGui::PushStyleColor(ImGuiCol_Text, { 1.0f, 1.0f, 0.55f, 1.0f });
 		else ImGui::PushStyleColor(ImGuiCol_Text, { 1.0f, 0.55f, 0.55f, 1.0f });
 
 		if (ImGui::TreeNode(group_short_name, "%s - %s", group_name, group_short_name))
@@ -295,7 +294,7 @@ void c_cache_file_tab::render_tags_list_tree()
 				{
 					is_tag_valid = gen3_tag_interface->get_is_tag_valid();
 				}
-				if (is_tag_valid) ImGui::PushStyleColor(ImGuiCol_Text, {0.55f, 1.0f, 0.55f, 1.0f});
+				if (is_tag_valid) ImGui::PushStyleColor(ImGuiCol_Text, { 0.55f, 1.0f, 0.55f, 1.0f });
 				else ImGui::PushStyleColor(ImGuiCol_Text, { 1.0f, 0.55f, 0.55f, 1.0f });
 
 				static ImGuiTreeNodeFlags base_flags = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick | ImGuiTreeNodeFlags_SpanAvailWidth;

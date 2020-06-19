@@ -423,7 +423,7 @@ void c_game_launcher::launch_mcc_game(e_engine_type engine_type)
 					{
 						wchar_t map_filepath[MAX_PATH + 1] = {};
 						_snwprintf(map_filepath, MAX_PATH, L"%S%S.map", "haloreach/maps/", map_file_name);
-						mandrill_user_interface->open_cache_file(map_filepath);
+						mandrill_user_interface->open_cache_file_tab(map_filepath);
 					}
 				}
 			}
