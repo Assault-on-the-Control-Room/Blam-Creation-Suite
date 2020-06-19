@@ -188,14 +188,21 @@ uint32_t c_gen3_cache_file_validator::render_tag_struct_definition(
 			{
 				uint32_t enum_max = current_field->string_list_definition ? current_field->string_list_definition->count : 0;
 				byte enum_value = __log2u(*reinterpret_cast<byte*>(current_data_position));
-				is_struct_valid &= enum_value < enum_max;
+				is_struct_valid &= enum_value < enum_max || (enum_value == 0 && enum_max == 0);
 				break;
 			}
 			case blofeld::_field_word_flags:
 			{
 				uint32_t enum_max = current_field->string_list_definition ? current_field->string_list_definition->count : 0;
 				word enum_value = __log2u(*reinterpret_cast<word*>(current_data_position));
-				is_struct_valid &= enum_value < enum_max;
+				is_struct_valid &= enum_value < enum_max || (enum_value == 0 && enum_max == 0);
+				break;
+			}
+			case blofeld::_field_long_flags:
+			{
+				uint32_t enum_max = current_field->string_list_definition ? current_field->string_list_definition->count : 0;
+				unsigned long enum_value = __log2u(*reinterpret_cast<unsigned long*>(current_data_position));
+				is_struct_valid &= enum_value < enum_max || (enum_value == 0 && enum_max == 0);
 				break;
 			}
 			case blofeld::_field_real:
@@ -249,13 +256,6 @@ uint32_t c_gen3_cache_file_validator::render_tag_struct_definition(
 				result.float_is_out_of_range |= fabsf(float_value1) > float(0xFFFFFFFu);
 				result.float_is_out_of_range |= fabsf(float_value2) > float(0xFFFFFFFu);
 				result.float_is_out_of_range |= fabsf(float_value3) > float(0xFFFFFFFu);
-				break;
-			}
-			case blofeld::_field_long_flags:
-			{
-				uint32_t enum_max = current_field->string_list_definition ? current_field->string_list_definition->count : 0;
-				unsigned long enum_value = __log2u(*reinterpret_cast<unsigned long*>(current_data_position));
-				is_struct_valid &= enum_value < enum_max;
 				break;
 			}
 			case blofeld::_field_string_id:
