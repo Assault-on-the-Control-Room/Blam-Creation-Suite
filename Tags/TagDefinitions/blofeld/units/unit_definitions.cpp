@@ -49,6 +49,12 @@ namespace blofeld
 		{ _field_terminator }
 	};
 
+	TAG_BLOCK(unit_hud_interfaces_block, MAXIMUM_HUD_INTERFACES_PER_UNIT)
+	{
+		{ _field_tag_reference, "Unit HUD Interface" },
+		{ _field_terminator }
+	};
+
 	TAG_BLOCK(dialogue_variant_block, MAXIMUM_DIALOGUE_VARIANTS_PER_UNIT)
 	{
 		{ _field_short_integer, "variant number#variant number to use this dialogue with (must match the suffix in the permutations on the unit\'s model)" },
@@ -89,7 +95,11 @@ namespace blofeld
 	TAG_BLOCK(unit_weapon_block, MAXIMUM_INITIAL_WEAPONS_PER_UNIT)
 	{
 		{ _field_tag_reference, "weapon^", &weapon_reference },
+
+		{ _field_version_greater, _engine_type_halo3 },
 		{ _field_string_id, "variant name" },
+
+		{ _field_version_greater, _engine_type_haloreach, 32},
 		{ _field_long_enum, "position", &initial_weapon_position },
 		{ _field_real, "maximum firing cone angle:degrees#must be greater than zero for turret to fire" },
 		{ _field_real, "minimum retarget time:seconds#minimum time before autoturret will change targets" },
@@ -331,7 +341,13 @@ namespace blofeld
 		{ _field_string_id, "grounded equipment variant name" },
 
 		{ _field_block, "postures", &unit_postures_block_block },
+
+		{ _field_version_less, _engine_type_halo4 },
+		{ _field_block, "HUD Interfaces", &unit_hud_interfaces_block_block },
+
+		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_block, "Hud audio cues", &hud_unit_sound_block_block },
+
 		{ _field_block, "dialogue variants", &dialogue_variant_block_block },
 
 		{ _field_custom, "standard grenade throw" },
