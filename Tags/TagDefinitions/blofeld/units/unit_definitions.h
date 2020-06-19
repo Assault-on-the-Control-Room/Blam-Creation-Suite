@@ -7,6 +7,9 @@ namespace blofeld
 
 	extern s_tag_group unit_group;
 
+	extern s_tag_block_definition hud_screen_reference_block_block;
+	extern s_tag_struct_definition hud_screen_reference_block_block_struct;
+
 	extern s_tag_struct_definition unit_screen_effect_block_block_struct;
 	extern s_tag_block_definition unit_screen_effect_block_block;
 	extern s_tag_struct_definition unit_camera_track_block_block_struct;

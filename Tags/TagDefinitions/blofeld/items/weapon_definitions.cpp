@@ -287,8 +287,11 @@ namespace blofeld
 	{
 		{ _field_tag_reference, "first person model", &render_model_reference$10 },
 		{ _field_tag_reference, "first person animations", &model_animation_graph_reference$4 },
+
+		{ _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_real, "first person fov scale#the multiplier by the standard first person FOV to use when this weapon is held" },
 		{ _field_real, "first person dof distance#the distance to apply depth of field to the weapon" },
+
 		{ _field_terminator }
 	};
 
@@ -308,8 +311,11 @@ namespace blofeld
 		{ _field_short_integer, "rounds total maximum" },
 		{ _field_short_integer, "rounds loaded maximum" },
 		{ _field_short_integer, "runtime rounds inventory maximum" },
+
+		{ _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_short_integer, "Ammopack rounds total initial#AmmoPack armormod - alternate total_initial value due to AmmoPack" },
 		{ _field_short_integer, "Ammopack rounds total maximum#AmmoPack armormod - alternate total_maximum value due to armor mod AmmoPack" },
+
 		{ _field_pad, "pad", 2 },
 		{ _field_real, "reload dialogue time:seconds#the length of time we wait before saying the reload dialogue" },
 		{ _field_short_integer, "rounds reloaded" },

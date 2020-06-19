@@ -140,7 +140,13 @@ namespace blofeld
 		{ _field_explanation, "TYPE AND FLAGS", "Type pertains to how you want the game engine to handle this object\nCertain flags applicable only to certain object types, should be self evident" },
 		{ _field_char_enum, "type", &multiplayer_object_type },
 		{ _field_byte_flags, "teleporter passability:used only for teleporters", &teleporter_passability_flags },
-		{ _field_char_enum, "spawn timer type", &multiplayer_object_spawn_timer_types },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_pad, "pad_shape", 1 },
+
+		{ _field_version_greater, _engine_type_haloreach },
+		{ _field_char_enum, "spawn timer type", &multiplayer_object_spawn_timer_types }, // moved after reach
+
 		{ _field_explanation, "GOAL & RESPAWN ZONE OBJECT BOUNDARY", "These fields are only used for goal area objects with boundaries, and for respawn zones" },
 		{ _field_real, "boundary width/radius" },
 		{ _field_real, "boundary box length" },
@@ -149,7 +155,7 @@ namespace blofeld
 		{ _field_char_enum, "boundary shape", &multiplayer_object_boundary_shape },
 
 		{ _field_version_less_or_equal, _engine_type_haloreach },
-		{ _field_pad, "pad_shape", 1 },
+		{ _field_char_enum, "spawn timer type", &multiplayer_object_spawn_timer_types }, // moved after reach
 
 		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_pad, "pad_shape", 3 },
