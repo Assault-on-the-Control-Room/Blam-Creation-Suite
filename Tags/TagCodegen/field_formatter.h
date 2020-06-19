@@ -3,7 +3,7 @@
 class c_field_formatter
 {
 public:
-	c_field_formatter(const blofeld::s_tag_field* field, const char* name, std::map<std::string, int>& field_name_unique_counter);
+	c_field_formatter(const blofeld::s_tag_field* field, const char* name, std::map<std::string, int>* field_name_unique_counter);
 	void cleanup_code_name();
 
 	c_fixed_string_512 display_name;

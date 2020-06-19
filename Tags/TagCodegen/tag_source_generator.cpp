@@ -112,7 +112,7 @@ void c_tag_source_generator::generate_source()
 
 		for (const s_tag_field* current_field = tag_struct_definition->fields; current_field->field_type != _field_terminator; current_field++)
 		{
-			c_field_formatter field_formatter = c_field_formatter(current_field, current_field->name, field_name_unique_counter);
+			c_field_formatter field_formatter = c_field_formatter(current_field, current_field->name, &field_name_unique_counter);
 			const char* field_type_string = field_to_string(current_field->field_type);
 
 			uint32_t field_skip_count;

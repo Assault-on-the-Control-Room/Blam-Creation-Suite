@@ -3,6 +3,8 @@
 class c_gen3_cache_file_validator;
 struct s_field_validation_result;
 
+class c_field_formatter;
+
 class c_blofeld_tag_debugger_tab :
 	public c_mandrill_tab
 {
@@ -22,6 +24,7 @@ protected:
 	virtual void render_game_layer_impl() override final;
 
 	c_tag_interface& tag_interface;
+	ImVec2 viewport_size;
 
 	static constexpr const char* k_show_hex_values_setting = "show_hex_values";
 	static constexpr const char* k_show_hex_values_float_setting = "show_hex_values_float";
@@ -110,7 +113,8 @@ protected:
 	void render_field_qword_integer(render_field_callback_args);
 #undef callback_args
 
-	void render_field_name(const blofeld::s_tag_field& field, s_field_validation_result* result);
+	void render_field_name(c_field_formatter& field_formatter, const blofeld::s_tag_field& field, s_field_validation_result* result);
+	void render_field_name_and_information(const blofeld::s_tag_field& field, s_field_validation_result* result);
 	void render_field_scalar_type(ImGuiDataType data_type, uint32_t count, int level, char* data, const blofeld::s_tag_field& field, s_field_validation_result* result, const char* format = nullptr);
 private:
 	template<typename t_raw_value> void render_field_enum_type(int level, char* data, const blofeld::s_tag_field& field, s_field_validation_result* result);

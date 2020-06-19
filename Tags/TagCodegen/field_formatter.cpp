@@ -9,7 +9,7 @@ std::pair<const char*, const char*> c_field_formatter::bespoke_fixups[] =
 	{ "scale_x(scale}*", "scale_x{scale}*" } // what a bag of dicks
 };
 
-c_field_formatter::c_field_formatter(const blofeld::s_tag_field* field, const char* name, std::map<std::string, int>& field_name_unique_counter) :
+c_field_formatter::c_field_formatter(const blofeld::s_tag_field* field, const char* name, std::map<std::string, int>* field_name_unique_counter) :
 	display_name(),
 	alt_name(),
 	units(),
@@ -108,12 +108,15 @@ c_field_formatter::c_field_formatter(const blofeld::s_tag_field* field, const ch
 		if (code_name == "final") code_name = "_final";
 		if (code_name == "real") code_name = "_real";
 
-		int unique_field_count = ++field_name_unique_counter[code_name.data];
-
-		if (unique_field_count > 1)
+		if (field_name_unique_counter)
 		{
-			c_fixed_string_512 temp = code_name;
-			code_name.format("%s$%i", temp.data, unique_field_count);
+			int unique_field_count = ++(*field_name_unique_counter)[code_name.data];
+
+			if (unique_field_count > 1)
+			{
+				c_fixed_string_512 temp = code_name;
+				code_name.format("%s$%i", temp.data, unique_field_count);
+			}
 		}
 
 		debug_point;

@@ -100,6 +100,13 @@ namespace blofeld
 		{ _field_explanation, "jumping and landing", "" },
 		{ _field_real, "jump velocity:world units per second" },
 		{ _field_block, "tricks", &unit_trick_definition_block_block },
+
+		// #TODO: This is assumed to be a tag block. Assert on these values and check if they are non zero
+		{ _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_long_integer, "unknown@" }, // assembly
+		{ _field_long_integer, "unknown@" }, // assembly
+		{ _field_long_integer, "unknown@" }, // assembly
+
 		{ _field_useless_pad },
 		{ _field_real, "maximum soft landing time:seconds#the longest amount of time the biped can take to recover from a soft landing" },
 		{ _field_real, "maximum hard landing time:seconds#the longest amount of time the biped can take to recover from a hard landing" },
@@ -150,10 +157,15 @@ namespace blofeld
 		{ _field_short_integer, "death spawn count" },
 		{ _field_pad, "TQYQEWG", 2 },
 		{ _field_struct, "leaping data", &biped_leaping_data_struct_struct_definition },
+
+		{ _field_version_greater, _engine_type_haloreach, 3 },
 		{ _field_struct, "vaulting data", &biped_vaulting_data_struct_struct_definition },
 		{ _field_struct, "grab biped data", &biped_grab_biped_data_struct_struct_definition },
 		{ _field_struct, "grab object data", &biped_grab_object_data_struct_struct_definition },
+
 		{ _field_struct, "ground fitting data", &biped_ground_fitting_data_struct_struct_definition },
+
+		{ _field_version_greater, _engine_type_haloreach, 15 },
 		{ _field_tag_reference, "death particleize#optional particleization effect definition, if you want this to particleize when it dies", &global_particleize_parameters_reference },
 		{ _field_real, "movement speed scale" },
 		{ _field_struct, "movement hip lean", &BipedMovementHipLeaningStruct_struct_definition },
@@ -169,6 +181,7 @@ namespace blofeld
 		{ _field_block, "Sound Sweeteners", &BipedSoundSweetenerBlock_block },
 		{ _field_block, "Aiming Fixup", &BipedAimingJointFixupBlock_block },
 		{ _field_tag_reference, "Self Illumination", &self_illumination_reference },
+
 		{ _field_terminator }
 	};
 
@@ -249,6 +262,11 @@ namespace blofeld
 		{ _field_real, "foot turn weight dampening:dampening of fitting value for fit to turn radius(0=none, 1=fast)" },
 		{ _field_real, "foot turn blend on time:time to blend on the foot turn effect (seconds)" },
 		{ _field_real, "foot turn blend off time:time to blend off the foot turn effect (seconds)" },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach, 2 },
+		{ _field_real, "unknown@" },
+		{ _field_real, "unknown@" },
+
 		{ _field_custom },
 		{ _field_custom, "pivot-on-foot" },
 		{ _field_explanation, "pivot-on-foot data", "" },
@@ -257,6 +275,9 @@ namespace blofeld
 		{ _field_real, "pivot stride length scale: leg length * this = stride length" },
 		{ _field_real_fraction, "pivot throttle scale:pivoting slows throttle (0=none, 1= full)" },
 		{ _field_real_fraction, "pivot offset dampening:react to pivot changes (0=slow, 1= fast)" },
+
+		{ _field_version_greater, _engine_type_haloreach, 18 },
+
 		{ _field_real_fraction, "pivot force turn rate:turn no matter what the pivot state is (0=control turn, 1= always turn)" },
 		{ _field_custom },
 		{ _field_custom, "Ground fitting pelvis elevation settings" },

@@ -59,7 +59,7 @@ void c_virtual_tag_source_generator::generate_header()
 				continue;
 			}
 
-			c_field_formatter field_formatter = c_field_formatter(current_field, current_field->name, field_name_unique_counter);
+			c_field_formatter field_formatter = c_field_formatter(current_field, current_field->name, &field_name_unique_counter);
 
 			switch (current_field->field_type)
 			{
@@ -101,7 +101,7 @@ void c_virtual_tag_source_generator::generate_header()
 				continue;
 			}
 
-			c_field_formatter field_formatter = c_field_formatter(current_field, current_field->name, field_name_unique_counter);
+			c_field_formatter field_formatter = c_field_formatter(current_field, current_field->name, &field_name_unique_counter);
 
 			if (current_field->field_type > _field_type_non_standard)
 			{

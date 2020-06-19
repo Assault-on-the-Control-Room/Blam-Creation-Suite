@@ -9,9 +9,24 @@ namespace blofeld
 	TAG_BLOCK(spheres_block, k_maximum_shapes_per_physics_model)
 	{
 		{ _field_struct, "base", &havok_primitive_struct_struct_definition },
+
 		{ _field_struct, "sphere shape", &havok_convex_shape_struct_struct_definition },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach, 4 },
+		{ _field_long_integer, "unknown@" },
+		{ _field_long_integer, "unknown@" },
+		{ _field_long_integer, "unknown@" },
+		{ _field_long_integer, "unknown@" },
+
 		{ _field_pad, "algn344", 12 },
 		{ _field_struct, "translate shape", &havok_convex_translate_shape_struct_struct_definition },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach, 4 },
+		{ _field_long_integer, "unknown@" },
+		{ _field_long_integer, "unknown@" },
+		{ _field_long_integer, "unknown@" },
+		{ _field_long_integer, "unknown@" },
+
 		{ _field_terminator }
 	};
 
@@ -511,13 +526,23 @@ namespace blofeld
 
 	TAG_STRUCT(havok_convex_shape_struct)
 	{
-		{ _field_struct, "base", &havok_shape_struct_struct_definition },
+		{ _field_struct, "base", & havok_shape_struct_struct_definition },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach, 3 },
+		{ _field_long_integer, "unknown@" },
+		{ _field_long_integer, "unknown@" },
+		{ _field_long_integer, "unknown@" },
+
 		{ _field_real, "radius*!" },
+
 		{ _field_terminator }
 	};
 
 	TAG_STRUCT(havok_shape_struct)
 	{
+		{ _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_long_integer, "unknown@" },
+
 		{ _field_long_integer, "field pointer skip!~" },
 		{ _field_short_integer, "size*~!" },
 		{ _field_short_integer, "count*~!" },
