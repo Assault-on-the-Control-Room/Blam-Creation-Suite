@@ -29,8 +29,11 @@ namespace blofeld
 	TAG_BLOCK(collision_model_permutation_block, MAXIMUM_PERMUTATIONS_PER_MODEL_REGION)
 	{
 		{ _field_string_id, "name^*" },
+
+		{ _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_short_integer, "resourceBspOffset*!" },
 		{ _field_short_integer, "resourceBspCount*!" },
+
 		{ _field_block, "bsps*", &collision_model_bsp_block_block },
 		{ _field_block, "bsp_physics*", &collision_bsp_physics_block_block },
 		{ _field_block, "mopp_codes*", &mopp_code_definition_block_block },
