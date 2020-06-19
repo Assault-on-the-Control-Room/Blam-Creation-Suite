@@ -140,18 +140,32 @@ namespace blofeld
 		{ _field_terminator }
 	};
 
+	TAG_REFERENCE(hud_screen_reference, CUI_SCREEN_TAG);
+
+	TAG_BLOCK(hud_screen_reference_block, 65536)
+	{
+		{ _field_tag_reference, "hud screen reference", & hud_screen_reference },
+		{ _field_terminator }
+	};
+
 	TAG_BLOCK(unit_seat_block, MAXIMUM_SEATS_PER_UNIT_DEFINITION)
 	{
 		{ _field_long_flags, "flags", &unit_seat_flags },
+
+		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_long_flags, "secondary flags", &unit_seat_secondary_flags },
+
 		{ _field_old_string_id, "label^" },
 		{ _field_custom },
 		{ _field_old_string_id, "marker name" },
 		{ _field_custom },
 		{ _field_string_id, "entry marker(s) name" },
+
+		{ _field_version_greater, _engine_type_haloreach, 3 },
 		{ _field_custom },
 		{ _field_string_id, "ui marker name" },
 		{ _field_string_id, "ui navpoint name" },
+
 		{ _field_custom },
 		{ _field_string_id, "boarding grenade marker" },
 		{ _field_string_id, "boarding grenade string" },
@@ -177,13 +191,22 @@ namespace blofeld
 		{ _field_useless_pad },
 		{ _field_explanation, "camera fields", "" },
 		{ _field_struct, "unit camera", &unit_camera_struct_struct_definition },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_block, "hud screen references", &hud_screen_reference_block_block },
+
+		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_tag_reference, "hud screen reference", &Tag::Reference<struct CuiScreenDefinition>::s_defaultDefinition },
+		
 		{ _field_string_id, "enter seat string" },
 		{ _field_useless_pad },
 		{ _field_angle, "yaw minimum" },
 		{ _field_angle, "yaw maximum" },
+
+		{ _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_angle, "yaw minimum for AI operator#only applies when an NPC is considering using this seat" },
 		{ _field_angle, "yaw maximum for AI operator#only applies when an NPC is considering using this seat" },
+
 		{ _field_tag_reference, "built-in gunner", &character_reference },
 		{ _field_useless_pad },
 		{ _field_explanation, "entry fields", "note: the entry radius shouldn\'t exceed 3 world units, \nas that is as far as the player will search for a vehicle\nto enter." },
@@ -199,10 +222,13 @@ namespace blofeld
 		{ _field_string_id, "closing function name#goes from 0 to 1 over the course of closing and stays at 1 while closed.  Drops to 0 immediately when opening starts" },
 		{ _field_string_id, "invisible seat region" },
 		{ _field_long_integer, "runtime invisible seat region index*" },
+
+		{ _field_version_greater, _engine_type_haloreach, 4 },
 		{ _field_explanation, "seat death grab crate", "If this unit dies while this seat is occupied, the occupant will be handed an instance of this crate for throwing purposes." },
 		{ _field_tag_reference, "seat death grab crate", &crate_reference$2 },
 		{ _field_string_id, "Seat Selection String" },
 		{ _field_real, "bailout velocity:wu/s#if exiting in bailout fashion, how much velocity to add in the entry_marker\'s forward direction" },
+
 		{ _field_terminator }
 	};
 
@@ -570,169 +596,169 @@ namespace blofeld
 	STRINGS(unit_camera_acceleration_displacement_input)
 	{
 		"linear velocity",
-			"linear acceleration",
-			"yaw",
-			"pitch",
-			"roll"
+		"linear acceleration",
+		"yaw",
+		"pitch",
+		"roll"
 	};
 	STRING_LIST(unit_camera_acceleration_displacement_input, unit_camera_acceleration_displacement_input_strings, _countof(unit_camera_acceleration_displacement_input_strings));
 
 	STRINGS(unit_camera_flags_definition)
 	{
 		"pitch bounds absolute space",
-			"only collides with environment",
-			"hides player-unit from camera#the player controlling this camera will not see their unit.  All other cameras will see this unit",
-			"use aiming vector instead of marker forward#for cameras without tracks that use a marker position, specifies that we use the unit\'s aiming vector instead of the marker\'s forward vector.\nThis results in more accurate aiming and smoother movement when frames are dropped"
+		"only collides with environment",
+		"hides player-unit from camera#the player controlling this camera will not see their unit.  All other cameras will see this unit",
+		"use aiming vector instead of marker forward#for cameras without tracks that use a marker position, specifies that we use the unit\'s aiming vector instead of the marker\'s forward vector.\nThis results in more accurate aiming and smoother movement when frames are dropped"
 	};
 	STRING_LIST(unit_camera_flags_definition, unit_camera_flags_definition_strings, _countof(unit_camera_flags_definition_strings));
 
 	STRINGS(unit_seat_flags)
 	{
 		"invisible#completely enclosed by vehicle",
-			"locked#when occupied, prevents enemies from entering locked seats",
-			"driver",
-			"gunner",
-			"third person camera",
-			"allows weapons",
-			"third person on enter",
-			"first person camera slaved to gun.",
-			"not valid without driver",
-			"allow AI noncombatants",
-			"boarding seat",
-			"ai firing disabled by max acceleration",
-			"boarding enters seat",
-			"boarding need any passenger",
-			"invalid for player",
-			"invalid for non-player",
-			"invalid for hero",
-			"gunner (player only)",
-			"invisible under major damage",
-			"melee instant killable",
-			"leader preference",
-			"allows exit and detach",
-			"blocks headshots",
-			"exits to ground",
-			"forward from attachment",
-			"disallow AI shooting",
-			"prevents weapon stowing",
-			"takes top level aoe damage",
-			"disallow exit#Prevents the unit currently in the seat from exiting regardless of circumstances",
-			"local aiming",
-			"pelvis relative attachment",
-			"apply velocity on death exit"
+		"locked#when occupied, prevents enemies from entering locked seats",
+		"driver",
+		"gunner",
+		"third person camera",
+		"allows weapons",
+		"third person on enter",
+		"first person camera slaved to gun.",
+		"not valid without driver",
+		"allow AI noncombatants",
+		"boarding seat",
+		"ai firing disabled by max acceleration",
+		"boarding enters seat",
+		"boarding need any passenger",
+		"invalid for player",
+		"invalid for non-player",
+		"invalid for hero",
+		"gunner (player only)",
+		"invisible under major damage",
+		"melee instant killable",
+		"leader preference",
+		"allows exit and detach",
+		"blocks headshots",
+		"exits to ground",
+		"forward from attachment",
+		"disallow AI shooting",
+		"prevents weapon stowing",
+		"takes top level aoe damage",
+		"disallow exit#Prevents the unit currently in the seat from exiting regardless of circumstances",
+		"local aiming",
+		"pelvis relative attachment",
+		"apply velocity on death exit"
 	};
 	STRING_LIST(unit_seat_flags, unit_seat_flags_strings, _countof(unit_seat_flags_strings));
 
 	STRINGS(unit_seat_secondary_flags)
 	{
 		"biped grab seat",
-			"low hanging cargo",
-			"ninja hot seat",
-			"skip obstacle check",
-			"search parent for entry marker",
-			"gunner release aim on exit#The unit\'s aim will no longer be controlled by gunner when it exits",
-			"fully open before allowing exit",
-			"finish melee before allowing exit",
-			"kill parent if unit in seat dies",
-			"co-pilot#opens and closes the cockpit to allow copilot in (if already closed)"
+		"low hanging cargo",
+		"ninja hot seat",
+		"skip obstacle check",
+		"search parent for entry marker",
+		"gunner release aim on exit#The unit\'s aim will no longer be controlled by gunner when it exits",
+		"fully open before allowing exit",
+		"finish melee before allowing exit",
+		"kill parent if unit in seat dies",
+		"co-pilot#opens and closes the cockpit to allow copilot in (if already closed)"
 	};
 	STRING_LIST(unit_seat_secondary_flags, unit_seat_secondary_flags_strings, _countof(unit_seat_secondary_flags_strings));
 
 	STRINGS(global_ai_seat_type_enum)
 	{
 		"NONE",
-			"passenger",
-			"gunner",
-			"small cargo",
-			"large cargo",
-			"driver"
+		"passenger",
+		"gunner",
+		"small cargo",
+		"large cargo",
+		"driver"
 	};
 	STRING_LIST(global_ai_seat_type_enum, global_ai_seat_type_enum_strings, _countof(global_ai_seat_type_enum_strings));
 
 	STRINGS(initial_weapon_position)
 	{
 		"primary or backpack",
-			"secondary"
+		"secondary"
 	};
 	STRING_LIST(initial_weapon_position, initial_weapon_position_strings, _countof(initial_weapon_position_strings));
 
 	STRINGS(sentryTurretBehaviorFlagDefinition)
 	{
 		"performs yaw scanning",
-			"secondary barrel starts enabled",
-			"suppress secondary barrel for light vehicles#Can be used to prevent turret from using its big guns on a mongoose",
-			"only use vehicle range scale if secondary barrel active",
-			"only use vehicle score bonus if secondary barrel active"
+		"secondary barrel starts enabled",
+		"suppress secondary barrel for light vehicles#Can be used to prevent turret from using its big guns on a mongoose",
+		"only use vehicle range scale if secondary barrel active",
+		"only use vehicle score bonus if secondary barrel active"
 	};
 	STRING_LIST(sentryTurretBehaviorFlagDefinition, sentryTurretBehaviorFlagDefinition_strings, _countof(sentryTurretBehaviorFlagDefinition_strings));
 
 	STRINGS(unit_flags_part1)
 	{
 		"circular aiming",
-			"destroyed after dying",
-			"half-speed interpolation",
-			"fires from camera",
-			"entrance inside bounding sphere",
-			"doesn\'t show readied weapon",
-			"causes passenger dialogue",
-			"resists pings",
-			"melee attack is fatal",
-			"don\'t reface during pings",
-			"has no aiming",
-			"impact melee attaches to unit",
-			"impact melee dies on shields",
-			"cannot open doors automatically",
-			"melee attackers cannot attach",
-			"not instantly killed by melee",
-			"flashlight power doesnt transfer to weapon",
-			"runs around flaming",
-			"top level for AOE damage",
-			"special cinematic unit",
-			"ignored by autoaiming",
-			"shields fry infection forms",
-			"use velocity as acceleration",
-			"can dual wield",
-			"acts as gunner for parent",
-			"controlled by parent gunner",
-			"parent\'s primary weapon",
-			"parent\'s secondary weapon",
-			"unit has boost",
-			"unit has vectored thrust",
-			"allow aim while opening or closing",
-			"compute acceleration from aiming"
+		"destroyed after dying",
+		"half-speed interpolation",
+		"fires from camera",
+		"entrance inside bounding sphere",
+		"doesn\'t show readied weapon",
+		"causes passenger dialogue",
+		"resists pings",
+		"melee attack is fatal",
+		"don\'t reface during pings",
+		"has no aiming",
+		"impact melee attaches to unit",
+		"impact melee dies on shields",
+		"cannot open doors automatically",
+		"melee attackers cannot attach",
+		"not instantly killed by melee",
+		"flashlight power doesnt transfer to weapon",
+		"runs around flaming",
+		"top level for AOE damage",
+		"special cinematic unit",
+		"ignored by autoaiming",
+		"shields fry infection forms",
+		"use velocity as acceleration",
+		"can dual wield",
+		"acts as gunner for parent",
+		"controlled by parent gunner",
+		"parent\'s primary weapon",
+		"parent\'s secondary weapon",
+		"unit has boost",
+		"unit has vectored thrust",
+		"allow aim while opening or closing",
+		"compute acceleration from aiming"
 	};
 	STRING_LIST(unit_flags_part1, unit_flags_part1_strings, _countof(unit_flags_part1_strings));
 
 	STRINGS(unit_flags_part2)
 	{
 		"override all pings",
-			"unit supports bailout",
-			"flying_or_vehicle_hard_pings_allowed",
-			"attempt to fire from weapon matching camera#if this unit \"fires from camera\", this flag attempts to match the result, but have the projectile actually come out of the gun",
-			"treat as vehicle #Treats a non-vehicle unit as a vehicle for gameplay purposes.  Mantis (biped) hack.",
-			"dropped weapons can dissolve",
-			"hard pings not allowed for driver-less vehicle",
-			"No friendly bump damage #Unit does not inflict collision damage to friendly units",
-			"ignores attachment feedback forced hard pings#ignores hard pings forced by attachment of sticky grenade",
-			"unit appears on radar as dot not sprite#do not try to find a sprite for this unit.  Just draw a dot.",
-			"suppress radar blip",
-			"do not ignore parents for line of sight tests#ai that are operating this unit will not ignore the unit\'s parents when doing line of sight tests (Mammoth turret hack)",
-			"do not pass attached AOE damage to children#projectiles attached to this object do not do attached damage to the object\'s children (regular aoe damage is still done to top level aoe children)",
-			"do not generate AI line of fire pill for unit#even if this vehicle is being driven by a friendly character, don\'t generate a pill for it during ai line of fire checks (for very large vehicles i.e. the lich)"
+		"unit supports bailout",
+		"flying_or_vehicle_hard_pings_allowed",
+		"attempt to fire from weapon matching camera#if this unit \"fires from camera\", this flag attempts to match the result, but have the projectile actually come out of the gun",
+		"treat as vehicle #Treats a non-vehicle unit as a vehicle for gameplay purposes.  Mantis (biped) hack.",
+		"dropped weapons can dissolve",
+		"hard pings not allowed for driver-less vehicle",
+		"No friendly bump damage #Unit does not inflict collision damage to friendly units",
+		"ignores attachment feedback forced hard pings#ignores hard pings forced by attachment of sticky grenade",
+		"unit appears on radar as dot not sprite#do not try to find a sprite for this unit.  Just draw a dot.",
+		"suppress radar blip",
+		"do not ignore parents for line of sight tests#ai that are operating this unit will not ignore the unit\'s parents when doing line of sight tests (Mammoth turret hack)",
+		"do not pass attached AOE damage to children#projectiles attached to this object do not do attached damage to the object\'s children (regular aoe damage is still done to top level aoe children)",
+		"do not generate AI line of fire pill for unit#even if this vehicle is being driven by a friendly character, don\'t generate a pill for it during ai line of fire checks (for very large vehicles i.e. the lich)"
 	};
 	STRING_LIST(unit_flags_part2, unit_flags_part2_strings, _countof(unit_flags_part2_strings));
 
 	STRINGS(unit_default_teams$2)
 	{
 		"default",
-			"player",
-			"human",
-			"covenant",
-			"brute",
-			"mule",
-			"spare",
-			"covenant_player",
-			"forerunner"
+		"player",
+		"human",
+		"covenant",
+		"brute",
+		"mule",
+		"spare",
+		"covenant_player",
+		"forerunner"
 	};
 	STRING_LIST(unit_default_teams$2, unit_default_teams$2_strings, _countof(unit_default_teams$2_strings));
 
@@ -745,9 +771,9 @@ namespace blofeld
 	STRINGS(unit_item_owner_size_enum)
 	{
 		"small",
-			"medium",
-			"large",
-			"huge"
+		"medium",
+		"large",
+		"huge"
 	};
 	STRING_LIST(unit_item_owner_size_enum, unit_item_owner_size_enum_strings, _countof(unit_item_owner_size_enum_strings));
 
