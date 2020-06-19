@@ -25,7 +25,13 @@ namespace blofeld
 		{ _field_string, "name^" },
 		{ _field_explanation, "Combat status decay options", "Controls how combat status is allowed to be automatically reduced in the absence of combat stimuli. \'Latch at X\' means that once the level of x is attained (and/or surpassed) the combat status never falls below it. Not applicable when style is applied to a character tag." },
 		{ _field_enum, "Combat status decay options", &combat_status_enum },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_pad, "hghq", 2 },
+
+		{ _field_version_less, _engine_type_haloreach },
+		{ _field_short_integer, "unknown" },
+
 		{ _field_explanation, "Style Behavior Control", "Check the appropriate box to turn on/off the given behavior" },
 		{ _field_long_flags, "Style control", &style_control_flags },
 		{ _field_long_flags, "Behaviors1", &behavior_set1 },

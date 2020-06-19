@@ -182,6 +182,9 @@ namespace blofeld
 
 	TAG_STRUCT(sound_cache_file_gestalt_struct_definition)
 	{
+		{ _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_long_integer, "unknown" },
+
 		{ _field_block, "codecs", &sound_gestalt_codec_block_block },
 		{ _field_block, "playbacks", &sound_gestalt_playback_block_block },
 		{ _field_block, "scales", &sound_gestalt_scale_block_block },

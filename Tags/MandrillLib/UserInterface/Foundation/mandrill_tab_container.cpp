@@ -23,16 +23,14 @@ void c_mandrill_tab_container::add_tab(c_mandrill_tab& tab)
 	{
 		children.push_back(&tab);
 
-		tab.on_closed.register_callback(this, std::bind(&c_mandrill_tab_container::tab_closed_callback, this, std::placeholders::_1));
+		tab.on_closed.register_callback(this, [this] (c_mandrill_tab& tab) 
+			{ 
+				this->remove_tab(tab); 
+			});
 	}
 }
 
 void c_mandrill_tab_container::remove_tab(c_mandrill_tab& tab)
 {
 	vector_erase_by_value_helper(children, &tab);
-}
-
-void c_mandrill_tab_container::tab_closed_callback(c_mandrill_tab& tab)
-{
-	this->remove_tab(tab);
 }

@@ -21,7 +21,7 @@ c_mandrill_user_interface::c_mandrill_user_interface(c_window& window, bool is_g
 	file_browser = new ImGuiAddons::ImGuiFileBrowser(previous_file_path.c_str());
 
 	restore_previous_session();
-	open_cache_file(startup_file);
+	open_cache_file_tab(startup_file);
 }
 
 c_mandrill_user_interface::~c_mandrill_user_interface()
@@ -38,7 +38,7 @@ c_mandrill_user_interface::~c_mandrill_user_interface()
 	delete file_browser;
 }
 
-void c_mandrill_user_interface::open_cache_file(const wchar_t* filepath)
+void c_mandrill_user_interface::open_cache_file_tab(const wchar_t* filepath)
 {
 	if (filepath == nullptr || !PathFileExistsW(filepath))
 	{
@@ -62,6 +62,13 @@ void c_mandrill_user_interface::open_cache_file(const wchar_t* filepath)
 	if (cache_file)
 	{
 		c_cache_file_tab* cache_file_tab = new c_cache_file_tab(*cache_file, *this);
+		cache_file_tab->on_closed.register_callback(cache_file, [this](c_mandrill_tab& tab)
+			{
+				if (c_cache_file_tab* cache_file_tab = static_cast<c_cache_file_tab*>(&tab))
+				{
+					close_cache_file_tab(*cache_file_tab);
+				}
+			});
 		add_tab(*cache_file_tab);
 		next_selected_tab = cache_file_tab;
 	}
@@ -69,6 +76,12 @@ void c_mandrill_user_interface::open_cache_file(const wchar_t* filepath)
 	{
 		// #TODO: Display an error message that the map failed to open
 	}
+}
+
+void c_mandrill_user_interface::close_cache_file_tab(c_cache_file_tab& tab)
+{
+	c_cache_file& cache_file = tab.get_cache_file();
+	delete& cache_file;
 }
 
 void c_mandrill_user_interface::restore_previous_session()
@@ -88,7 +101,7 @@ void c_mandrill_user_interface::restore_previous_session()
 			read_position++;
 		}
 
-		g.run([this, open_maps_path] { open_cache_file(open_maps_path.c_str()); });
+		g.run([this, open_maps_path] { open_cache_file_tab(open_maps_path.c_str()); });
 
 		open_maps_path.clear();
 		read_position++;
@@ -274,7 +287,7 @@ void c_mandrill_user_interface::render_file_dialogue_gui_impl()
 				c_settings::write_string(_settings_section_mandrill, k_previous_open_filepath_setting, file_browser->get_current_path());
 				c_fixed_wide_path selected_file_path_buffer;
 				selected_file_path_buffer.format(L"%S", selected_file_path);
-				open_cache_file(selected_file_path_buffer.c_str());
+				open_cache_file_tab(selected_file_path_buffer.c_str());
 			}
 		}
 	}

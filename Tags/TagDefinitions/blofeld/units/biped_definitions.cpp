@@ -102,7 +102,7 @@ namespace blofeld
 		{ _field_block, "tricks", &unit_trick_definition_block_block },
 
 		// #TODO: This is assumed to be a tag block. Assert on these values and check if they are non zero
-		{ _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_version_less_or_equal, _engine_type_haloreach, 3 },
 		{ _field_long_integer, "unknown@" }, // assembly
 		{ _field_long_integer, "unknown@" }, // assembly
 		{ _field_long_integer, "unknown@" }, // assembly
