@@ -26,7 +26,10 @@ namespace blofeld
 		{ _field_real, "Transparent sort distance" },
 		{ _field_char_enum, "Transparent sort layer", &global_sort_layer_enum_defintion },
 		{ _field_pad, "UNdfdfdSED", 3 },
+		
+		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_struct, "wind strength across distance", &scalar_function_named_struct_default_one_struct_definition },
+		
 		{ _field_block, "underwater settings", &underwater_setting_block_block },
 		{ _field_terminator }
 	};
