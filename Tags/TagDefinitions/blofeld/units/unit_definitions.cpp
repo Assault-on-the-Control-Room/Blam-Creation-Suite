@@ -15,7 +15,10 @@ namespace blofeld
 	TAG_BLOCK(unit_camera_track_block, MAXIMUM_NUMBER_OF_UNIT_CAMERA_TRACKS)
 	{
 		{ _field_tag_reference, "track", &global_camera_track_reference },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_tag_reference, "screen effect", &global_area_screen_effect_reference },
+
 		{ _field_terminator }
 	};
 
