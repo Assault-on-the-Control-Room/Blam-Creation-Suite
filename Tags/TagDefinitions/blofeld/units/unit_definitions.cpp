@@ -92,7 +92,11 @@ namespace blofeld
 	TAG_BLOCK(unit_weapon_block, MAXIMUM_INITIAL_WEAPONS_PER_UNIT)
 	{
 		{ _field_tag_reference, "weapon^", &weapon_reference },
+
+		{ _field_version_greater, _engine_type_halo3 },
 		{ _field_string_id, "variant name" },
+
+		{ _field_version_greater, _engine_type_haloreach, 32 },
 		{ _field_long_enum, "position", &initial_weapon_position },
 		{ _field_real, "maximum firing cone angle:degrees#must be greater than zero for turret to fire" },
 		{ _field_real, "minimum retarget time:seconds#minimum time before autoturret will change targets" },
