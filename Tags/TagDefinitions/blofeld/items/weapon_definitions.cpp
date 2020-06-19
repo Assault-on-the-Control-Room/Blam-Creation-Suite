@@ -350,8 +350,11 @@ namespace blofeld
 		{ _field_useless_pad },
 		{ _field_struct, "autofire", &weapon_trigger_autofire_struct_struct_definition },
 		{ _field_struct, "charging", &weapon_trigger_charging_struct_struct_definition },
+
+		{ _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_tag_reference, "double latch projectile releasable effect#created once player is able to release the tethered projectile", &global_effect_reference },
 		{ _field_tag_reference, "double latch projectile released effect#created when player releases the tethered projectile", &global_effect_reference },
+
 		{ _field_terminator }
 	};
 
@@ -378,17 +381,26 @@ namespace blofeld
 		{ _field_short_integer, "shot count lower bound#the minimum number of times this firing effect will be used, once it has been chosen" },
 		{ _field_short_integer, "shot count upper bound#the maximum number of times this firing effect will be used, once it has been chosen" },
 		{ _field_tag_reference, "firing effect^#this effect is used when the weapon is loaded and fired normally", &weapon_block_struct_ready_effect_reference },
+
+		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_tag_reference, "critical effect^#this effect is used when the weapon is loaded and will do critical damage", &weapon_block_struct_ready_effect_reference },
+
 		{ _field_tag_reference, "misfire effect#this effect is used when the weapon is loaded but fired while overheated", &weapon_block_struct_ready_effect_reference },
 		{ _field_tag_reference, "empty effect#this effect is used when the weapon is not loaded", &weapon_block_struct_ready_effect_reference },
 		{ _field_tag_reference, "optional secondary firing effect#this effect is used when the weapon is not loaded", &weapon_block_struct_ready_effect_reference },
 		{ _field_tag_reference, "firing damage#this effect is used when the weapon is loaded and fired normally", &global_damage_effect_or_response_definition_reference },
+
+		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_tag_reference, "critical damage^#this effect is used when the weapon is loaded and will do critical damage", &weapon_block_struct_ready_effect_reference },
+
 		{ _field_tag_reference, "misfire damage#this effect is used when the weapon is loaded but fired while overheated", &global_damage_effect_or_response_definition_reference },
 		{ _field_tag_reference, "empty damage#this effect is used when the weapon is not loaded", &global_damage_effect_or_response_definition_reference },
 		{ _field_tag_reference, "optional secondary firing damage#this effect is used when the weapon is loaded and fired normally", &global_damage_effect_or_response_definition_reference },
 		{ _field_tag_reference, "firing rider damage#this effect is used when the weapon is loaded and fired normally", &global_damage_effect_or_response_definition_reference },
+
+		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_tag_reference, "critical rider damage^#this effect is used when the weapon is loaded and will do critical damage", &weapon_block_struct_ready_effect_reference },
+
 		{ _field_tag_reference, "misfire rider damage#this effect is used when the weapon is loaded but fired while overheated", &global_damage_effect_or_response_definition_reference },
 		{ _field_tag_reference, "empty rider damage#this effect is used when the weapon is not loaded", &global_damage_effect_or_response_definition_reference },
 		{ _field_tag_reference, "optional secondary firing rider damage#this effect is used when the weapon is loaded and fired normally", &global_damage_effect_or_response_definition_reference },
@@ -416,7 +428,10 @@ namespace blofeld
 		{ _field_explanation, "projectile", "" },
 		{ _field_enum, "distribution function", &weapon_barrel_distribution_functions },
 		{ _field_short_integer, "projectiles per shot" },
+
+		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_block, "custom vectors#Custom vectors must be set in distribution function above", &projectileDistributionCustomVector_block },
+
 		{ _field_real, "distribution angle:degrees#used by distribution function \'horizontal fan\' above" },
 		{ _field_angle, "minimum error:degrees#projectile direction is randomly selected between this and max_error_angle below" },
 		{ _field_angle_bounds, "error angle:degrees (max_error_angle)#current barrel_error is linearly interpolated between these to generate max_error_angle" },
