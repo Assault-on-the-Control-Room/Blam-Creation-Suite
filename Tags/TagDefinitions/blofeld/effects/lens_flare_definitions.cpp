@@ -11,7 +11,10 @@ namespace blofeld
 		{ _field_custom },
 		{ _field_string_id, "name^" },
 		{ _field_word_flags, "flags", &lens_flare_reflection_flags_definition },
+
+		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_short_integer, "bitmap index" },
+		
 		{ _field_tag_reference, "bitmap override", &Tag::Reference<struct bitmap_group>::s_defaultDefinition },
 		{ _field_real, "rotation offset:degrees" },
 		{ _field_real, "axis offset:percent#percent offset in screen space along corona axis - 0.0 is on the corona, 1.0 is primary side edge of the screen, -1.0 is opposite side" },
@@ -48,7 +51,10 @@ namespace blofeld
 		{ _field_angle, "falloff angle:degrees" },
 		{ _field_angle, "cutoff angle:degrees" },
 		{ _field_explanation, "OCCLUSION", "Occlusion factor affects overall lens flare brightness and can also affect scale. Occlusion never affects rotation." },
+
+		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_long_integer, "occlusion reflection index#occlusion information will be generated against the size of this reflection" },
+		
 		{ _field_real, "occlusion offset distance:world units#distance along offset direction used to test occlusion" },
 		{ _field_enum, "occlusion offset direction", &lens_flare_occlusion_offset_enum_definition },
 		{ _field_pad, "PANTS", 2 },
