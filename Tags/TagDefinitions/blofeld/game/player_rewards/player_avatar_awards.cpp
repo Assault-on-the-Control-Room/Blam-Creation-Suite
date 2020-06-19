@@ -25,7 +25,10 @@ namespace blofeld
 	{
 		"award_0",
 		"award_1",
-		"award_2"
+		"award_2",
+		"award_3",
+		"award_4"
+		
 	};
 	STRING_LIST(global_avatar_award_enum, global_avatar_award_enum_strings, _countof(global_avatar_award_enum_strings));
 
