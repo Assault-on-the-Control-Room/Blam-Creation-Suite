@@ -40,11 +40,17 @@ namespace blofeld
 		{ _field_real, "fraction of total mass#(0.0-1.0) fraction of total vehicle mass" },
 		{ _field_real, "radius" },
 		{ _field_real, "damaged radius#radius when the tire is blown off." },
+
+		{ _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_real, "ground friction scale# scale the non sliding friction on this friction point" },
 		{ _field_real, "AI ground friction scale override# use this value when an AI is driving" },
+
 		{ _field_real, "moving friction velocity diff" },
+
+		{ _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_real, "moving friction scale# scale the sliding friction on this friction point, active when velocity is greater than moving friction velocity diff" },
 		{ _field_real, "AI moving friction scale override# use this value when an AI is driving" },
+
 		{ _field_real, "e-brake moving friction" },
 		{ _field_real, "e-brake friction" },
 		{ _field_real, "e-brake moving friction vel diff" },

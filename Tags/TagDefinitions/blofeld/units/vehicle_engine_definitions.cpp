@@ -16,8 +16,14 @@ namespace blofeld
 		{ _field_real, "gear ratio" },
 		{ _field_real, "min time to downshift#seconds" },
 		{ _field_real, "engine down-shift scale#0-1" },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_real, "unknown@" },
+
+		{ _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_tag_reference, "gear shift sound - shifting up", &global_sound_reference },
 		{ _field_tag_reference, "gear shift sound - shifting down", &global_sound_reference },
+
 		{ _field_terminator }
 	};
 
@@ -42,6 +48,10 @@ namespace blofeld
 	TAG_STRUCT(torque_curve_struct)
 	{
 		{ _field_struct, "function", &scalar_function_named_struct_struct_definition },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_real, "unknown@" },
+
 		{ _field_terminator }
 	};
 
