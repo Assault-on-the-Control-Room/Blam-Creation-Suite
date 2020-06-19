@@ -129,6 +129,7 @@ namespace blofeld
 		{ _field_string_id, "alert mode effect secondary scale" },
 		{ _field_block, "sentry properties", &SentryPropertiesBlock_block },
 		{ _field_real, "target camouflage threshold# 0 - 1 : target when players camo level falls below this threshold, full camo = 1" },
+
 		{ _field_terminator }
 	};
 
