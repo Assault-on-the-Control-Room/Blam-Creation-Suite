@@ -15,7 +15,10 @@ namespace blofeld
 	TAG_BLOCK(unit_camera_track_block, MAXIMUM_NUMBER_OF_UNIT_CAMERA_TRACKS)
 	{
 		{ _field_tag_reference, "track", &global_camera_track_reference },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_tag_reference, "screen effect", &global_area_screen_effect_reference },
+
 		{ _field_terminator }
 	};
 
@@ -89,7 +92,11 @@ namespace blofeld
 	TAG_BLOCK(unit_weapon_block, MAXIMUM_INITIAL_WEAPONS_PER_UNIT)
 	{
 		{ _field_tag_reference, "weapon^", &weapon_reference },
+
+		{ _field_version_greater, _engine_type_halo3 },
 		{ _field_string_id, "variant name" },
+
+		{ _field_version_greater, _engine_type_haloreach, 32 },
 		{ _field_long_enum, "position", &initial_weapon_position },
 		{ _field_real, "maximum firing cone angle:degrees#must be greater than zero for turret to fire" },
 		{ _field_real, "minimum retarget time:seconds#minimum time before autoturret will change targets" },
@@ -122,6 +129,7 @@ namespace blofeld
 		{ _field_string_id, "alert mode effect secondary scale" },
 		{ _field_block, "sentry properties", &SentryPropertiesBlock_block },
 		{ _field_real, "target camouflage threshold# 0 - 1 : target when players camo level falls below this threshold, full camo = 1" },
+
 		{ _field_terminator }
 	};
 
@@ -201,6 +209,14 @@ namespace blofeld
 	TAG_BLOCK_FROM_STRUCT(unit_block, 1, unit_struct_definition_struct_definition);
 
 	TAG_REFERENCE(integrated_light_toggle_reference, blofeld::INVALID_TAG);
+
+	TAG_REFERENCE(unit_hud_interface_reference);
+
+	TAG_BLOCK(unit_hud_interfaces_block, 65536)
+	{
+		{ _field_tag_reference, "Unit HUD Interface", &unit_hud_interface_reference },
+		{ _field_terminator }
+	};
 
 	TAG_STRUCT(unit_struct_definition)
 	{
@@ -331,14 +347,22 @@ namespace blofeld
 		{ _field_string_id, "grounded equipment variant name" },
 
 		{ _field_block, "postures", &unit_postures_block_block },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_block, "HUD Interfaces", &unit_hud_interfaces_block_block },
+
+		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_block, "Hud audio cues", &hud_unit_sound_block_block },
+
 		{ _field_block, "dialogue variants", &dialogue_variant_block_block },
 
 		{ _field_custom, "standard grenade throw" },
+
 		{ _field_version_greater_or_equal, _engine_type_haloreach, 3 },
 		{ _field_real, "grenade angle:degrees" },
 		{ _field_real, "grenade angle max elevation:degrees" },
 		{ _field_real, "grenade angle min elevation:degrees" },
+
 		{ _field_real, "grenade velocity:world units per second" },
 		{ _field_custom },
 
