@@ -634,7 +634,10 @@ namespace blofeld
 		{ _field_block, "stiff spring constraints*!", &stiff_spring_constraints_block_block },
 		{ _field_block, "prismatic constraints*!", &prismatic_constraints_block_block },
 		{ _field_block, "phantoms*!", &phantoms_block_block },
+		
+		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_block, "RigidBody Serialized Shapes*", &RigidBodySerializedShapesBlock_block },
+		
 		{ _field_terminator }
 	};
 
