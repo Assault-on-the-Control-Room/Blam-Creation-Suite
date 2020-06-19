@@ -10,7 +10,9 @@ namespace blofeld
 
 	TAG_STRUCT(collision_damage_struct_definition)
 	{
+		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_long_flags, "Flags", &collisionDamageFlags },
+
 		{ _field_explanation, "Applying collision damage", "for things that want to cause more or less collision damage" },
 		{ _field_real, "Apply collision damage scale#0 means 1.  1 is standard scale.  Some things may want to apply more damage" },
 		{ _field_real, "Friendly apply collision damage scale#0 means 1.  1 is standard scale.  Some things may want to apply more damage, yet go soft on their friends" },
@@ -25,8 +27,11 @@ namespace blofeld
 		{ _field_real, "minimum velocity for absolute damage#if you are going below this velocity we stop all absolute damage" },
 		{ _field_struct, "absolute collision damage", &collision_damage_function_struct_definition },
 		{ _field_real_bounds, "absolute acceleration#0-Infinity" },
+
+		{ _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_explanation, "Alternative damage effect", "Overrides the damage effect from globals.globals" },
 		{ _field_tag_reference, "alternative damage effect", &Tag::Reference<struct s_damage_effect_definition>::s_defaultDefinition },
+
 		{ _field_terminator }
 	};
 
