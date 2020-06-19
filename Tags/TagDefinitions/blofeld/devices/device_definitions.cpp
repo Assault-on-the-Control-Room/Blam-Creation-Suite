@@ -87,6 +87,8 @@ namespace blofeld
 		{ _field_tag_reference, "delay effect", &device_struct_definition_open_up_reference },
 		{ _field_real, "automatic activation radius:world units" },
 		{ _field_custom },
+
+		{ _field_version_greater, _engine_type_haloreach, 7 },
 		{ _field_string_id, "marker name" },
 		{ _field_real, "marker radius#max distance between the unit and the marker" },
 		{ _field_angle, "marker cone angle#angle from marker forward the unit must be" },
@@ -94,6 +96,7 @@ namespace blofeld
 		{ _field_real, "min targetable position threshold#above this value and below the max, object becomes targetable" },
 		{ _field_real, "max targetable position threshold#below this value and above the min, object becomes targetable" },
 		{ _field_useless_pad },
+		
 		{ _field_custom },
 		{ _field_terminator }
 	};
