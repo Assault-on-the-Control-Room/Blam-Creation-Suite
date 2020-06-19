@@ -28,8 +28,11 @@ namespace blofeld
 	{
 		{ _field_tag_reference, "biped spawn effect", &global_effect_reference },
 		{ _field_tag_reference, "vehicle spawn effect", &global_effect_reference },
-		{ _field_tag_reference, "weapon spawn effect", &global_effect_reference },
+		{ _field_tag_reference, "weapon spawn effect", &global_effect_reference }, 
+
+		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_tag_reference, "first person player spawn effect", &global_effect_reference },
+
 		{ _field_terminator }
 	};
 
@@ -85,7 +88,9 @@ namespace blofeld
 		"type_cpu_particle",
 		"type_gpu_particle_row",
 		"type_particle_queue",
-		"tracer queue"
+		"tracer queue",
+		"track decal system",
+		"halo_reach_unknown", // #TODO
 	};
 	STRING_LIST(effect_holdback_type_enum, effect_holdback_type_enum_strings, _countof(effect_holdback_type_enum_strings));
 

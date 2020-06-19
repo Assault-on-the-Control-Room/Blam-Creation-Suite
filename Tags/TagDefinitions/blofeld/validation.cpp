@@ -33,15 +33,39 @@ namespace blofeld
 				case _field_byte_flags:
 					if (current_field->string_list_definition == nullptr)
 					{
-						c_console::write_line_verbose("%s(%i): warning V5000: '%s' '%s':'%s' failed validation. no string list specified.", current_field->filename, current_field->line, nice_field_string, struct_definition.name, current_field->name);
-						*block_failed_validation |= true;
+						c_console::write_line_verbose("%s(%i): warning V1000: '%s' '%s':'%s' failed validation. no string list specified.", current_field->filename, current_field->line, nice_field_string, struct_definition.name, current_field->name);
+						*block_failed_validation = true;
 					}
 					break;
 				case _field_struct:
 					if (current_field->struct_definition == nullptr)
 					{
-						c_console::write_line_verbose("%s(%i): warning V4000: '%s' '%s':'%s' failed validation. array is not implemented!", current_field->filename, current_field->line, nice_field_string, struct_definition.name, current_field->name);
-						*block_failed_validation |= true;
+						c_console::write_line_verbose("%s(%i): warning V2000: '%s' '%s':'%s' failed validation. no struct specified.", current_field->filename, current_field->line, nice_field_string, struct_definition.name, current_field->name);
+						*block_failed_validation = true;
+						continue;
+					}
+					break;
+				case _field_array:
+					if (current_field->array_definition == nullptr)
+					{
+						c_console::write_line_verbose("%s(%i): warning V3000: '%s' '%s':'%s' failed validation. no array specified.", current_field->filename, current_field->line, nice_field_string, struct_definition.name, current_field->name);
+						*block_failed_validation = true;
+						continue;
+					}
+					break;
+				case _field_block:
+					if (current_field->block_definition == nullptr)
+					{
+						c_console::write_line_verbose("%s(%i): warning V2000: '%s' '%s':'%s' failed validation. no block specified.", current_field->filename, current_field->line, nice_field_string, struct_definition.name, current_field->name);
+						*block_failed_validation = true;
+						continue;
+					}
+					break;
+				case _field_tag_reference:
+					if (current_field->tag_reference_definition == nullptr)
+					{
+						c_console::write_line_verbose("%s(%i): warning V4000: '%s' '%s':'%s' failed validation. no tag reference specified.", current_field->filename, current_field->line, nice_field_string, struct_definition.name, current_field->name);
+						*block_failed_validation = true;
 						continue;
 					}
 					break;
@@ -96,7 +120,7 @@ namespace blofeld
 			block_failed_validation |= computed_size != expected_size;
 			if (block_failed_validation)
 			{
-				c_console::write_line_verbose("%s(%i): warning V2000: s_tag_struct '%s' failed validation. computed size 0x%x expected 0x%x", struct_definition.filename, struct_definition.line, block_name, computed_size, expected_size);
+				c_console::write_line_verbose("%s(%i): warning V0002: s_tag_struct '%s' failed validation. computed size 0x%x expected 0x%x", struct_definition.filename, struct_definition.line, block_name, computed_size, expected_size);
 			}
 			else
 			{
@@ -107,7 +131,7 @@ namespace blofeld
 		float percentage = 100.0f * float(successful_validation_attempts) / float(_countof(gen3_xbox360_tag_struct_validation_data));
 		if (percentage != 100.0f)
 		{
-			c_console::write_line_verbose("warning V1000: failed to validate all tags. success rate %.1f.", percentage);
+			c_console::write_line_verbose("warning V0001: failed to validate all tags. success rate %.1f.", percentage);
 		}
 		return any_block_failed_validation;
 	}
