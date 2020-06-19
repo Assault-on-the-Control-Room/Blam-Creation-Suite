@@ -231,7 +231,15 @@ namespace blofeld
 		{ _field_real_vector_3d, "intertia tensor z*!" },
 		{ _field_real, "havok w intertia tensor z*!!" },
 		{ _field_long_integer, "runtime havok group mask *!" },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_real, "Unknown@" },
+		
 		{ _field_struct, "shape reference", &havok_shape_reference_struct_struct_definition },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach},
+		{ _field_real, "Unknown" },
+		
 		{ _field_real, "mass:kg*!" },
 		{ _field_real, "bounding sphere pad#the bounding sphere for this rigid body will be outset by this much" },
 		{ _field_char_enum, "collision quality override type", &rigid_body_collision_quality_enum },
