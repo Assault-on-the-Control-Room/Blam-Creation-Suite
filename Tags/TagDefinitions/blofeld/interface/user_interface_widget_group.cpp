@@ -396,7 +396,7 @@ namespace blofeld
 		{ _field_explanation, "Screen Widgets", "These are the HaloX screen widgets" },
 		{ _field_block, "cui screen widgets", &cui_component_screen_reference_block_definition_block },
 
-		{ _field_version_greater, _engine_type_halo3, 5 },
+		{ _field_version_greater_or_equal, _engine_type_haloreach, 5 },
 		{ _field_block, "cui overlay cameras", &cui_overlay_camera_block_definition_block },
 		{ _field_block, "player model camera settings", &cui_player_model_camera_settings_definition_block },
 		{ _field_block, "player model input settings", &cui_player_model_controller_settings_definition_block },
@@ -406,18 +406,18 @@ namespace blofeld
 		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_tag_reference, "infinity mission images{infinity mission images ref}", &Tag::Reference<struct InfinityUIImages>::s_defaultDefinition },
 
-		{ _field_version_greater, _engine_type_halo3 },
+		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_block, "active roster settings", &cui_active_roster_settings_block_block },
 		
 		{ _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_explanation, "PGCR Categories Definitions", "This is a reference to the tag storing the categories we want to display in the PGCR" },
 		{ _field_tag_reference, "pgcr categories definitions", &pgcr_enemy_to_category_mapping_definition_reference },
 
-		{ _field_version_greater, _engine_type_halo3, 2 },
+		{ _field_version_greater_or_equal, _engine_type_haloreach, 2 },
 		{ _field_explanation, "PGCR Damage Types Definitions", "This is a reference to the tag storing details about damage types for display in the PGCR" },
 		{ _field_tag_reference, "pgcr damage types definitions", &pgcr_damage_type_image_mapping_definition_reference },
 
-		{ _field_version_greater, _engine_type_halo3, 2 },
+		{ _field_version_greater_or_equal, _engine_type_haloreach, 2 },
 		{ _field_explanation, "Campaign State Screen Scripts", "Contains a mapping of campaign map IDs and screen scripts used to implement lobby backgrounds that track campaign state. This block should only be non-empty for the main menu." },
 		{ _field_block, "campaign state screen scripts", &campaign_state_screen_script_block_definition_block },
 
