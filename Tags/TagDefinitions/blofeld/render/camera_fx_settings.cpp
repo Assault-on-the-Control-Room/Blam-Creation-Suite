@@ -11,7 +11,10 @@ namespace blofeld
 		{ _field_struct, "auto_exposure_sensitivity", &camera_fx_exposure_sensitivity_struct_struct_definition },
 		{ _field_struct, "bloom_highlight{bloom_point}", &camera_fx_bloom_highlight_struct_struct_definition },
 		{ _field_struct, "bloom_inherent", &camera_fx_bloom_inherent_struct_struct_definition },
+
+		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_struct, "bloom_self_illum", &camera_fx_bloom_self_illum_struct_struct_definition },
+
 		{ _field_struct, "bloom_intensity", &camera_fx_bloom_intensity_struct_struct_definition },
 		{ _field_struct, "bloom_large_color", &camera_fx_bloom_large_color_struct_struct_definition },
 		{ _field_struct, "bloom_medium_color", &camera_fx_bloom_medium_color_struct_struct_definition },
@@ -22,9 +25,12 @@ namespace blofeld
 		{ _field_struct, "bling_count!", &camera_fx_bling_count_struct_struct_definition },
 		{ _field_struct, "self_illum_preferred", &camera_fx_self_illum_preferred_struct_struct_definition },
 		{ _field_struct, "self_illum_scale", &camera_fx_self_illum_scale_struct_struct_definition },
+
+		{ _field_version_greater, _engine_type_haloreach, 3 },
 		{ _field_struct, "color_grading", &camera_fx_color_grading_struct_struct_definition },
 		{ _field_struct, "filmic_tone_curve", &camera_fx_filmic_tone_curve_struct_struct_definition },
 		{ _field_custom },
+
 		{ _field_terminator }
 	};
 
