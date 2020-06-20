@@ -142,10 +142,13 @@ namespace blofeld
 	TAG_BLOCK(animation_definition, k_cui_max_animation_count)
 	{
 		{ _field_string_id, "name^" },
+
+		{ _field_version_greater, _engine_type_haloreach, 4},
 		{ _field_real, "time base offset" },
 		{ _field_real, "time exponential offset" },
 		{ _field_char_enum, "animation input", &animationInputType },
 		{ _field_pad, "pad0", 3 },
+
 		{ _field_block, "components", &animation_component_definition_block },
 		{ _field_terminator }
 	};
@@ -288,7 +291,10 @@ namespace blofeld
 		{ _field_block, "binding conversion long comparisons", &binding_conversion_long_comparison_block_definition_block },
 		{ _field_block, "static data tables", &static_data_table_block },
 		{ _field_block, "expressions", &expression_block },
+
+		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_block, "encapsulated properties", &encapsulatedProperties_block },
+
 		{ _field_terminator }
 	};
 
@@ -297,7 +303,10 @@ namespace blofeld
 		{ _field_block, "long properties", &property_long_value_block },
 		{ _field_block, "real properties", &property_real_value_block },
 		{ _field_block, "string_id properties", &property_string_id_value_block },
+
+		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_block, "component ptr properties", &propertyComponentPtrValue_block },
+
 		{ _field_block, "tag reference properties", &property_tag_reference_value_block },
 		{ _field_block, "string properties", &property_text_value_block },
 		{ _field_block, "argb color properties", &property_argb_color_value_block },
@@ -320,9 +329,15 @@ namespace blofeld
 
 	TAG_STRUCT(cui_screen_struct_definition)
 	{
+		{ _field_version_less_or_equal, _engine_type_haloreach, 2 },
+		{ _field_tag_reference, "string list", &global_multilingual_unicode_string_list_reference },
+		{ _field_struct, "system", &cui_system_struct_definition },
+
+		{ _field_version_greater, _engine_type_haloreach, 3 },
 		{ _field_block, "string references", &string_file_references_block },
 		{ _field_tag_reference, "logic", &cui_logic_reference },
 		{ _field_struct, "system", &cui_system_struct_definition },
+
 		{ _field_terminator }
 	};
 
