@@ -28,6 +28,8 @@ namespace blofeld
 
 	extern const char* commendationCategoryEnum_strings[];
 	extern s_string_list_definition commendationCategoryEnum;
+	extern const char *commendationCategoryReachEnum_strings[];
+	extern s_string_list_definition commendationCategoryReachEnum;
 	extern const char* commendationFlags_strings[];
 	extern s_string_list_definition commendationFlags;
 	extern const char* commendationSubcategoryEnum_strings[];
