@@ -320,8 +320,13 @@ namespace blofeld
 
 	TAG_STRUCT(cui_screen_struct_definition)
 	{
+		{ _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_block, "string references", &string_file_references_block },
 		{ _field_tag_reference, "logic", &cui_logic_reference },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_tag_reference, "string list", &global_multilingual_unicode_string_list_reference },
+		
 		{ _field_struct, "system", &cui_system_struct_definition },
 		{ _field_terminator }
 	};
