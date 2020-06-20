@@ -40,6 +40,10 @@ namespace blofeld
 
 	TAG_STRUCT(performance_throttles_struct_definition)
 	{
+
+		{ _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_long_integer, "Unknown@" },
+		
 		{ _field_explanation, "Performance Throttles", "Split-screen throttle settings should be more aggresive than non-local co-op settings\nblock index 0:\tdefault non split screen\nblock index 1: two way split screen\nblock index 2: three way split screen\nblock index 3: four way split screen\nblock index 4: one additional non-local player\nblock index 5: two additional non-local players\nblock index 6: three additional non-local players\n\n" },
 		{ _field_block, "Performance Throttles", &performane_throttle_block_block },
 		{ _field_terminator }
