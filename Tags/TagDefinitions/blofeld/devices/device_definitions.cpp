@@ -40,6 +40,8 @@ namespace blofeld
 		{ _field_enum, "triggers when", &control_triggers },
 		{ _field_real, "call value:[0,1]" },
 		{ _field_string_id, "action string" },
+
+		{ _field_version_greater, _engine_type_haloreach, 14 },
 		{ _field_string_id, "secondary action string" },
 		{ _field_string_id, "action denied string#A string to display when someone else is already using \"interaction held\"-type controls" },
 		{ _field_string_id, "action denied secondary string#A string displayed when someone else is using \"interaction held\"-type controls and it\'s in secondary mode" },
@@ -54,11 +56,15 @@ namespace blofeld
 		{ _field_useless_pad },
 		{ _field_enum, "MP team use restriction", &teamUseRestrictionEnum },
 		{ _field_pad, "turd", 2 },
+
 		{ _field_tag_reference, "on", &device_struct_definition_open_up_reference },
 		{ _field_tag_reference, "off", &device_struct_definition_open_up_reference },
 		{ _field_tag_reference, "deny", &device_struct_definition_open_up_reference },
+
+		{ _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_string_id, "script name" },
 		{ _field_custom },
+
 		{ _field_terminator }
 	};
 
