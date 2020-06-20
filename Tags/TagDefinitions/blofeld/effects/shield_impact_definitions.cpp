@@ -58,9 +58,12 @@ namespace blofeld
 		{ _field_real, "Hit Time:seconds" },
 		{ _field_struct, "Hit Color", &shield_color_function_struct_struct_definition },
 		{ _field_struct, "Hit Intensity", &shield_scalar_function_struct_struct_definition },
+
+		{ _field_version_greater, _engine_type_haloreach, 3 },
 		{ _field_struct, "Hit Radius", &shield_scalar_function_struct_struct_definition },
 		{ _field_tag_reference, "hit blob texture (adds significant cost)", &Tag::Reference<struct bitmap_group>::s_defaultDefinition },
 		{ _field_custom },
+
 		{ _field_real_quaternion, "edge_scales!" },
 		{ _field_real_quaternion, "edge_offsets!" },
 		{ _field_real_quaternion, "plasma_scales!" },
