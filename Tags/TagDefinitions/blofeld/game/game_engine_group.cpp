@@ -310,7 +310,13 @@ namespace blofeld
 		{ _field_char_integer, "Starting Crate 12" },
 		{ _field_char_integer, "Starting Crate 13" },
 		{ _field_char_integer, "Starting Crate 14" },
+
+		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_string, "Variant Event#This event is always set for script" },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_string, "Start Event" },
+		
 		{ _field_block, "Midnight Player Goal Properties", &GameEngineFirefightPlayerGoalPropertiesBlock_block },
 		{ _field_terminator }
 	};
