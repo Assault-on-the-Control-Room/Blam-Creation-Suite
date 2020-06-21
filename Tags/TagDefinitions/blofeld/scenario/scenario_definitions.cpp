@@ -812,20 +812,26 @@ namespace blofeld
 
 	TAG_STRUCT(scenario_struct_definition)
 	{
+
+		{ _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_block, "child scenarios", &scenario_child_references_block_block },
 		{ _field_custom, "link to scenario lightmap" },
+		
 		{ _field_enum, "type", &scenario_type_enum },
 		{ _field_word_flags, "flags", &scenario_flags },
 		{ _field_long_flags, "runtime trigger volume flags*!", &scenario_runtime_trigger_volume_flags },
 		{ _field_long_integer, "campaign id" },
 		{ _field_long_integer, "map id" },
 		{ _field_string_id, "map name#Used to associate external resources with this map - e.g. PDA camera setting block names." },
+
+		{ _field_version_greater, _engine_type_haloreach, 6 },
 		{ _field_tag_reference, "Scenario sound bank#Scenario-specific sound bank.", &global_soundbank_reference },
 		{ _field_tag_reference, "Scenario sound bank Number 2#Another scenario-specific sound bank. All will be loaded.", &global_soundbank_reference },
 		{ _field_tag_reference, "Scenario sound bank Number 3#Another scenario-specific sound bank. All will be loaded.", &global_soundbank_reference },
 		{ _field_tag_reference, "Scenario sound bank Number 4#Another scenario-specific sound bank. All will be loaded.", &global_soundbank_reference },
 		{ _field_string_id, "Inside reverb name#This reverb will be used for inside areas when the listener is outside." },
 		{ _field_long_integer, "Inside reverb hash ID!" },
+		
 		{ _field_short_integer, "sound permutation mission id" },
 		{ _field_pad, "pad", 2 },
 		{ _field_long_integer, "minimum structure bsp importer version*!" },
