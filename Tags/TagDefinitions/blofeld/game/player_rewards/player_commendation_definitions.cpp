@@ -119,9 +119,15 @@ namespace blofeld
 
 	TAG_STRUCT(commendationAggregatorDependent_struct)
 	{
+
+		{ _field_version_greater, _engine_type_haloreach, 3 },
 		{ _field_char_enum, "type", &aggregatorDependentTypeEnumDefinition },
 		{ _field_pad, "PAD1", 3 },
 		{ _field_string_id, "name^" },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_string_id, "commendation name^" },
+		
 		{ _field_terminator }
 	};
 
