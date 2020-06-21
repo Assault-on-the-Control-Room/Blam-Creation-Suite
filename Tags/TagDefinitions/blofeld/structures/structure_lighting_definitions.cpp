@@ -80,9 +80,18 @@ namespace blofeld
 		{ _field_int64_integer, "Light Instance ID!" },
 		{ _field_long_block_index, "Light Definition Index" },
 		{ _field_long_block_index, "Light Instance Index" },
+
+		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_array, "Active Shots", &g_cinematicShotFlagArray_array },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_dword_integer, "Active Shots" },
+		
 		{ _field_block, "Linked Objects", &structureLightingCinematicObjectBlock_block },
+
+		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_pad, "padding", 4 },
+		
 		{ _field_terminator }
 	};
 
