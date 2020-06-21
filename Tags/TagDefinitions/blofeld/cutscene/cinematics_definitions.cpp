@@ -514,18 +514,33 @@ namespace blofeld
 	TAG_STRUCT(scenario_cutscene_title_struct)
 	{
 		{ _field_string_id, "name^" },
+
+		{ _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_real_fraction_bounds, "text bounds X" },
 		{ _field_real_fraction_bounds, "text bounds Y" },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_rectangle_2d, "text bounds (on screen)" },
+		
 		{ _field_enum, "justification", &text_justification_enum_definition },
+
+		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_enum, "vertical justification", &text_vertical_justification_enum_definition },
+		
 		{ _field_enum, "font", &global_font_id_enum_definition },
+
+		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_pad, "padding", 2 },
+		
 		{ _field_rgb_color, "text color" },
 		{ _field_rgb_color, "shadow color" },
 		{ _field_real, "fade in time [seconds]" },
 		{ _field_real, "up time [seconds]" },
 		{ _field_real, "fade out time [seconds]" },
+
+		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_real, "letter print time:seconds" },
+		
 		{ _field_terminator }
 	};
 
