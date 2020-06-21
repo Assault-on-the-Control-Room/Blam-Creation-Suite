@@ -465,8 +465,22 @@ namespace blofeld
 
 	TAG_STRUCT(camera_frame_struct)
 	{
+
+		{ _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_struct, "dynamic data", &camera_frame_dynamic_struct_struct_definition },
 		{ _field_struct, "constant data", &camera_frame_constant_struct_struct_definition },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach, 9 },
+		{ _field_real_point_3d, "camera position*" },
+		{ _field_real_vector_3d, "camera forward*" },
+		{ _field_real_vector_3d, "camera up*" },
+		{ _field_real, "focal length*" },
+		{ _field_long_integer, "depth of field*" },
+		{ _field_real, "near focal plane distance*" },
+		{ _field_real, "far focal plane distance*" },
+		{ _field_real, "focal depth*" },
+		{ _field_real, "blur amount*" },
+		
 		{ _field_terminator }
 	};
 
