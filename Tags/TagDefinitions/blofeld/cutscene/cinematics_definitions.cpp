@@ -484,10 +484,17 @@ namespace blofeld
 		{ _field_long_integer, "depth of field*" },
 		{ _field_real, "near focal plane distance*" },
 		{ _field_real, "far focal plane distance*" },
+
+		{ _field_version_greater, _engine_type_haloreach, 4 },
 		{ _field_real, "near focal depth*" },
 		{ _field_real, "far focal depth*" },
 		{ _field_real, "near blur amount*" },
 		{ _field_real, "far blur amount*" },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach, 2 },
+		{ _field_real, "focal depth*" },
+		{ _field_real, "blur amount*" },
+		
 		{ _field_terminator }
 	};
 
