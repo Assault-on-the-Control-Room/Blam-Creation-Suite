@@ -11,8 +11,29 @@ namespace blofeld
 	TAG_BLOCK(commendationRewardBlock, eCT_count)
 	{
 		{ _field_char_enum, "currency type#Type of currency given by this reward.", &currencyTypeEnumDefinition },
+		
+		{ _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_char_enum, "override reward level cap#override the global reward level cap", &commendationProgressionLevelWithNoneEnum },
+
+		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_pad, "CRB_PAD1", 1 },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_pad, "PJB1", 2 },
+		
 		{ _field_short_integer, "reward value" },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach, 9 },
+		{ _field_short_integer, "post cap reward value" },
+		{ _field_short_integer, "clear level reward_value" },
+		{ _field_short_integer, "steel level reward value" },
+		{ _field_short_integer, "bronze level reward value" },
+		{ _field_short_integer, "silver level reward value" },
+		{ _field_short_integer, "gold level reward value" },
+		{ _field_short_integer, "onyx level reward value" },
+		{ _field_short_integer, "max level reward value" },
+		{ _field_pad, "PJB2", 2 },
+		
 		{ _field_terminator }
 	};
 
@@ -146,6 +167,21 @@ namespace blofeld
 		{ _field_terminator }
 	};
 
+
+	STRINGS(commendationProgressionLevelWithNoneEnum) // #TODO: This needs to be merged with another enum (String Versioning)
+	{
+		"default",
+			"clear",
+			"steel",
+			"bronze",
+			"silver",
+			"gold",
+			"onyx",
+			"max"
+	};
+	STRING_LIST(commendationProgressionLevelWithNoneEnum, commendationProgressionLevelWithNoneEnum_strings, _countof(commendationProgressionLevelWithNoneEnum_strings));
+
+	
 	STRINGS(commendationCategoryEnum)
 	{
 		"default",

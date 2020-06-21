@@ -26,6 +26,8 @@ namespace blofeld
 	extern s_tag_struct_definition commendationAggregatorDependent_struct_struct_definition;
 	extern s_tag_struct_definition commendation_globals_definition_struct_definition_struct_definition; // tag group
 
+	extern const char* commendationProgressionLevelWithNoneEnum_strings[];
+	extern s_string_list_definition commendationProgressionLevelWithNoneEnum;
 	extern const char* commendationCategoryEnum_strings[];
 	extern s_string_list_definition commendationCategoryEnum;
 	extern const char *commendationCategoryReachEnum_strings[];
