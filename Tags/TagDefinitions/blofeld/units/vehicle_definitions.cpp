@@ -28,20 +28,29 @@ namespace blofeld
 		{ _field_real, "maximum reverse speed" },
 		{ _field_real, "speed acceleration" },
 		{ _field_real, "speed deceleration" },
+
+		{ _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_real, "speed accel against direction#acceleration when trying to throttle against current speed direction" },
 		{ _field_real, "maximum forward speed during boost" },
+
 		{ _field_real, "maximum left slide" },
 		{ _field_real, "maximum right slide" },
 		{ _field_real, "slide acceleration" },
 		{ _field_real, "slide deceleration" },
+
+		{ _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_real, "slide accel against direction#acceleration when trying to throttle against current slide direction" },
 		{ _field_real, "maximum slide speed during boost" },
+
 		{ _field_real, "maximum up rise" },
 		{ _field_real, "maximum down rise" },
 		{ _field_real, "rise acceleration" },
 		{ _field_real, "rise deceleration" },
+
+		{ _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_real, "rise accel against direction#acceleration when trying to throttle against current rise direction" },
 		{ _field_real, "maximum rise speed during boost" },
+
 		{ _field_explanation, "human plane tuning variables", "" },
 		{ _field_real, "flying torque scale#big vehicles need to scale this down.  0 defaults to 1, which is generally a good value." },
 		{ _field_real, "air friction deceleration#human plane physics only. 0 is nothing.  1 is like thowing the engine to full reverse" },
@@ -81,7 +90,10 @@ namespace blofeld
 		{ _field_real, "maximum right slide" },
 		{ _field_real, "slide acceleration" },
 		{ _field_real, "slide deceleration" },
+
+		{ _field_version_greater, _engine_type_haloreach, 1 },
 		{ _field_real, "slide accel against direction#acceleration when trying to throttle against current slide direction" },
+
 		{ _field_real, "slide speed at top speed:wu/s#the slide speeds are interpolated down to this value, reaching it when the vehicle is moving at its top speed" },
 		{ _field_explanation, "specific types", "different types are treated differently alien scout controller" },
 		{ _field_char_enum, "specific type", &alien_scout_specific_type_enum },
@@ -355,7 +367,10 @@ namespace blofeld
 		{ _field_real, "maximum right slide" },
 		{ _field_real, "slide acceleration" },
 		{ _field_real, "slide deceleration" },
+
+		{ _field_version_greater, _engine_type_haloreach, 1 },
 		{ _field_real, "slide accel against direction#acceleration when trying to throttle against current slide direction" },
+
 		{ _field_explanation, "torque scale", "how hard the vehicle trys to rotate to it\'s desired rotation" },
 		{ _field_real, "flying torque scale#big vehicles need to scale this down.  0 defaults to 1, which is generally a good value." },
 		{ _field_explanation, "fixed gun offset", "this offset will be aligned to the units aiming vector instead of the vehicle forward vector" },
@@ -388,6 +403,8 @@ namespace blofeld
 		{ _field_angle, "cosmetic roll acceleration:deg/sec/sec#maximum angular acceleration for cosmetic roll" },
 		{ _field_real, "cosmetic roll spring k#controls relationship between displacement and acceleration - higher values mean faster acceleration when the desired position is far from current position" },
 		{ _field_real, "cosmetic roll spring c#controls relationship between velocity and friction - higher values will slow the system down, lower values may let the system oscillate" },
+
+		{ _field_version_greater, _engine_type_haloreach, 8 },
 		{ _field_explanation, "new roll", "" },
 		{ _field_long_flags, "roll flags", &space_fighter_roll_flags },
 		{ _field_angle, "maximum left stick roll angle" },
@@ -396,6 +413,7 @@ namespace blofeld
 		{ _field_angle, "maximum right stick roll angle" },
 		{ _field_real, "right stick rate smoothing" },
 		{ _field_real, "right stick trend smoothing" },
+
 		{ _field_explanation, "turn deceleration", "" },
 		{ _field_angle, "turn deceleration threshold:deg/sec#turn deceleration kicks in when turning faster than this" },
 		{ _field_real_fraction, "turn deceleration fraction#when turning at the maximum rate, throttle is limited to this value" },
@@ -583,6 +601,8 @@ namespace blofeld
 		{ _field_explanation, "wheel circumferance", "" },
 		{ _field_real, "wheel circumferance" },
 		{ _field_real, "gravity adjust#0-1 fraction by which we scale gravity that is not along the ground plane" },
+
+		{ _field_version_greater, _engine_type_haloreach, 11 },
 		{ _field_explanation, "New Tank Controls", "" },
 		{ _field_byte_flags, "control flags", &tank_flags },
 		{ _field_pad, "pad", 3 },
@@ -594,6 +614,7 @@ namespace blofeld
 		{ _field_real, "at rest facing backward reverse angle(pink)##angle forming arc in which the control will cause the tank to reverse while at rest and facing backwards" },
 		{ _field_real, "in motion opposing direction angle#when in motion the angle in which the control must be to start moving in the opposite direction" },
 		{ _field_real, "in motion speed#the speed a tank must reach before we consider it in motion, changing the control mode" },
+
 		{ _field_terminator }
 	};
 
