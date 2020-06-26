@@ -107,6 +107,8 @@ namespace blofeld
 		{ _field_block, "sound events", &animation_sound_event_block_extended_block },
 		{ _field_block, "effect events", &animation_effects_event_block_extended_block },
 		{ _field_block, "dialogue events", &animation_dialogue_event_block_extended_block },
+
+		{ _field_version_greater, _engine_type_haloreach, 1 },
 		{ _field_block, "script events", &animation_script_event_block_extended_block },
 		{ _field_terminator }
 	};
