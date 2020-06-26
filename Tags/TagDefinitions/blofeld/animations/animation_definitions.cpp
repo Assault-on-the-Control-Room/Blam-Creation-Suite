@@ -110,6 +110,7 @@ namespace blofeld
 
 		{ _field_version_greater, _engine_type_haloreach, 1 },
 		{ _field_block, "script events", &animation_script_event_block_extended_block },
+		
 		{ _field_terminator }
 	};
 
