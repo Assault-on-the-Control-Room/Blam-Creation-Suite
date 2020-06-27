@@ -16,8 +16,15 @@ namespace blofeld
 		{ _field_real, "easing in time#seconds" },
 		{ _field_real, "easing out time#seconds" },
 		{ _field_tag_reference, "transition settings", &cinematic_transition_reference },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach, 1 },
+		{ _field_pad, "PADDING", 32 }, // to verify
+
 		{ _field_tag_reference, "bink movie", &bink_reference },
+
+		{ _field_version_greater, _engine_type_haloreach, 1 },
 		{ _field_string, "bink movie on disc" },
+
 		{ _field_custom, "Header" },
 		{ _field_struct, "header", &cinematic_custom_script_block_struct_definition },
 		{ _field_custom },
@@ -57,14 +64,22 @@ namespace blofeld
 
 	TAG_BLOCK(cinematic_shot_playback_data_block, MAX_CINEMATIC_SCENE_COUNT)
 	{
+		{ _field_version_greater, _engine_type_haloreach, 1 },
 		{ _field_array, "shot flags!", &g_cinematicShotFlagArray_array },
+
+	    { _field_version_less_or_equal, _engine_type_haloreach, 1 },
+	    { _field_array, "shot flags!", &g_cinematicShotFlagArray_haloreach_array }, // 1 flag instead of 2
+
 		{ _field_terminator }
 	};
 
 	TAG_BLOCK(cinematic_scene_reference_block, MAX_CINEMATIC_SCENE_COUNT)
 	{
 		{ _field_tag_reference, "scene", &cinematic_scene_reference },
+
+		{ _field_version_greater, _engine_type_haloreach, 1 },
 		{ _field_tag_reference, "data", &cinematic_scene_data_reference },
+
 		{ _field_terminator }
 	};
 
@@ -400,18 +415,30 @@ namespace blofeld
 		{ _field_terminator }
 	};
 
+	TAG_ARRAY(g_cinematicShotFlagArray_haloreach, c_cinematic_shot_flags::k_flag_chunk_count_haloreach)
+	{
+		{ _field_dword_integer, "shot flag data" },
+		{ _field_terminator }
+	};
+
 	TAG_STRUCT(cinematic_playback_data_block)
 	{
 		{ _field_long_block_flags, "scenes!" },
 		{ _field_long_block_flags, "scenes expanded!" },
 		{ _field_block, "shots!", &cinematic_shot_playback_data_block_block },
+
+		{ _field_version_greater, _engine_type_haloreach, 1 },
 		{ _field_long_integer, "bsp zone flags!" },
+
 		{ _field_terminator }
 	};
 
 	TAG_STRUCT(scenario_and_zone_set_struct)
 	{
+
+		{ _field_version_greater, _engine_type_haloreach, 1 },
 		{ _field_custom, "custom ui" },
+
 		{ _field_tag_reference, "scenario!", &scenario_reference },
 		{ _field_long_integer, "zone set!" },
 		{ _field_terminator }

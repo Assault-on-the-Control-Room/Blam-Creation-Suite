@@ -590,6 +590,7 @@ namespace blofeld
 	struct c_cinematic_shot_flags
 	{
 		static const unsigned long k_flag_chunk_count = 2;
+		static const unsigned long k_flag_chunk_count_haloreach = 1;
 	};
 	struct c_node_flags
 	{

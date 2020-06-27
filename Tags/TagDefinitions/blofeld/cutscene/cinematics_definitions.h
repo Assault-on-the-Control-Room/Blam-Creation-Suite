@@ -93,6 +93,7 @@ namespace blofeld
 
 	extern s_tag_struct_definition g_cinematicShotFlagArray_struct_definition;
 	extern s_tag_array_definition g_cinematicShotFlagArray_array;
+	extern s_tag_array_definition g_cinematicShotFlagArray_haloreach_array;
 	extern s_tag_struct_definition cinematic_playback_data_block_struct_definition;
 	extern s_tag_struct_definition scenario_and_zone_set_struct_struct_definition;
 	extern s_tag_struct_definition cinematic_custom_script_block_struct_definition;
