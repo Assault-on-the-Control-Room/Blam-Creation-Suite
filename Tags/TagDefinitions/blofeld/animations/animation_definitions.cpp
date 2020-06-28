@@ -757,7 +757,10 @@ namespace blofeld
 		{ _field_block, "node map*", &inherited_animation_node_map_block_block },
 		{ _field_block, "node map flags*", &inherited_animation_node_map_flag_block_block },
 		{ _field_long_integer, "inheritance_flags*" },
+
+		{ _field_version_greater, _engine_type_haloreach, 1 },
 		{ _field_real, "uniform translation scale*" },
+
 		{ _field_terminator }
 	};
 

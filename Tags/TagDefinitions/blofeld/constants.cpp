@@ -51,6 +51,7 @@ namespace blofeld
 		"c_node_flags::k_flag_chunk_count",
 		{
 			{ _engine_type_not_set, 2 },
+			{ _engine_type_haloreach, 8 },
 			{ _engine_type_gen3_xbox360, 8 }
 		}
 	};
