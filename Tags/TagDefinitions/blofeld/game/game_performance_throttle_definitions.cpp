@@ -33,9 +33,12 @@ namespace blofeld
 		{ _field_long_integer, "maximum ragdoll count" },
 		{ _field_long_integer, "maximum impact count" },
 		{ _field_long_integer, "vehicle suspension update frequency" },
+
+		{ _field_version_greater, _engine_type_haloreach, 3 },
 		{ _field_long_integer, "Actor LOD, AI actors to update fully each frame" },
 		{ _field_long_integer, "Actor LOD, Number of frames to tick LODed AI" },
 		{ _field_long_integer, "Actor LOD, Number of concurrent LOD actors to tick" },
+		
 		{ _field_terminator }
 	};
 

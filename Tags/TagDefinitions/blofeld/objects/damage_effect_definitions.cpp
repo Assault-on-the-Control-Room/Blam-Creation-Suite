@@ -24,7 +24,9 @@ namespace blofeld
 
 	TAG_STRUCT(damage_effect_group)
 	{
+		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_tag_reference, "area of effect behavior equipment#if a reference is here, area of effect damage will attach the equipment to the target", &behavior_object_reference },
+		
 		{ _field_real_bounds, "radius:world units" },
 		{ _field_real_fraction, "cutoff scale:[0,1]" },
 		{ _field_long_flags, "effect flags", &damage_effect_flags },
@@ -33,8 +35,11 @@ namespace blofeld
 		{ _field_enum, "category", &damage_categories },
 		{ _field_long_enum, "death vocalization", &damage_death_vocalizations },
 		{ _field_long_flags, "flags", &damage_flags },
+
+		{ _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_long_flags, "secondary flags", &damageSecondaryFlags },
 		{ _field_real, "headshot damage multiplier#ignored if zero or if headshot flag is not set above; \notherwise, makes headshot not instantly lethal, but multiplies damage done to head by this much.  \n2 does 2x damage to head for headshot.  note that head still has different health than body." },
+		
 		{ _field_real, "AOE core radius:world units#if >0 then higher fidelity obstruction collision checks are preformed. This field has no other ramifications." },
 		{ _field_real, "damage lower bound" },
 		{ _field_real_bounds, "damage upper bound" },
@@ -47,15 +52,21 @@ namespace blofeld
 		{ _field_real, "stun time:seconds#duration of stun due to this damage" },
 		{ _field_long_integer, "damage stun:ticks#how long we stun recovering current body damage" },
 		{ _field_real, "instantaneous acceleration:[0,+inf]" },
+
+		{ _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_real, "alt instantaneous acceleration:[0,+inf]#This field can be used for an alternative acceleration if the corresponding flags are set, e.g. check vehicle->flags.vehicle wants reduced weapon impulse when airborne" },
 		{ _field_real, "acceleration cap#set to zero to disable cap" },
+		
 		{ _field_useless_pad },
 		{ _field_useless_pad },
 		{ _field_explanation, "DEPRECATED - rider damage scales", "" },
 		{ _field_real, "rider direct damage scale" },
 		{ _field_real, "rider maximum transfer damage scale" },
 		{ _field_real, "rider minimum transfer damage scale" },
+
+		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_real, "vehicle damage multiplier" },
+		
 		{ _field_real_fraction, "soft ping pain screen scale:[0,1]#The maximum amount to apply the pain screen pose overlay" },
 		{ _field_useless_pad },
 		{ _field_string_id, "general_damage" },
@@ -68,6 +79,8 @@ namespace blofeld
 		{ _field_real, "aoe spike radius" },
 		{ _field_real, "aoe spike damage bump" },
 		{ _field_real, "shield render effects scale" },
+
+		{ _field_version_greater, _engine_type_haloreach, 17 },
 		{ _field_long_integer, "stasis time:ticks#duration of stasis due to this damage, zero disables" },
 		{ _field_real, "stasis time dilation" },
 		{ _field_real, "stasis max biped turning rate" },
@@ -85,6 +98,7 @@ namespace blofeld
 		{ _field_explanation, "Modifies TOL logic so that (above) unstun will only happen if (below) minimum stun time has passed", "" },
 		{ _field_real, "shield minimum stun time:seconds" },
 		{ _field_real, "health minimum stun time:seconds" },
+		
 		{ _field_explanation, "damage response", "" },
 		{ _field_tag_reference, "damage response", &global_damage_response_definition_reference },
 		{ _field_explanation, "sound", "" },
