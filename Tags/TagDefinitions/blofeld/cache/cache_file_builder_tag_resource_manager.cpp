@@ -26,6 +26,11 @@ namespace blofeld
 		{ _field_block, "shared files", &cache_file_shared_file_block_block },
 		{ _field_block, "file pages", &cache_file_resource_file_page_block_block },
 		{ _field_block, "streaming subpage tables", &cache_file_resource_streaming_subpage_table_block_block },
+
+		{ _field_version_platform_include, _platform_type_pc, 2 },
+		{ _field_version_less_or_equal, _engine_type_haloreach, 1 },
+		{ _field_block, "unknown", &g_null_block_block },
+
 		{ _field_block, "sections", &cache_file_resource_section_block_block },
 		{ _field_block, "resources*", &cache_file_resource_data_block_block },
 		{ _field_block, "designer zone manifests*", &cache_file_designer_zone_block_block },
@@ -38,8 +43,11 @@ namespace blofeld
 		{ _field_block, "static bsp zone manifests*", &cache_file_tag_zone_block_block },
 		{ _field_block, "dynamic bsp zone manifests*", &cache_file_tag_zone_block_block },
 		{ _field_block, "cinematic zone manifests*", &cache_file_cinematic_zone_block_block },
+
+		{ _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_block, "required map variant manifests*", &cache_file_tag_zone_block_block },
 		{ _field_block, "sandbox map variant manifests*", &cache_file_tag_zone_block_block },
+
 		{ _field_block, "zone only zone set manifests*", &cache_file_tag_zone_block_block },
 		{ _field_block, "expected zone set manifests*", &cache_file_tag_zone_block_block },
 		{ _field_block, "fully populated zone set manifests", &cache_file_full_zone_sets_block_block },
@@ -118,9 +126,17 @@ namespace blofeld
 		{ _field_long_integer, "identifier part 2" },
 		{ _field_long_integer, "identifier part 3" },
 		{ _field_long_integer, "definition flags" },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach, 2 }, // this needs to be setup properly as a _field_array with a count of 2
+		{ _field_short_integer, "page alignment bits1" },
+		{ _field_short_integer, "page alignment bits2" },
+
 		{ _field_string_id, "name^" },
+
+		{ _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_array, "page alignment bits", &tag_resource_alignment_bits_array_definition_array },
 		{ _field_pad, "pad0", 2 },
+
 		{ _field_terminator }
 	};
 
@@ -161,12 +177,20 @@ namespace blofeld
 		{ _field_char_block_index, "resource type index*" },
 		{ _field_char_integer, "control alignment bits" },
 		{ _field_long_integer, "control size" },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach, 2 },
+		{ _field_long_integer, "secondary control size" }, // unknown
+		{ _field_long_integer, "tertiary control size" },  // unknown
+
 		{ _field_word_flags, "flags", &cache_file_resource_data_flags_definition },
 		{ _field_short_block_index, "page" },
 		{ _field_long_integer, "root fixup" },
 		{ _field_block, "control fixups", &cache_file_resource_fixup_location_block_block },
 		{ _field_block, "interop locations", &cache_file_resource_interop_location_block_block },
+
+		{ _field_version_greater, _engine_type_haloreach, 1 },
 		{ _field_block, "priority level data", &cache_file_resource_priority_data_block_block },
+
 		{ _field_terminator }
 	};
 
@@ -179,7 +203,14 @@ namespace blofeld
 	TAG_BLOCK(cache_file_tag_resource_usage_block, k_maximum_cache_file_tag_resource_types)
 	{
 		{ _field_string_id, "name^" },
+
+		{ _field_version_greater, _engine_type_haloreach, 1 },
 		{ _field_array, "page sizes", &resource_usage_page_size_array_definition_array },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach, 2 }, // this needs to be setup properly as a _field_array with a count of 2
+		{ _field_long_integer, "page sizes" },
+		{ _field_long_integer, "page sizes" },
+
 		{ _field_long_integer, "deferred required size" },
 		{ _field_long_integer, "streamed resource size" },
 		{ _field_long_integer, "dvd in-memory resource size" },
@@ -218,8 +249,16 @@ namespace blofeld
 		{ _field_long_flags, "flags", &scenario_zone_set_flags_definition },
 		{ _field_long_block_flags, "required bsp zones" },
 		{ _field_long_block_flags, "expected touched bsp zones" },
+
+		{ _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_qword_integer, "required designer zones" },
 		{ _field_qword_integer, "expected designer zones" },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach, 3 },
+		{ _field_long_block_flags, "unknown" }, // a thorough verification is required for this tagblock
+		{ _field_long_block_flags, "required designer zones" },
+		{ _field_long_block_flags, "expected designer zones" },
+
 		{ _field_long_block_flags, "required cinematic zones" },
 		{ _field_long_block_index, "hint previous zone set" },
 		{ _field_terminator }
@@ -460,9 +499,24 @@ namespace blofeld
 	TAG_STRUCT(cache_file_tag_zone_manifest_struct)
 	{
 		{ _field_block, "cached resource bitvector", &cache_file_tag_resources_bitvector_block_block },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach, 1 },
+		{ _field_block, "unknown resource bitvector", &cache_file_tag_resources_bitvector_block_block },
+
 		{ _field_block, "streamed resource bitvector", &cache_file_tag_resources_bitvector_block_block },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach, 1 },
+		{ _field_block, "unknown resource bitvector", &cache_file_tag_resources_bitvector_block_block },
+
 		{ _field_string_id, "name^" },
+
+		{ _field_version_greater, _engine_type_haloreach, 1 },
 		{ _field_array, "page sizes", &resource_usage_page_size_array_definition_array },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach, 2 }, // this needs to be setup properly as a _field_array with a count of 2
+		{ _field_long_integer, "page sizes" },
+		{ _field_long_integer, "page sizes" },
+
 		{ _field_long_integer, "deferred required size" },
 		{ _field_long_integer, "streamed resource size" },
 		{ _field_long_integer, "dvd in-memory resource size" },
@@ -475,7 +529,13 @@ namespace blofeld
 		{ _field_long_integer, "active bsp mask!" },
 		{ _field_long_integer, "touched bsp mask!" },
 		{ _field_long_integer, "cinematic zone mask!" },
+
+		{ _field_version_greater, _engine_type_haloreach, 1 },
 		{ _field_qword_integer, "designer zone mask!" },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach, 1 },
+		{ _field_long_integer, "designer zone mask!" },
+
 		{ _field_terminator }
 	};
 
