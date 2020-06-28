@@ -10,6 +10,11 @@ namespace blofeld
 		{ _field_block, "shared files", &cache_file_shared_file_block_block },
 		{ _field_block, "file pages", &cache_file_resource_file_page_block_block },
 		{ _field_block, "streaming subpage tables", &cache_file_resource_streaming_subpage_table_block_block },
+
+		{ _field_version_platform_include, _platform_type_pc, 2 },
+		{ _field_version_less_or_equal, _engine_type_haloreach, 1 },
+		{ _field_block, "unknown@", &g_null_block_block },
+
 		{ _field_block, "sections", &cache_file_resource_section_block_block },
 		{ _field_long_integer, "required location count" },
 		{ _field_long_integer, "required dvd location count" },
