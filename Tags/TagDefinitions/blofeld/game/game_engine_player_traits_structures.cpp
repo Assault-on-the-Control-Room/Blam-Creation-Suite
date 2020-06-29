@@ -156,30 +156,190 @@ namespace blofeld
 	};
 	STRING_LIST(player_trait_bool_enum, player_trait_bool_enum_strings, _countof(player_trait_bool_enum_strings));
 
-	STRINGS(player_trait_initial_grenade_count_enum)
+	STRINGS(player_trait_damage_resistance_enum)
 	{
-		"unchanged",
-		"map_default",
-		"0",
-		"1_frag",
-		"2_frag",
-		"1_plasma",
-		"2_plasma",
-		"1_type2",
-		"2_type2",
-		"1_type3",
-		"2_type3",
-		"1_type4",
-		"2_type4",
-		"1_type5",
-		"2_type5",
-		"1_type6",
-		"2_type6",
-		"1_type7",
-		"2_type7"
+		"Unchanged",
+		"10%",
+		"50%",
+		"90%",
+		"100%",
+		"110%",
+		"150%",
+		"200%",
+		"300%",
+		"500%",
+		"1000%",
+		"2000%",
+		"Invulnerable"
 	};
+	STRING_LIST(player_trait_damage_resistance_enum, player_trait_damage_resistance_enum_strings, _countof(player_trait_damage_resistance_enum_strings));
+
+	STRINGS(player_trait_shield_multiplier_enum)
+	{
+		"Unchanged",
+		"No Shields",
+		"Normal Shields",
+		"1.5x Overshields",
+		"2x Overshields",
+		"3x Overshields",
+		"4x Overshields"
+	};
+	STRING_LIST(player_trait_shield_multiplier_enum, player_trait_shield_multiplier_enum_strings, _countof(player_trait_shield_multiplier_enum_strings));
+
+	STRINGS(player_trait_body_multiplier_enum)
+	{
+		"Unchanged",
+		"0%",
+		"100%",
+		"150%",
+		"200%",
+		"300%",
+		"400%"
+	};
+	STRING_LIST(player_trait_body_multiplier_enum, player_trait_body_multiplier_enum_strings, _countof(player_trait_body_multiplier_enum_strings));
+
+	STRINGS(player_trait_shield_recharge_rate_enum)
+	{
+		"Unchanged",
+		"-25%",
+		"-10%",
+		"-5%",
+		"0%",
+		"10%",
+		"25%",
+		"50%",
+		"75%",
+		"90%",
+		"100%",
+		"110%",
+		"125%",
+		"150%",
+		"200%"
+	};
+	STRING_LIST(player_trait_shield_recharge_rate_enum, player_trait_shield_recharge_rate_enum_strings, _countof(player_trait_shield_recharge_rate_enum_strings));
+
+	STRINGS(player_trait_shield_vampirism_enum)
+	{
+		"Unchanged",
+		"Disabled",
+		"10%",
+		"25%",
+		"50%",
+		"100%"
+	};
+	STRING_LIST(player_trait_shield_vampirism_enum, player_trait_shield_vampirism_enum_strings, _countof(player_trait_shield_vampirism_enum_strings));
+
+	STRINGS(player_trait_damage_modifier_enum)
+	{
+		"Unchanged",
+		"0%",
+		"25%",
+		"50%",
+		"75%",
+		"90%",
+		"100%",
+		"110%",
+		"125%",
+		"150%",
+		"200%",
+		"300%",
+		"Instant Kill"
+	};
+	STRING_LIST(player_trait_damage_modifier_enum, player_trait_damage_modifier_enum_strings, _countof(player_trait_damage_modifier_enum_strings));
+	
+	STRINGS(player_trait_initial_grenade_count_enum)
+		{
+			{
+				_engine_type_haloreach,
+				_versioned_string_list_mode_new,
+				{
+					"Unchanged",
+					"Map Default",
+					"None",
+					"1 Frag",
+					"2 Frags",
+					"3 Frags",
+					"4 Frags",
+					"1 Plasma",
+					"2 Plasmas",
+					"3 Plasmas",
+					"4 Plasmas",
+					"1x Each",
+					"2x Each",
+					"3x Each",
+					"4x Each"
+				}
+			},
+			{
+				_engine_type_halo4,
+				_versioned_string_list_mode_new,
+				{
+					"unchanged",
+					"map_default",
+					"0",
+					"1_frag",
+					"2_frag",
+					"1_plasma",
+					"2_plasma",
+					"1_type2",
+					"2_type2",
+					"1_type3",
+					"2_type3",
+					"1_type4",
+					"2_type4",
+					"1_type5",
+					"2_type5",
+					"1_type6",
+					"2_type6",
+					"1_type7",
+					"2_type7"
+				}
+			}
+		};
 	STRING_LIST(player_trait_initial_grenade_count_enum, player_trait_initial_grenade_count_enum_strings, _countof(player_trait_initial_grenade_count_enum_strings));
 
+	STRINGS(player_trait_movement_speed_enum)
+	{
+		"Unchanged",
+		"0%",
+		"25%",
+		"50%",
+		"75%",
+		"90%",
+		"100%",
+		"110%",
+		"120%",
+		"130%",
+		"140%",
+		"150%",
+		"160%",
+		"170%",
+		"180%",
+		"190%",
+		"200%",
+		"300%"
+	};
+	STRING_LIST(player_trait_movement_speed_enum, player_trait_movement_speed_enum_strings, _countof(player_trait_movement_speed_enum_strings));
+
+	STRINGS(player_trait_gravity_scale_enum)
+	{
+		"Unchanged",
+		"50%",
+		"75%",
+		"100%",
+		"150%",
+		"200%",
+		"250%",
+		"300%",
+		"350%",
+		"400%",
+		"450%",
+		"500%",
+		"550%",
+		"600%"
+	};
+	STRING_LIST(player_trait_gravity_scale_enum, player_trait_gravity_scale_enum_strings, _countof(player_trait_gravity_scale_enum_strings));
+	
 	STRINGS(player_trait_infinite_ammo_enum)
 	{
 		"unchanged",
@@ -213,12 +373,24 @@ namespace blofeld
 	STRING_LIST(player_trait_vehicle_usage, player_trait_vehicle_usage_strings, _countof(player_trait_vehicle_usage_strings));
 
 	STRINGS(player_trait_double_jump)
-	{
-		"unchanged",
-		"off",
-		"on",
-		"on_plus_lunge"
-	};
+		{
+			{
+				_engine_type_haloreach,
+				_versioned_string_list_mode_new,
+				{
+					"unchanged",
+					"off",
+					"on",
+				}
+			},
+			{
+				_engine_type_halo4,
+				_versioned_string_list_mode_append,
+				{
+					"on_plus_lunge"
+				}
+			}
+		};
 	STRING_LIST(player_trait_double_jump, player_trait_double_jump_strings, _countof(player_trait_double_jump_strings));
 
 	STRINGS(player_trait_active_camo)
@@ -231,6 +403,25 @@ namespace blofeld
 		"invisible"
 	};
 	STRING_LIST(player_trait_active_camo, player_trait_active_camo_strings, _countof(player_trait_active_camo_strings));
+
+	STRINGS(player_trait_forced_color_enum)
+	{
+		"Unchanged",
+		"Disabled",
+		"Red",
+		"Blue",
+		"Green",
+		"Orange",
+		"Purple",
+		"Gold",
+		"Brown",
+		"Pink",
+		"White",
+		"Black",
+		"Zombie",
+		"Pink (Unused)"
+	};
+	STRING_LIST(player_trait_forced_color_enum, player_trait_forced_color_enum_strings, _countof(player_trait_forced_color_enum_strings));
 
 	STRINGS(player_trait_waypoint)
 	{
@@ -260,6 +451,19 @@ namespace blofeld
 		"all_bipeds_moving_vehicles"
 	};
 	STRING_LIST(player_trait_motion_tracker, player_trait_motion_tracker_strings, _countof(player_trait_motion_tracker_strings));
+
+	STRINGS(player_trait_motion_tracker_range_enum)
+	{
+		"Unchanged",
+		"10m",
+		"15m",
+		"25m",
+		"50m",
+		"75m",
+		"100m",
+		"150m"
+	};
+	STRING_LIST(player_trait_motion_tracker_range_enum, player_trait_motion_tracker_range_enum_strings, _countof(player_trait_motion_tracker_range_enum_strings));
 
 	STRINGS(player_trait_powerup_cancellation_enum)
 	{
