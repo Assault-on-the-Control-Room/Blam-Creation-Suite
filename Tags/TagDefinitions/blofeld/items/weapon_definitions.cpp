@@ -219,7 +219,7 @@ namespace blofeld
 	TAG_STRUCT(melee_damage_parameters_block)
 	{ 
 		{ _field_explanation, "melee damage parameters", "damage pyramid angles: defines the frustum from the camera that the melee-attack uses to find targets\ndamage pyramid depth: how far the melee attack searches for a target" },
-		{ _field_version_less_or_equal, _engine_type_halo3, 2},
+		{ _field_version_less_or_equal, _engine_type_halo3, 2 },
 		{ _field_tag_reference, "player melee damage", &player_melee_damage_reference }, // assembly
 		{ _field_tag_reference, "player melee response", &player_melee_response_reference }, // assembly
 		{ _field_real_euler_angles_2d, "damage pyramid angles" },
