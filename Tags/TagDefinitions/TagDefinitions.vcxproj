@@ -58,6 +58,7 @@
     <ClCompile Include="blofeld\camera\camera_globals.cpp" />
     <ClCompile Include="blofeld\camera\camera_obstruction.cpp" />
     <ClCompile Include="blofeld\camera\camera_track_definitions.cpp" />
+    <ClCompile Include="blofeld\components\chocolate_mountain_new_definitions.cpp" />
     <ClCompile Include="blofeld\components\selfilluminationdefinition.cpp" />
     <ClCompile Include="blofeld\constants.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
@@ -331,6 +332,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="blofeld\components\chocolate_mountain_new_definitions.h" />
     <ClInclude Include="blofeld\effects\beam_system.h" />
     <ClInclude Include="blofeld\effects\contrail_system.h" />
     <ClInclude Include="blofeld\tag_structs.h" />

@@ -281,6 +281,7 @@ namespace blofeld
 		&chud_animation_group,
 		&chud_group,
 		&chud_globals_group,
+		&chocolate_mountain_new_group,
 		nullptr
 	};
 

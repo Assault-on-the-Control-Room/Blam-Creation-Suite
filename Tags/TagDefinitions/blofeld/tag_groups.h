@@ -41,6 +41,7 @@
 #include "camera\camera_obstruction.h"
 #include "camera\camera_track_definitions.h"
 #include "components\selfilluminationdefinition.h"
+#include "components\chocolate_mountain_new_definitions.h"
 #include "creatures\creature_definitions.h"
 #include "cutscene\cinematics_definitions.h"
 #include "cutscene\lightrig.h"

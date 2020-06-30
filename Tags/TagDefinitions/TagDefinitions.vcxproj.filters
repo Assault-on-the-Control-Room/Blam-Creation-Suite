@@ -915,6 +915,9 @@
     <ClCompile Include="blofeld\interface\chud\chud_widgets.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="blofeld\components\chocolate_mountain_new_definitions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="blofeld.h">
@@ -1848,6 +1851,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="blofeld\interface\chud\chud_widgets.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="blofeld\components\chocolate_mountain_new_definitions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
