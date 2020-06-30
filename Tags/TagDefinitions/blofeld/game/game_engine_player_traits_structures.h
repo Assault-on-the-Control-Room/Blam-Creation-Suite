@@ -57,6 +57,8 @@ namespace blofeld
 	extern s_string_list_definition player_trait_aura;
 	extern c_versioned_string_list player_trait_motion_tracker_strings;
 	extern s_string_list_definition player_trait_motion_tracker;
+	extern c_versioned_string_list player_trait_motion_tracker_range_enum_strings;
+	extern s_string_list_definition player_trait_motion_tracker_range_enum;
 	extern c_versioned_string_list player_trait_powerup_cancellation_enum_strings;
 	extern s_string_list_definition player_trait_powerup_cancellation_enum;
 	extern c_versioned_string_list player_traits_vitality_float_flags_strings;
