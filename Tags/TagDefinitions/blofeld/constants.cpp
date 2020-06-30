@@ -42,6 +42,7 @@ namespace blofeld
 		"c_cinematic_shot_flags::k_flag_chunk_count",
 		{
 			{ _engine_type_not_set, 1 },
+			{ _engine_type_haloreach, 2 },
 			{ _engine_type_gen3_xbox360, 2 }
 		}
 	};

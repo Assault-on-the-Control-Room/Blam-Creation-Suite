@@ -18,7 +18,7 @@ namespace blofeld
 		{ _field_tag_reference, "transition settings", &cinematic_transition_reference },
 
 		{ _field_version_less_or_equal, _engine_type_haloreach, 1 },
-		{ _field_pad, "PADDING", 32 }, // to verify
+		{ _field_pad, "PADDING@", 32 },
 
 		{ _field_tag_reference, "bink movie", &bink_reference },
 
@@ -95,12 +95,28 @@ namespace blofeld
 	TAG_BLOCK(cinematic_scene_object_block, 10000)
 	{
 		{ _field_string_id, "name*^" },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach, 1 }, // from H4 cisd tag
+		{ _field_string_id, "identifier*" },
+
 		{ _field_string_id, "variant name" },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach, 2 }, // from H4 cisd tag
+		{ _field_tag_reference, "model animation graph*", &global_animation_graph_reference },
+		{ _field_tag_reference, "object type*", &scene_object_attachment_block_attachment_type_reference },
+
 		{ _field_long_flags, "flags", &scene_object_flags },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach, 2 }, // from H4 cisd tag
+		{ _field_custom, "shots active flags*" },
+		{ _field_array, "shots active flags*", &g_cinematicShotFlagArray_array },
+
+		{ _field_version_greater, _engine_type_haloreach, 4 },    
 		{ _field_custom, "lightmap shadow flags" },
 		{ _field_array, "lightmap shadow flags", &g_cinematicShotFlagArray_array },
 		{ _field_custom, "high res flags" },
 		{ _field_array, "high res flags", &g_cinematicShotFlagArray_array },
+
 		{ _field_long_flags, "override creation flags", &cinematic_coop_type_flags },
 		{ _field_explanation, "Custom override creation condition", "Used in combination with the override creation flags above" },
 		{ _field_struct, "custom don\'t create condition", &cinematic_custom_script_block_struct_definition },
@@ -170,8 +186,11 @@ namespace blofeld
 		{ _field_long_integer, "frame" },
 		{ _field_custom, "stop frame" },
 		{ _field_long_integer, "stop frame" },
+
+		{ _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_byte_flags, "flags", &cinematicShotScreenEffectFlags },
 		{ _field_pad, "BLAHWWW", 3 },
+
 		{ _field_terminator }
 	};
 
@@ -207,22 +226,50 @@ namespace blofeld
 		{ _field_custom },
 		{ _field_custom, "Settings" },
 		{ _field_long_flags, "settings flags", &sceneShotSettingsFlags },
+
+		{ _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_real, "Lightmap Direct Scalar" },
 		{ _field_real, "Lightmap Indirect Scalar" },
+
 		{ _field_real, "Sun Scalar" },
+
+		{ _field_version_greater, _engine_type_haloreach, 3 },
 		{ _field_tag_reference, "Atmosphere Fog", &global_atmosphere_definition_reference },
 		{ _field_tag_reference, "Camera Effects", &global_camera_fx_settings_reference },
 		{ _field_tag_reference, "Cubemap", &global_bitmap_reference },
+
 		{ _field_custom },
 		{ _field_block, "lighting", &cinematic_shot_lighting_block_block },
 		{ _field_block, "clip", &cinematic_shot_clip_block_block },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach, 1 },// from H4 cisd
+		{ _field_block, "dialogue", &cinematic_shot_dialogue_block_block },
+
 		{ _field_block, "music", &cinematic_shot_music_block_block },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach, 1 },// from H4 cisd
+		{ _field_block, "effects", &cinematic_shot_effect_block_block },
+
 		{ _field_block, "object functions", &cinematic_shot_object_function_block_block },
 		{ _field_block, "screen effects", &cinematic_shot_screen_effect_block_block },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach, 1 },// from H4 cisd
+		{ _field_block, "custom script", &cinematic_shot_custom_script_block_block },
+
 		{ _field_block, "user input constraints", &cinematic_shot_user_input_constraints_block_block },
+
+		{ _field_version_greater, _engine_type_haloreach, 1 },
 		{ _field_block, "texture movies", &cinematicShotTextureMovieBlock_block },
+
 		{ _field_custom, "Footer" },
 		{ _field_struct, "footer", &cinematic_custom_script_block_struct_definition },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach, 4 },// from H4 cisd
+		{ _field_long_integer, "frame count*" },
+		{ _field_block, "frame data*", &cinematic_shot_frame_block_block },
+		{ _field_block, "dynamic frame data*!", &cinematic_shot_frame_dynamic_block_block },
+		{ _field_block, "constant frame data*!", &cinematic_shot_frame_constant_block_block },
+
 		{ _field_custom },
 		{ _field_terminator }
 	};
@@ -258,7 +305,10 @@ namespace blofeld
 		{ _field_char_enum, "state", &sceneShotEffectState },
 		{ _field_pad, "CMVOIRLKSD", 2 },
 		{ _field_tag_reference, "effect", &global_effect_reference },
+
+		{ _field_version_greater, _engine_type_haloreach, 1 },
 		{ _field_real, "size scale" },
+
 		{ _field_custom, "frame" },
 		{ _field_long_integer, "frame" },
 		{ _field_custom },
@@ -266,6 +316,8 @@ namespace blofeld
 		{ _field_long_block_index, "marker parent" },
 		{ _field_string_id, "function a" },
 		{ _field_string_id, "function b" },
+
+		{ _field_version_greater, _engine_type_haloreach, 2 },     
 		{ _field_long_integer, "node id!" },
 		{ _field_long_integer, "sequence id!" },
 		{ _field_terminator }
@@ -447,15 +499,27 @@ namespace blofeld
 		{ _field_string_id, "anchor" },
 		{ _field_enum, "reset object lighting", &scene_reset_object_lighting_enum },
 		{ _field_pad, "pad", 2 },
+
+		{ _field_version_greater, _engine_type_haloreach, 1 },
 		{ _field_tag_reference, "data*", &cinematic_scene_data_reference },
+
 		{ _field_custom, "Header" },
 		{ _field_struct, "header", &cinematic_custom_script_block_struct_definition },
 		{ _field_custom },
 		{ _field_block, "objects*", &cinematic_scene_object_block_block },
 		{ _field_block, "shots", &cinematic_shot_block_block },
+
+		{ _field_version_greater, _engine_type_haloreach, 1 },
 		{ _field_block, "lights", &cinematicStructureLightingBlock_block },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach, 1 },
+		{ _field_block, "extra camera frame data*", &cinematic_shot_extra_camera_block_block },
+
 		{ _field_custom, "Footer" },
 		{ _field_struct, "footer", &cinematic_custom_script_block_struct_definition },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach, 1 },
+		{ _field_long_integer, "version*" },
 		{ _field_custom },
 		{ _field_terminator }
 	};
@@ -502,9 +566,15 @@ namespace blofeld
 		{ _field_real, "near focal plane distance*" },
 		{ _field_real, "far focal plane distance*" },
 		{ _field_real, "near focal depth*" },
+
+		{ _field_version_greater, _engine_type_haloreach, 1 },
 		{ _field_real, "far focal depth*" },
+
 		{ _field_real, "near blur amount*" },
+
+		{ _field_version_greater, _engine_type_haloreach, 1 },
 		{ _field_real, "far blur amount*" },
+
 		{ _field_terminator }
 	};
 
@@ -743,4 +813,3 @@ namespace blofeld
 	STRING_LIST(scenario_cinematics_flags, scenario_cinematics_flags_strings, _countof(scenario_cinematics_flags_strings));
 
 } // namespace blofeld
-
