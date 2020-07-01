@@ -106,7 +106,8 @@ namespace blofeld
 		{ _field_enum, "output scalar d", &wrdt_output_scalar_enum_definition },
 		{ _field_enum, "output scalar e", &wrdt_output_scalar_enum_definition },
 		{ _field_enum, "output scalar f", &wrdt_output_scalar_enum_definition },
-		{ _field_pad, "padding", 8 },
+		{ _field_long_integer, "unknown" },
+		{ _field_long_integer, "unknown" },
 		{ _field_short_integer, "unknown" },
 		{ _field_short_integer, "unknown" },
 		{ _field_terminator }
