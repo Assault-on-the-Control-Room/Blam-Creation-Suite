@@ -183,10 +183,8 @@ namespace blofeld
 
 	TAG_BLOCK(player_traits_sensors_block, 1)
 	{
-		{ _field_version_greater, _engine_type_haloreach },
+		{ _field_version_greater, _engine_type_haloreach, 3 },
 		{ _field_long_flags, "should apply trait", &player_traits_sensors_float_flags },
-
-		{ _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_real, "motion tracker range" },
 		{ _field_real, "nemesis duration:seconds" },
 		
