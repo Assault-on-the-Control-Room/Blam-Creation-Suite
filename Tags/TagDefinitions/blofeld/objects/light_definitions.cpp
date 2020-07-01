@@ -40,29 +40,29 @@ namespace blofeld
 
 		// { _field_real, "destroy light after:seconds#automatically destroys the light after it has existed this long (0 to disable)" },
 
-		{ _field_word_flags, "flags", &light_definition_flags }, // #TODO test
+		{ _field_word_flags, "flags", &light_definition_flags }, // #todo test
 		{ _field_short_integer, "unknown" },
-		{ _field_long_enum, "Light Type:#Geometry shape of light.", &midnight_light_type_enum_definition }, // #TODO test
-		{ _field_real, "Intensity:[0-1+]" }, // #TODO test
-		{ _field_real, "Radius or size of light" }, // #TODO test
+		{ _field_long_enum, "light type:#geometry shape of light.", &midnight_light_type_enum_definition }, // #todo test
+		{ _field_real, "intensity:[0-1+]" }, // #todo test
+		{ _field_real, "radius or size of light" }, // #todo test
 		{ _field_real, "unknown@", },
 		{ _field_real, "unknown", },
 		{ _field_real, "unknown", },
-		{ _field_explanation, "Shared Spot Parameters", "" },
-		{ _field_real, "Inner Cone Angle:[0-160 degrees]#Inner hotspot attenuation end." }, // #TODO test
-		{ _field_real, "Outer Cone End:[0-160 degrees]#Angle size of spotlight." }, // #TODO test
+		{ _field_explanation, "shared spot parameters", "" },
+		{ _field_real, "inner cone angle:[0-160 degrees]#inner hotspot attenuation end." }, // #todo test
+		{ _field_real, "outer cone end:[0-160 degrees]#angle size of spotlight." }, // #todo test
 		{ _field_real, "unknown", },
 		{ _field_real, "unknown", },
 		{ _field_real, "unknown", },
 		{ _field_real, "unknown", },
 		{ _field_long_integer, "unknown", },
-		{ _field_struct, "color function", &light_color_function_struct_struct_definition }, // #TODO test
-		{ _field_struct, "brightness function", &light_scalar_function_struct_struct_definition }, // #TODO test
-		{ _field_tag_reference, "gel/gobo map", &global_bitmap_reference },
-		{ _field_real, "Rotation:[0-360 degrees]" }, // #TODO test
-		{ _field_real, "Aspect Ratio:[-0-1+]#Shape length and width of Gobo." }, // #TODO test
+		{ _field_struct, "color function", &light_color_function_struct_struct_definition }, // #todo test
+		{ _field_struct, "brightness function", &light_scalar_function_struct_struct_definition }, // #todo test
+		{ _field_tag_reference, "gel map", &global_bitmap_reference },
+		{ _field_real, "rotation:[0-360 degrees]" }, // #todo test
+		{ _field_real, "aspect ratio:[-0-1+]#shape length and width of gobo." }, // #todo test
 		{ _field_long_integer, "unknown", },
-		{ _field_tag_reference, "Lens Flare", &global_lens_flare_reference },
+		{ _field_tag_reference, "lens flare", &global_lens_flare_reference },
 		{ _field_real, "unknown", },
 		{ _field_real, "unknown", },
 		{ _field_real, "unknown", },

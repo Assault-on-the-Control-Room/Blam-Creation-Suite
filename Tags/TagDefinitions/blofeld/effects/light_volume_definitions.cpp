@@ -19,9 +19,16 @@ namespace blofeld
 	{
 		{ _field_custom },
 		{ _field_string_id, "light_volume name^" },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach, 2 },
+		{ _field_explanation, "Render Method" },
+		{ _field_struct, "render method", &render_method_struct_definition_struct_definition },
+
+		{ _field_version_greater, _engine_type_haloreach, 3 },
 		{ _field_custom, "material" },
 		{ _field_custom },
 		{ _field_struct, "actual material\?", &material_struct_struct_definition },
+
 		{ _field_custom },
 		{ _field_word_flags, "appearance flags", &light_volume_appearance_flags },
 		{ _field_pad, "SONGWEOINGEW", 2 },

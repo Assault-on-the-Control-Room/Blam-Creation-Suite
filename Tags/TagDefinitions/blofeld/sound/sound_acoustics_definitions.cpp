@@ -17,8 +17,11 @@ namespace blofeld
 		{ _field_block, "points", &acoustic_sector_point_block_block },
 		{ _field_real_plane_3d, "top plane!" },
 		{ _field_real_plane_3d, "bottom plane!" },
+
+		{ _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_long_flags, "flags", &acousticPaletteFlags },
 		{ _field_real, "occlusion value" },
+
 		{ _field_short_block_index, "acoustics^" },
 		{ _field_short_block_index, "editor folder!" },
 		{ _field_real, "height" },

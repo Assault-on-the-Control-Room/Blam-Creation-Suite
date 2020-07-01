@@ -13,7 +13,10 @@ namespace blofeld
 		{ _field_string_id, "constraint/group name" },
 		{ _field_explanation, "Damage response flags", "* kills object: when the response fires the object dies regardless of its current health\n* inhibits <x>: from halo 1 - disallows basic behaviors for a unit\n* forces drop weapon: from halo 1 - makes the unit drop its current weapon\n* kills weapon <x> trigger: destroys the <x> trigger on the unit\'s current weapon\n* destroys object: when the response fires the object is destroyed" },
 		{ _field_long_flags, "flags", &damage_response_set1 },
+
+		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_long_flags, "flags2", &damage_response_set2 },
+
 		{ _field_real_fraction, "damage threshold#response fires after crossing this threshold.  1=full health" },
 		{ _field_long_flags, "body threshold flags", &damage_response_body_threshold_flags_definition },
 		{ _field_real, "body damage threshold#response fires after object body damage crosses this threshold, numbers can be negative.  You need to set the flag \"body threshold active\" for this number to be used. 1=full health" },
@@ -35,7 +38,10 @@ namespace blofeld
 		{ _field_real, "response delay#in seconds" },
 		{ _field_tag_reference, "delay effect", &global_effect_reference },
 		{ _field_string_id, "delay effect marker name" },
+
+		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_real, "response delay premature damage threshold" },
+
 		{ _field_explanation, "seat ejaculation", "" },
 		{ _field_string_id, "ejecting seat label" },
 		{ _field_explanation, "skip fraction", "0.0 always fires, 1.0 never fires" },
@@ -182,7 +188,10 @@ namespace blofeld
 	TAG_BLOCK(new_instantaneous_damage_response_block, MAXIMUM_RESPONSES_PER_DAMAGE_SECTION)
 	{
 		{ _field_long_flags, "flags", &newDamageResponseFlagsPart1 },
+
+		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_long_flags, "flags2", &newDamageResponseFlagsPart2 },
+
 		{ _field_string_id, "label" },
 		{ _field_real_fraction, "damage threshold#response fires after crossing this threshold.  1=full health" },
 		{ _field_tag_reference, "transition effect (generic){transition effect}", &global_effect_reference },
@@ -217,6 +226,36 @@ namespace blofeld
 		{ _field_terminator }
 	};
 
+	STRINGS(health_transfers_flags_definition)
+	{
+		"transfer health to damage section",
+		"transfer health to parent",
+		"transfer health to children",
+		"transfer health to seats",
+		"transfer direct health",
+		"transfer aoe exposed damage",
+		"transfer aoe obstructed damage",
+	};
+	STRING_LIST(health_transfers_flags_definition, health_transfers_flags_definition_strings, _countof(health_transfers_flags_definition_strings));
+
+	STRINGS(transfer_function_enum_definition)
+	{
+		"percent",
+		"points",
+		"ceiling",
+	};
+	STRING_LIST(transfer_function_enum_definition, transfer_function_enum_definition_strings, _countof(transfer_function_enum_definition_strings));
+
+	TAG_BLOCK(health_transfers_block, 65536) // assembly #NOTE: where did this information come from?
+	{
+		{ _field_long_flags, "flags", &health_transfers_flags_definition },
+		{ _field_real, "transfer amount" },
+		{ _field_word_flags, "transfer function", &transfer_function_enum_definition },
+		{ _field_short_integer, "damage section index" },
+		{ _field_string_id, "seat label" },
+		{ _field_terminator }
+	};
+
 	TAG_BLOCK(new_global_damage_section_block, MAXIMUM_DAMAGE_SECTIONS_PER_MODEL)
 	{
 		{ _field_string_id, "name^" },
@@ -246,6 +285,10 @@ namespace blofeld
 		{ _field_string_id, "resurrection restored region name" },
 		{ _field_block, "instant responses", &new_instantaneous_damage_response_block_block },
 		{ _field_block, "section damage transfers", &damage_transfer_block_block },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_block, "health transfers", &health_transfers_block_block },
+
 		{ _field_block, "rendering", &damage_section_rendering_paramters_block },
 		{ _field_real, "runtime recharge velocity!*" },
 		{ _field_real, "runtime overcharge velocity!*" },
@@ -460,16 +503,83 @@ namespace blofeld
 
 	STRINGS(new_damage_section_flags_definition)
 	{
-		"starts inactive#this section will be initialized with zero health and will be stunned indefinitely",
-		"takes full dmg when object dies",
-		"takes full dmg when obj dstryd",
-		"restored on ressurection",
-		"headshot#takes extra headshot damage when shot",
-		"depletion is permanent",
-		"recharges while dead",
-		"play recharge effect only when empty",
-		"networked (note that primary body and shield are always networked)",
-		"can recharge independently#always a shield layer to recharge even if there is an inner shield layer that is stunned"
+		{
+			_engine_type_not_set,
+			_versioned_string_list_mode_new,
+			{
+				"starts inactive#this section will be initialized with zero health and will be stunned indefinitely",
+				"takes full dmg when object dies",
+				"takes full dmg when obj dstryd",
+				"restored on ressurection",
+				"headshot#takes extra headshot damage when shot",
+				"depletion is permanent",
+				"recharges while dead",
+				"play recharge effect only when empty",
+				"networked (note that primary body and shield are always networked)",
+				"can recharge independently#always a shield layer to recharge even if there is an inner shield layer that is stunned"
+			}
+		},
+		{
+			_engine_type_haloreach,
+			_versioned_string_list_mode_append,
+			{
+				// NOTE: taken from halo5 and used to extend haloreach
+				"depletion tracked by AI characters#on an AI character, depletion of this section is tracked by the AI, stimulus 'tracked_sections_depleted' is set when all of these on a character are depleted",
+				"DEPRECATED DO NOT USE 1!",
+				"DEPRECATED DO NOT USE 2!",
+				"DEPRECATED DO NOT USE 3!",
+				"DEPRECATED DO NOT USE 4!",
+				"DEPRECATED DO NOT USE 5!",
+				"DEPRECATED DO NOT USE 6!",
+				"blocks headshots#headshot obstruction test collides with this damage section",
+				"weak spot#this section is considered a weak spot and is not blocked by trivial collision sections",
+				"trivial collision#test for headshots and weak spot hits through this damage section",
+				"disable additive player damage sound",
+			}
+		},
+		{
+			_engine_type_gen3_xbox360,
+			_versioned_string_list_mode_new,
+			{
+				"starts inactive#this section will be initialized with zero health and will be stunned indefinitely",
+				"takes full dmg when object dies",
+				"takes full dmg when obj dstryd",
+				"restored on ressurection",
+				"headshot#takes extra headshot damage when shot",
+				"depletion is permanent",
+				"recharges while dead",
+				"play recharge effect only when empty",
+				"networked (note that primary body and shield are always networked)",
+				"can recharge independently#always a shield layer to recharge even if there is an inner shield layer that is stunned"
+			}
+		},
+		{
+			_engine_type_halo5,
+			_versioned_string_list_mode_new,
+			{
+				"starts inactive#this section will be initialized with zero health and will be stunned indefinitely",
+				"takes full dmg when object dies",
+				"takes full dmg when obj dstryd",
+				"restored on ressurection",
+				"headshot#takes extra headshot damage when shot",
+				"depletion is permanent",
+				"recharges while dead",
+				"play recharge effect only when empty",
+				"networked (note that primary body and shield are always networked)",
+				"can recharge independently#always a shield layer to recharge even if there is an inner shield layer that is stunned",
+				"depletion tracked by AI characters#on an AI character, depletion of this section is tracked by the AI, stimulus 'tracked_sections_depleted' is set when all of these on a character are depleted",
+				"DEPRECATED DO NOT USE 1!",
+				"DEPRECATED DO NOT USE 2!",
+				"DEPRECATED DO NOT USE 3!",
+				"DEPRECATED DO NOT USE 4!",
+				"DEPRECATED DO NOT USE 5!",
+				"DEPRECATED DO NOT USE 6!",
+				"blocks headshots#headshot obstruction test collides with this damage section",
+				"weak spot#this section is considered a weak spot and is not blocked by trivial collision sections",
+				"trivial collision#test for headshots and weak spot hits through this damage section",
+				"disable additive player damage sound",
+			}
+		}
 	};
 	STRING_LIST(new_damage_section_flags_definition, new_damage_section_flags_definition_strings, _countof(new_damage_section_flags_definition_strings));
 

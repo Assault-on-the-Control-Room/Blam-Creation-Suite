@@ -114,6 +114,7 @@ protected:
 	void render_field_dword_integer(render_field_callback_args);
 	void render_field_qword_integer(render_field_callback_args);
 	void render_field_pointer(render_field_callback_args);
+	void render_field_half(render_field_callback_args);
 #undef callback_args
 
 	void render_field_name(c_field_formatter& field_formatter, const blofeld::s_tag_field& field, s_field_validation_result* result);

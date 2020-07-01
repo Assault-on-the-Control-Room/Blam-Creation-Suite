@@ -76,7 +76,10 @@ namespace blofeld
 		{ _field_struct, "object data", &scenario_object_datum_struct_struct_definition },
 		{ _field_struct, "permutation data", &scenario_object_permutation_struct_struct_definition },
 		{ _field_struct, "unit data", &scenario_unit_struct_struct_definition },
+
+		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_struct, "multiplayer data", &scenario_multiplayer_object_struct_struct_definition },
+
 		{ _field_terminator }
 	};
 
@@ -96,7 +99,10 @@ namespace blofeld
 		{ _field_struct, "permutation data", &scenario_object_permutation_struct_struct_definition },
 		{ _field_struct, "unit data", &scenario_unit_struct_struct_definition },
 		{ _field_struct, "multiplayer data", &scenario_multiplayer_object_struct_struct_definition },
+
+		{ _field_version_greater, _engine_type_haloreach, 1 },
 		{ _field_struct, "vehicle data", &scenario_vehicle_datum_struct_struct_definition },
+
 		{ _field_terminator }
 	};
 
@@ -275,7 +281,10 @@ namespace blofeld
 		{ _field_custom },
 		{ _field_short_block_index, "name^" },
 		{ _field_struct, "object data", &scenario_object_datum_struct_struct_definition },
+
+		{ _field_version_greater, _engine_type_haloreach, 1 },
 		{ _field_struct, "effect scenery data", &scenario_effect_scenery_datum_struct_struct_definition },
+
 		{ _field_struct, "multiplayer data", &scenario_multiplayer_object_struct_struct_definition },
 		{ _field_terminator }
 	};
@@ -392,6 +401,14 @@ namespace blofeld
 		{ _field_real_euler_angles_3d, "rotation" },
 		{ _field_real, "scale" },
 		{ _field_block, "node orientations!*", &scenario_object_node_orientations_block_block },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach, 4 },
+		{ _field_pad, "pad", 3 }, // #TODO: Poke around these values
+		{ _field_char_enum, "bsp policy", &scenario_object_bsp_placement_policy_definition },
+		{ _field_short_integer, "manual bsp flags*" },
+		{ _field_pad, "pad", 2 }, // #TODO: Poke around these values
+
+		{ _field_version_greater, _engine_type_haloreach, 8 },
 		{ _field_real, "gravity override" },
 		{ _field_byte_flags, "gravity flags", &object_gravity_flags },
 		{ _field_pad, "ZEE", 1 },
@@ -400,21 +417,30 @@ namespace blofeld
 		{ _field_block, "force enabled scripts", &scriptListBlock_block },
 		{ _field_block, "disabled scripts", &scriptListBlock_block },
 		{ _field_struct, "manual bsp flags*", &manualBspFlagsReferences_struct_definition },
+
+		{ _field_version_greater, _engine_type_haloreach, 5 },
 		{ _field_word_flags, "transform flags!", &object_transform_flags },
 		{ _field_char_enum, "Nav Mesh Cutting", &NavMeshCuttingOverrideEnum },
 		{ _field_char_enum, "Nav Mesh Obstacle", &BooleanOverrideEnum },
 		{ _field_byte_flags, "Nav Mesh Flags", &object_navmesh_flags },
 		{ _field_pad, "ZEE2", 3 },
+
 		{ _field_string_id, "light airprobe name" },
 		{ _field_struct, "object id", &scenario_object_id_struct_struct_definition },
+
+		{ _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_long_flags, "Light Channels:", &channelDefinitionFlags },
 		{ _field_non_cache_runtime_value, "runtimeObjectHandle!*" },
+
 		{ _field_short_block_index, "editor folder!" },
 		{ _field_pad, "NCIUNE", 2 },
 		{ _field_struct, "parent id", &scenario_object_parent_struct_struct_definition },
 		{ _field_long_block_flags, "can attach to bsp flags*!" },
+
+		{ _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_real, "Directional Acceleration Mult. #Multiplier applied to all phantoms\' direction acceleration factors.  Used to scale man-cannon strength." },
 		{ _field_block, "Command Links", &commandLinkBlock_block },
+
 		{ _field_terminator }
 	};
 
@@ -453,6 +479,32 @@ namespace blofeld
 
 	TAG_STRUCT(scenario_multiplayer_object_struct)
 	{
+		{ _field_version_less_or_equal, _engine_type_haloreach, 23 },
+		{ _field_explanation, "Multiplayer Data", "object data for multiplayer game use" },
+		{ _field_string, "megalo label" },
+		{ _field_long_enum, "game engine symmetric placement", &game_engine_symmetry_placement_flags },
+		{ _field_byte_flags, "game engine flags", &global_game_engine_type_flags },
+		{ _field_char_enum, "owner team", &global_multiplayer_team_designator_enum_definition },
+		{ _field_pad, "pad", 2 },
+		{ _field_char_integer, "unknown" },
+		{ _field_char_integer, "quota minimum" },
+		{ _field_char_integer, "quota maximum:<=0 for unlimited" },
+		{ _field_byte_flags, "spawn flags", &multiplayer_object_placement_spawn_flags },
+		{ _field_short_integer, "spawn time:seconds" },
+		{ _field_short_integer, "abandonment time:seconds" },
+		{ _field_real, "boundary width or radius" },
+		{ _field_real, "boundary box length" },
+		{ _field_real, "boundary positive height" },
+		{ _field_real, "boundary negative height" },
+		{ _field_char_enum, "boundary shape", &multiplayer_goal_area_boundary_shape_enum },
+		{ _field_pad, "boundary_pad", 1 },
+		{ _field_char_enum, "teleporter channel", &multiplayer_teleporter_channel },
+		{ _field_byte_flags, "teleporter passability", &teleporter_passability_flags },
+		{ _field_string_id, "location name" },
+		{ _field_struct, "map variant parent", &scenario_object_parent_struct_struct_definition },
+		{ _field_pad, "unknown", 4 },
+
+		{ _field_version_greater, _engine_type_haloreach, 27 },
 		{ _field_explanation, "Multiplayer Data", "object data for multiplayer game use" },
 		{ _field_string, "megalo label" },
 		{ _field_string, "megalo label 2" },
@@ -480,6 +532,7 @@ namespace blofeld
 		{ _field_short_integer, "abandonment time:seconds" },
 		{ _field_string_id, "location name" },
 		{ _field_struct, "map variant parent", &scenario_object_parent_struct_struct_definition },
+
 		{ _field_terminator }
 	};
 

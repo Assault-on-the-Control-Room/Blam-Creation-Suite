@@ -212,48 +212,62 @@ namespace blofeld
 	{
 		{ _field_custom, "OBJECT" },
 		{ _field_short_integer, "runtime object type!" },
+
 		{ _field_version_equal, {_engine_type_haloreach} },
 		{ _field_short_integer, "unknown@" },
+
 		{ _field_version_greater, {_engine_type_haloreach}, 4 },
 		{ _field_char_enum, "Nav Mesh Cutting", &NavMeshCuttingOverrideEnum },
 		{ _field_char_enum, "Nav Mesh Obstacle", &BooleanOverrideEnum },
 		{ _field_real_vector_3d, "Nav Mesh Cutting OBB Offset" },
 		{ _field_real_vector_3d, "Nav Mesh Cutting OBB Scale" },
+
 		{ _field_version_less, {_engine_type_haloreach} },
 		{ _field_word_flags, "flags", &object_definition_flags },
+
 		{ _field_version_greater_or_equal, {_engine_type_haloreach} },
 		{ _field_long_flags, "flags", &object_definition_flags },
+
 		{ _field_real, "bounding radius#If you edit this field manually, beware that the render model is no longer respected for radius calculation and that you need to set the bounding offset as well." },
 		{ _field_real_point_3d, "bounding offset" },
+
 		{ _field_version_less, {_engine_type_haloreach} },
 		{ _field_real, "acceleration scale:[0,+inf]" },
+
 		{ _field_version_greater_or_equal, {_engine_type_haloreach}, 3 },
 		{ _field_real, "horizontal acceleration scale{acceleration scale}:[0,+inf]" },
 		{ _field_real, "vertical acceleration scale" },
 		{ _field_real, "angular acceleration scale" },
+
 		{ _field_enum, "lightmap shadow mode", &lightmap_shadow_mode_enum },
 		{ _field_char_enum, "sweetener size", &sweetener_size_enum },
 		{ _field_char_enum, "water density", &water_density_type_enum },
 		{ _field_long_integer, "runtime flags!*" },
 		{ _field_real, "dynamic light sphere radius#sphere to use for dynamic lights and shadows. only used if not 0" },
 		{ _field_real_point_3d, "dynamic light sphere offset#only used if radius not 0" },
+
 		{ _field_version_greater_or_equal, {_engine_type_haloreach}, 3 },
 		{ _field_string_id, "generic hud text" },
 		{ _field_tag_reference, "generic name list", &global_multilingual_unicode_string_list_reference },
 		{ _field_tag_reference, "generic service tag list", &global_multilingual_unicode_string_list_reference },
+
 		{ _field_version_greater, {_engine_type_haloreach} },
 		{ _field_block, "source sidecar", &sidecarBlock_block },
+
 		{ _field_string_id, "default model variant" },
 		{ _field_tag_reference, "model", &model_reference$2 },
 		{ _field_tag_reference, "crate object", &crate_reference },
 		{ _field_explanation, "only set this tag if you want to override the default collision damage values in globals.globals", "" },
 		{ _field_tag_reference, "collision damage", &collision_damage_reference },
+
 		{ _field_version_greater_or_equal, {_engine_type_haloreach}, 1 },
 		{ _field_tag_reference, "brittle collision damage", &collision_damage_reference },
+
 		{ _field_block, "early mover OBB", &object_early_mover_obb_block_block },
 		{ _field_tag_reference, "creation effect", &global_effect_reference },
 		{ _field_tag_reference, "material effects", &global_material_effects_reference },
 		{ _field_tag_reference, "melee sound#this is the sound that is made when I am meleed.  This overrides the sweetener sound of my material.", &global_sound_reference },
+
 		{ _field_version_greater, {_engine_type_haloreach} },
 		{ _field_real, "self-destruct time:seconds#if non-zero, any instances of this object will destroy themselves after this many seconds." },
 		{ _field_block, "ai properties", &object_ai_properties_block_block },
@@ -261,11 +275,13 @@ namespace blofeld
 		
 		{ _field_version_greater_or_equal, {_engine_type_haloreach} },
 		{ _field_block, "runtime interpolator functions*!", &object_runtime_interpolator_functions_block_block },
+
 		{ _field_version_greater, {_engine_type_haloreach} },
 		{ _field_block, "function switches", &objectFunctionSwitchBlock_block },
 		{ _field_short_integer, "hud text message index" },
 		{ _field_word_flags, "secondary flags", &object_definition_secondary_flags },
 		{ _field_block, "attachments", &global_object_attachment_block_block },
+
 		{ _field_version_greater_or_equal, {_engine_type_haloreach}, 2 },
 		{ _field_block, "hull surfaces", &water_physics_hull_surface_definition_block_block },
 		{ _field_block, "jetwash", &jetwash_definition_block_block },
@@ -273,9 +289,11 @@ namespace blofeld
 		{ _field_block, "change colors", &object_change_colors_block },
 		{ _field_block, "predicted resources*", &g_null_block_block },
 		{ _field_block, "multiplayer object", &multiplayer_object_block_block },
+
 		{ _field_version_greater_or_equal, {_engine_type_haloreach}, 2 },
 		{ _field_tag_reference, "simulation_interpolation#Set to a specific interpolation definition, or leave blank to inherit the default for the object type (there are defaults for bipeds, vehicles, and crates in multiplayer_globals).  To disable interpolation on a particular object whose type has interpolation by default, set this reference to the special disable_interpolation.simulation_interpolation tag.", &global_simulation_interpolation_reference },
 		{ _field_block, "spawn effects", &object_spawn_effects_block_block },
+
 		{ _field_version_greater, {_engine_type_haloreach}, 7 },
 		{ _field_block, "model dissolve data", &modelDissolveDataBlock_block },
 		{ _field_struct, "script data*!", &hs_script_data_struct_struct_definition },
@@ -284,6 +302,7 @@ namespace blofeld
 		{ _field_explanation, "Object Abandoment", "" },
 		{ _field_struct, "object abandonment", &object_abandonment_struct_struct_definition },
 		{ _field_custom },
+
 		{ _field_terminator }
 	};
 

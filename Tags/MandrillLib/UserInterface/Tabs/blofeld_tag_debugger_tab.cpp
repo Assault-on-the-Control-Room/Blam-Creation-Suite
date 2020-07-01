@@ -215,7 +215,15 @@ void c_blofeld_tag_debugger_tab::render_field_int64_integer(render_field_callbac
 void c_blofeld_tag_debugger_tab::render_field_angle(render_field_callback_args)
 {
 	if (&tag_interface != &this->tag_interface) return;
-	render_field_scalar_type(ImGuiDataType_Float, 1, result->level, data, field, result);
+
+	float value = *reinterpret_cast<float*>(data);
+	value *= 180.0f / 3.14159265359f;
+	ImGui::Dummy({ result->level * indent_size, 0.0f });
+	render_field_name_and_information(field, result);
+	ImGui::SameLine();
+	ImGui::Text("angle: [%.4f]", value);
+
+	//render_field_scalar_type(ImGuiDataType_Float, 1, result->level, data, field, result);
 }
 void c_blofeld_tag_debugger_tab::render_field_tag(render_field_callback_args)
 {
@@ -637,6 +645,14 @@ void c_blofeld_tag_debugger_tab::render_field_pointer(render_field_callback_args
 	}
 }
 
+void c_blofeld_tag_debugger_tab::render_field_half(render_field_callback_args)
+{
+	if (&tag_interface != &this->tag_interface) return;
+	uint16_t& raw_half_data = *reinterpret_cast<uint16_t*>(data);
+	float half_value = half_to_float(raw_half_data);
+	render_field_scalar_type(ImGuiDataType_Float, 1, result->level, reinterpret_cast<char*>(&half_value), field, result);
+}
+
 void c_blofeld_tag_debugger_tab::setup_render_callbacks()
 {
 	using namespace std::placeholders;
@@ -724,6 +740,7 @@ void c_blofeld_tag_debugger_tab::setup_render_callbacks()
 	register_validation_callback(blofeld::_field_dword_integer, render_field_dword_integer);
 	register_validation_callback(blofeld::_field_qword_integer, render_field_qword_integer);
 	register_validation_callback(blofeld::_field_pointer, render_field_pointer);
+	register_validation_callback(blofeld::_field_half, render_field_half);
 
 #undef register_validation_callback
 }

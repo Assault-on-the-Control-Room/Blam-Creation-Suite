@@ -2,6 +2,15 @@
 
 namespace blofeld
 {
+	extern c_constant NUMBER_OF_SCENARIO_RESOURCE_TYPES; // 16
+	extern c_constant k_maximum_hs_source_files_per_scenario; // 8
+	extern c_constant k_number_of_scenario_ai_types; // 2
+
+#ifdef BLOFELD_CONST_ARGS
+#define NUMBER_OF_SCENARIO_RESOURCE_TYPES NUMBER_OF_SCENARIO_RESOURCE_TYPES(BLOFELD_CONST_ARGS)
+#define k_maximum_hs_source_files_per_scenario k_maximum_hs_source_files_per_scenario(BLOFELD_CONST_ARGS)
+#define k_number_of_scenario_ai_types k_number_of_scenario_ai_types(BLOFELD_CONST_ARGS)
+#endif
 
 	constexpr unsigned long PERFORMANCE_TEMPLATE_TAG = 'pfmc';
 

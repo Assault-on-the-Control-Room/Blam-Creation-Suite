@@ -14,7 +14,7 @@ namespace blofeld
 
 	TAG_REFERENCE(model_reference, MODEL_TAG);
 
-	TAG_REFERENCE(bitmap_reference$2, BITMAP_TAG, _tag_reference_flag_dont_resolve_in_editor);
+	TAG_REFERENCE(lightmap_bitmap_reference, BITMAP_TAG, _tag_reference_flag_dont_resolve_in_editor);
 
 	TAG_REFERENCE(bitmap_reference$3, BITMAP_TAG, _tag_reference_flag_dont_resolve_in_editor);
 

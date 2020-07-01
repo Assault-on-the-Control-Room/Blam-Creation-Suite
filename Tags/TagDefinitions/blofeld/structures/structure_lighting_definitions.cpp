@@ -8,6 +8,27 @@ namespace blofeld
 
 	TAG_BLOCK(structure_lighting_generic_light_definition_block, SHORT_MAX)
 	{
+		{ _field_version_less_or_equal, _engine_type_haloreach, 18 },
+		{ _field_long_integer, "unknown" },
+		{ _field_long_enum, "light type:#geometry shape of light.", &midnight_light_type_enum_definition },
+		{ _field_real_rgb_color, "light color" },
+		{ _field_real, "light intensity" },
+		{ _field_angle, "inner cone angle:[0-160 degrees]#inner hotspot attenuation end." },
+		{ _field_angle, "outer cone end:[0-160 degrees]#angle size of spotlight." },
+		{ _field_real, "unknown" },
+		{ _field_real, "unknown" },
+		{ _field_real, "unknown" },
+		{ _field_real, "unknown" },
+		{ _field_real, "unknown" },
+		{ _field_real, "unknown" },
+		{ _field_real, "unknown" },
+		{ _field_real, "unknown" },
+		{ _field_real, "unknown" },
+		{ _field_real, "unknown" },
+		{ _field_real, "unknown" },
+		{ _field_real, "unknown" },
+
+		{ _field_version_greater, _engine_type_haloreach, 13 },
 		{ _field_int64_integer, "Definition Identifier!" },
 		{ _field_struct, "Midnight_Light_Parameters", &midnight_light_struct_struct_definition },
 		{ _field_long_integer, "Source File Identifier!" },
@@ -24,19 +45,43 @@ namespace blofeld
 		{ _field_terminator }
 	};
 
+	TAG_REFERENCE(structure_lighting_generic_light_instance_unknown_reference0);
+	TAG_REFERENCE(structure_lighting_generic_light_instance_unknown_reference1);
+	TAG_REFERENCE(structure_lighting_generic_light_instance_unknown_reference3);
+
 	TAG_BLOCK(structure_lighting_generic_light_instance_block, SHORT_MAX)
 	{
+		{ _field_version_greater, _engine_type_haloreach, 5 },
 		{ _field_int64_integer, "Light Definition ID!" },
 		{ _field_int64_integer, "Light Instance ID!" },
 		{ _field_long_integer, "Light Definition Index!" },
 		{ _field_long_integer, "Maya Source Hash!" },
 		{ _field_tag_reference, "runtime definition!", &Tag::Reference<struct dynamic_light_definition>::s_defaultDefinition },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach, 1 },
+		{ _field_long_integer, "unknown" },
+
 		{ _field_long_enum, "light mode", &structure_lighting_light_mode_enum },
 		{ _field_real_point_3d, "origin" },
 		{ _field_real_vector_3d, "forward" },
 		{ _field_real_vector_3d, "up" },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach, 4 },
+		{ _field_long_integer, "unknown" },
+		{ _field_real, "unknown" },
+		{ _field_real, "unknown" },
+		{ _field_real, "unknown" },
+
 		{ _field_real, "fade out distance" },
 		{ _field_real, "fade start distance" },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach, 4 },
+		{ _field_tag_reference, "unknown", &structure_lighting_generic_light_instance_unknown_reference0 },
+		{ _field_tag_reference, "unknown", &structure_lighting_generic_light_instance_unknown_reference1 },
+		{ _field_tag_reference, "gel map", &global_bitmap_reference },
+		{ _field_tag_reference, "unknown", &structure_lighting_generic_light_instance_unknown_reference3 },
+
+		{ _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_long_integer, "Shadow Geometry Checksum" },
 		{ _field_pad, "pdd", 4 },
 		{ _field_terminator }
@@ -64,11 +109,44 @@ namespace blofeld
 
 	TAG_BLOCK_FROM_STRUCT(scenario_structure_lighting_info_block, 1, scenario_structure_lighting_info_struct_definition_struct_definition );
 
+	TAG_BLOCK(scenario_structure_lighting_info_unknown_block0, 65536)
+	{
+		{ _field_real, "unknown" },
+		{ _field_real_rgb_color, "unknown" },
+		{ _field_real, "unknown" },
+		{ _field_real, "unknown" },
+		{ _field_long_integer, "unknown" },
+		{ _field_real, "unknown" },
+		{ _field_real, "unknown" },
+		{ _field_real, "unknown" },
+		{ _field_terminator }
+	};
+
+	TAG_BLOCK(scenario_structure_lighting_info_unknown_block1, 65536)
+	{
+		{ _field_string_id, "name" },
+		{ _field_long_integer, "unknown" },
+		{ _field_real, "unknown" },
+		{ _field_terminator }
+	};
+
 	TAG_STRUCT(scenario_structure_lighting_info_struct_definition)
 	{
 		{ _field_long_integer, "import info checksum" },
 		{ _field_block, "generic light definitions", &structure_lighting_generic_light_definition_block_block },
 		{ _field_block, "generic light instances", &structure_lighting_generic_light_instance_block_block },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach, 8 },
+		{ _field_real, "unknown@" },
+		{ _field_real, "unknown@" },
+		{ _field_real, "unknown@" },
+		{ _field_real, "unknown@" },
+		{ _field_real, "unknown@" },
+		{ _field_real, "unknown@" },
+		{ _field_block, "unknown", &scenario_structure_lighting_info_unknown_block0_block },
+		{ _field_block, "unknown", &scenario_structure_lighting_info_unknown_block1_block },
+
+		{ _field_version_greater, _engine_type_haloreach, 3 },
 		{ _field_block, "screen space light shader override", &screen_space_light_shader_override_block_block },
 		{ _field_block, "cinematic light instances", &structureLightingCinematicLightInstanceBlock_block },
 		{ _field_struct, "Sun Intensity Multiplier", &light_scalar_function_struct_struct_definition },

@@ -42,6 +42,7 @@ namespace blofeld
 		"c_cinematic_shot_flags::k_flag_chunk_count",
 		{
 			{ _engine_type_not_set, 1 },
+			{ _engine_type_haloreach, 2 },
 			{ _engine_type_gen3_xbox360, 2 }
 		}
 	};
@@ -641,5 +642,19 @@ namespace blofeld
 	c_constant k_vertices_per_line_count = { "k_vertices_per_line_count", 2 };
 	c_constant k_vertices_per_quadrilateral_count = { "k_vertices_per_quadrilateral_count", 4 };
 	c_constant k_int32_bits_bits = { "k_int32_bits_bits", __k_int32_bits_bits };
+	c_constant k_model_flag_chunk_count = 
+	{ 
+		"k_model_flag_chunk_count",
+		{
+			{ _engine_type_not_set, 2 },
+			{ _engine_type_haloreach, 2 },
+			{ _engine_type_gen3_xbox360, 8 },
+		}
+	};
+	
+	// scenario_definitions.h
+	c_constant NUMBER_OF_SCENARIO_RESOURCE_TYPES = { "NUMBER_OF_SCENARIO_RESOURCE_TYPES", 16 };
+	c_constant k_maximum_hs_source_files_per_scenario = { "k_maximum_hs_source_files_per_scenario", 8 };
+	c_constant k_number_of_scenario_ai_types = { "k_number_of_scenario_ai_types", 2 };
 
 }

@@ -8,6 +8,8 @@ namespace blofeld
 	extern s_tag_group prefab_group;
 	constexpr unsigned long SCENARIO_STRUCTURE_BSP_TAG = 'sbsp';
 
+	extern s_tag_struct_definition scenario_bsp_nav_struct_definition; // #TODO better name for this
+
 	extern s_tag_struct_definition scenario_structure_bsp_block_struct;
 	extern s_tag_block_definition scenario_structure_bsp_block;
 	extern s_tag_group scenario_structure_bsp_group;

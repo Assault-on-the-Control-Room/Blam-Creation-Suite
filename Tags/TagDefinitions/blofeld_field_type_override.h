@@ -69,6 +69,7 @@
 #define _field_qword_integer _field_qword_integer, __FILE__, __LINE__
 
 #define _field_pointer _field_pointer, __FILE__, __LINE__
+#define _field_half _field_half, __FILE__, __LINE__
 #define _field_version_equal _field_version_equal, __FILE__, __LINE__
 #define _field_version_not_equal _field_version_not_equal, __FILE__, __LINE__
 #define _field_version_less _field_version_less, __FILE__, __LINE__

@@ -36,7 +36,7 @@ namespace blofeld
 
 	TAG_STRUCT(render_model_unknown_struct)
 	{
-		{ _field_block, "sky light unknown", & render_model_unknown_struct_unknown_block_block },
+		{ _field_block, "sky light unknown", &render_model_unknown_struct_unknown_block_block },
 		{ _field_struct, "sh sky red", &render_model_unknown_sky_struct2_struct_definition },
 		{ _field_struct, "sh sky green", &render_model_unknown_sky_struct2_struct_definition },
 		{ _field_struct, "sh sky blue", &render_model_unknown_sky_struct2_struct_definition },

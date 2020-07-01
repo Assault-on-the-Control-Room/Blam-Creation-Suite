@@ -21,9 +21,10 @@
 #include "macro_utils.h"
 #include "intrinsics.h"
 #include "windows_api.h"
+#include "platform_types.h"
+#include "math_util.h"
 
 #include "error_handling.h"
-#include "platform_types.h"
 #include "xxhash_cx.h"
 using namespace xxhash;
 using namespace xxhash::literals;

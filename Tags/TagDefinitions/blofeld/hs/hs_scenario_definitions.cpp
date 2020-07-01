@@ -31,17 +31,30 @@ namespace blofeld
 	{
 		{ _field_string_id, "name^*" },
 		{ _field_enum, "script type*", &hs_script_types_enum },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach, 3 },
+		{ _field_enum, "return type*", &hs_types_enum },
+		{ _field_short_integer, "root expression index*" },
+		{ _field_short_integer, "locals stack space" },
+
+		{ _field_version_greater, _engine_type_haloreach, 4 },
 		{ _field_word_flags, "script flags*", &scriptFlagsEnumDefinition },
 		{ _field_long_enum, "return type*", &hs_types_enum },
 		{ _field_long_integer, "root expression index*" },
 		{ _field_long_integer, "locals stack space" },
+
 		{ _field_block, "parameters", &hs_script_parameters_block_block },
 		{ _field_terminator }
 	};
 
 	TAG_BLOCK(hs_globals_block, k_maximum_hs_globals_per_context)
 	{
+		{ _field_version_less_or_equal, _engine_type_haloreach, 1 },
+		{ _field_string, "name" },
+
+		{ _field_version_greater, _engine_type_haloreach, 1 },
 		{ _field_string_id, "name*" },
+
 		{ _field_long_enum, "type*", &hs_types_enum },
 		{ _field_long_integer, "initialization expression index*" },
 		{ _field_terminator }
@@ -65,6 +78,17 @@ namespace blofeld
 
 	TAG_BLOCK(hs_syntax_datum_block, k_maximum_hs_syntax_nodes_per_context)
 	{
+		{ _field_version_less_or_equal, _engine_type_haloreach, 8 },
+		{ _field_short_integer, "datum header~" },
+		{ _field_short_integer, "script index/function index/constant type union" },
+		{ _field_enum, "node expression type", &hs_types_enum },
+		{ _field_short_integer, "flags" },
+		{ _field_long_integer, "next node" },
+		{ _field_long_integer, "source data" }, // offset into script string data (check halo 2)
+		{ _field_long_integer, "source offset location" }, // reinterpreted value
+		{ _field_long_integer, "source file offset" },
+
+		{ _field_version_greater, _engine_type_haloreach, 9 },
 		{ _field_short_integer, "datum header~" },
 		{ _field_short_integer, "script index/function index/constant type union" },
 		{ _field_long_integer, "next node" },

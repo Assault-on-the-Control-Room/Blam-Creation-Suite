@@ -101,7 +101,7 @@ namespace blofeld
 
 		{ _field_long_integer, "unknown" },
 		{ _field_long_integer, "unknown" },
-		{ _field_long_integer, "structured scenario interop index" },
+		{ _field_long_integer, "structured scenario interop index" }, // see "runtime m_gpu_data!" gpu_property_function_color_struct_struct_definition
 		{ _field_long_integer, "unknown" },
 		{ _field_long_integer, "unknown" },
 		{ _field_long_integer, "unknown" },

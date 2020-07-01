@@ -131,8 +131,7 @@ namespace blofeld
 		{ _field_char_integer, "quick cue*!" },
 		{ _field_short_integer, "editor folder!" },
 		{ _field_real_point_3d, "position!" },
-		{ _field_custom_long_block_index, "packedKeyOffaceref~!" },
-		{ _field_custom_long_block_index, "navMeshUIDOffaceref~!" },
+		{ _field_struct, "scenario_bsp_nav", &scenario_bsp_nav_struct_definition }, // #CUSTOM
 		{ _field_real_euler_angles_2d, "facing (yaw, pitch):degrees" },
 		{ _field_real, "roll" },
 		{ _field_custom, "distribution" },
@@ -152,8 +151,7 @@ namespace blofeld
 		{ _field_char_integer, "quick cue*!" },
 		{ _field_short_block_index, "editor folder!" },
 		{ _field_real_point_3d, "position" },
-		{ _field_custom_long_block_index, "packedKeyOffaceref~!" },
-		{ _field_custom_long_block_index, "navMeshUIDOffaceref~!" },
+		{ _field_struct, "scenario_bsp_nav", &scenario_bsp_nav_struct_definition }, // #CUSTOM
 		{ _field_real_euler_angles_2d, "facing!" },
 		{ _field_real, "roll!" },
 		{ _field_explanation, "Distribution", "The following blocks describe who will receive this cue." },
@@ -175,8 +173,7 @@ namespace blofeld
 		{ _field_pad, "post-flags", 1 },
 		{ _field_short_block_index, "editor folder!" },
 		{ _field_real_point_3d, "position" },
-		{ _field_custom_long_block_index, "packedKeyOffaceref~!" },
-		{ _field_custom_long_block_index, "navMeshUIDOffaceref~!" },
+		{ _field_struct, "scenario_bsp_nav", &scenario_bsp_nav_struct_definition }, // #CUSTOM
 		{ _field_real_euler_angles_2d, "facing!" },
 		{ _field_real, "roll!" },
 		{ _field_block, "tasks*!", &task_distribution_block_block },

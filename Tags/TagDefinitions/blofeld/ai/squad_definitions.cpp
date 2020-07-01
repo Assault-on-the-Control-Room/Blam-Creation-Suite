@@ -41,8 +41,7 @@ namespace blofeld
 		{ _field_struct, "place on", &ai_spawn_conditions_struct_struct_definition },
 		{ _field_string_id, "name^" },
 		{ _field_real_point_3d, "position" },
-		{ _field_custom_long_block_index, "packedKeyOffaceref~!" },
-		{ _field_custom_long_block_index, "navMeshUIDOffaceref~!" },
+		{ _field_struct, "scenario_bsp_nav", &scenario_bsp_nav_struct_definition }, // #CUSTOM
 		{ _field_real_euler_angles_2d, "facing (yaw, pitch):degrees" },
 		{ _field_real, "roll" },
 		{ _field_string_id, "formation" },
@@ -55,8 +54,11 @@ namespace blofeld
 		{ _field_custom_short_block_index, "point set" },
 		{ _field_enum, "patrol mode", &patrol_mode_enum },
 		{ _field_block, "points", &patrol_point_block_block },
+
+		{ _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_byte_flags, "flags", &spawn_formation_flags },
 		{ _field_pad, "post-flags-pad", 3 },
+
 		{ _field_terminator }
 	};
 
@@ -67,8 +69,7 @@ namespace blofeld
 		{ _field_custom_short_block_index, "cell" },
 		{ _field_pad, "post-cell-index-pad", 2 },
 		{ _field_real_point_3d, "position" },
-		{ _field_custom_long_block_index, "packedKeyOffaceref~!" },
-		{ _field_custom_long_block_index, "navMeshUIDOffaceref~!" },
+		{ _field_struct, "scenario_bsp_nav", &scenario_bsp_nav_struct_definition }, // #CUSTOM
 		{ _field_real_euler_angles_2d, "facing (yaw, pitch):degrees" },
 		{ _field_real, "roll" },
 		{ _field_word_flags, "flags", &starting_location_flags },
@@ -97,8 +98,11 @@ namespace blofeld
 		{ _field_custom_short_block_index, "point set" },
 		{ _field_enum, "patrol mode", &patrol_mode_enum },
 		{ _field_block, "points", &patrol_point_block_block },
+
+		{ _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_short_block_index, "vehicle body" },
 		{ _field_pad, "post-vehicle_index-pad", 2 },
+
 		{ _field_terminator }
 	};
 
@@ -179,11 +183,6 @@ namespace blofeld
 	TAG_BLOCK(character_ref_choice_block, k_maximum_palette_choices)
 	{
 		{ _field_struct, "place on", &ai_spawn_conditions_struct_struct_definition },
-
-		{ _field_version_less_or_equal, _engine_type_haloreach, 2 },
-		{ _field_long_integer, "unknown@" },
-		{ _field_long_integer, "unknown@" },
-
 		{ _field_tag_reference, "character type^", &character_reference$7 },
 		{ _field_short_integer, "chance" },
 		{ _field_pad, "post-chance", 2 },
@@ -193,11 +192,6 @@ namespace blofeld
 	TAG_BLOCK(weapon_ref_choice_block, k_maximum_palette_choices)
 	{
 		{ _field_struct, "place on", &ai_spawn_conditions_struct_struct_definition },
-
-		{ _field_version_less_or_equal, _engine_type_haloreach, 2 },
-		{ _field_long_integer, "unknown@" },
-		{ _field_long_integer, "unknown@" },
-
 		{ _field_tag_reference, "weapon type^", &weapon_reference$8 },
 		{ _field_short_integer, "chance" },
 		{ _field_pad, "post-chance", 2 },
@@ -207,11 +201,6 @@ namespace blofeld
 	TAG_BLOCK(equipment_ref_choice_block, k_maximum_palette_choices)
 	{
 		{ _field_struct, "place on", &ai_spawn_conditions_struct_struct_definition },
-
-		{ _field_version_less_or_equal, _engine_type_haloreach, 2 },
-		{ _field_long_integer, "unknown@" },
-		{ _field_long_integer, "unknown@" },
-
 		{ _field_tag_reference, "equipment type^", &equipment_reference$4 },
 		{ _field_short_integer, "chance" },
 		{ _field_pad, "post-chance", 2 },
@@ -224,13 +213,6 @@ namespace blofeld
 		{ _field_struct, "place on", &ai_spawn_conditions_struct_struct_definition },
 		{ _field_short_integer, "normal diff count#initial number of actors on normal difficulty" },
 		{ _field_enum, "major upgrade", &major_upgrade_enum },
-
-		{ _field_version_less_or_equal, _engine_type_haloreach, 4 },
-		{ _field_short_integer, "unknown@" },
-		{ _field_short_integer, "unknown@" },
-		{ _field_short_integer, "leader count" },
-		{ _field_short_integer, "follower count" },
-
 		{ _field_explanation, "Character Build", "Specify the distribution of characters and weapons in the following blocks" },
 		{ _field_block, "character type", &character_ref_choice_block_block },
 		{ _field_block, "initial weapon", &weapon_ref_choice_block_block },

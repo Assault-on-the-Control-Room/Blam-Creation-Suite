@@ -3,6 +3,19 @@
 
 namespace blofeld
 {
+	TAG_STRUCT(scenario_bsp_nav)
+	{
+		{ _field_version_less_or_equal, _engine_type_haloreach, 2 },
+		{ _field_short_block_index, "reference frame" }, // assembly
+		{ _field_short_block_index, "bsp index" }, // assembly
+
+		{ _field_version_greater, _engine_type_haloreach, 2 },
+		{ _field_custom_long_block_index, "packedKeyOffaceref~!" },
+		{ _field_custom_long_block_index, "navMeshUIDOffaceref~!" },
+
+		{ _field_terminator }
+	};
+
 	TAG_BLOCK(haloreach_sbsp_unknown_block, 65536)
 	{
 		{ _field_real, "unknown@" },

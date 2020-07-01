@@ -73,7 +73,10 @@ namespace blofeld
 		{ _field_array, "render-only section flags*!", &g_node_flag_storage_array_array },
 		{ _field_long_flags, "runtime flags*!", &model_private_flags_definition },
 		{ _field_block, "scenario load parameters", &global_scenario_load_parameters_block_block },
+
+		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_block, "game mode render model override", &model_game_mode_render_model_override_block },
+
 		{ _field_real_fraction, "Sky parallax percent#If flag checked % between sky pos and camera pos 0=camera" },
 		{ _field_real, "shadow depth compare bias#Default is 0.002" },
 		{ _field_real, "shadow slope scale bias:degrees#controls cutoff point for shadows around edges.  Default is 81 degrees" },
@@ -133,7 +136,10 @@ namespace blofeld
 	{
 		{ _field_custom },
 		{ _field_string_id, "parent marker^" },
+
+		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_string_id, "parent controlling seat label^#the seat in my parent that will control me" },
+
 		{ _field_custom },
 		{ _field_string_id, "child marker" },
 		{ _field_string_id, "child variant name#optional" },
@@ -150,6 +156,13 @@ namespace blofeld
 		{ _field_terminator }
 	};
 
+	// fixup as older blocks differ in count from global array definition
+	TAG_ARRAY(g_model_node_flag_storage_array, k_model_flag_chunk_count /*c_node_flags::k_flag_chunk_count*/)
+	{
+		{ _field_long_integer, "flag data" },
+		{ _field_terminator }
+	};
+
 	TAG_BLOCK(model_variant_block, k_maximum_variants_per_model)
 	{
 		{ _field_string_id, "name^" },
@@ -162,7 +175,7 @@ namespace blofeld
 		{ _field_version_greater, _engine_type_haloreach, 1 },
 		{ _field_block, "muted nodes#turn off animation on these named nodes and children", &model_variant_muted_node_block_block },
 
-		{ _field_array, "muted flag*!", &g_node_flag_storage_array_array },
+		{ _field_array, "muted flag*!", &g_model_node_flag_storage_array_array },
 
 		{ _field_terminator }
 	};
@@ -332,19 +345,55 @@ namespace blofeld
 
 	STRINGS(model_flags_definition)
 	{
-		"active camo always on",
-		"active camo never",
-		"inconsequential target#used in magnetism and campaign saving",
-		"model use airprobe lighting first{model use airprobe lighting}",
-		"locked precomputed probes#air or scenery probe",
-		"If sky attaches to camera#parallax % between sky pos and camera pos below",
-		"model is big battle object",
-		"model never uses compressed vertex position",
-		"model is invisible, even attachments",
-		"model can have shield impact effect!*",
-		"model is good z occluder",
-		"no child objects in lightmap shadow",
-		"should include model in floating shadow"
+		{
+			_engine_type_not_set,
+			_versioned_string_list_mode_new,
+			{
+				"active camo always on",
+				"active camo never",
+				"inconsequential target#used in magnetism and campaign saving",
+				"model use airprobe lighting first{model use airprobe lighting}",
+				"locked precomputed probes#air or scenery probe",
+				"If sky attaches to camera#parallax % between sky pos and camera pos below",
+				"model is big battle object",
+				"model never uses compressed vertex position",
+				"model is invisible, even attachments",
+				"model can have shield impact effect!*",
+				"model is good z occluder",
+				"no child objects in lightmap shadow",
+				"should include model in floating shadow"
+			}
+		},
+		{
+			_engine_type_haloreach,
+			_versioned_string_list_mode_append,
+			{
+				"bit 14",
+				"bit 15",
+				"bit 16",
+				"bit 17",
+				"bit 18",
+			}
+		},
+		{
+			_engine_type_gen3_xbox360,
+			_versioned_string_list_mode_new,
+			{
+				"active camo always on",
+				"active camo never",
+				"inconsequential target#used in magnetism and campaign saving",
+				"model use airprobe lighting first{model use airprobe lighting}",
+				"locked precomputed probes#air or scenery probe",
+				"If sky attaches to camera#parallax % between sky pos and camera pos below",
+				"model is big battle object",
+				"model never uses compressed vertex position",
+				"model is invisible, even attachments",
+				"model can have shield impact effect!*",
+				"model is good z occluder",
+				"no child objects in lightmap shadow",
+				"should include model in floating shadow"
+			}
+		}
 	};
 	STRING_LIST(model_flags_definition, model_flags_definition_strings, _countof(model_flags_definition_strings));
 

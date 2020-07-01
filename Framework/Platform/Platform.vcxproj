@@ -28,6 +28,7 @@
     <ClInclude Include="error_handling.h" />
     <ClInclude Include="filesystem_util.h" />
     <ClInclude Include="language_util.h" />
+    <ClInclude Include="math_util.h" />
     <ClInclude Include="settings.h" />
     <ClInclude Include="Strings\fixed_string.h" />
     <ClInclude Include="intrinsics.h" />
@@ -52,6 +53,7 @@
     <ClCompile Include="debug_util.cpp" />
     <ClCompile Include="error_handling.cpp" />
     <ClCompile Include="filesystem_util.cpp" />
+    <ClCompile Include="math_util.cpp" />
     <ClCompile Include="settings.cpp" />
     <ClCompile Include="Strings\fixed_string.cpp" />
     <ClCompile Include="platform-private-pch.cpp">

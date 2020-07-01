@@ -83,6 +83,7 @@ const char* c_tag_source_generator::field_type_to_source_type(e_platform_type pl
 	case _field_dword_integer:						return "dword";
 	case _field_qword_integer:						return "qword";
 	case _field_pointer: // #NONSTANDARD
+	{
 		switch (get_platform_pointer_size(platform_type))
 		{
 		case 8: return "long long";
@@ -90,8 +91,8 @@ const char* c_tag_source_generator::field_type_to_source_type(e_platform_type pl
 		default: FATAL_ERROR(L"bad pointer size");
 		}
 		break;
-
-
+	}
+	case _field_half:						return "short";
 	default: FATAL_ERROR(L"Unknown field type");
 	}
 }

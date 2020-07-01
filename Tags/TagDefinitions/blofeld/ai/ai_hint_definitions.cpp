@@ -8,11 +8,10 @@ namespace blofeld
 	{
 		{ _field_long_flags, "Flags", &user_hint_geometry_flags },
 		{ _field_real_point_3d, "Point 0" },
-		{ _field_custom_long_block_index, "packedKeyOffaceref0~!" },
-		{ _field_custom_long_block_index, "navMeshUIDOffaceref0~!" },
+		{ _field_struct, "scenario_bsp_nav 0", &scenario_bsp_nav_struct_definition }, // #CUSTOM
 		{ _field_real_point_3d, "Point 1" },
-		{ _field_custom_long_block_index, "packedKeyOffaceref1~!" },
-		{ _field_custom_long_block_index, "navMeshUIDOffaceref1~!" },
+		{ _field_struct, "scenario_bsp_nav 1", &scenario_bsp_nav_struct_definition }, // #CUSTOM
+
 		{ _field_terminator }
 	};
 
@@ -20,17 +19,13 @@ namespace blofeld
 	{
 		{ _field_long_flags, "Flags", &user_hint_geometry_flags },
 		{ _field_real_point_3d, "Point 0" },
-		{ _field_custom_long_block_index, "packedKeyOffaceref0!" },
-		{ _field_custom_long_block_index, "navMeshUIDOffaceref0!" },
+		{ _field_struct, "scenario_bsp_nav 0", &scenario_bsp_nav_struct_definition }, // #CUSTOM
 		{ _field_real_point_3d, "Point 1" },
-		{ _field_custom_long_block_index, "packedKeyOffaceref1!" },
-		{ _field_custom_long_block_index, "navMeshUIDOffaceref1!" },
+		{ _field_struct, "scenario_bsp_nav 1", &scenario_bsp_nav_struct_definition }, // #CUSTOM
 		{ _field_real_point_3d, "Point 2" },
-		{ _field_custom_long_block_index, "packedKeyOffaceref2!" },
-		{ _field_custom_long_block_index, "navMeshUIDOffaceref2!" },
+		{ _field_struct, "scenario_bsp_nav 2", &scenario_bsp_nav_struct_definition }, // #CUSTOM
 		{ _field_real_point_3d, "Point 3" },
-		{ _field_custom_long_block_index, "packedKeyOffaceref3!" },
-		{ _field_custom_long_block_index, "navMeshUIDOffaceref3!" },
+		{ _field_struct, "scenario_bsp_nav 3", &scenario_bsp_nav_struct_definition }, // #CUSTOM
 		{ _field_word_flags, "invalid_points*", &parallelogram_points_invalid_flags },
 		{ _field_pad, "KJHIUF", 2 },
 		{ _field_terminator }
@@ -44,6 +39,7 @@ namespace blofeld
 
 	TAG_BLOCK(user_hint_jump_block, k_max_hint_geometries)
 	{
+		{ _field_version_greater, _engine_type_haloreach, 7 },
 		{ _field_enum, "hint type", &hint_type_enum },
 		{ _field_short_block_index, "Squad group filter" },
 		{ _field_block, "hint vertices*~", &hint_vertex_block_block },
@@ -51,6 +47,7 @@ namespace blofeld
 		{ _field_short_integer, "hint data 1*" },
 		{ _field_byte_integer, "hint data 2*" },
 		{ _field_byte_integer, "pad1*" },
+
 		{ _field_word_flags, "Flags", &user_hint_geometry_flags },
 		{ _field_short_block_index, "geometry index*" },
 		{ _field_enum, "force jump height", &global_ai_jump_height_enum },
@@ -60,6 +57,7 @@ namespace blofeld
 
 	TAG_BLOCK(user_hint_climb_block, k_max_climb_hints)
 	{
+		{ _field_version_greater, _engine_type_haloreach, 7 },
 		{ _field_enum, "hint type", &hint_type_enum },
 		{ _field_short_block_index, "Squad group filter" },
 		{ _field_block, "hint vertices*~", &hint_vertex_block_block },
@@ -67,6 +65,7 @@ namespace blofeld
 		{ _field_short_integer, "hint data 1*" },
 		{ _field_byte_integer, "hint data 2*" },
 		{ _field_byte_integer, "pad1*" },
+
 		{ _field_word_flags, "Flags", &user_hint_geometry_flags },
 		{ _field_short_block_index, "geometry index*" },
 		{ _field_enum, "force hoist height", &forced_hoist_height_enum },
@@ -79,8 +78,7 @@ namespace blofeld
 		{ _field_enum, "type", &user_hint_well_point_type_enum },
 		{ _field_pad, "CNXLP", 2 },
 		{ _field_real_point_3d, "point" },
-		{ _field_custom_long_block_index, "packedKeyOffaceref~!" },
-		{ _field_custom_long_block_index, "navMeshUIDOffaceref~!" },
+		{ _field_struct, "scenario_bsp_nav", &scenario_bsp_nav_struct_definition }, // #CUSTOM
 		{ _field_real_euler_angles_2d, "normal" },
 		{ _field_terminator }
 	};
@@ -140,8 +138,7 @@ namespace blofeld
 	TAG_BLOCK(user_hint_sector_point_block, k_maximum_points_per_sector)
 	{
 		{ _field_real_point_3d, "point" },
-		{ _field_custom_long_block_index, "packedKeyOffaceref~!" },
-		{ _field_custom_long_block_index, "navMeshUIDOffaceref~!" },
+		{ _field_struct, "scenario_bsp_nav", &scenario_bsp_nav_struct_definition }, // #CUSTOM
 		{ _field_real_euler_angles_2d, "normal" },
 		{ _field_terminator }
 	};
@@ -154,13 +151,20 @@ namespace blofeld
 
 	TAG_BLOCK(user_hint_cookie_cutter_block, k_max_cookie_cutters)
 	{
+		{ _field_version_greater, _engine_type_haloreach, 3 },
 		{ _field_pointer, "hkaiVolume vtable*~!" },
 		{ _field_short_integer, "size*~!" },
 		{ _field_short_integer, "count*~!" },
+
 		{ _field_block, "points", &user_hint_sector_point_block_block },
+
+		{ _field_version_greater, _engine_type_haloreach, 1 },
 		{ _field_block, "pointsObjectIds", &hint_object_id_block_block },
+
 		{ _field_real, "z height" },
 		{ _field_real, "z sink" },
+
+		{ _field_version_greater, _engine_type_haloreach, 7 },
 		{ _field_enum, "type", &cookie_cutter_type_enum },
 		{ _field_short_integer, "pad*!" },
 		{ _field_long_integer, "runtimeObjectTransformOverrideIndex*~!" },
@@ -168,6 +172,7 @@ namespace blofeld
 		{ _field_char_integer, "pad2*!" },
 		{ _field_char_integer, "pad3*!" },
 		{ _field_char_integer, "pad4*!" },
+
 		{ _field_terminator }
 	};
 
@@ -244,7 +249,10 @@ namespace blofeld
 		{ _field_block, "volume avoidance hints", &user_hint_volume_avoidance_block },
 		{ _field_block, "spline hints", &user_hint_spline_block_block },
 		{ _field_block, "cookie cutters", &user_hint_cookie_cutter_block_block },
+
+		{ _field_version_greater, _engine_type_haloreach }, // #NOTE assumed that reach has no navmesh support
 		{ _field_block, "navmesh areas", &user_hint_navmesh_area_block_block },
+
 		{ _field_block, "giant hints", &user_hint_giant_block_block },
 		{ _field_block, "flood hints", &user_hint_flood_block_block },
 		{ _field_terminator }

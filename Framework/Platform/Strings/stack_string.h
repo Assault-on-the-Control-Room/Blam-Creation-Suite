@@ -110,4 +110,4 @@ public:
 	}
 };
 
-#define c_stack_string(data_size) { static_cast<char*>(malloc(static_cast<size_t>(data_size))), static_cast<size_t>(data_size) } 
+#define c_stack_string(data_size) { static_cast<char*>(alloca(static_cast<size_t>(data_size))), static_cast<size_t>(data_size) } 

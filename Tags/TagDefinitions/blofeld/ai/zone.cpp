@@ -22,14 +22,14 @@ namespace blofeld
 	TAG_BLOCK(area_sector_point_block, k_maximum_points_per_sector)
 	{
 		{ _field_real_point_3d, "point" },
-		{ _field_custom_long_block_index, "packedKeyOffaceref~!" },
-		{ _field_custom_long_block_index, "navMeshUIDOffaceref~!" },
+		{ _field_struct, "scenario_bsp_nav", &scenario_bsp_nav_struct_definition }, // #CUSTOM
 		{ _field_real_euler_angles_2d, "normal" },
 		{ _field_terminator }
 	};
 
 	TAG_BLOCK(areas_block, k_max_areas_per_zone)
 	{
+		{ _field_version_greater, _engine_type_haloreach, 7 },
 		{ _field_custom },
 		{ _field_custom },
 		{ _field_custom },
@@ -37,27 +37,43 @@ namespace blofeld
 		{ _field_pointer, "hkaiVolume vtable*~!" },
 		{ _field_short_integer, "size*~!" },
 		{ _field_short_integer, "count*~!" },
+
 		{ _field_string, "name^`" },
 		{ _field_long_flags, "area flags", &area_flags },
 		{ _field_real_point_3d, "runtime relative mean point!" },
-		{ _field_custom_long_block_index, "packedKeyOffaceref~!" },
-		{ _field_custom_long_block_index, "navMeshUIDOffaceref~!" },
+		{ _field_struct, "scenario_bsp_nav", &scenario_bsp_nav_struct_definition }, // #CUSTOM
 		{ _field_real, "runtime standard deviation!" },
 		{ _field_short_integer, "runtime starting index!" },
 		{ _field_short_integer, "runtime count!" },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach, 2 }, // #TODO: commom pattern
+		{ _field_short_integer, "unknown" },
+		{ _field_short_integer, "unknown" },
+
+		{ _field_version_greater, _engine_type_haloreach, 1 },
 		{ _field_struct, "Nav Mesh Attachments*", &NavMeshAttachmentsStruct_struct_definition },
+
 		{ _field_array, "cluster occupancy!", &area_cluster_occupancy_bitvector_array_array },
 		{ _field_block, "flight_hints", &flight_reference_block_block },
 		{ _field_block, "points^", &area_sector_point_block_block },
 		{ _field_explanation, "Generation Properties", "" },
 		{ _field_enum, "preset", &generate_preset_enum },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach, 1 },
 		{ _field_short_integer, "runtimeCarverInversion*~!" },
+
+		{ _field_version_greater, _engine_type_haloreach, 1 },
+		{ _field_pad, "pad", 2 },
+
 		{ _field_long_flags, "flags", &generate_flags },
 		{ _field_real, "extrusion" },
 		{ _field_real, "sink" },
 		{ _field_angle, "firing point orientation" },
 		{ _field_angle, "grid orientation" },
+
+		{ _field_version_greater, _engine_type_haloreach, 1 },
 		{ _field_real, "nav volume cell size" },
+
 		{ _field_real, "spacing*" },
 		{ _field_real, "airborne spacing*" },
 		{ _field_real, "min cover length*" },
@@ -77,8 +93,15 @@ namespace blofeld
 		{ _field_short_block_index, "editor folder index!" },
 		{ _field_block, "firing positions", &firing_positions_block_block },
 		{ _field_block, "areas", &areas_block_block },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach, 2 }, // #TODO: commom pattern
+		{ _field_short_integer, "unknown" },
+		{ _field_short_integer, "unknown" },
+
+		{ _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_struct, "Nav Mesh Attachments*", &NavMeshAttachmentsStruct_struct_definition },
 		{ _field_struct, "disallowed attachment bsps", &manualBspFlagsReferences_struct_definition },
+
 		{ _field_terminator }
 	};
 

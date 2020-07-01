@@ -127,7 +127,13 @@ namespace blofeld
 	TAG_BLOCK(scenario_designer_zone_block, k_maximum_designer_zone_count)
 	{
 		{ _field_string_id, "name^" },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_long_integer, "unknown" },
+
+		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_block, "references*", &scenarioDesignerZoneTagReferenceBlock_block },
+
 		{ _field_custom, "biped" },
 		{ _field_block, "biped", &biped_block_index_flags_block_block },
 		{ _field_custom, "vehicle" },
@@ -144,8 +150,11 @@ namespace blofeld
 		{ _field_block, "terminal", &terminal_block_index_flags_block_block },
 		{ _field_custom, "control" },
 		{ _field_block, "control", &control_block_index_flags_block_block },
+
+		{ _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_custom, "dispenser" },
 		{ _field_block, "dispenser", &dispenser_block_index_flags_block_block },
+
 		{ _field_custom, "sound_scenery" },
 		{ _field_block, "sound_scenery", &sound_scenery_block_index_flags_block_block },
 		{ _field_custom, "crate" },
@@ -160,11 +169,14 @@ namespace blofeld
 		{ _field_block, "character", &character_block_index_flags_block_block },
 		{ _field_custom, "spawner" },
 		{ _field_block, "spawner", &spawner_block_index_flags_block_block },
+
+		{ _field_version_greater, _engine_type_haloreach, 5 },
 		{ _field_custom, "budget_reference" },
 		{ _field_block, "budget_reference", &budget_reference_block_index_flags_block_block },
 		{ _field_custom, "bink" },
 		{ _field_block, "bink", &bink_block_index_flags_block_block },
 		{ _field_block, "resource dependencies*!", &scenarioDesignerResourceDependenciesBlock_block },
+
 		{ _field_terminator }
 	};
 

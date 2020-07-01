@@ -8,7 +8,7 @@ namespace blofeld
 	extern s_tag_reference_definition bitmap_reference;
 	extern s_tag_reference_definition render_method_template_reference;
 	extern s_tag_reference_definition model_reference;
-	extern s_tag_reference_definition bitmap_reference$2;
+	extern s_tag_reference_definition lightmap_bitmap_reference;
 	extern s_tag_reference_definition bitmap_reference$3;
 	extern s_tag_reference_definition ai_dialogue_globals_reference;
 	extern s_tag_reference_definition formation_reference;

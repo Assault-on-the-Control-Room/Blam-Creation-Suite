@@ -25,7 +25,10 @@ namespace blofeld
 	{
 		{ _field_custom, "Cinematic Lighting" },
 		{ _field_custom, "Cinema Lighting" },
+
+		{ _field_version_greater, _engine_type_haloreach, 1 },
 		{ _field_long_integer, "version!" },
+
 		{ _field_custom, "Direction&Direction(D)" },
 		{ _field_real, "Direction&Direction(D)" },
 		{ _field_custom, "Front-Back&Front-Back(D)" },
@@ -45,14 +48,26 @@ namespace blofeld
 		{ _field_real_rgb_color, "Direct color" },
 		{ _field_custom, "Direct intensity" },
 		{ _field_real, "Direct intensity" },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach, 1 },
+		{ _field_real, "unknown" },
+
 		{ _field_real_rgb_color, "Indirect color" },
 		{ _field_custom, "Indirect intensity" },
 		{ _field_real, "Indirect intensity" },
 		{ _field_custom, "Interpolation" },
 		{ _field_real, "Interpolation" },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach, 3 },
+		{ _field_real, "unknown" },
+		{ _field_real, "unknown" },
+		{ _field_real, "unknown" },
+
+		{ _field_version_greater, _engine_type_haloreach, 3 },
 		{ _field_custom },
 		{ _field_block, "Authored Light Probe", &authored_light_probe_block },
 		{ _field_block, "Cortana Lighting", &hologramLightingBlock_block },
+
 		{ _field_block, "dynamic lights!", &cinematic_dynamic_light_block_block },
 		{ _field_terminator }
 	};
