@@ -188,7 +188,7 @@ namespace blofeld
 		{ _field_real, "motion tracker range" },
 		{ _field_real, "nemesis duration:seconds" },
 		
-		{ _field_char_enum, "motion tracker mode", &player_trait_motion_tracker },
+		{ _field_char_enum, "motion tracker", &player_trait_motion_tracker },
 
 		{ _field_version_less_or_equal, _engine_type_haloreach },
 		{ _field_char_enum, "motion tracker range", &player_trait_motion_tracker_range_enum },
