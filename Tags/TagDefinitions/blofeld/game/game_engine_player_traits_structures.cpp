@@ -208,7 +208,7 @@ namespace blofeld
 		{ _field_char_enum, "nemesis", &player_trait_bool_enum },
 
 		{ _field_version_less_or_equal, _engine_type_haloreach },
-		{ _field_char_integer, "unknown" },
+		{ _field_char_integer, "unknown" }, // TODO: Some research required
 		
 		{ _field_terminator }
 	};
