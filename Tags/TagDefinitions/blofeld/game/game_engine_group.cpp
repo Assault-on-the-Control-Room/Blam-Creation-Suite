@@ -720,7 +720,7 @@ namespace blofeld
 	STRINGS(game_engine_survival_variant_difficulty_enum)
 	{
 		"unchanged",
-		"east",
+		"easy",
 		"normal",
 		"heroic",
 		"legendary"
