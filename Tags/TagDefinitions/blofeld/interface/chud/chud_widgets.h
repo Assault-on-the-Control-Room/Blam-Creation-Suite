@@ -28,6 +28,11 @@ namespace blofeld
 	extern s_tag_block_definition wpdt_placement_data_block_block;
 	extern s_tag_reference_definition chud_widget_placement_data_reference;
 
+	extern c_versioned_string_list wpdt_unknown_flags_definition_strings;
+	extern s_string_list_definition wpdt_unknown_flags_definition;
+	extern c_versioned_string_list wpdt_anchor_enum_definition_strings;
+	extern s_string_list_definition wpdt_anchor_enum_definition;
+
 	// render data
 	extern s_tag_group chud_widget_render_data_group;
 
