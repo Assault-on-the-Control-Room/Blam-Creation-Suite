@@ -262,14 +262,14 @@ namespace blofeld
 		{ _field_block, "ordnance options", &gameEngineOrdnanceOptionsBlock_block },
 		
 		{ _field_byte_flags, "flags", &game_engine_survival_variant_flags },
-		{ _field_char_enum, "game difficulty", &global_campaign_difficulty_enum },
+		{ _field_char_enum, "game difficulty", &game_engine_survival_variant_difficulty_enum },
 
 		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_pad, "SDFHJREN", 2 },
 
 		{ _field_version_less_or_equal, _engine_type_haloreach, 2 },
 		{ _field_char_integer, "time limit" },
-		{ _field_char_integer, "unknown" },
+		{ _field_char_integer, "unknown" }, // #TODO: Do some research
 		
 		{ _field_char_integer, "set count#survival_mode_get_set_count, -1 to loop last, -2 to loop last 3, -3 to loop all" },
 		{ _field_char_integer, "bonus lives awarded#survival_mode_get_bonus_lives_awarded" },
@@ -485,27 +485,15 @@ namespace blofeld
 
 	STRINGS(game_engine_miscellaneous_options_flags)
 	{
-			{
-				_engine_type_not_set,
-				_versioned_string_list_mode_new,
-				{
-					"teams enabled",
-					"round reset players",
-					"round reset map"
-				}
-			},
-			{
-				_engine_type_gen3_xbox360,
-				_versioned_string_list_mode_append,
-				{
-					"perfection enabled",
-					"mosh",
-					"drop weapons on death",
-					"killcam enabled",
-					"medal scoring enabled",
-					"asymmetric round scoring"
-				}
-			}
+		"teams enabled",
+		"round reset players",
+		"round reset map",
+		"perfection enabled",
+		"mosh",
+		"drop weapons on death",
+		"killcam enabled",
+		"medal scoring enabled",
+		"asymmetric round scoring"
 	};
 	STRING_LIST(game_engine_miscellaneous_options_flags, game_engine_miscellaneous_options_flags_strings, _countof(game_engine_miscellaneous_options_flags_strings));
 
@@ -728,6 +716,16 @@ namespace blofeld
 		"3 Generators"
 	};
 	STRING_LIST(game_engine_survival_generator_count_enum, game_engine_survival_generator_count_enum_strings, _countof(game_engine_survival_generator_count_enum_strings));
+
+	STRINGS(game_engine_survival_variant_difficulty_enum)
+	{
+		"unchanged",
+		"east",
+		"normal",
+		"heroic",
+		"legendary"
+	};
+	STRING_LIST(game_engine_survival_variant_difficulty_enum, game_engine_survival_variant_difficulty_enum_strings, _countof(game_engine_survival_variant_difficulty_enum_strings));
 
 	TAG_REFERENCE(GameEngineFirefightVariantReference, GAMEENGINEFIREFIGHTVARIANTTAG_TAG);
 

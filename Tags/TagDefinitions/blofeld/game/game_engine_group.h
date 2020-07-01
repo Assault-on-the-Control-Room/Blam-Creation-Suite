@@ -121,6 +121,8 @@ namespace blofeld
 	extern s_string_list_definition game_engine_settings_flags;
 	extern c_versioned_string_list game_engine_survival_generator_count_enum_strings;
 	extern s_string_list_definition game_engine_survival_generator_count_enum;
+	extern c_versioned_string_list game_engine_survival_variant_difficulty_enum_strings;
+	extern s_string_list_definition game_engine_survival_variant_difficulty_enum;
 
 	extern s_tag_reference_definition GameEngineFirefightVariantReference;
 

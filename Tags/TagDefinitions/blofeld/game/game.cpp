@@ -6,27 +6,10 @@ namespace blofeld
 
 	STRINGS(global_campaign_difficulty_enum)
 	{
-		{
-			_engine_type_haloreach,
-				_versioned_string_list_mode_new,
-			{
-				"unchanged",
-				"east",
-				"normal",
-				"heroic",
-				"legendary"
-			}
-		},
-		{
-			_engine_type_gen3_xbox360,
-			_versioned_string_list_mode_new,
-			{
-				"easy",
-				"normal",
-				"heroic",
-				"legendary"
-			}
-		}
+		"easy",
+		"normal",
+		"heroic",
+		"legendary"
 	};
 	STRING_LIST(global_campaign_difficulty_enum, global_campaign_difficulty_enum_strings, _countof(global_campaign_difficulty_enum_strings));
 

@@ -15,7 +15,7 @@ namespace blofeld
 		{ _field_char_enum, "body recharge rate", &player_trait_shield_recharge_rate_enum },
 		{ _field_char_enum, "shield multiplier", &player_trait_shield_multiplier_enum },
 		{ _field_char_enum, "shield recharge rate", &player_trait_shield_recharge_rate_enum },
-		{ _field_char_enum, "shield recharge rate 2", &player_trait_shield_recharge_rate_enum }, // Could be shield stun duration?
+		{ _field_char_enum, "shield recharge rate 2", &player_trait_shield_recharge_rate_enum }, // #TODO: Could be shield stun duration? Some research is required.
 		
 		{ _field_version_greater, _engine_type_haloreach, 14 },
 		{ _field_explanation, "damage resistance", "Any damage taken is divided by this number.  If you put -1, that means \"invulnerable\"." },
@@ -99,7 +99,7 @@ namespace blofeld
 
 		{ _field_version_less_or_equal, _engine_type_haloreach, 3 },
 		{ _field_char_integer, "unknown" },
-		{ _field_char_integer, "unknown" },
+		{ _field_char_integer, "unknown" }, // TODO: Some research required
 		{ _field_char_integer, "unknown" },
 
 		{ _field_version_greater, _engine_type_haloreach, 9 },
@@ -170,7 +170,7 @@ namespace blofeld
 
 		{ _field_version_less_or_equal, _engine_type_haloreach, 3 },
 		{ _field_char_integer, "unknown" },
-		{ _field_char_integer, "unknown" },
+		{ _field_char_integer, "unknown" }, // TODO: Some research required
 		{ _field_char_integer, "unknown" },
 
 		{ _field_version_greater, _engine_type_haloreach, 3 },
