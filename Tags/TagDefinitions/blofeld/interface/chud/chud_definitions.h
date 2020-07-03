@@ -16,6 +16,11 @@ namespace blofeld
 	extern s_tag_block_definition chgd_hud_sounds_block_block;
 	extern s_tag_block_definition chgd_hud_attributes_block_block;
 	extern s_tag_block_definition chgd_hud_globals_block_block;
+	extern s_tag_block_definition chgd_waypoint_blips_block_block;
+	extern s_tag_block_definition chgd_shaders_block_block;
+	extern s_tag_block_definition chgd_unknown_block_block;
+	extern s_tag_block_definition chgd_player_training_data_block_block;
+	extern s_tag_block_definition chgd_state_triggers_block_block;
 
 	extern s_tag_reference_definition unknown_reference;
 
@@ -25,6 +30,10 @@ namespace blofeld
 	extern s_string_list_definition resolution_flags_definition;
 	extern c_versioned_string_list latched_to_flags_definition_strings;
 	extern s_string_list_definition latched_to_flags_definition;
+	extern c_versioned_string_list icon_enum_definition_strings;
+	extern s_string_list_definition icon_enum_definition;
+	extern c_versioned_string_list player_training_flags_definition_strings;
+	extern s_string_list_definition player_training_flags_definition;
 
 	extern s_tag_reference_definition chud_animation_reference;
 	extern s_tag_reference_definition chud_reference;
