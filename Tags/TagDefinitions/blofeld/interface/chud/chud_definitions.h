@@ -8,11 +8,26 @@ namespace blofeld
 
 	extern s_tag_group chud_animation_group;
 	extern s_tag_group chud_group;
+
 	extern s_tag_group chud_globals_group;
+	extern s_tag_struct_definition chgd_struct_definition_struct_definition;
+	extern s_tag_block_definition chgd_block_block;
+	extern s_tag_reference_definition chud_globals_reference;
+	extern s_tag_block_definition chgd_hud_sounds_block_block;
+	extern s_tag_block_definition chgd_hud_attributes_block_block;
+	extern s_tag_block_definition chgd_hud_globals_block_block;
+
+	extern s_tag_reference_definition unknown_reference;
+
+	extern c_versioned_string_list biped_enum_definition_strings;
+	extern s_string_list_definition biped_enum_definition;
+	extern c_versioned_string_list resolution_flags_definition_strings;
+	extern s_string_list_definition resolution_flags_definition;
+	extern c_versioned_string_list latched_to_flags_definition_strings;
+	extern s_string_list_definition latched_to_flags_definition;
 
 	extern s_tag_reference_definition chud_animation_reference;
 	extern s_tag_reference_definition chud_reference;
-	extern s_tag_reference_definition chud_globals_reference;
 
 }
 
