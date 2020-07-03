@@ -104,7 +104,12 @@ namespace blofeld
 
 	TAG_BLOCK(phantom_types_block, k_maximum_phantom_types_per_physics_model)
 	{
+		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_long_flags, "flags", &PhantomFlagsV2 },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_byte_flags, "flags", &PhantomFlagsV2 },
+		
 		{ _field_real, "brittle timer:seconds#objects in this phantom volume will be set to brittle collision damage for this amount of time." },
 		{ _field_char_enum, "minimum size", &rigid_body_size_enum },
 		{ _field_char_enum, "maximum size", &rigid_body_size_enum },
