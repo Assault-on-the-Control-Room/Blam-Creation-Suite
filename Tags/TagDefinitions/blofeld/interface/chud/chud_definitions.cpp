@@ -3,19 +3,357 @@
 
 namespace blofeld
 {
+	TAG_REFERENCE(unknown_reference);
 
 	TAG_REFERENCE(chud_animation_reference, CHUD_ANIMATION_TAG);
-	TAG_REFERENCE(chud_reference, CHUD_TAG);
 
 	TAG_GROUP(chud_animation, CHUD_ANIMATION_TAG)
 	{
 		{ _field_terminator }
 	};
 
-	TAG_GROUP(chud, CHUD_TAG)
+	TAG_BLOCK(chdt_compiled_widget_data_block, 65536)
 	{
+		{ _field_char_enum, "special hud type", &chdt_special_hud_type_definition },
+		{ _field_byte_flags, "unknown", &chdt_unknown_definition },
+		{ _field_byte_integer, "unknown index?" },
+		{ _field_byte_flags, "unknown", &chdt_unknown_definition },
+		{ _field_real, "animation 1 frame count" },
+		{ _field_real, "animation 2 frame count" },
+		{ _field_real, "animation 3 frame count" },
+		{ _field_real, "animation 4 frame count" },
+		{ _field_real, "animation 5 frame count" },
+		{ _field_enum, "input", &chdt_input_definition },
+		{ _field_enum, "range input", &chdt_input_definition },
+		{ _field_long_flags, "input variable triggers", &chdt_input_variable_triggers_definition },
+		{ _field_char_enum, "second state-block start value", &chdt_second_state_block_start_value_definition },
+		{ _field_char_enum, "third state-block start value", &chdt_second_state_block_start_value_definition },
+		{ _field_short_integer, "0" },
+		{ _field_short_integer, "1" },
+		{ _field_short_integer, "2" },
+		{ _field_short_integer, "3" },
+		{ _field_short_integer, "4" },
+		{ _field_short_integer, "5" },
+		{ _field_short_integer, "6" },
+		{ _field_short_integer, "7" },
+		{ _field_short_integer, "8" },
+		{ _field_short_integer, "9" },
+		{ _field_short_integer, "10" },
+		{ _field_short_integer, "11" },
+		{ _field_short_integer, "12" },
+		{ _field_short_integer, "13" },
+		{ _field_short_integer, "14" },
+		{ _field_short_integer, "15" },
+		{ _field_short_integer, "16" },
+		{ _field_short_integer, "17" },
+		{ _field_short_integer, "18" },
+		{ _field_short_integer, "19" },
+		{ _field_short_integer, "20" },
+		{ _field_short_integer, "21" },
+		{ _field_short_integer, "22" },
+		{ _field_short_integer, "23" },
+		{ _field_short_integer, "24" },
+		{ _field_short_integer, "25" },
+		{ _field_short_integer, "26" },
+		{ _field_short_integer, "27" },
+		{ _field_short_integer, "28" },
 		{ _field_terminator }
 	};
+	TAG_BLOCK(chdt_triggers_block, 65536)
+	{
+		{ _field_byte_flags, "flag", &chdt_flag_definition },
+
+		{ _field_byte_integer, "unknown" },
+		{ _field_byte_integer, "unknown" },
+		{ _field_byte_integer, "unknown" },
+		{ _field_long_integer, "trigger index" },
+		{ _field_terminator }
+	};
+	TAG_BLOCK(chdt_yesno_states_block, 65536)
+	{
+		{ _field_block, "triggers", &chdt_triggers_block_block },
+		{ _field_terminator }
+	};
+	TAG_BLOCK(chdt_placement_data_block, 65536)
+	{
+		{ _field_byte_flags, "unknown", & chdt_unknown_definition },
+		{ _field_char_enum, "anchor", &chdt_anchor_definition },
+		{ _field_short_integer, "unknown" },
+		{ _field_real, "mirror offset x" },
+		{ _field_real, "mirror offset y" },
+		{ _field_real, "offset x" },
+		{ _field_real, "offset y" },
+		{ _field_real, "scale x" },
+		{ _field_real, "scale y" },
+		{ _field_terminator }
+	};
+	TAG_BLOCK(chdt_state_data_block, 65536)
+	{
+		{ _field_block, "'yes' states", &chdt_yesno_states_block_block },
+		{ _field_block, "unknown states", &chdt_yesno_states_block_block },
+		{ _field_block, "'no' states", &chdt_yesno_states_block_block },
+		{ _field_short_integer, "unknown" },
+		{ _field_short_integer, "unknown" },
+		{ _field_short_integer, "unknown" },
+		{ _field_short_integer, "unknown" },
+		//{ undefined ooga booga, "unknown" },
+		//{ undefined ooga booga, "unknown" },
+		//{ undefined ooga booga, "unknown" },
+		{ _field_terminator }
+	};
+	TAG_BLOCK(chdt_animation_data_block, 65536)
+	{
+		{ _field_byte_flags, "animation 1 flags", & chdt_animation_flags_definition },
+		{ _field_char_enum, "animation 1 function", &chdt_animation_function_definition },
+		{ _field_short_integer, "unknown" },
+		{ _field_tag_reference, "animation 1", &chud_animation_reference },
+		{ _field_byte_flags, "animation 2 flags", &chdt_animation_flags_definition },
+		{ _field_char_enum, "animation 2 function", &chdt_animation_function_definition },
+		{ _field_short_integer, "unknown" },
+		{ _field_tag_reference, "animation 2", &chud_animation_reference },
+		{ _field_byte_flags, "animation 3 flags", &chdt_animation_flags_definition },
+		{ _field_char_enum, "animation 3 function", &chdt_animation_function_definition },
+		{ _field_short_integer, "unknown" },
+		{ _field_tag_reference, "animation 3", &chud_animation_reference },
+		{ _field_byte_flags, "animation 4 flags", &chdt_animation_flags_definition },
+		{ _field_char_enum, "animation 4 function", &chdt_animation_function_definition },
+		{ _field_short_integer, "unknown" },
+		{ _field_tag_reference, "animation 4", &chud_animation_reference },
+		{ _field_byte_flags, "animation 5 flags", &chdt_animation_flags_definition },
+		{ _field_char_enum, "animation 5 function", &chdt_animation_function_definition },
+		{ _field_short_integer, "unknown" },
+		{ _field_tag_reference, "animation 5", &chud_animation_reference },
+		{ _field_terminator }
+	};
+	TAG_BLOCK(chdt_render_data_block, 65536)
+	{
+		{ _field_char_enum, "shader index", & chdt_shader_index_definition },
+		{ _field_byte_integer, "unknown" },
+		{ _field_byte_integer, "unknown" },
+		{ _field_byte_integer, "unknown" },
+		{ _field_real_argb_color, "local color a" },
+		{ _field_real_argb_color, "local color b" },
+		{ _field_real_argb_color, "local color c" },
+		{ _field_real_argb_color, "local color d" },
+		{ _field_real, "local scalar a" },
+		{ _field_real, "local scalar b" },
+		{ _field_real, "local scalar c" },
+		{ _field_real, "local scalar d" },
+		{ _field_enum, "output color a", &chdt_output_color_definition },
+		{ _field_enum, "output color b", &chdt_output_color_definition },
+		{ _field_enum, "output color c", &chdt_output_color_definition },
+		{ _field_enum, "output color d", &chdt_output_color_definition },
+		{ _field_enum, "output color e", &chdt_output_color_definition },
+		{ _field_enum, "output color f", &chdt_output_color_definition },
+		{ _field_enum, "output scalar a", &chdt_output_scalar_definition },
+		{ _field_enum, "output scalar b", &chdt_output_scalar_definition },
+		{ _field_enum, "output scalar c", &chdt_output_scalar_definition },
+		{ _field_enum, "output scalar d", &chdt_output_scalar_definition },
+		{ _field_enum, "output scalar e", &chdt_output_scalar_definition },
+		{ _field_enum, "output scalar f", &chdt_output_scalar_definition },
+		{ _field_long_integer, "unknown" },
+		{ _field_long_integer, "unknown" },
+		{ _field_short_integer, "unknown" },
+		{ _field_short_integer, "unknown" },
+		{ _field_terminator }
+	};
+	TAG_BLOCK(chdt_unknown_block, 65536)
+	{
+		{ _field_real, "unknown" },
+		{ _field_real, "unknown" },
+		{ _field_real, "unknown" },
+		{ _field_real, "unknown" },
+		{ _field_terminator }
+	};
+	TAG_BLOCK(chdt_datasource_block, 65536)
+	{
+		{ _field_byte_integer, "unknown" },
+		{ _field_byte_integer, "unknown" },
+		{ _field_byte_integer, "unknown" },
+		{ _field_byte_integer, "unknown" },
+		{ _field_short_integer, "unknown" },
+		{ _field_short_integer, "unknown" },
+		//{ undefined ooga booga, "unknown" },
+		//{ undefined ooga booga, "unknown" },
+		//{ undefined ooga booga, "unknown" },
+		{ _field_block, "unknown", &chdt_unknown_block_block },
+
+		{ _field_terminator }
+	};
+	TAG_BLOCK(chdt_bitmap_widgets_block, 65536)
+	{
+		{ _field_string_id, "name" },
+		{ _field_char_enum, "special hud type", &chdt_special_hud_type_definition },
+		{ _field_byte_integer, "unknown" },
+		{ _field_byte_integer, "unknown" },
+		{ _field_byte_integer, "unknown" },
+		{ _field_enum, "import input", &chdt_input_definition },
+		{ _field_enum, "import range input", &chdt_input_definition },
+		{ _field_tag_reference, "state data template", &chud_widget_state_data_reference },
+		{ _field_block, "state data", &chdt_state_data_block_block },
+		{ _field_tag_reference, "placement data template", &chud_widget_placement_data_reference },
+		{ _field_block, "placement data", &chdt_placement_data_block_block },
+		{ _field_tag_reference, "animation data template", &wadt_animation_reference },
+		{ _field_block, "animation data", &chdt_animation_data_block_block },
+		{ _field_tag_reference, "render data template", &chud_widget_render_data_reference },
+		{ _field_block, "render data", &chdt_render_data_block_block },
+		{ _field_long_flags, "flags", &chdt_flags_definition },
+		{ _field_tag_reference, "bitmap", &global_bitmap_reference },
+		{ _field_byte_integer, "bitmap sprite index" },
+		{ _field_byte_integer, "unknown" },
+		{ _field_byte_integer, "unknown" },
+		{ _field_byte_integer, "unknown" },
+		{ _field_rectangle_2d, "manual texture coordinates#this defines the visible rectangle for the bitmap if the bit of the same name is set. for ammo counters, l/r should be a multiple of 8, and t/b a multiple of 12." },
+		{ _field_terminator }
+	};
+	TAG_BLOCK(chdt_text_widgets_block, 65536)
+	{
+		{ _field_string_id, "name" },
+		{ _field_char_enum, "special hud type", &chdt_special_hud_type_definition },
+		{ _field_byte_integer, "unknown" },
+		{ _field_byte_integer, "unknown" },
+		{ _field_byte_integer, "unknown" },
+		{ _field_enum, "import input", &chdt_input_definition },
+		{ _field_enum, "import range input", &chdt_input_definition },
+		{ _field_tag_reference, "state data template", &chud_widget_state_data_reference },
+		{ _field_block, "state data", &chdt_state_data_block_block },
+		{ _field_tag_reference, "placement data template", &chud_widget_placement_data_reference },
+		{ _field_block, "placement data", &chdt_placement_data_block_block },
+		{ _field_tag_reference, "animation data template", &wadt_animation_reference },
+		{ _field_block, "animation data", &chdt_animation_data_block_block },
+		{ _field_tag_reference, "render data template", &chud_widget_render_data_reference },
+		{ _field_block, "render data", &chdt_render_data_block_block },
+		{ _field_word_flags, "flags", &chdt_flags_definition },
+		{ _field_enum, "font", &chdt_font_definition },
+		{ _field_explanation, "string", "This value can be anything from the hud_messages unicode tag, or one of the following, where a - f correspond to Output Scalars a - f in the Render Data block :"
+			"\nchud_out_a"
+			"\nchud_out_b"
+			"\nchud_out_c"
+			"\nchud_out_d"
+			"\nchud_out_e"
+			"\nchud_out_f"
+			"\nchud_variant_name"
+			"\nchud_variant_objective_variant"
+			"\nchud_variant_objective"
+			"\nchud_variant_objective_designator"
+			"\nchud_talking_player_name"
+			"\nchud_arming_meter_name"
+			"\nchud_time_left"
+			"\nchud_training_text"
+			"\nchud_nav_point"
+			"\nchud_scripted_objective_text"
+			"\nchud_scripted_chapter_title_text"
+			"\nchud_scripted_training_text"
+			"\nchud_campaign_objective_text"
+			"\nchud_ft_member_1_name"
+			"\nchud_ft_member_2_name"
+			"\nchud_ft_member_3_name"
+			"\nchud_ft_member_name"
+			"\nchud_ft_member_1_kill_count"
+			"\nchud_ft_member_2_kill_count"
+			"\nchud_ft_member_3_kill_count"
+			"\nchud_ft_member_kill_count"
+			"\nchud_campaign_ft_member_1_name"
+			"\nchud_campaign_ft_member_2_name"
+			"\nchud_campaign_ft_member_3_name"
+			"\nchud_campaign_ft_member_4_name"
+			"\nchud_campaign_ft_member_5_name"
+			"\nchud_campaign_ft_member_name"
+			"\nchud_campaign_ft_member_1_service_tag"
+			"\nchud_campaign_ft_member_2_service_tag"
+			"\nchud_campaign_ft_member_3_service_tag"
+			"\nchud_campaign_ft_member_4_service_tag"
+			"\nchud_campaign_ft_member_5_service_tag"
+			"\nchud_campaign_ft_member_service_tag"
+			"\nchud_megalo_datasource_omni_widget_label"
+			"\nchud_megalo_datasource_omni_widget_value"
+			"\nchud_megalo_progress_bar_label"
+			"\nchud_datasource_scripted_object_text"
+			"\nchud_datasource_tracked_target_text"
+			"\nchud_location_name"
+			"\nchud_commendation_callout_text"
+			"\nchud_datasource_progression_toast_text"
+			"\nchud_datasource_scripted_object_priority_text"
+			"\nchud_datasource_scripted_object_priority_description_text" },
+		{ _field_string_id, "string" },
+		{ _field_terminator }
+	};
+	TAG_BLOCK(chdt_hud_widgets_block, 65536)
+	{
+		{ _field_string_id, "name" },
+		{ _field_char_enum, "special hud type", &chdt_special_hud_type_definition },
+		{ _field_byte_integer, "unknown" },
+		{ _field_byte_integer, "unknown" },
+		{ _field_byte_integer, "unknown" },
+		{ _field_enum, "import input", &chdt_input_definition },
+		{ _field_enum, "import range input", &chdt_input_definition },
+		{ _field_tag_reference, "state data template", &chud_widget_state_data_reference },
+		{ _field_block, "state data", &chdt_state_data_block_block },
+		{ _field_tag_reference, "placement data template", &chud_widget_placement_data_reference },
+		{ _field_block, "placement data", &chdt_placement_data_block_block },
+		{ _field_tag_reference, "animation data template", &wadt_animation_reference },
+		{ _field_block, "animation data", &chdt_animation_data_block_block },
+		{ _field_tag_reference, "render data template", &chud_widget_render_data_reference },
+		{ _field_block, "render data", &chdt_render_data_block_block },
+		{ _field_tag_reference, "datasource template", &unknown_reference },
+		{ _field_block, "datasource", &chdt_datasource_block_block },
+		{ _field_block, "bitmap widgets", &chdt_bitmap_widgets_block_block },
+		{ _field_block, "text widgets", &chdt_text_widgets_block_block },
+		{ _field_long_integer, "unknown text addition" },
+		{ _field_short_integer, "unknown" },
+		{ _field_short_integer, "unknown" },
+		{ _field_short_integer, "unknown" },
+		{ _field_short_integer, "unknown" },
+		{ _field_char_enum, "second state-block starting value", &chdt_second_state_block_start_value_definition },
+		{ _field_byte_integer, "unknown" },
+		{ _field_byte_integer, "unknown" },
+		{ _field_byte_integer, "unknown" },
+		{ _field_word_flags, "input variable triggers", &chdt_input_variable_triggers_definition },
+		{ _field_explanation, "Compiled States (HUD Widgets)", "Uses this format:"
+		"\nStates(Yes, No) Count(\"Unknown\" States not used here!)"
+		"\n		Then for every States count :"
+		"\n-Triggers Count"
+		"\n		Then for every Triggers count :"
+		"\n-Trigger Index"
+		"\n		Repeats for both States blocks.Use a 0 if the block is null."
+		"\n		It is currently unknown what the criteria is for more than one \"X States\" index."
+		"\n		Check existing tags for examples, good luck."},
+		{ _field_short_integer, "0" },
+		{ _field_short_integer, "1" },
+		{ _field_short_integer, "2" },
+		{ _field_short_integer, "3" },
+		{ _field_short_integer, "4" },
+		{ _field_short_integer, "5" },
+		{ _field_short_integer, "6" },
+		{ _field_short_integer, "7" },
+		{ _field_short_integer, "8" },
+		{ _field_short_integer, "9" },
+		{ _field_short_integer, "10" },
+		{ _field_short_integer, "11" },
+		{ _field_short_integer, "12" },
+		{ _field_terminator }
+	};
+
+	TAG_GROUP_FROM_BLOCK(chud, CHUD_TAG, chud_block_block);
+	TAG_BLOCK_FROM_STRUCT(chud_block, 1, chud_struct_definition_struct_definition);
+	TAG_STRUCT(chud_struct_definition)
+	{
+		{ _field_explanation, "Reach HUDs Are Annoying", "The inputs are not defined where they were for Halo 3, but instead are in the \"Compiled Widget Data\" block at the bottom, along with the 3 blocks within \"State Data\"."
+			"...Unless the State Data block is part of HUD Widgets not Bitmap / Text Widgets, which THOSE states are defined at the bottom of the HUD Widgets block."
+			"There is no outright index for Compiled Widget Data so use the Import Inputs / States and counting(Bitmap and Text Widgets only!) to find it."
+			"Mapping the Trigger indexes will take time.There is a block at the bottom of CHGD with an unsorted list of triggers with a vague category, which has been sorted into a comment about the block."
+			"As for Placement Data, each index likely refers to each \"HUD Attributes\" index in CHGD to change depending on resolution." },
+		{ _field_explanation, "Render Data Shader Index", "While represented as an enum, it is actually an index to the \"HUD Shaders\" block in CHGD." },
+		{ _field_explanation, "Placement Anchor", "Only select \"Use Parent Widget\" for a Bitmap or Text Widget, otherwise the game will crash." },
+		{ _field_block, "hud widgets", & chdt_hud_widgets_block_block },
+		{ _field_long_integer, "low clip cutoff" },
+		{ _field_long_integer, "low ammo cutoff" },
+		{ _field_long_integer, "age cutoff" },
+		{ _field_long_integer, "sword age cutoff" },
+		{ _field_block, "compiled widget data", &chdt_compiled_widget_data_block_block },
+		{ _field_terminator }
+	};
+	TAG_REFERENCE(chud_reference, CHUD_TAG);
 
 	TAG_BLOCK(chgd_hud_sounds_block, 65536)
 	{
@@ -24,13 +362,6 @@ namespace blofeld
 		{ _field_real, "Scale" },
 		{ _field_terminator }
 	};
-
-	TAG_REFERENCE_GROUP(chgd_sound_reference, _tag_reference_flag_resolved_by_game)
-	{
-		SOUND_TAG,
-		INVALID_TAG,
-	};
-
 	TAG_BLOCK(chgd_hud_attributes_block, 65536)
 	{
 		{ _field_byte_flags, "resolution flags", &resolution_flags_definition },
@@ -105,7 +436,6 @@ namespace blofeld
 		{ _field_long_integer, "notification line count modifier" },
 		{ _field_terminator }
 	};
-
 	TAG_BLOCK(chgd_waypoint_blips_block, 65536)
 	{
 		{ _field_string_id, "title" },
@@ -117,7 +447,6 @@ namespace blofeld
 		{ _field_real_argb_color, "secondary color" },
 		{ _field_terminator }
 	};
-
 	TAG_BLOCK(chgd_hud_globals_block, 65536)
 	{
 		{ _field_long_enum, "biped", &biped_enum_definition },
@@ -238,14 +567,12 @@ namespace blofeld
 		{ _field_block, "waypoint blips", &chgd_waypoint_blips_block_block },
 		{ _field_terminator }
 	};
-
 	TAG_BLOCK(chgd_shaders_block, 65536)
 	{
 		{ _field_tag_reference, "vertex shader", & global_vertex_shader_reference },
 		{ _field_tag_reference, "pixel shader", &global_pixel_shader_reference },
 		{ _field_terminator }
 	};
-
 	TAG_BLOCK(chgd_unknown_block, 65536)
 	{
 		{ _field_real, "unknown" },
@@ -266,7 +593,6 @@ namespace blofeld
 		{ _field_real, "unknown" },
 		{ _field_terminator }
 	};
-
 	TAG_BLOCK(chgd_player_training_data_block, 65536)
 	{
 		{ _field_string_id, "Display String" },
@@ -279,15 +605,12 @@ namespace blofeld
 		{ _field_short_integer, "Unknown" },
 		{ _field_terminator }
 	};
-
 	TAG_BLOCK(chgd_state_triggers_block, 65536)
 	{
 		{ _field_long_integer, "trigger index" },
 		{ _field_string, "type" },
 		{ _field_terminator }
 	};
-
-	TAG_REFERENCE(unknown_reference);
 
 	TAG_GROUP_FROM_BLOCK(chud_globals, CHUD_GLOBALS_TAG, chgd_block_block);
 	TAG_BLOCK_FROM_STRUCT(chgd_block, 1, chgd_struct_definition_struct_definition);
@@ -1059,4 +1382,489 @@ namespace blofeld
 		"bit 15",
 	};
 	STRING_LIST(player_training_flags_definition, player_training_flags_definition_strings, _countof(player_training_flags_definition_strings));
+
+
+	STRINGS(chdt_special_hud_type_definition)
+	{
+		"unspecial",
+		"ammo",
+		"crosshair and scope",
+		"unit shield meter",
+		"grenades",
+		"gametype",
+		"motion sensor",
+		"unknown",
+		"m70_bonus",
+	};
+	STRING_LIST(chdt_special_hud_type_definition, chdt_special_hud_type_definition_strings, _countof(chdt_special_hud_type_definition_strings));
+
+	STRINGS(chdt_input_definition)
+	{
+		"zero",
+		"one",
+		"unknown 2",
+		"unknown 3",
+		"unknown 4",
+		"time",
+		"fade",
+		"unknown 7",
+		"unknown 8",
+		"unknown 9",
+		"unknown 10",
+		"unknown 11",
+		"unknown 12",
+		"unknown 13",
+		"unknown 14",
+		"unknown 15",
+		"unknown 16",
+		"unknown 17",
+		"unknown 18",
+		"unknown 19",
+		"unknown 20",
+		"saber unknown 1",
+		"vehicle health current percentage",
+		"unit health current",
+		"unit health",
+		"unit shield current",
+		"unit 1x overshield current",
+		"unit 2x overshield current",
+		"unit 2x overshield current",
+		"unit shield",
+		"unit 1x overshield",
+		"unit 2x overshield",
+		"unit 3x overshield",
+		"unit shield current percentage",
+		"vehicle shield current percentage",
+		"boost energy fraction",
+		"unknown 36",
+		"aim yaw",
+		"aim pitch",
+		"saber waypoint distance",
+		"sensor range",
+		"unit altitude 1",
+		"unit altitude 2",
+		"unknown 43",
+		"softkill timer",
+		"transient credits",
+		"unknown 46",
+		"clip ammo fraction",
+		"total ammo fraction",
+		"pickup",
+		"heat fraction",
+		"airstrike charge fraction",
+		"battery fraction",
+		"deprecated",
+		"unknown 54",
+		"weapon error",
+		"unknown weapon error",
+		"unit autoaimed",
+		"saber waypoint distance current",
+		"airstrike distance",
+		"nav point airstrike",
+		"airstrike ammo",
+		"unknown 62",
+		"unknown 63",
+		"grenade fraction",
+		"unknown 65",
+		"charge fraction",
+		"unknown 67",
+		"trigger cooldown",
+		"trigger remote detonate fraction",
+		"trigger locked on",
+		"target distance",
+		"target elevation",
+		"equipment energy fraction",
+		"unknown 74",
+		"unknown 75",
+		"unknown 76",
+		"unknown 77",
+		"unknown 78",
+		"unknown 79",
+		"medal commendation",
+		"generator health current",
+		"generator health",
+		"unknown 83",
+		"waypoint",
+		"unknown 85",
+		"unknown 86",
+		"waypoint onscreen",
+		"waypoint offscreen",
+		"gametype plate",
+		"offense defense",
+		"metagame time",
+		"metagame score transient",
+		"metagame score player 1",
+		"unknown 94",
+		"unknown 95",
+		"unknown 96",
+		"unknown 97",
+		"unknown 98",
+		"unknown 99",
+		"survival multiplier",
+		"metagame score negative",
+		"survival set",
+		"unknown 103",
+		"survival waves background",
+		"survival lives 1",
+		"survival lives 2",
+		"survival bonus timer",
+		"unknown 108",
+		"unknown 109",
+		"friendly score",
+		"enemy score",
+		"score to win",
+		"arming fraction",
+		"posession icon",
+		"arming unknown",
+		"omniwidget icon",
+		"unknown 117",
+		"fireteam health",
+		"unknown 119",
+		"unknown 120",
+		"unknown 121",
+		"fireteam current shield",
+		"unknown 123",
+		"unknown 124",
+		"fireteam 1 arming fraction",
+		"fireteam 2 arming fraction",
+		"unknown 127",
+		"fireteam 1 directional arrow",
+		"fireteam 2 directional arrow",
+		"unknown 130",
+		"unknown 131",
+		"unknown 132",
+		"unknown 133",
+		"unknown 134",
+		"unknown 135",
+		"unknown 136",
+		"unknown 137",
+		"editor budget",
+		"editor budget cost",
+		"film total time",
+		"film current time",
+		"deprecated",
+		"film timeline last marker fraction",
+		"film timeline fraction",
+		"unknown 145",
+		"deprecated",
+		"netdebug latency",
+		"netdebug latency quality",
+		"netdebug host quality",
+		"netdebug local quality",
+	};
+	STRING_LIST(chdt_input_definition, chdt_input_definition_strings, _countof(chdt_input_definition_strings));
+
+	STRINGS(chdt_flag_definition)
+	{
+		"input variable",
+	};
+	STRING_LIST(chdt_flag_definition, chdt_flag_definition_strings, _countof(chdt_flag_definition_strings));
+
+	STRINGS(chdt_unknown_definition)
+	{
+		"bit 0",
+		"bit 1",
+		"bit 2",
+		"bit 3",
+		"bit 4",
+		"bit 5",
+		"bit 6",
+		"bit 7",
+	};
+	STRING_LIST(chdt_unknown_definition, chdt_unknown_definition_strings, _countof(chdt_unknown_definition_strings));
+
+	STRINGS(chdt_anchor_definition)
+	{
+		"unknown",
+		"top, left",
+		"top, middle",
+		"top, right",
+		"center, middle",
+		"bottom, left",
+		"bottom, middle",
+		"bottom, right",
+		"motion sensor",
+		"crosshair a",
+		"ability",
+		"weapon left",
+		"weapon right",
+		"use parent widget",
+		"unknown",
+		"top, left b",
+		"unknown",
+		"crosshair b",
+		"top, left c",
+		"top, left d",
+		"top, left e",
+		"crosshair b",
+		"top, left f",
+		"unknown",
+		"top, left g",
+		"unknown",
+		"top, left f",
+		"score",
+		"score b",
+		"score c",
+		"score d",
+		"score e",
+		"score f",
+		"score g",
+		"unknown",
+		"unknown",
+		"unknown",
+		"unknown",
+		"unknown",
+		"unknown",
+	};
+	STRING_LIST(chdt_anchor_definition, chdt_anchor_definition_strings, _countof(chdt_anchor_definition_strings));
+
+	STRINGS(chdt_animation_function_definition)
+	{
+		"default",
+		"use input",
+		"use range input",
+		"zero",
+	};
+	STRING_LIST(chdt_animation_function_definition, chdt_animation_function_definition_strings, _countof(chdt_animation_function_definition_strings));
+
+	STRINGS(chdt_animation_flags_definition)
+	{
+		"reverse frames",
+	};
+	STRING_LIST(chdt_animation_flags_definition, chdt_animation_flags_definition_strings, _countof(chdt_animation_flags_definition_strings));
+
+	STRINGS(chdt_shader_index_definition)
+	{
+		"cheap",
+		"simple",
+		"meter",
+		"text simple",
+		"meter shield",
+		"meter gradient",
+		"crosshair",
+		"directional damage",
+		"solid",
+		"sensor",
+		"meter single color",
+		"navpoint",
+		"medal",
+		"texture cam",
+		"meter chapter",
+		"meter double gradient",
+		"meter radial gradient",
+		"turbulence",
+		"emblem",
+		"directional damage apply",
+		"damage tracker",
+	};
+	STRING_LIST(chdt_shader_index_definition, chdt_shader_index_definition_strings, _countof(chdt_shader_index_definition_strings));
+
+	STRINGS(chdt_output_color_definition)
+	{
+		"local a",
+		"local b",
+		"local c",
+		"local d",
+		"unknown 4",
+		"unknown 5",
+		"scoreboard friendly",
+		"scoreboard enemy",
+		"arming team",
+		"metagame player 1",
+		"metagame player 2",
+		"metagame player 3",
+		"metagame player 4",
+		"unknown 13",
+		"unknown 14",
+		"unknown 15",
+		"unknown 16",
+		"unknown 17",
+		"global dynamic 0",
+		"global dynamic 1",
+		"global dynamic 2",
+		"global dynamic 3",
+		"global dynamic 4",
+		"global dynamic 5",
+		"global dynamic 6",
+		"global dynamic 7",
+		"global dynamic 8",
+		"global dynamic 9",
+		"global dynamic 10",
+		"global dynamic 11",
+		"global dynamic 12",
+		"global dynamic 13",
+		"global dynamic 14",
+		"global dynamic 15",
+		"global dynamic 16",
+		"global dynamic 17",
+		"global dynamic 18",
+		"global dynamic 19",
+		"global dynamic 20",
+		"global dynamic 21",
+		"global dynamic 22",
+		"global dynamic 23",
+		"global dynamic 24",
+		"global dynamic 25",
+		"global dynamic 26",
+		"global dynamic 27",
+		"global dynamic 28",
+		"global dynamic 29",
+		"global dynamic 30",
+		"global dynamic 31",
+		"global dynamic 32",
+		"global dynamic 33",
+		"global dynamic 34",
+		"global dynamic 35",
+		"global dynamic 36",
+		"global dynamic 37",
+		"global dynamic 38",
+		"global dynamic 39",
+		"global dynamic 40",
+		"global dynamic 41",
+		"global dynamic 42",
+	};
+	STRING_LIST(chdt_output_color_definition, chdt_output_color_definition_strings, _countof(chdt_output_color_definition_strings));
+
+	STRINGS(chdt_output_scalar_definition)
+	{
+		"unknown 0",
+		"unknown 1",
+		"input",
+		"range input",
+		"local a",
+		"local b",
+		"local c",
+		"local d",
+		"unknown 8",
+		"unknown 9",
+	};
+	STRING_LIST(chdt_output_scalar_definition, chdt_output_scalar_definition_strings, _countof(chdt_output_scalar_definition_strings));
+
+	STRINGS(chdt_flags_definition)
+	{
+		"mirror horizontally",
+		"mirror vertically",
+		"stretch edges",
+		"bit 3",
+		"enable texture cam",
+		"looping",
+		"offset sprite index by biped type",
+		"offset sprite index by input",
+		"offset sprite index by range input",
+		"player 1 emblem",
+		"player 2 emblem",
+		"player 3 emblem",
+		"player 4 emblem",
+		"unknown alpha modifier",
+		"bit 14",
+		"unk bit 15",
+		"unk bit 16",
+		"unk bit 17",
+		"bit 18",
+		"unk persistent chud data1",
+		"unk persistent chud data2",
+		"unk persistent chud data3",
+		"unk persistent chud data4",
+		"manual texture coordinates",
+		"bit 24",
+		"bit 25",
+		"bit 26",
+		"bit 27",
+		"bit 28",
+		"bit 29",
+		"bit 30",
+		"bit 31",
+	};
+	STRING_LIST(chdt_flags_definition, chdt_flags_definition_strings, _countof(chdt_flags_definition_strings));
+
+	STRINGS(chdt_render_data_flags_definition)
+	{
+		"string is a number",
+		"force 2-digit",
+		"force 3-digit",
+		"'+' prefix",
+		"'m' suffix",
+		"tenths decimal",
+		"hundredths decimal",
+		"thousandths decimal",
+		"hundred thousandths decimal",
+		"round number (obsolete)",
+		"'x' suffix",
+		"in brackets",
+		"time format s:ms",
+		"time format h:m:s",
+		"money format",
+		"'-' prefix",
+	};
+	STRING_LIST(chdt_render_data_flags_definition, chdt_render_data_flags_definition_strings, _countof(chdt_render_data_flags_definition_strings));
+
+	STRINGS(chdt_font_definition)
+	{
+		"fixedsys, 9pt",
+		"tv nord condensed, 18pt",
+		"tv nord condensed, bold, 24pt",
+		"tv nord condensed, bold, 42pt",
+		"tv nord condensed, bold, 30pt",
+		"eurostile light demi, 13pt",
+		"tv nord hud, 15pt",
+		"tv nord condensed, 15pt",
+		"eurostile light demi, 18pt",
+		"tv nord condensed, 16pt",
+		"tv nord condensed, 17pt",
+	};
+	STRING_LIST(chdt_font_definition, chdt_font_definition_strings, _countof(chdt_font_definition_strings));
+
+	STRINGS(chdt_second_state_block_start_value_definition)
+	{
+		"value 0",
+		"value 1",
+		"value 2",
+		"value 3",
+		"value 4",
+		"value 5",
+		"value 6",
+		"value 7",
+		"value 8",
+		"value 9",
+		"value 10",
+		"value 11",
+		"value 12",
+	};
+	STRING_LIST(chdt_second_state_block_start_value_definition, chdt_second_state_block_start_value_definition_strings, _countof(chdt_second_state_block_start_value_definition_strings));
+
+	STRINGS(chdt_input_variable_triggers_definition)
+	{
+		"value 0",
+		"value 1",
+		"value 2",
+		"value 3",
+		"value 4",
+		"value 5",
+		"value 6",
+		"value 7",
+		"value 8",
+		"value 9",
+		"value 10",
+		"value 11",
+		"value 12",
+		"value 13",
+		"value 14",
+		"value 15",
+		"value 16",
+		"value 17",
+		"value 18",
+		"value 19",
+		"value 20",
+		"value 21",
+		"value 22",
+		"value 23",
+		"value 24",
+		"value 25",
+		"value 26",
+		"value 27",
+		"value 28",
+	};
+	STRING_LIST(chdt_input_variable_triggers_definition, chdt_input_variable_triggers_definition_strings, _countof(chdt_input_variable_triggers_definition_strings));
+
+
 }
