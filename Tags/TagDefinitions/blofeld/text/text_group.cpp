@@ -66,6 +66,7 @@ namespace blofeld
 
 		{ _field_version_less_or_equal, _engine_type_haloreach },
 		{ _field_long_integer, "unknown@" },
+		
 		{ _field_terminator }
 	};
 
