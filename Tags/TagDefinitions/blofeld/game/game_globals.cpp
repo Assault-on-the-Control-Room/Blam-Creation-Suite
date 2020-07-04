@@ -111,7 +111,7 @@ namespace blofeld
 		{ _field_tag_reference, "forge globals", &forge_globals_reference },
 
 		{ _field_version_less_or_equal, _engine_type_haloreach },
-	        { _field_block, "forge globals", &forge_color_block_block },
+		{ _field_block, "forge globals", &forge_color_block_block },
 
 		{ _field_tag_reference, "game engine globals", &game_engine_globals_reference },
 		{ _field_tag_reference, "multiplayer globals", &multiplayer_globals_reference },
