@@ -6,7 +6,26 @@ namespace blofeld
 	constexpr unsigned long CHUD_TAG = 'chdt';
 	constexpr unsigned long CHUD_GLOBALS_TAG = 'chgd';
 
+	extern s_tag_reference_definition unknown_reference;
+
 	extern s_tag_group chud_animation_group;
+	extern s_tag_struct_definition chad_struct_definition_struct_definition;
+	extern s_tag_block_definition chad_block_block;
+	extern s_tag_reference_definition chud_animation_reference;
+	extern s_tag_block_definition chad_size_block_block;
+	extern s_tag_block_definition chad_texture_coords_animation_block;
+	extern s_tag_block_definition chad_color_block_block;
+	extern s_tag_block_definition chad_position_animation_block_block;
+	extern s_tag_block_definition chad_alpha_animation_block_block;
+	extern s_tag_block_definition chad_rotation_animation_block_block;
+	extern s_tag_block_definition chad_ammo_counter_block_block;
+	extern s_tag_block_definition chad_color_animation_block_block;
+	extern s_tag_block_definition chad_ammo_counter_boot_block_block;
+	extern s_tag_block_definition chad_size_animation_block_block;
+	extern s_tag_block_definition chad_position_block_block;
+	extern s_tag_block_definition chad_rotation_block_block;
+	extern s_tag_block_definition chad_alpha_block_block;
+	extern s_tag_block_definition chad_texture_coords_block_block;
 
 	extern s_tag_group chud_group;
 	extern s_tag_struct_definition chud_struct_definition_struct_definition;
@@ -37,8 +56,6 @@ namespace blofeld
 	extern s_tag_block_definition chgd_unknown_block_block;
 	extern s_tag_block_definition chgd_player_training_data_block_block;
 	extern s_tag_block_definition chgd_state_triggers_block_block;
-
-	extern s_tag_reference_definition unknown_reference;
 
 	extern c_versioned_string_list biped_enum_definition_strings;
 	extern s_string_list_definition biped_enum_definition;
@@ -82,8 +99,8 @@ namespace blofeld
 	extern c_versioned_string_list chdt_input_variable_triggers_definition_strings;
 	extern s_string_list_definition chdt_input_variable_triggers_definition;
 
-	extern s_tag_reference_definition chud_animation_reference;
-	extern s_tag_reference_definition chud_reference;
+	extern c_versioned_string_list chad_flags_definition_strings;
+	extern s_string_list_definition chad_flags_definition;
 
 }
 

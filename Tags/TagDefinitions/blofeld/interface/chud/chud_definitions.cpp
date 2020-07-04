@@ -5,12 +5,121 @@ namespace blofeld
 {
 	TAG_REFERENCE(unknown_reference);
 
-	TAG_REFERENCE(chud_animation_reference, CHUD_ANIMATION_TAG);
-
-	TAG_GROUP(chud_animation, CHUD_ANIMATION_TAG)
+	TAG_BLOCK(chad_size_block, 65536)
 	{
+		{ _field_block, "animation", &chad_size_animation_block_block },
+		{ _field_data, "unknown" },
 		{ _field_terminator }
 	};
+	TAG_BLOCK(chad_texture_coords_animation_block, 65536)
+	{
+		{ _field_real, "frame number" },
+		{ _field_real, "movement 1 x" },
+		{ _field_real, "movement 1 y" },
+		{ _field_real, "movement 2 x" },
+		{ _field_real, "movement 2 y" },
+		{ _field_terminator }
+	};
+	TAG_BLOCK(chad_color_block, 65536)
+	{
+		{ _field_block, "animation", &chad_color_animation_block_block },
+		{ _field_data, "function" },
+		{ _field_terminator }
+	};
+	TAG_BLOCK(chad_position_animation_block, 65536)
+	{
+		{ _field_real, "frame number" },
+		{ _field_real, "position x" },
+		{ _field_real, "position y" },
+		{ _field_real, "position z" },
+		{ _field_terminator }
+	};
+	TAG_BLOCK(chad_alpha_animation_block, 65536)
+	{
+		{ _field_real, "frame number" },
+		{ _field_real, "alpha" },
+		{ _field_terminator }
+	};
+	TAG_BLOCK(chad_rotation_animation_block, 65536)
+	{
+		{ _field_real, "frame number" },
+		{ _field_angle, "x angle" },
+		{ _field_angle, "y angle" },
+		{ _field_angle, "z angle" },
+		{ _field_terminator }
+	};
+	TAG_BLOCK(chad_ammo_counter_block, 65536)
+	{
+		{ _field_real, "frame number" },
+		{ _field_real, "boot progress fraction" },
+		{ _field_terminator }
+	};
+	TAG_BLOCK(chad_color_animation_block, 65536)
+	{
+		{ _field_real, "frame number" },
+		{ _field_terminator }
+	};
+	TAG_BLOCK(chad_ammo_counter_boot_block, 65536)
+	{
+		{ _field_block, "ammo counter", &chad_ammo_counter_block_block },
+		{ _field_data, "function" },
+		{ _field_terminator }
+	};
+	TAG_BLOCK(chad_size_animation_block, 65536)
+	{
+		{ _field_real, "frame number" },
+		{ _field_real, "stretch x" },
+		{ _field_real, "stretch y" },
+		{ _field_terminator }
+	};
+	TAG_BLOCK(chad_position_block, 65536)
+	{
+		{ _field_block, "animation", &chad_position_animation_block_block },
+		{ _field_data, "function" },
+		{ _field_terminator }
+	};
+	TAG_BLOCK(chad_rotation_block, 65536)
+	{
+		{ _field_block, "animation", &chad_rotation_animation_block_block },
+		{ _field_data, "function" },
+		{ _field_terminator }
+	};
+	TAG_BLOCK(chad_alpha_block, 65536)
+	{
+		{ _field_block, "animation", &chad_alpha_animation_block_block },
+		{ _field_data, "function" },
+		{ _field_terminator }
+	};
+	TAG_BLOCK(chad_texture_coords_block, 65536)
+	{
+		{ _field_block, "animation", &chad_texture_coords_animation_block_block },
+		{ _field_data, "function" },
+		{ _field_terminator }
+	};
+
+	TAG_GROUP_FROM_BLOCK(chud_animation, CHUD_ANIMATION_TAG, chad_block_block);
+	TAG_BLOCK_FROM_STRUCT(chad_block, 1, chad_struct_definition_struct_definition)
+	TAG_STRUCT(chad_struct_definition)
+	{
+		{ _field_byte_flags, "flags", &chad_flags_definition },
+		{ _field_byte_integer, "unknown" },
+		{ _field_short_integer, "unknown" },
+		{ _field_block, "position", &chad_position_block_block },
+		{ _field_block, "rotation", &chad_rotation_block_block },
+		{ _field_block, "size", &chad_size_block_block },
+		{ _field_block, "color", &chad_color_block_block },
+		{ _field_block, "alpha", &chad_alpha_block_block },
+		{ _field_block, "alpha unknown", &chad_alpha_block_block },
+		{ _field_block, "texture coordinates", &chad_texture_coords_block_block },
+		{ _field_block, "ammo counter boot", &chad_ammo_counter_boot_block_block },
+		{ _field_long_integer, "unknown animation block" },
+		{ _field_long_integer, "unknown animation block" },
+		{ _field_long_integer, "unknown animation block" },
+		{ _field_real, "number of frames" },
+		{ _field_terminator }
+	};
+	TAG_REFERENCE(chud_animation_reference, CHUD_ANIMATION_TAG);
+
 
 	TAG_BLOCK(chdt_compiled_widget_data_block, 65536)
 	{
@@ -354,6 +463,7 @@ namespace blofeld
 		{ _field_terminator }
 	};
 	TAG_REFERENCE(chud_reference, CHUD_TAG);
+
 
 	TAG_BLOCK(chgd_hud_sounds_block, 65536)
 	{
@@ -1286,6 +1396,7 @@ namespace blofeld
 	};
 	TAG_REFERENCE(chud_globals_reference, CHUD_GLOBALS_TAG);
 
+
 	STRINGS(biped_enum_definition)
 	{
 		"spartan",
@@ -1382,7 +1493,6 @@ namespace blofeld
 		"bit 15",
 	};
 	STRING_LIST(player_training_flags_definition, player_training_flags_definition_strings, _countof(player_training_flags_definition_strings));
-
 
 	STRINGS(chdt_special_hud_type_definition)
 	{
@@ -1866,5 +1976,16 @@ namespace blofeld
 	};
 	STRING_LIST(chdt_input_variable_triggers_definition, chdt_input_variable_triggers_definition_strings, _countof(chdt_input_variable_triggers_definition_strings));
 
-
+	STRINGS(chad_flags_definition)
+	{
+		"bit 0",
+		"loops",
+		"loops - oscillate",
+		"bit 3",
+		"bit 4",
+		"bit 5",
+		"bit 6",
+		"bit 7",
+	};
+	STRING_LIST(chad_flags_definition, chad_flags_definition_strings, _countof(chad_flags_definition_strings));
 }
