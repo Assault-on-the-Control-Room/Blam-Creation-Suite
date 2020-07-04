@@ -395,7 +395,6 @@ namespace blofeld
 			{ _engine_type_halo3, 4 },
 			{ _engine_type_halo3odst, 4 },
 			{ _engine_type_haloreach, 2 }, 
-			{ _engine_type_gen3_xbox360, 2 },
 		}
 	};
 	c_constant k_button_presets_count = { "k_button_presets_count", 7 };
