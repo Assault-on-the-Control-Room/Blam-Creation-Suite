@@ -445,6 +445,13 @@ namespace blofeld
 	STRINGS(model_variant_permutation_flags_definition)
 	{
 		{
+			_engine_type_not_set,
+				_versioned_string_list_mode_new,
+			{
+				"copy states to all permutations"
+			}
+		},
+		{
 			_engine_type_gen3_xbox360,
 			_versioned_string_list_mode_new,
 			{
