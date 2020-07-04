@@ -189,15 +189,22 @@ namespace blofeld
 	{
 		{ _field_tag_reference, "sound classes", &sound_classes_reference },
 		{ _field_tag_reference, "sound effects", &global_sound_effect_collection_reference },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_tag_reference, "sound mastering", &sound_mix_reference },
+
 		{ _field_tag_reference, "sound mix", &sound_mix_reference },
 		{ _field_tag_reference, "sound combat dialogue constants", &sound_dialogue_constants_reference },
 		{ _field_tag_reference, "sound propagation", &sound_global_propagation_reference },
+		
+		{ _field_version_greater, _engine_type_haloreach, 6 },
 		{ _field_tag_reference, "Init sound bank#Init sound bank for WWise.", &global_soundbank_reference },
 		{ _field_tag_reference, "Global sound bank#Global sound bank for WWise.", &global_soundbank_reference },
 		{ _field_tag_reference, "Extra sound bank#The other sound bank for WWise.", &global_soundbank_reference },
 		{ _field_tag_reference, "Campaign sound bank#Extra sound bank for WWise - only loaded for Campaign.", &global_soundbank_reference },
 		{ _field_tag_reference, "Multiplayer sound bank#Extra sound bank for WWise - only loaded for MP - PVP.", &global_soundbank_reference },
 		{ _field_block, "Streaming pack files", &StreamingPackBlock_block },
+
 		{ _field_block, "un-spatialized campaign sounds", &campaign_unspatialized_sounds_block_block },
 		{ _field_terminator }
 	};

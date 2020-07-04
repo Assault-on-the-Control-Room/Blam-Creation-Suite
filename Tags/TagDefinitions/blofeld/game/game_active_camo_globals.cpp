@@ -22,12 +22,15 @@ namespace blofeld
 		{ _field_struct, "camo value to distortion", &scalar_function_named_struct_struct_definition },
 		{ _field_struct, "camo value to transparency#maps active-camo percentage to alpha for THIRD PERSON rendering", &scalar_function_named_struct_struct_definition },
 		{ _field_struct, "camo value to fp transparency#maps active-camo percentage to alpha for FIRST PERSON rendering", &scalar_function_named_struct_struct_definition },
+		
+		{ _field_version_greater, _engine_type_haloreach, 6 },
 		{ _field_struct, "camo distortion texture strength", &scalar_function_named_struct_struct_definition },
 		{ _field_real_vector_2d, "camo distortion scale" },
 		{ _field_real_vector_2d, "camo distortion translate speed" },
 		{ _field_tag_reference, "camo distortion texture", &Tag::Reference<struct bitmap_group>::s_defaultDefinition },
 		{ _field_real, "camo depth bias max distance#This is used to deal with ugly rendering artifacts when camo is not fully on" },
 		{ _field_struct, "camo depth bias function#This is used to deal with ugly rendering artifacts when camo is not fully on", &scalar_function_named_struct_struct_definition },
+		
 		{ _field_block, "camo levels", &active_camo_level_definition_block_block },
 		{ _field_terminator }
 	};

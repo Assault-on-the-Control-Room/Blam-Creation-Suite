@@ -27,6 +27,9 @@ namespace blofeld
 	extern s_tag_block_definition globals_block_block;
 	extern s_tag_block_definition patch_globals_block_block;
 
+	extern s_tag_struct_definition grenade_globals_block_block_struct;
+	extern s_tag_block_definition grenade_globals_block_block;
+
 	extern s_tag_struct_definition globals_struct_definition_struct_definition; // tag group
 	extern s_tag_struct_definition elite_specular_color_struct_struct_definition;
 	extern s_tag_struct_definition patch_globals_struct_definition_struct_definition; // tag group

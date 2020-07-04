@@ -37,7 +37,9 @@ namespace blofeld
 
 	TAG_BLOCK(player_control_block, 1)
 	{
-		{ _field_block, "controller button mappings", &controller_mapping_reference_block_block },
+		{ _field_version_greater, _engine_type_haloreach, 1 },
+        { _field_block, "controller button mappings", &controller_mapping_reference_block_block },
+
 		{ _field_block, "move stick info", &gamepad_stick_info_block_block },
 		{ _field_block, "look stick info", &gamepad_stick_info_block_block },
 		{ _field_real_fraction, "magnetism friction#how much the crosshair slows over enemies" },
@@ -45,7 +47,12 @@ namespace blofeld
 		{ _field_real_fraction, "inconsequential target scale#scales magnetism level for inconsequential targets like infection forms" },
 		{ _field_explanation, "crosshair", "" },
 		{ _field_real_point_2d, "crosshair location#-1..1, 0 is middle of the screen" },
-		{ _field_explanation, "fireteam", "" },
+		
+        { _field_version_less_or_equal, _engine_type_haloreach, 2 },
+		{ _field_real, "unknown@" },
+		{ _field_real, "unknown@" },
+
+        { _field_explanation, "fireteam", "" },
 		{ _field_real, "fireteam command mode duration:seconds#How long is command mode on after you initially attempt to issue an order" },
 		{ _field_explanation, "looking", "" },
 		{ _field_real, "look autolevelling scale#1 is fast, 0 is none, >1 will probably be really fast" },
@@ -57,8 +64,11 @@ namespace blofeld
 		{ _field_real, "minimum action hold time:seconds#time that player needs to press ACTION to register as a HOLD" },
 		{ _field_real, "minimum action hold time for teammates:seconds#teammates of player who dropped/spawned weapon" },
 		{ _field_real, "minimum action hold time for opponents:seconds#opponents of player who dropped/spawned weapon" },
-		{ _field_real, "pegged zoom supression threshold#for spinny-shotgun goodness" },
-		{ _field_explanation, "double/triple jump", "" },
+		
+        { _field_version_greater, _engine_type_haloreach, 1 },
+        { _field_real, "pegged zoom supression threshold#for spinny-shotgun goodness" },
+		
+        { _field_explanation, "double/triple jump", "" },
 		{ _field_real, "minimum vertical velocity:wu/s" },
 		{ _field_real, "cooldown time:seconds" },
 		{ _field_real_vector_2d, "double jump velocity:horizontal, vertical" },
@@ -73,7 +83,9 @@ namespace blofeld
 		{ _field_real, "flick peg jump max time:s#max time you can be pegged and then press jump to activate" },
 		{ _field_real, "double tap interval time:s#to engage double-tap, user must press jump twice in this much time" },
 		{ _field_explanation, "Jump Assist", "" },
-		{ _field_real, "vault_speed_gain" },
+
+		{ _field_version_greater, _engine_type_haloreach, 54 },
+        { _field_real, "vault_speed_gain" },
 		{ _field_real, "vaultSprint_speed_gain" },
 		{ _field_real, "vault_height_high" },
 		{ _field_real, "vaultSprint_height_high" },
@@ -127,7 +139,8 @@ namespace blofeld
 		{ _field_real, "Vault_AutoCorrect_MaxAngle" },
 		{ _field_real, "Vault ideal distance#When several via vault targets are found, vaults closer to this distance are more likely to be chosen" },
 		{ _field_real, "Vault Sprint ideal distance#When several via vault targets are found, vaults closer to this distance are more likely to be chosen" },
-		{ _field_terminator }
+		
+        { _field_terminator }
 	};
 
 	STRINGS(input_mapping_shape_enum)

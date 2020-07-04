@@ -387,6 +387,17 @@ namespace blofeld
 	c_constant k_maximum_streaming_packs = { "k_maximum_streaming_packs", 20 };
 	c_constant k_maximum_campaign_unspatialized_sounds = { "k_maximum_campaign_unspatialized_sounds", 64 };
 	c_constant k_maximum_material_types = { "k_maximum_material_types", 512 };
+	c_constant k_grenade_globals_count =
+	{
+		"k_grenade_globals_count",
+		{
+			{ _engine_type_not_set, 2 },
+			{ _engine_type_halo3, 4 },
+			{ _engine_type_halo3odst, 4 },
+			{ _engine_type_haloreach, 2 }, 
+			{ _engine_type_gen3_xbox360, 2 },
+		}
+	};
 	c_constant k_button_presets_count = { "k_button_presets_count", 7 };
 	c_constant k_player_character_type_count = { "k_player_character_type_count", 3 };
 	c_constant k_player_momentum_count = { "k_player_momentum_count", 2 };

@@ -31,7 +31,10 @@ namespace blofeld
 		{ _field_tag_reference, "soft landing damage", &global_damage_reference },
 		{ _field_tag_reference, "hard landing damage", &global_damage_reference },
 		{ _field_tag_reference, "hs damage", &global_damage_reference },
+		
+		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_tag_reference, "hs fire damage", &global_damage_reference },
+
 		{ _field_real, "terminal velocity:wu/s#you die if you fall faster than this (non-multiplayer only)" },
 		{ _field_tag_reference, "terminal velocity damage{distance damage}", &global_damage_reference },
 		{ _field_tag_reference, "default damage response{damage response}#fall back if none is specified in damage effect tags", &global_damage_response_definition_reference },

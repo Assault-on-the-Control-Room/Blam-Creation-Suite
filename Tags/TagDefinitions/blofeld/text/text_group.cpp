@@ -63,6 +63,9 @@ namespace blofeld
 		{ _field_array, "string reference checksum!", &data_hash_definition_array },
 		{ _field_array, "string data checksum!", &data_hash_definition_array },
 		{ _field_long_integer, "data loaded boolean~!" },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_long_integer, "unknown@" },
 		{ _field_terminator }
 	};
 

@@ -74,8 +74,10 @@ namespace blofeld
 		{ _field_block, "DEPRECATED{ai globals}*!", &ai_globals_data_block_block },
 		{ _field_tag_reference, "ai globals ref", &ai_globals_reference },
 		{ _field_block, "damage table", &game_globals_damage_block_block },
-		{ _field_version_equal, _engine_type_haloreach },
+		
+        { _field_version_equal, _engine_type_haloreach },
 		{ _field_tag_reference, "unknown@", &haloreach_unknown_globals_reference },
+
 		{ _field_block, "sounds", &sound_block_block },
 		{ _field_block, "camera", &camera_block_block },
 		{ _field_block, "controller input", &controller_input_block_block },
@@ -83,7 +85,12 @@ namespace blofeld
 		{ _field_block, "default player traits", &game_engine_player_traits_block_block },
 		{ _field_block, "difficulty", &difficulty_block_block },
 		{ _field_block, "co-op difficulty", &coop_difficulty_block_block },
-		{ _field_block, "soft ceilings", &soft_ceiling_globals_block_block },
+		{ _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_block, "grenades", &grenade_globals_block_block },
+
+        { _field_version_less_or_equal, _engine_type_haloreach },// probably an unused tagblock
+        { _field_block, "soft ceilings", &soft_ceiling_globals_block_block },
+        { _field_pad, "pad", 4 * 3 },
 		{ _field_block, "interface tags", &interface_tag_references_block },
 		{ _field_block, "@weapon list (update _weapon_list enum in game_globals.h)", &cheat_weapons_block_block },
 		{ _field_block, "@cheat powerups", &cheat_powerups_block_block },
@@ -98,16 +105,28 @@ namespace blofeld
 		{ _field_custom, "Elite specular colors" },
 		{ _field_struct, "elite specular color", &elite_specular_color_struct_struct_definition },
 		{ _field_custom },
+
+		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_tag_reference, "forge globals", &forge_globals_reference },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach },
+	    { _field_block, "forge globals", &forge_color_block_block },
+
 		{ _field_tag_reference, "game engine globals", &game_engine_globals_reference },
 		{ _field_tag_reference, "multiplayer globals", &multiplayer_globals_reference },
 		{ _field_tag_reference, "survival_mode globals", &survival_mode_globals_reference },
+		
+		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_tag_reference, "firefight globals", &firefight_globals_reference },
+
 		{ _field_tag_reference, "global multiplayer object type list", &global_multiplayer_object_type_list_reference },
+
+		{ _field_version_greater, _engine_type_haloreach, 4 },
 		{ _field_tag_reference, "custom app globals", &global_custom_app_globals_reference },
 		{ _field_tag_reference, "grenades", &Tag::Reference<struct GameGlobalsGrenadeList>::s_defaultDefinition },
 		{ _field_tag_reference, "ordnances", &Tag::Reference<struct GameGlobalsOrdnance>::s_defaultDefinition },
 		{ _field_tag_reference, "silent assist", &Tag::Reference<struct SilentAssistGlobals>::s_defaultDefinition },
+
 		{ _field_block, "cinematics globals", &cinematics_globals_block_block },
 		{ _field_block, "campaign metagame globals", &campaign_metagame_globals_block_block },
 		{ _field_tag_reference, "game medal globals", &game_medal_globals_reference },
@@ -123,11 +142,14 @@ namespace blofeld
 		{ _field_struct, "language pack10!", &language_pack_definition_struct_definition },
 		{ _field_struct, "language pack11!", &language_pack_definition_struct_definition },
 		{ _field_struct, "language pack12!", &language_pack_definition_struct_definition },
+
+		{ _field_version_greater, _engine_type_haloreach, 5 },
 		{ _field_struct, "language pack13!", &language_pack_definition_struct_definition },
 		{ _field_struct, "language pack14!", &language_pack_definition_struct_definition },
 		{ _field_struct, "language pack15!", &language_pack_definition_struct_definition },
 		{ _field_struct, "language pack16!", &language_pack_definition_struct_definition },
 		{ _field_struct, "language pack17!", &language_pack_definition_struct_definition },
+
 		{ _field_explanation, "Rasterizer globals", "" },
 		{ _field_tag_reference, "rasterizer_globals_ref", &global_rasterizer_globals_reference },
 		{ _field_explanation, "Default camera fx settings", "" },
@@ -150,7 +172,10 @@ namespace blofeld
 		{ _field_block, "active camo", &active_camo_globals_block_block },
 		{ _field_tag_reference, "incident global properties", &incident_global_properties_definition_reference },
 		{ _field_tag_reference, "player grade globals", &player_grade_globals_definition_reference },
+
+		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_tag_reference, "enlistment globals", &player_enlistment_globals_definition_reference },
+
 		{ _field_tag_reference, "player model customization globals", &global_player_model_customization_globals_reference },
 		{ _field_tag_reference, "loadout globals", &global_loadout_globals_reference },
 		{ _field_tag_reference, "challenge globals", &challenge_globals_definition_reference },
@@ -158,13 +183,22 @@ namespace blofeld
 		{ _field_tag_reference, "game achievements", &achievements_reference },
 		{ _field_tag_reference, "game avatar awards", &avatar_awards_reference },
 		{ _field_tag_reference, "game performance thortles default", &game_performance_throttle_reference },
+
+		{ _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_tag_reference, "armormod globals", &armormod_globals_reference },
 		{ _field_tag_reference, "progression globals", &global_progression_reference },
+
 		{ _field_block, "garbage collection", &garbage_collection_block_block },
 		{ _field_block, "camera impulse", &global_camera_impulse_block_block },
 		{ _field_block, "runtime materials*!", &runtime_materials_block_block },
+
+		{ _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_block, "Hologram Lighting", &hologramLightingGlobalsBlock_block },
 		{ _field_tag_reference, "Narrative globals", &NarrativeGlobalsReference },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_long_integer, "unknown@" },
+
 		{ _field_terminator }
 	};
 
@@ -218,6 +252,17 @@ namespace blofeld
 		"norwegian"
 	};
 	STRING_LIST(language_enum, language_enum_strings, _countof(language_enum_strings));
+
+	TAG_BLOCK(grenade_globals_block, k_grenade_globals_count)
+	{
+		{ _field_short_integer, "maximum count" },
+		{ _field_pad, "pad@", 2 },
+		{ _field_real, "unknown" },
+		{ _field_tag_reference, "throwing effect", &global_effect_reference },
+		{ _field_tag_reference, "equipment", &global_equipment_reference },
+		{ _field_tag_reference, "projectile", &projectile_reference },
+		{ _field_terminator }
+	};
 
 } // namespace blofeld
 

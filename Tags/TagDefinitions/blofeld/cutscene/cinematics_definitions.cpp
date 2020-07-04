@@ -443,7 +443,15 @@ namespace blofeld
 		{ _field_real_fraction_bounds, "subtitle rect height#0=default, 0.5=center of the screen" },
 		{ _field_real_rgb_color, "default subtitle color" },
 		{ _field_real_rgb_color, "default subtitle shadow color" },
+
+		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_block, "cinematic characters", &cinematic_characters_block_block },
+
+		{ _field_version_less_or_equal, _engine_type_haloreach, 3 }, // possibly cinematic characters but unused
+		{ _field_long_integer, "unknown@" },
+		{ _field_long_integer, "unknown@" },
+		{ _field_long_integer, "unknown@" },
+
 		{ _field_terminator }
 	};
 
