@@ -85,6 +85,7 @@ namespace blofeld
 		{ _field_block, "default player traits", &game_engine_player_traits_block_block },
 		{ _field_block, "difficulty", &difficulty_block_block },
 		{ _field_block, "co-op difficulty", &coop_difficulty_block_block },
+		
 		{ _field_version_less_or_equal, _engine_type_haloreach },
 		{ _field_block, "grenades", &grenade_globals_block_block },
 
