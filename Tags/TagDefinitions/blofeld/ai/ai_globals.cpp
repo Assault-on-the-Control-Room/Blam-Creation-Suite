@@ -172,7 +172,7 @@ namespace blofeld
 		{ _field_block, "performance template folders", &ai_globals_performance_template_folder_block_block },
 		
 		{ _field_version_greater, _engine_type_haloreach, 2 },
-        { _field_block, "custom stimuli", &ai_globals_custom_stimuli_block_block },
+		{ _field_block, "custom stimuli", &ai_globals_custom_stimuli_block_block },
 		{ _field_block, "cue templates", &ai_cue_template_block_block },
 
 		{ _field_explanation, "CLUMP THROTTLING", "Some values to help you control how much guys will throttle when they want to stick with the rest of their squad." },

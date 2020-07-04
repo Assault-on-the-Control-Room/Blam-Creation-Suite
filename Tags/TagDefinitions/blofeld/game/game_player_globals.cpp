@@ -13,7 +13,7 @@ namespace blofeld
 		{ _field_real, "decay rate#how fast being unpegged decays the timer (seconds per second)" },
 		{ _field_real, "full speed multiplier#how much faster we actually go when at full momentum" },
 		{ _field_real, "sprint turn multiplier#how much faster to turn when sprinting" },
-            
+		    
 		{ _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_real, "pegged magnitude#how far the stick needs to be pressed before being considered pegged" },
 		{ _field_real, "pegged angular threshold#how far off straight up (in degrees) we consider pegged" },
@@ -24,8 +24,8 @@ namespace blofeld
 		{ _field_real, "look window length:seconds#period of time over which we record the biped\'s look angle for deciding if we should drop him out of momentum" },
 		{ _field_string_id, "momentum animation stance" },
 		
-        { _field_version_greater, _engine_type_haloreach },
-        { _field_real, "min weapon error#[0, 1] while using this type of momentum, the player\'s weapon error cannot drop below this value" },
+		{ _field_version_greater, _engine_type_haloreach },
+		{ _field_real, "min weapon error#[0, 1] while using this type of momentum, the player\'s weapon error cannot drop below this value" },
 
 		{ _field_terminator }
 	};
@@ -73,7 +73,7 @@ namespace blofeld
 		{ _field_long_integer, "unknown@" },
 		{ _field_struct, "momentum and sprinting", &player_momentum_data_block_block_struct }, // H4 moved to a tagblock
 
-        { _field_terminator }
+		{ _field_terminator }
 	};
 
 	TAG_BLOCK(firstPersonpHiddenBodyRegionsBlock, 32)
