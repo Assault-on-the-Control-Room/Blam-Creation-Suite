@@ -71,7 +71,7 @@ void c_blofeld_tag_debugger_tab::render_field_scalar_type(ImGuiDataType data_typ
 		}
 	}
 
-	c_field_formatter formatter = c_field_formatter(&field, field.name, nullptr);
+	c_field_formatter formatter = c_field_formatter(&field, nullptr);
 
 	const ImGuiDataTypeInfo* info = ImGui::DataTypeGetInfo(data_type);
 	ImGui::BeginGroup();
@@ -371,8 +371,9 @@ void c_blofeld_tag_debugger_tab::render_field_real_argb_color(render_field_callb
 	if (&tag_interface != &this->tag_interface) return;
 	ImGui::Dummy({ result->level * indent_size, 0.0f });
 	ImGui::SameLine();
-	float* color = reinterpret_cast<float*>(data);
-	ImGui::ColorEdit4("", color, ImGuiColorEditFlags_Float);
+	float* raw_color = reinterpret_cast<float*>(data);
+	float swizzled_color[4] = { raw_color[1], raw_color[2], raw_color[3], raw_color[0] };
+	ImGui::ColorEdit4("", swizzled_color, ImGuiColorEditFlags_Float);
 	render_field_name_and_information(field, result);
 }
 void c_blofeld_tag_debugger_tab::render_field_real_hsv_color(render_field_callback_args)
@@ -639,7 +640,7 @@ void c_blofeld_tag_debugger_tab::render_field_pointer(render_field_callback_args
 	case 4:
 		render_field_scalar_type(ImGuiDataType_U32, 1, result->level, data, field, result, true, "0x%X");
 		break;
-	default: 
+	default:
 		ImGui::Text("ERROR: Unknown pointer size %u", pointer_size);
 		break;
 	}
@@ -768,89 +769,6 @@ void c_blofeld_tag_debugger_tab::render_impl()
 		finish_pos.x = start_pos.x;
 		ImGui::SetCursorScreenPos(finish_pos);
 	}
-
-	{
-		float header_height = line_height * 1.75f;
-
-		ImVec2 start_pos = ImGui::GetCursorScreenPos();
-		ImVec2 finish_pos = start_pos;
-		finish_pos.x += ImGui::GetContentRegionAvailWidth();
-		finish_pos.y += header_height;
-		draw_list->AddRectFilled(start_pos, finish_pos, ImGui::ColorConvertFloat4ToU32(MANDRILL_THEME_MENU(0.5f)));
-
-		ImVec2 text_pos = start_pos;
-		text_pos.x += 10.0f;
-		text_pos.y += (header_height - line_height) / 2.0f;
-		ImGui::SetCursorScreenPos(text_pos);
-
-		{
-			ImGui::Text("User view:");
-			ImGui::SameLine();
-			ImGui::SetNextItemWidth(250.0f);
-			if (ImGui::BeginCombo("##userview", "<All>"))
-			{
-				ImGui::EndCombo();
-			}
-			ImGui::SameLine();
-			ImGui::Button("...");
-		}
-
-		float field_search_width = ImGui::CalcTextSize("#").x * 30.0f;
-		ImVec2 search_pos = text_pos;
-		{
-			float content_width = 0.0f;
-			content_width += ImGui::CalcTextSize("search fields").x + ImGui::GetStyle().ItemSpacing.x; // "search fields"
-			content_width += field_search_width + ImGui::GetStyle().ItemSpacing.x; // "text input"
-			content_width += ImGui::CalcTextSize(ICON_FA_ARROW_LEFT).x + ImGui::GetStyle().FramePadding.x * 2.0f + ImGui::GetStyle().ItemSpacing.x; // "button1"
-			content_width += ImGui::CalcTextSize(ICON_FA_ARROW_RIGHT).x + ImGui::GetStyle().FramePadding.x * 2.0f + ImGui::GetStyle().ItemSpacing.x; // "button2"
-			content_width += ImGui::CalcTextSize(ICON_FA_TIMES).x + ImGui::GetStyle().FramePadding.x * 2.0f + ImGui::GetStyle().ItemSpacing.x; // "button3"
-
-			search_pos.x = finish_pos.x - content_width;
-		}
-		ImGui::SetCursorScreenPos(search_pos);
-
-		ImGui::Text("search fields");
-		ImGui::SameLine();
-		char field_search_buffer[256]{};
-		ImGui::SetNextItemWidth(field_search_width);
-		ImGui::InputText("##search_input", field_search_buffer, _countof(field_search_buffer));
-		ImGui::SameLine();
-		ImGui::Button(ICON_FA_ARROW_LEFT);
-		ImGui::SameLine();
-		ImGui::Button(ICON_FA_ARROW_RIGHT);
-		ImGui::SameLine();
-		ImGui::Button(ICON_FA_TIMES);
-
-		finish_pos.x = start_pos.x;
-		ImGui::SetCursorScreenPos(finish_pos);
-	}
-
-	{
-		float header_height = line_height * 1.75f;
-
-		ImVec2 start_pos = ImGui::GetCursorScreenPos();
-		ImVec2 finish_pos = start_pos;
-		finish_pos.x += ImGui::GetContentRegionAvailWidth();
-		finish_pos.y += header_height;
-		draw_list->AddRectFilled(start_pos, finish_pos, ImGui::ColorConvertFloat4ToU32(MANDRILL_THEME_MENU(0.5f)));
-
-		ImVec2 text_pos = start_pos;
-		text_pos.x += 10.0f;
-		text_pos.y += (header_height - line_height) / 2.0f;
-		ImGui::SetCursorScreenPos(text_pos);
-		ImGui::Button("Quick Preview");
-		ImGui::SameLine(0.0f, 25.0f);
-		static bool use_live_mode = false;
-		ImGui::Checkbox("Use Live Mode", &use_live_mode);
-		ImGui::SameLine(0.0f, 25.0f);
-		ImGui::Text("Status:");
-		ImGui::SameLine();
-		ImGui::Text("Ready");
-
-
-		finish_pos.x = start_pos.x;
-		ImGui::SetCursorScreenPos(finish_pos);
-	}
 	ImGui::Dummy({ 0.0f, ImGui::GetStyle().ItemSpacing.y });
 
 	static c_custom_tool_render_model custom_tool;
@@ -918,7 +836,7 @@ void c_blofeld_tag_debugger_tab::render_menu_gui_impl(e_menu_render_type menu_re
 				use_absolute_offsets = !use_absolute_offsets;
 				c_settings::write_boolean(_settings_section_mandrill, k_use_absolute_offsets_setting, use_absolute_offsets);
 			}
-			
+
 
 			ImGui::EndMenu();
 		}

@@ -171,6 +171,9 @@
     <ClInclude Include="Extension\mandrill_extension.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="UserInterface\Tabs\blofeld_tag_editor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CacheInterface\cache_file.cpp">
@@ -293,33 +296,36 @@
     <ClCompile Include="Extension\mandrill_extension.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="UserInterface\Tabs\blofeld_tag_editor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="CacheInterface\tag_group_names.inl">
       <Filter>Header Files</Filter>
     </None>
-    <None Include="GUI\render_bitfield_gui.inl">
+    <None Include="OldUserInterface\GUI\render_bitfield_gui.inl">
       <Filter>Header Files</Filter>
     </None>
-    <None Include="GUI\render_dataref_gui.inl">
+    <None Include="OldUserInterface\GUI\render_dataref_gui.inl">
       <Filter>Header Files</Filter>
     </None>
-    <None Include="GUI\render_enum_gui.inl">
+    <None Include="OldUserInterface\GUI\render_enum_gui.inl">
       <Filter>Header Files</Filter>
     </None>
-    <None Include="GUI\render_primitive_gui.inl">
+    <None Include="OldUserInterface\GUI\render_primitive_gui.inl">
       <Filter>Header Files</Filter>
     </None>
-    <None Include="GUI\render_stringid_gui.inl">
+    <None Include="OldUserInterface\GUI\render_stringid_gui.inl">
       <Filter>Header Files</Filter>
     </None>
-    <None Include="GUI\render_struct_gui.inl">
+    <None Include="OldUserInterface\GUI\render_struct_gui.inl">
       <Filter>Header Files</Filter>
     </None>
-    <None Include="GUI\render_tagblock_gui.inl">
+    <None Include="OldUserInterface\GUI\render_tagblock_gui.inl">
       <Filter>Header Files</Filter>
     </None>
-    <None Include="GUI\render_tagref_gui.inl">
+    <None Include="OldUserInterface\GUI\render_tagref_gui.inl">
       <Filter>Header Files</Filter>
     </None>
   </ItemGroup>

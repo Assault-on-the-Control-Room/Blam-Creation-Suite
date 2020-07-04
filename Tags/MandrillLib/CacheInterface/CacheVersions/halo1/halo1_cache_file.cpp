@@ -154,7 +154,7 @@ char* c_halo1_cache_file::get_tag_data(s_tag_data& tag_data) const
 	return nullptr;
 }
 
-char* c_halo1_cache_file::get_tag_block_data(s_tag_block& tag_block) const
+char* c_halo1_cache_file::get_tag_block_data(const s_tag_block& tag_block) const
 {
 	return nullptr;
 }

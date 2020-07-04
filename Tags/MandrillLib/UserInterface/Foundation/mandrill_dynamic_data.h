@@ -21,46 +21,49 @@ public:
 	// that a 256KB structure has only 6.25% efficiency
 	std::vector<c_imgui_dynamic_data*> imgui_dynamic_data;
 
-	inline c_imgui_dynamic_data& get_dynamic_data(void* pPosition, bool& rWasAllocated);
+	inline c_imgui_dynamic_data& get_dynamic_data(void* data, bool& was_allocated);
+
 	template<typename T>
-	inline T& get_dynamic_data(void* pPosition)
+	inline T& get_dynamic_data(void* data)
 	{
-	
-		bool wasAllocated = false;
-		c_imgui_dynamic_data& rDynamicData = get_dynamic_data(pPosition, wasAllocated);
-		if (wasAllocated)
+		bool was_allocated = false;
+		c_imgui_dynamic_data& dynamic_data = get_dynamic_data(data, was_allocated);
+		static_assert(sizeof(T) <= sizeof(dynamic_data.second), "Dynamic data exceeds allocated space");
+		if (was_allocated)
 		{
-			static_assert(sizeof(T) <= sizeof(rDynamicData.second), "Dynamic data exceeds allocated space");
-			new(rDynamicData.second) T(); // initialize value
+			new(dynamic_data.second) T(); // initialize value
 		}
-		T& rDynamicTagBlockData = *reinterpret_cast<T*>(rDynamicData.second);
-		return rDynamicTagBlockData;
+		T& dynamic_tag_block_data = *reinterpret_cast<T*>(dynamic_data.second);
+		return dynamic_tag_block_data;
 	}
 	template<typename T, typename ...Tconstructor>
-	inline T& get_dynamic_data(void* pPosition, bool& rWasAllocated)
+	inline T& get_dynamic_data(void* data, Tconstructor ...args)
 	{
-		c_imgui_dynamic_data& rDynamicData = get_dynamic_data(pPosition, rWasAllocated);
-		static_assert(sizeof(T) <= sizeof(rDynamicData.second), "Dynamic data exceeds allocated space");
-		T& rDynamicTagBlockData = *reinterpret_cast<T*>(rDynamicData.second);
-		return rDynamicTagBlockData;
+		bool was_allocated = false;
+		c_imgui_dynamic_data& dynamic_data = get_dynamic_data(data, was_allocated);
+		static_assert(sizeof(T) <= sizeof(dynamic_data.second), "Dynamic data exceeds allocated space");
+		if (was_allocated)
+		{
+			new(dynamic_data.second) T(args...); // initialize value
+		}
+		T& dynamic_tag_block_data = *reinterpret_cast<T*>(dynamic_data.second);
+		return dynamic_tag_block_data;
 	}
 };
 
-inline s_mandrill_dynamic_data::c_imgui_dynamic_data& s_mandrill_dynamic_data::get_dynamic_data(void* pPosition, bool& rWasAllocated)
+inline s_mandrill_dynamic_data::c_imgui_dynamic_data& s_mandrill_dynamic_data::get_dynamic_data(void* data, bool& was_allocated)
 {
 	for (c_imgui_dynamic_data* pDynamicData : imgui_dynamic_data)
 	{
-		if (pDynamicData->first == pPosition)
+		if (pDynamicData->first == data)
 		{
-			rWasAllocated = false;
+			was_allocated = false;
 			return *pDynamicData;
 		}
 	}
 
-	//c_console::write_line_verbose("Adding new dynamic data @ %p", pPosition);
-
-	rWasAllocated = true;
-	c_imgui_dynamic_data& rDynamicData = *imgui_dynamic_data.emplace_back(new c_imgui_dynamic_data{});
-	rDynamicData.first = pPosition;
-	return rDynamicData;
+	was_allocated = true;
+	c_imgui_dynamic_data& dynamic_tag_block_data = *imgui_dynamic_data.emplace_back(new c_imgui_dynamic_data{});
+	dynamic_tag_block_data.first = data;
+	return dynamic_tag_block_data;
 }

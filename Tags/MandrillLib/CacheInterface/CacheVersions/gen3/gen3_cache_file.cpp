@@ -124,7 +124,7 @@ char* c_gen3_cache_file::get_tag_data(s_tag_data& tag_data) const
 	return data;
 }
 
-char* c_gen3_cache_file::get_tag_block_data(s_tag_block& tag_block) const
+char* c_gen3_cache_file::get_tag_block_data(const s_tag_block& tag_block) const
 {
 	char* data = get_data_with_page_offset(tag_block.address);
 	return data;

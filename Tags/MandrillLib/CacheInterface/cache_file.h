@@ -33,7 +33,7 @@ public:
 	BCSAPI c_tag_group_interface* get_tag_group_interface_by_group_id(unsigned long tag_group) const;
 	BCSAPI c_tag_group_interface* const* get_tag_group_interfaces() const;
 	virtual char* get_tag_data(s_tag_data& tag_data) const = 0;
-	virtual char* get_tag_block_data(s_tag_block& tag_block) const = 0;
+	virtual char* get_tag_block_data(const s_tag_block& tag_block) const = 0;
 	virtual const char* get_string_id_by_index(uint32_t index) const = 0;
 	virtual const char* get_string_id(string_id const id, const char* const error_value = nullptr) const = 0;
 	virtual void* get_internal_tag_instance_impl(uint32_t tag_index) const = 0;
@@ -44,9 +44,9 @@ public:
 	virtual void get_raw_tag_memory_region(uint32_t tag_index, size_t& out_size, char*& tag_data) const = 0;
 
 	template<typename T>
-	inline T* get_tag_block_data(c_typed_tag_block<T>& tag_block)
+	inline T* get_tag_block_data(const c_typed_tag_block<T>& tag_block)
 	{
-		void* data = get_tag_block_data(*reinterpret_cast<s_tag_block*>(&tag_block));
+		void* data = get_tag_block_data(*reinterpret_cast<const s_tag_block*>(&tag_block));
 		T* typed_data = reinterpret_cast<T*>(data);
 		return typed_data;
 	}

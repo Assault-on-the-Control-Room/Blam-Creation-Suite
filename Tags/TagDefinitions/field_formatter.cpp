@@ -9,7 +9,7 @@ std::pair<const char*, const char*> c_field_formatter::bespoke_fixups[] =
 	{ "scale_x(scale}*", "scale_x{scale}*" } // what a bag of dicks
 };
 
-c_field_formatter::c_field_formatter(const blofeld::s_tag_field* field, const char* name, std::map<std::string, int>* field_name_unique_counter) :
+c_field_formatter::c_field_formatter(const blofeld::s_tag_field* field, std::map<std::string, int>* field_name_unique_counter) :
 	display_name(),
 	alt_name(),
 	units(),
@@ -21,6 +21,8 @@ c_field_formatter::c_field_formatter(const blofeld::s_tag_field* field, const ch
 	is_index(false),
 	is_pointer(false)
 {
+	const char* name = field->name;
+
 	//name = "air reverb gain*!^{reverb gain}*!^:dB*!^[   -100  ]#how much reverb applies to this sound class";
 	static int y = 0;
 	//c_console::write_line_verbose("%i %s", y, name);

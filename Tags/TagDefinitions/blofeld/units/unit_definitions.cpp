@@ -359,7 +359,7 @@ namespace blofeld
 		{ _field_custom, "melee damage" },
 		{ _field_tag_reference, "melee damage", &global_damage_reference },
 
-		{ _field_version_greater_or_equal, _engine_type_haloreach, 1 },
+		{ _field_version_greater, _engine_type_haloreach, 1 },
 		{ _field_tag_reference, "native melee override#when set, characters will melee with these settings rather than their actual held weapon. (for characters that melee with an off hand)", &weapon_reference },
 
 		{ _field_struct, "your momma", &unit_boarding_melee_struct_struct_definition },
@@ -535,6 +535,10 @@ namespace blofeld
 		{ _field_tag_reference, "landing melee damage", &global_damage_reference },
 		{ _field_tag_reference, "flurry melee damage", &global_damage_reference },
 		{ _field_tag_reference, "obstacle smash damage", &global_damage_reference },
+
+		{ _field_version_equal, _engine_type_haloreach, 1 },
+		{ _field_tag_reference, "shield pop melee damage", &global_damage_reference },
+
 
 		{ _field_version_equal, _engine_type_haloreach, 1 },
 		{ _field_tag_reference, "assassination damage", &global_damage_reference },

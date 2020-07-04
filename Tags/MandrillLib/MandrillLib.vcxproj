@@ -64,6 +64,7 @@
     <ClInclude Include="mandrilllib-public-pch.h" />
     <ClInclude Include="tests.h" />
     <ClInclude Include="UserInterface\Foundation\mandrill_tab_container.h" />
+    <ClInclude Include="UserInterface\Tabs\blofeld_tag_editor.h" />
     <ClInclude Include="UserInterface\Tabs\cache_file_tab.h" />
     <ClInclude Include="UserInterface\Foundation\mandrill_event_queue.h" />
     <ClInclude Include="UserInterface\Foundation\mandrill_user_interface.h" />
@@ -112,6 +113,7 @@
     </ClCompile>
     <ClCompile Include="tests.cpp" />
     <ClCompile Include="UserInterface\Foundation\mandrill_tab_container.cpp" />
+    <ClCompile Include="UserInterface\Tabs\blofeld_tag_editor.cpp" />
     <ClCompile Include="UserInterface\Tabs\cache_file_tab.cpp" />
     <ClCompile Include="UserInterface\Foundation\mandrill_event_queue.cpp" />
     <ClCompile Include="UserInterface\Foundation\mandrill_user_interface.cpp" />
@@ -121,14 +123,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="CacheInterface\tag_group_names.inl" />
-    <None Include="GUI\render_bitfield_gui.inl" />
-    <None Include="GUI\render_dataref_gui.inl" />
-    <None Include="GUI\render_enum_gui.inl" />
-    <None Include="GUI\render_primitive_gui.inl" />
-    <None Include="GUI\render_stringid_gui.inl" />
-    <None Include="GUI\render_struct_gui.inl" />
-    <None Include="GUI\render_tagblock_gui.inl" />
-    <None Include="GUI\render_tagref_gui.inl" />
+    <None Include="OldUserInterface\GUI\render_bitfield_gui.inl" />
+    <None Include="OldUserInterface\GUI\render_dataref_gui.inl" />
+    <None Include="OldUserInterface\GUI\render_enum_gui.inl" />
+    <None Include="OldUserInterface\GUI\render_primitive_gui.inl" />
+    <None Include="OldUserInterface\GUI\render_stringid_gui.inl" />
+    <None Include="OldUserInterface\GUI\render_struct_gui.inl" />
+    <None Include="OldUserInterface\GUI\render_tagblock_gui.inl" />
+    <None Include="OldUserInterface\GUI\render_tagref_gui.inl" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
