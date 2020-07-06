@@ -189,7 +189,7 @@ namespace blofeld
 		{ _field_enum, "ai seat type", &global_ai_seat_type_enum },
 		{ _field_short_block_index, "boarding seat" },
 
-		{ _field_version_equal, _engine_type_haloreach },
+		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_block, "additional boarding seats#additional seats to eject", &boarding_seat_block_block },
 
 		{ _field_real_fraction, "listener interpolation factor#how far to interpolate listener position from camera to occupant\'s head" },
