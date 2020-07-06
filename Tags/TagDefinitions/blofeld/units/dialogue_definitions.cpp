@@ -8,7 +8,13 @@ namespace blofeld
 	{
 		{ _field_tag_reference, "global dialogue info", &global_dialogue_reference },
 		{ _field_long_flags, "flags", &dialogue_flags },
+
+		{ _field_version_greater, _engine_type_halo3 },
 		{ _field_block, "vocalizations", &sound_references_block_block },
+
+		{ _field_version_less_or_equal, _engine_type_halo3 },
+		{ _field_block, "vocalizations", &vocalization_stimuli_block_definition_block },
+		
 		{ _field_string_id, "mission dialogue designator#3-letter mission dialogue designator name" },
 		{ _field_terminator }
 	};
