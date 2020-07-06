@@ -113,7 +113,7 @@ namespace blofeld
 	STRINGS(output_mod_enum$4)
 	{
 		" ",
-		"Plus", 
+		"Plus",
 		"Times"
 	};
 	STRING_LIST(output_mod_enum$4, output_mod_enum$4_strings, _countof(output_mod_enum$4_strings));
