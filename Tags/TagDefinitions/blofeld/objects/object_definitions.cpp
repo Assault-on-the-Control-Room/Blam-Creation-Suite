@@ -54,13 +54,19 @@ namespace blofeld
 		{ _field_string_id, "import name#if you leave this field blank then you can set this function\'s input value with the hs_function object_set_function_variable" },
 		{ _field_string_id, "export name" },
 		{ _field_string_id, "turn off with#if the specified function is off, so is this function" },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_string_id, "ranged interpolation name#if you have the ranged button checked" },
+
 		{ _field_real, "min value#function must exceed this value (after mapping) to be active 0. means do nothing" },
 		{ _field_custom },
 		{ _field_struct, "default function", &mapping_function_struct_definition },
 		{ _field_string_id, "scale by" },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach, 2 },
 		{ _field_block, "interpolation", &object_function_interpolation_block_block },
 		{ _field_long_block_index, "runtime interpolator index*!" },
+
 		{ _field_terminator }
 	};
 
@@ -136,22 +142,33 @@ namespace blofeld
 	TAG_BLOCK(multiplayer_object_block, k_maximum_multiplayer_object_blocks)
 	{
 		{ _field_explanation, "GAME ENGINE INCLUSION", "Set which game engines you desire this object to appear in" },
+
+		{ _field_version_less, _engine_type_haloreach },
+		{ _field_word_flags, "game engine flags", &global_game_engine_type_flags },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_byte_flags, "game engine flags", &global_game_engine_type_flags },
+
 		{ _field_explanation, "TYPE AND FLAGS", "Type pertains to how you want the game engine to handle this object\nCertain flags applicable only to certain object types, should be self evident" },
 		{ _field_char_enum, "type", &multiplayer_object_type },
 		{ _field_byte_flags, "teleporter passability:used only for teleporters", &teleporter_passability_flags },
 
-		{ _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_version_less, _engine_type_haloreach },
+		{ _field_word_flags, "flags", &multiplayer_object_flags },
+
+		{ _field_version_equal, _engine_type_haloreach },
 		{ _field_pad, "pad_shape", 1 },
 
 		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_char_enum, "spawn timer type", &multiplayer_object_spawn_timer_types }, // moved after reach
 
+		{ _field_version_greater_or_equal, _engine_type_haloreach, 5 },
 		{ _field_explanation, "GOAL & RESPAWN ZONE OBJECT BOUNDARY", "These fields are only used for goal area objects with boundaries, and for respawn zones" },
 		{ _field_real, "boundary width/radius" },
 		{ _field_real, "boundary box length" },
 		{ _field_real, "boundary +height" },
 		{ _field_real, "boundary -height" },
+
 		{ _field_char_enum, "boundary shape", &multiplayer_object_boundary_shape },
 
 		{ _field_version_less_or_equal, _engine_type_haloreach },
@@ -163,6 +180,15 @@ namespace blofeld
 		{ _field_explanation, "SPAWNING DATA", "These fields are used for default spawning times and remapping" },
 		{ _field_short_integer, "default spawn time:seconds" },
 		{ _field_short_integer, "default abandonment time:seconds" },
+
+		{ _field_version_less, _engine_type_haloreach, 5 },
+		{ _field_explanation, "GOAL & RESPAWN ZONE OBJECT BOUNDARY", "These fields are only used for goal area objects with boundaries, and for respawn zones" },
+		{ _field_real, "boundary width/radius" },
+		{ _field_real, "boundary box length" },
+		{ _field_real, "boundary +height" },
+		{ _field_real, "boundary -height" },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_word_flags, "flags", &multiplayer_object_flags },
 
 		{ _field_version_greater, _engine_type_haloreach },
@@ -170,6 +196,10 @@ namespace blofeld
 
 		{ _field_explanation, "RESPAWN ZONE DATA", "These are respawn zone weights, used only for respawn zones" },
 		{ _field_real, "normal weight:aka natural weight" },
+
+		{ _field_version_less, _engine_type_haloreach, 2 },
+		{ _field_real, "unknown weight" },
+		{ _field_real, "unknown weight" },
 
 		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_block, "falloff function#Multiplier applied to weight (domain is center to radius, range should be 0 to 1).", &spawn_influence_weight_falloff_function_block_block },

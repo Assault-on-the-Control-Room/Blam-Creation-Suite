@@ -9,19 +9,42 @@ namespace blofeld
 		{ _field_custom },
 		{ _field_string_id, "marker name^" },
 		{ _field_long_flags, "flags", &anti_gravity_point_definition_flags },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_long_enum, "damping", &anti_gravity_point_definition_damping },
+
 		{ _field_custom },
 		{ _field_real, "antigrav strength" },
+
+		{ _field_version_less, _engine_type_haloreach },
+		{ _field_real, "antigrav offset" },
+
 		{ _field_real, "antigrav height" },
+
+		{ _field_version_less, _engine_type_haloreach },
+		{ _field_real, "antigrav damp factor" },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach, 2 },
 		{ _field_real, "antigrav compression damping{antigrav damp factor}" },
 		{ _field_real, "antigrav extension damping" },
+
 		{ _field_real, "antigrav normal k1" },
 		{ _field_real, "antigrav normal k0" },
 		{ _field_real, "radius" },
+
+		{ _field_version_less, _engine_type_haloreach, 5 },
+		{ _field_long_integer, "unused!" },
+		{ _field_long_integer, "unused!" },
+		{ _field_long_integer, "unused!" },
+		{ _field_pad, "pad", 2 },
+		{ _field_short_integer, "runtime damage source region index" },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach, 4 },
 		{ _field_custom },
 		{ _field_string_id, "collision global material name" },
 		{ _field_short_integer, "runtime global material index!" },
 		{ _field_short_integer, "WU!" },
+
 		{ _field_string_id, "damage source region name" },
 		{ _field_real, "default state error" },
 		{ _field_real, "minor damage error" },

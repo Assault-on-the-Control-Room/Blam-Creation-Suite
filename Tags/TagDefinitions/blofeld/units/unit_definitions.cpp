@@ -175,11 +175,23 @@ namespace blofeld
 		{ _field_useless_pad },
 		{ _field_real, "turnover time:seconds#how much time it takes to evict a rider from a flipped vehicle" },
 		{ _field_explanation, "seat acceleration spring", "" },
+
+		// Reach and above live in a new seperate tag group, see physics/spring_acceleration_definitions.cpp
+		{ _field_version_less, _engine_type_haloreach, 3 },
+		{ _field_real_vector_3d, "acceleration range:world units" },
+		{ _field_real, "acceleration action scale#0 defaults to 1, scale the acceleration the object itself applies on this system." },
+		{ _field_real, "acceleration attach scale#0 defaults to 1, scale the acceleration the object itself applies on this system." },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_tag_reference, "seat acceleration", &spring_acceleration_reference },
+
 		{ _field_real, "AI scariness" },
 		{ _field_enum, "ai seat type", &global_ai_seat_type_enum },
 		{ _field_short_block_index, "boarding seat" },
+
+		{ _field_version_equal, _engine_type_haloreach },
 		{ _field_block, "additional boarding seats#additional seats to eject", &boarding_seat_block_block },
+
 		{ _field_real_fraction, "listener interpolation factor#how far to interpolate listener position from camera to occupant\'s head" },
 		{ _field_explanation, "speed dependant turn rates", "when the unit velocity is 0, the yaw/pitch rates are the left values\nat [max speed reference], the yaw/pitch rates are the right values.\nthe max speed reference is what the code uses to generate a clamped speed from 0..1\nthe exponent controls how midrange speeds are interpreted.\nIOW: As velocity exceeds \'min speed\' and approaches \'max speed\', turn rates are scaled from low --> high" },
 		{ _field_real_bounds, "yaw rate bounds:degrees per second" },
@@ -215,11 +227,14 @@ namespace blofeld
 		{ _field_angle, "entry marker facing angle#angle from unit facing the marker must be" },
 		{ _field_real, "maximum relative velocity" },
 		{ _field_useless_pad },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach, 5 },
 		{ _field_real, "open time:seconds" },
 		{ _field_real, "close time:seconds" },
 		{ _field_string_id, "open function name#creates an object function with this name that you can use to query the open state of this seat" },
 		{ _field_string_id, "opening function name#goes from 0 to 1 over the course of opening and stays at 1 while open.  Drops to 0 immediately when closing starts" },
 		{ _field_string_id, "closing function name#goes from 0 to 1 over the course of closing and stays at 1 while closed.  Drops to 0 immediately when opening starts" },
+
 		{ _field_string_id, "invisible seat region" },
 		{ _field_long_integer, "runtime invisible seat region index*" },
 
@@ -266,7 +281,7 @@ namespace blofeld
 
 		{ _field_version_less, _engine_type_haloreach, 2 },
 		{ _field_tag_reference, "integrated_light_toggle", &integrated_light_toggle_reference },
-		{ _field_real, "camera field of view" },
+		{ _field_angle, "camera field of view" },
 
 		{ _field_real, "camera stiffness" },
 		{ _field_struct, "unit camera", &unit_camera_struct_struct_definition },
@@ -286,9 +301,10 @@ namespace blofeld
 		{ _field_string_id, "assassination weapon anchor marker#the marker on the knife that we anchor to the biped" },
 		{ _field_tag_reference, "seat acceleration", &spring_acceleration_reference },
 
-		{ _field_version_less, _engine_type_haloreach, 2 },
+		{ _field_version_less, _engine_type_haloreach, 3 },
+		{ _field_real_vector_3d, "acceleration range#ranges i,j,k" },
 		{ _field_real, "acceleration action scale" },
-		{ _field_real, "acceleration action scale" },
+		{ _field_real, "acceleration attach scale" },
 
 		{ _field_custom, "pings" },
 		{ _field_real, "soft ping threshold:[0,1]" },
@@ -485,17 +501,16 @@ namespace blofeld
 		{ _field_version_less, _engine_type_haloreach, 1 },
 		{ _field_block, "unknown@", &halo3_unit_camera_struct_unknown_block },
 
+		{ _field_version_greater_or_equal, _engine_type_haloreach, 8 },
 		{ _field_angle, "look acceleration:deg/s/s#if non-zero, limits the change in look velocity per second while the user is pushing the look stick in the current direction of looking" },
 		{ _field_angle, "look deceleration:deg/s/s#if non-zero, limits the change in look velocity per second while the user is not pushing the look stick or changing directions" },
 		{ _field_real_fraction, "look acc smoothing fraction#if non-zero, when the desired velocity change is less than this fraction of the acceleration, starts interpolating the maximum acceleration towards zero.\nYou can think of this as a time in seconds where if the velocity would reach its target in this amount of time or less, it will start taking longer." },
-
-
-		{ _field_version_greater_or_equal, _engine_type_haloreach, 5 },
 		{ _field_angle, "override fov#if non-zero, overrides the FOV set in the unit or globals" },
 		{ _field_struct, "camera obstruction", &camera_obstruction_struct_struct_definition },
 		{ _field_block, "camera acceleration", &unit_camera_acceleration_displacement_block_block },
 		{ _field_block, "move stick overrides", &gamepad_stick_info_block_block },
 		{ _field_block, "look stick overrides", &gamepad_stick_info_block_block },
+
 		{ _field_custom },
 		{ _field_terminator }
 	};

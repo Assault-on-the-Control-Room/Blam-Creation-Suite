@@ -689,66 +689,66 @@ namespace blofeld
 	STRINGS(vehicle_flags)
 	{
 		"no friction w/driver",
-			"autoaim when teamless",
-			"ai weapon cannot rotate",
-			"ai does not require driver",
-			"ai driver enable",
-			"ai driver flying",
-			"ai driver can-sidestep",
-			"ai driver hovering",
-			"noncombat vehicle",
-			"does not cause collision damage",
-			"huge vehicle physics group",
-			"enable wheelie-popping hack",
-			"ai auto turret#will attempt to spawn Unit\'s \'spawned turret character\' to control this turret",
-			"ai sentry turret",
-			"ignore camera pitch",
-			"auto turret#will be ignored if \'ai auto turret\' is set in campaign or survival",
-			"ignore kill volumes#Suppress kill volume checks performed by unmanned vehicles (needed by RemoteStrike/power weapon ordnance)",
-			"targetable when open#makes this targetable if it is in an open state",
-			"vehicle wants to recieve reduced weapon acceleration when on ground#if set, vehicle will use all tag damage_effect->alt instantaneous acceleration fields if it is on the ground",
-			"vehicle wants to recieve reduced weapon acceleration when airborne#if set, vehicle will use all tag damage_effect->alt instantaneous acceleration fields if it is airborne",
-			"do not force units to exit when upside down",
-			"vehicle creates enemy spawn influencers#Used for Dominion Sentry Turrets, which enemies should not spawn in range of",
-			"driver cannot take damage",
-			"player cannot flip vehicle#the player isn\'t allowed to flip the vehicle under any circumstances"
+		"autoaim when teamless",
+		"ai weapon cannot rotate",
+		"ai does not require driver",
+		"ai driver enable",
+		"ai driver flying",
+		"ai driver can-sidestep",
+		"ai driver hovering",
+		"noncombat vehicle",
+		"does not cause collision damage",
+		"huge vehicle physics group",
+		"enable wheelie-popping hack",
+		"ai auto turret#will attempt to spawn Unit\'s \'spawned turret character\' to control this turret",
+		"ai sentry turret",
+		"ignore camera pitch",
+		"auto turret#will be ignored if \'ai auto turret\' is set in campaign or survival",
+		"ignore kill volumes#Suppress kill volume checks performed by unmanned vehicles (needed by RemoteStrike/power weapon ordnance)",
+		"targetable when open#makes this targetable if it is in an open state",
+		"vehicle wants to recieve reduced weapon acceleration when on ground#if set, vehicle will use all tag damage_effect->alt instantaneous acceleration fields if it is on the ground",
+		"vehicle wants to recieve reduced weapon acceleration when airborne#if set, vehicle will use all tag damage_effect->alt instantaneous acceleration fields if it is airborne",
+		"do not force units to exit when upside down",
+		"vehicle creates enemy spawn influencers#Used for Dominion Sentry Turrets, which enemies should not spawn in range of",
+		"driver cannot take damage",
+		"player cannot flip vehicle#the player isn\'t allowed to flip the vehicle under any circumstances"
 	};
 	STRING_LIST(vehicle_flags, vehicle_flags_strings, _countof(vehicle_flags_strings));
 
 	STRINGS(vehicle_size_enum)
 	{
 		"small",
-			"large"
+		"large"
 	};
 	STRING_LIST(vehicle_size_enum, vehicle_size_enum_strings, _countof(vehicle_size_enum_strings));
 
 	STRINGS(alien_scout_specific_type_enum)
 	{
 		"none",
-			"ghost",
-			"spectre",
-			"wraith",
-			"hover craft"
+		"ghost",
+		"spectre",
+		"wraith",
+		"hover craft"
 	};
 	STRING_LIST(alien_scout_specific_type_enum, alien_scout_specific_type_enum_strings, _countof(alien_scout_specific_type_enum_strings));
 
 	STRINGS(vehicle_type_enum)
 	{
 		"vehicle_type_human_tank",
-			"vehicle_type_human_jeep",
-			"vehicle_type_human_plane",
-			"vehicle_type_wolverine",
-			"vehicle_type_alien_scout",
-			"vehicle_type_alien_fighter",
-			"vehicle_type_turret",
-			"vehicle_type_mantis",
-			"vehicle_type_vtol",
-			"vehicle_type_chopper",
-			"vehicle_type_guardian",
-			"vehicle_type_jackal_glider",
-			"vehicle_type_boat",
-			"vehicle_type_space_fighter",
-			"vehicle_type_revenant"
+		"vehicle_type_human_jeep",
+		"vehicle_type_human_plane",
+		"vehicle_type_wolverine",
+		"vehicle_type_alien_scout",
+		"vehicle_type_alien_fighter",
+		"vehicle_type_turret",
+		"vehicle_type_mantis",
+		"vehicle_type_vtol",
+		"vehicle_type_chopper",
+		"vehicle_type_guardian",
+		"vehicle_type_jackal_glider",
+		"vehicle_type_boat",
+		"vehicle_type_space_fighter",
+		"vehicle_type_revenant"
 	};
 	STRING_LIST(vehicle_type_enum, vehicle_type_enum_strings, _countof(vehicle_type_enum_strings));
 
@@ -761,34 +761,34 @@ namespace blofeld
 	STRINGS(tank_flags)
 	{
 		"Enable New Control",
-			"Use Linear Velocity#Used to decide if we use linear velocity to calculate if we are in motion",
-			"Use Angular Velocity#Used to decide if we use angular velocity to calculate if we are in motion"
+		"Use Linear Velocity#Used to decide if we use linear velocity to calculate if we are in motion",
+		"Use Angular Velocity#Used to decide if we use angular velocity to calculate if we are in motion"
 	};
 	STRING_LIST(tank_flags, tank_flags_strings, _countof(tank_flags_strings));
 
 	STRINGS(dimensions_enum)
 	{
 		"foward",
-			"left",
-			"up"
+		"left",
+		"up"
 	};
 	STRING_LIST(dimensions_enum, dimensions_enum_strings, _countof(dimensions_enum_strings));
 
 	STRINGS(turret_flags)
 	{
 		"powered by parent#this is basicly a flag for the wolverine.  This turret pops up when the wolverine activates",
-			"idles in default position#this turret holds its default position instead of swinging freely when not controlled",
-			"reverse yaw motor direction",
-			"reverse pitch motor direction",
-			"reverse elevate motor direction",
-			"targetable when open"
+		"idles in default position#this turret holds its default position instead of swinging freely when not controlled",
+		"reverse yaw motor direction",
+		"reverse pitch motor direction",
+		"reverse elevate motor direction",
+		"targetable when open"
 	};
 	STRING_LIST(turret_flags, turret_flags_strings, _countof(turret_flags_strings));
 
 	STRINGS(boat_flags)
 	{
 		"brick on throttle#use this for torpedoes",
-			"use tank controls"
+		"use tank controls"
 	};
 	STRING_LIST(boat_flags, boat_flags_strings, _countof(boat_flags_strings));
 
