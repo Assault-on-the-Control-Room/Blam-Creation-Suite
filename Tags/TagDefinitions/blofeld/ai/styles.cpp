@@ -41,7 +41,10 @@ namespace blofeld
 		{ _field_long_flags, "Behaviors5", &behavior_set5 },
 		{ _field_long_flags, "Behaviors6", &behavior_set6 },
 		{ _field_long_flags, "Behaviors7", &behavior_set7 },
+
+		{ _field_version_greater, _engine_type_halo3 },
 		{ _field_long_flags, "Behaviors8", &behavior_set8 },
+		
 		{ _field_block, "Special movement", &special_movement_block_block },
 		{ _field_block, "Behavior list", &behavior_names_block_block },
 		{ _field_terminator }
