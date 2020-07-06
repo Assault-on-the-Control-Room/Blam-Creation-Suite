@@ -16,5 +16,11 @@ namespace blofeld
 	extern c_versioned_string_list output_mod_enum$4_strings;
 	extern s_string_list_definition output_mod_enum$4;
 
+	extern c_versioned_string_list e_light_priority_strings;
+	extern s_string_list_definition e_light_priority;
+
+	extern c_versioned_string_list e_light_priority_bias_strings;
+	extern s_string_list_definition e_light_priority_bias;
+
 } // namespace blofeld
 
