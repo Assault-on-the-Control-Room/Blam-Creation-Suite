@@ -16,7 +16,7 @@ namespace blofeld
 		{ _field_struct, "distance falloff", &screen_effect_scalar_function_struct_struct_definition },
 		{ _field_explanation, "TIME EVOLUTION", "controls the lifetime and time falloff of this effect\nNOTE: not used for scenario global effects" },
 
-		{ _field_version_greater, _engine_type_halo3 },
+		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_real, "delay:seconds#the effect will start after this many seconds (ignored if the play sequentially flag is set)" },
 		
 		{ _field_real, "lifetime:seconds#the effect is destroyed after this many seconds (0 = never dies)" },
@@ -24,7 +24,7 @@ namespace blofeld
 		{ _field_explanation, "ANGLE FALLOFF", "controls the falloff of this effect based on how close you are to looking directly at it\nNOTE: not used for scenario global effects" },
 		{ _field_struct, "angle falloff", &screen_effect_scalar_function_struct_struct_definition },
 
-		{ _field_version_greater, _engine_type_halo3,2 },
+		{ _field_version_greater_or_equal, _engine_type_haloreach,2 },
 		{ _field_explanation, "OBJECT FALLOFF", "applies a falloff based on an object function - ignored if the effect is not attached to an object" },
 		{ _field_struct, "object falloff", &screen_effect_scalar_object_function_struct_struct_definition },
 		
@@ -36,7 +36,7 @@ namespace blofeld
 		
 		{ _field_real, "exposure boost:stops#increase in exposure" },
 
-		{ _field_version_greater, _engine_type_halo3 },
+		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_real, "exposure deboost:stops#decrease in exposure" },
 		
 		{ _field_real, "hue left:degrees [0-360]#shifts hue R->G->B" },
@@ -47,7 +47,7 @@ namespace blofeld
 		{ _field_real, "gamma enhance:[0-10]#gamma increase" },
 		{ _field_real, "gamma reduce:[0-10]#gamma increase" },
 
-		{ _field_version_greater, _engine_type_halo3, 2 },
+		{ _field_version_greater_or_equal, _engine_type_haloreach, 2 },
 		{ _field_real, "bright noise:[0-1]#add bright noise contribution, 0 turns it off, 1: full on" },
 		{ _field_real, "dark noise:[0-1]#add dark noise contribution, 0 turns it off, 1: full on" },
 		
@@ -58,7 +58,7 @@ namespace blofeld
 		{ _field_real_fraction, "color replace strength:[0-1]#used to blend in the color replace below" },
 		{ _field_real_rgb_color, "color replace#this color is blended in place of the screen\'s color" },
 
-		{ _field_version_greater, _engine_type_halo3, 2 },
+		{ _field_version_greater_or_equal, _engine_type_haloreach, 2 },
 		{ _field_real, "tron:[0-1]#adds a full-screen tron effect" },
 		{ _field_real, "motion suck:[-2, 2]#adds motion-blur towards or away from this screen effect" },
 
@@ -66,7 +66,7 @@ namespace blofeld
 		{ _field_version_greater, _engine_type_haloreach }, 
 		{ _field_real, "bloom buffer motion suck:[-2, 2]#adds cheap bloom buffer motion-blur towards or away from this screen effect" },
 
-		{ _field_version_greater, _engine_type_halo3, 9 },
+		{ _field_version_greater_or_equal, _engine_type_haloreach, 9 },
 		{ _field_real_vector_3d, "motion suck direction!:[do not edit]#do not edit" },
 		{ _field_real, "horizontal blur:[0-10] expensive#blurs the entire screen" },
 		{ _field_real, "vertical blur:[0-10] expensive#blurs the entire screen" },
@@ -85,7 +85,7 @@ namespace blofeld
 	TAG_STRUCT(area_screen_effect_struct_definition)
 	{
 
-		{ _field_version_greater, _engine_type_halo3, 2 },
+		{ _field_version_greater_or_equal, _engine_type_haloreach, 2 },
 		{ _field_word_flags, "global flags", &area_screen_effect_global_flags_definition },
 		{ _field_word_flags, "global hidden flags!", &area_screen_effect_global_hidden_flags_definition },
 		

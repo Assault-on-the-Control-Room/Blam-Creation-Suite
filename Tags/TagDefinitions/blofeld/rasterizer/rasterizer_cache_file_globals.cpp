@@ -12,7 +12,7 @@ namespace blofeld
 	{
 		{ _field_long_integer, "texture header count" },
 
-		{ _field_version_greater, _engine_type_halo3, 2 },
+		{ _field_version_greater_or_equal, _engine_type_haloreach, 2 },
 		{ _field_long_integer, "maximum vertex shader gprs" },
 		{ _field_long_integer, "maximum pixel shader gprs" },
 		
