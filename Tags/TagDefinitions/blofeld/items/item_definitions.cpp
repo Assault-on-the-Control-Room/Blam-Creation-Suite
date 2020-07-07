@@ -32,8 +32,10 @@ namespace blofeld
 		{ _field_string_id, "switch-to msg" },
 		{ _field_string_id, "switch-to from ai msg" },
 		{ _field_string_id, "notify empty msg" },
+
 		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_string_id, "notify overheated message" },
+
 		{ _field_tag_reference, "collision sound", &global_sound_reference },
 		{ _field_block, "predicted bitmaps", &predicted_bitmaps_block_block },
 		{ _field_tag_reference, "detonation damage effect", &global_damage_reference },
@@ -41,11 +43,14 @@ namespace blofeld
 		{ _field_tag_reference, "detonating effect", &global_effect_reference },
 		{ _field_tag_reference, "detonation effect", &global_effect_reference },
 		{ _field_explanation, "Item scale settings", "because grenades look better as coconuts. 0==1" },
+
 		{ _field_version_less, _engine_type_haloreach, 2 },
 		{ _field_real, "campaign ground scale" },
 		{ _field_real, "multiplayer ground scale" },
+
 		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_real, "ground scale" },
+
 		{ _field_real, "small unit (armed)" },
 		{ _field_real, "small unit (stowed)" },
 		{ _field_real, "medium unit (armed)" },
@@ -54,13 +59,17 @@ namespace blofeld
 		{ _field_real, "large unit (stowed)" },
 		{ _field_real, "huge unit (armed)" },
 		{ _field_real, "huge unit (stowed)" },
+
 		{ _field_version_less, _engine_type_haloreach, 2 },
 		{ _field_real, "grounded friction length" },
 		{ _field_real, "grounded friction unknown" },
+
 		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_tag_reference, "grounded friction settings#If not present, the default from global.globals is used.", &global_grounded_friction_reference },
+
 		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_tag_reference, "Tossed Override# Used to override the object tossed when item owner is killed.  Is overridden by tossed weapon override.", &object_reference$3 },
+
 		{ _field_custom },
 		{ _field_terminator }
 	};
