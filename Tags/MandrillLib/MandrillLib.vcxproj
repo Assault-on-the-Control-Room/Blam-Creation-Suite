@@ -19,7 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CacheInterface\virtual_tag.h" />
     <ClInclude Include="Extension\mandrill_extension.h" />
+    <ClInclude Include="CacheInterface\CacheVersions\gen3\gen3_resource_manager.h" />
     <ClInclude Include="UserInterface\Tabs\blofeld_tag_debugger_tab.h" />
     <ClInclude Include="CustomTools\CustomTools.h" />
     <ClInclude Include="CustomTools\custom_tool_render_model.h" />
@@ -48,8 +50,6 @@
     <ClInclude Include="CacheInterface\cache_utilities.h" />
     <ClInclude Include="CacheInterface\tag_group_interface.h" />
     <ClInclude Include="CacheInterface\tag_interface.h" />
-    <ClInclude Include="CacheInterface\virtual_tag_block.h" />
-    <ClInclude Include="CacheInterface\virtual_tag.h" />
     <ClInclude Include="CacheInterface\CacheVersions\halo1\halo1_tag_interface.h" />
     <ClInclude Include="CacheInterface\CacheVersions\halo1\halo1_tag_group_interface.h" />
     <ClInclude Include="CacheInterface\CacheVersions\gen3\gen3_tag_group_interface.h" />
@@ -74,7 +74,9 @@
     <ClInclude Include="virtual_memory_container.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CacheInterface\virtual_tag.cpp" />
     <ClCompile Include="Extension\mandrill_extension.cpp" />
+    <ClCompile Include="CacheInterface\CacheVersions\gen3\gen3_resource_manager.cpp" />
     <ClCompile Include="UserInterface\Tabs\blofeld_tag_debugger_tab.cpp" />
     <ClCompile Include="CustomTools\custom_tool_render_model.cpp" />
     <ClCompile Include="CustomTools\custom_tool_base.cpp" />
@@ -94,8 +96,6 @@
     <ClCompile Include="CacheInterface\cache_file_string_id_guesstimator.cpp" />
     <ClCompile Include="CacheInterface\tag_group_interface.cpp" />
     <ClCompile Include="CacheInterface\tag_interface.cpp" />
-    <ClCompile Include="CacheInterface\virtual_tag_block.cpp" />
-    <ClCompile Include="CacheInterface\virtual_tag.cpp" />
     <ClCompile Include="CacheInterface\CacheVersions\halo1\halo1_tag_interface.cpp" />
     <ClCompile Include="CacheInterface\CacheVersions\halo1\halo1_tag_group_interface.cpp" />
     <ClCompile Include="CacheInterface\CacheVersions\gen3\gen3_tag_group_interface.cpp" />

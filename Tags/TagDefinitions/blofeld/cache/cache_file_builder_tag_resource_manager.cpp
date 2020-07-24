@@ -25,7 +25,7 @@ namespace blofeld
 	{
 		{ _field_enum, "scenario type", &scenario_type_enum },
 		{ _field_word_flags, "scenario flags", &scenario_flags },
-		{ _field_block, "resource type identifiers*", &cache_file_resource_type_identifier_block_block },
+		{ _field_block, "resource type identifiers*", &cache_file_bcs_resource_type_identifier_block_block },
 		{ _field_block, "interop type identifiers*", &cache_file_interop_type_identifier_block_block },
 		{ _field_block, "codec identifiers*", &cache_file_codec_identifier_block_block },
 		{ _field_block, "shared files", &cache_file_shared_file_block_block },
@@ -130,7 +130,7 @@ namespace blofeld
 		{ _field_terminator }
 	};
 
-	TAG_BLOCK(cache_file_resource_type_identifier_block, k_maximum_cache_file_tag_resource_types)
+	TAG_BLOCK(cache_file_bcs_resource_type_identifier_block, k_maximum_cache_file_tag_resource_types)
 	{
 		{ _field_long_integer, "identifier part 0" },
 		{ _field_long_integer, "identifier part 1" },

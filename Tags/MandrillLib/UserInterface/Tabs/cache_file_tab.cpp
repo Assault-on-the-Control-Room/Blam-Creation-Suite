@@ -3,7 +3,7 @@
 float c_cache_file_tab::explorer_bar_width = c_settings::read_float(_settings_section_mandrill, k_explorer_bar_width, 500.0f);
 
 c_cache_file_tab::c_cache_file_tab(c_cache_file& cache_file, c_mandrill_tab& parent, const char* tag_list) :
-	c_mandrill_tab(cache_file.get_map_path_utf8(), cache_file.get_map_filepath_utf8(), &parent),
+	c_mandrill_tab(cache_file.get_filename_utf8(), cache_file.get_filepath_utf8(), &parent),
 	cache_file(cache_file),
 	render_trigger_volumes(c_command_line::has_command_line_arg("-showtriggervolumes")),
 	search_buffer(),
@@ -232,7 +232,7 @@ void c_cache_file_tab::render_menu_gui_impl(e_menu_render_type menu_render_type)
 	if (menu_render_type == _menu_render_type_root_file && is_selected())
 	{
 		c_fixed_string_512 save_string;
-		save_string.format("Save %s", cache_file.get_map_path_utf8());
+		save_string.format("Save %s", cache_file.get_filename_utf8());
 		if (ImGui::MenuItem(save_string.c_str(), "Ctrl+S"))
 		{
 			cache_file.save_map();

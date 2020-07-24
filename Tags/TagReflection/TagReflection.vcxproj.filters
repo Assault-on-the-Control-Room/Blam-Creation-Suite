@@ -72,6 +72,12 @@
     <ClInclude Include="halo3\halo3_virtual.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="virtual_struct_interface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="virtual_tag_block.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tagreflection-private-pch.cpp">
@@ -102,6 +108,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="halo3\halo3_virtual.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="virtual_struct_interface.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="virtual_tag_block.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

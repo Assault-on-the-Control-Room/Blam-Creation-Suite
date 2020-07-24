@@ -16,7 +16,7 @@ c_runtime_symbols::c_runtime_symbols() :
 	symbol_file_data(nullptr),
 	symbol_file_data_size(0)
 {
-	static bool has_symbols_blob = c_resources_manager::get_resource(_resource_type_symbols_blob, &symbol_file_data, &symbol_file_data_size, true);
+	static bool has_symbols_blob = c_resources_manager::get_resource(_bcs_resource_type_symbols_blob, &symbol_file_data, &symbol_file_data_size, true);
 	if (has_symbols_blob)
 	{
 		ASSERT(symbol_file_data != nullptr);

@@ -40,6 +40,7 @@ void c_gen3_cache_file::init_gen3_cache_file()
 
 c_gen3_cache_file::c_gen3_cache_file(const std::wstring& map_filepath, e_engine_type engine_type, e_platform_type platform_type) :
 	c_cache_file(map_filepath, engine_type, platform_type),
+	resource_manager(*this),
 	cache_file_header(*read_cache_file()),
 	string_id_guesstimator(nullptr),
 	validator(nullptr)
@@ -67,11 +68,38 @@ c_gen3_cache_file::c_gen3_cache_file(const std::wstring& map_filepath, e_engine_
 	}
 
 	validator = new c_gen3_cache_file_validator(*this);
+
+	on_init.register_callback(this, [this] { post_init(); });
 }
 
 c_gen3_cache_file::~c_gen3_cache_file()
 {
 	delete validator;
+}
+
+void c_gen3_cache_file::post_init()
+{
+	// #TODO: remove
+	init_sorted_instance_lists();
+
+	bool tags_valid = true;
+	for (c_gen3_tag_interface& tag_interface : c_reference_loop(reinterpret_cast<c_gen3_tag_interface* const*>(get_tag_interfaces()), get_tag_count()))
+	{
+		if (tag_interface.is_null())
+		{
+			continue;
+		}
+
+		tag_interface.validate();
+		bool is_valid = tag_interface.get_is_tag_valid();
+		tags_valid &= is_valid;
+	}
+
+	if (tags_valid)
+	{
+		c_gen3_cache_file_validator2 validator2(*this);
+		validator2.validate_tag_instances();
+	}
 }
 
 bool c_gen3_cache_file::is_loading() const

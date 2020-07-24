@@ -394,21 +394,80 @@ uint32_t c_gen3_cache_file_validator::render_tag_struct_definition(
 					c_tag_group_interface* cache_file_resource_gestalt_group = cache_file.get_tag_group_interface_by_group_id(blofeld::CACHE_FILE_RESOURCE_GESTALT_TAG);
 					if (cache_file_resource_gestalt_group != nullptr && cache_file_resource_gestalt_group->get_tag_interfaces_count() != 0)
 					{
-
-						char* pagable_data = nullptr;
+						char* raw_pagable_data = nullptr;
+						char* resource_definition_data = nullptr;
+						char* resource_definition = nullptr;
 
 						c_tag_interface* cache_file_resource_gestalt = cache_file_resource_gestalt_group->get_tag_interfaces()[0];
-						if (v_tag_interface<blofeld::haloreach::s_cache_file_resource_gestalt_block_struct>* haloreach_cache_file_resource_gestalt = dynamic_cast<decltype(haloreach_cache_file_resource_gestalt)>(cache_file_resource_gestalt->get_virtual_tag_interface()))
+						if (v_tag<blofeld::haloreach::s_cache_file_resource_gestalt_block_struct>* haloreach_cache_file_resource_gestalt = dynamic_cast<decltype(haloreach_cache_file_resource_gestalt)>(cache_file_resource_gestalt->get_virtual_tag_interface()))
 						{
-							blofeld::haloreach::s_cache_file_resource_data_block_block_struct& cache_file_resource_data_block = haloreach_cache_file_resource_gestalt->resources_block[index];
-							char* data = cache_file.get_tag_data(haloreach_cache_file_resource_gestalt->naive_resource_control_data); // #TODO: virtual tag data [tag_data.get_data()]
-							pagable_data = data + cache_file_resource_data_block.naive_data_offset;
+							//blofeld::haloreach::s_cache_file_resource_data_block_block_struct& cache_file_resource_data_block = haloreach_cache_file_resource_gestalt->resources_block[index];
+							v_struct<blofeld::haloreach::s_cache_file_resource_data_block_block_struct>& cache_file_resource_data_block = haloreach_cache_file_resource_gestalt->resources_block[index];
+							if (~cache_file_resource_data_block.resource_type_index != 0 && cache_file_resource_data_block.control_size > 0)
+							{
+								char* data = cache_file.get_tag_data(haloreach_cache_file_resource_gestalt->naive_resource_control_data); // #TODO: virtual tag data [tag_data.get_data()]
+								raw_pagable_data = data + cache_file_resource_data_block.naive_data_offset;
 
+								resource_definition_data = static_cast<char*>(malloc(cache_file_resource_data_block.control_size));
+								memcpy(resource_definition_data, raw_pagable_data, cache_file_resource_data_block.control_size);
 
+								union s_resource_encoded_value
+								{
+									s_resource_encoded_value(long encoded_fixup_value)
+									{
+										this->encoded_fixup_value = encoded_fixup_value;
+									}
+
+									struct
+									{
+										long encoded_fixup_value;
+									};
+									struct
+									{
+										unsigned long address : 29;
+										unsigned long is_fixup : 1;
+										unsigned long is_raw_page : 1;
+										unsigned long unknown : 1;
+									};
+								};
+
+								s_resource_encoded_value root_fixup_info(cache_file_resource_data_block.root_fixup);
+
+								const char* resource_type_id = cache_file.get_string_id(haloreach_cache_file_resource_gestalt->resource_type_identifiers_block[cache_file_resource_data_block.resource_type_index].name);
+
+								for (auto control_fixup : cache_file_resource_data_block.control_fixups_block)
+								{
+									s_resource_encoded_value fixup_info(control_fixup->encoded_fixup_value);
+
+									long& fixup_dst = *reinterpret_cast<long*>(resource_definition_data + control_fixup->encoded_fixup_location);
+									fixup_dst = fixup_info.address;
+								}
+
+								for (auto interop_locations : cache_file_resource_data_block.interop_locations_block)
+								{
+									s_resource_encoded_value encoded_interop_location(interop_locations->encoded_interop_location);
+									e_interop_type interop_type = cache_file.get_interop_type_by_index(interop_locations->interop_type_index);
+									const char* interop_type_id = cache_file.get_string_id(haloreach_cache_file_resource_gestalt->interop_type_identifiers_block[interop_locations->interop_type_index].name);
+									char* fixup_destination = resource_definition_data + encoded_interop_location.address;
+
+									if (encoded_interop_location.is_fixup)
+									{
+										long& address_fixup = *reinterpret_cast<long*>(fixup_destination);
+										address_fixup = haloreach_cache_file_resource_gestalt->naive_resource_control_data.address + (cache_file_resource_data_block.naive_data_offset / 4); // HAX
+									}
+									else
+									{
+										debug_point; // #TODO: unsupported interop type
+										throw;
+									}
+								}
+
+								resource_definition = resource_definition_data + root_fixup_info.address;
+							}
 
 							debug_point;
 						}
-						else if (v_tag_interface<blofeld::halo3::s_cache_file_resource_gestalt_block_struct>* halo3_cache_file_resource_gestalt = dynamic_cast<decltype(halo3_cache_file_resource_gestalt)>(cache_file_resource_gestalt->get_virtual_tag_interface()))
+						else if (v_tag<blofeld::halo3::s_cache_file_resource_gestalt_block_struct>* halo3_cache_file_resource_gestalt = dynamic_cast<decltype(halo3_cache_file_resource_gestalt)>(cache_file_resource_gestalt->get_virtual_tag_interface()))
 						{
 
 						}
@@ -417,25 +476,31 @@ uint32_t c_gen3_cache_file_validator::render_tag_struct_definition(
 
 						}
 
-						if (pagable_data != nullptr)
+						if (resource_definition_data != nullptr)
 						{
-							bool is_valid_address = cache_file.is_valid_data_address(pagable_data);
-							is_struct_valid &= is_valid_address;
-
-							if (is_valid_address && current_field->struct_definition)
+							if (raw_pagable_data != nullptr)
 							{
-								render_tag_struct_definition(
-									tag_interface,
-									level + 2,
-									pagable_data,
-									*current_field->struct_definition,
-									false,
-									render,
-									is_struct_valid,
-									is_tag_valid,
-									parent_offset + bytes_traversed,
-									_cache_file_validator_struct_type_tag_resource);
+								bool is_valid_address = cache_file.is_valid_data_address(raw_pagable_data);
+								is_struct_valid &= is_valid_address;
+
+								if (is_valid_address && current_field->struct_definition)
+								{
+									render_tag_struct_definition(
+										tag_interface,
+										level + 2,
+										resource_definition,
+										*current_field->struct_definition,
+										false,
+										render,
+										is_struct_valid,
+										is_tag_valid,
+										parent_offset + bytes_traversed,
+										_cache_file_validator_struct_type_tag_resource);
+								}
+
 							}
+
+							free(resource_definition_data);
 						}
 					}
 				}

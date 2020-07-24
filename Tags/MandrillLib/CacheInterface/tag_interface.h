@@ -31,6 +31,14 @@ public:
 	virtual const char* get_name_with_group_name_cstr() const = 0; // eg. globals.globals
 
 	BCSAPI c_virtual_tag_interface* get_virtual_tag_interface();
+
+	template<typename T>
+	inline v_tag<T>* get_virtual_tag_interface()
+	{
+		v_tag<T>* virtual_tag_interface = dynamic_cast<decltype(virtual_tag_interface)>(get_virtual_tag_interface());
+		return virtual_tag_interface;
+	}
+
 	BCSAPI const blofeld::s_tag_group* get_blofeld_reflection_data();
 
 	BCSAPI virtual char* get_data() = 0;
@@ -50,6 +58,7 @@ public:
 	//inline c_tag_group_interface* get_tag_group_interface() const { return group_interface; }; // #TODO: Use this version and guarantee valid value for cache_file_legacy_tag_group_interface
 
 private:
+	void init_blofeld_reflection_type();
 	void init_virtual_tag_interface();
 
 protected:
@@ -57,7 +66,6 @@ protected:
 	bool is_tag_null;
 	uint32_t tag_index;
 	c_cache_file& cache_file;
-	bool reflection_initialised;
 	const blofeld::s_tag_group* blofeld_reflection_type;
 	c_virtual_tag_interface* virtual_tag_interface;
 public:

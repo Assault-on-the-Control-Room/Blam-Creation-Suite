@@ -1765,7 +1765,7 @@ namespace blofeld
 		{ global_textures_refs_block_block_struct, 16 }, // block
 		{ weather_globals_struct_definition_struct_definition, 56 }, // group
 		{ tag_resource_alignment_bits_array_definition_struct_definition, 2 }, // array
-		{ cache_file_resource_type_identifier_block_block_struct, 32 }, // block
+		{ cache_file_bcs_resource_type_identifier_block_block_struct, 32 }, // block
 		{ cache_file_interop_type_identifier_block_block_struct, 20 }, // block
 		{ cache_file_resource_fixup_location_block_block_struct, 8 }, // block
 		{ cache_file_resource_interop_location_block_block_struct, 8 }, // block

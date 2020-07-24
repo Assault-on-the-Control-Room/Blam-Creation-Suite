@@ -1,5 +1,7 @@
 #pragma once
 
+#include "virtual_struct_interface.h"
+#include "virtual_tag_block.h"
 #include "virtual_tag_interface.h"
 
 #include "halo1\halo1.h"

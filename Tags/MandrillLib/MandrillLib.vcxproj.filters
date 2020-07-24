@@ -33,9 +33,6 @@
     <ClInclude Include="CacheInterface\tag_interface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CacheInterface\virtual_tag_block.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="HaloScript\halo_script_function_definition.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -55,9 +52,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="virtual_memory_container.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CacheInterface\virtual_tag.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CacheInterface\CacheVersions\haloreach\haloreach_cache_file.h">
@@ -174,6 +168,12 @@
     <ClInclude Include="UserInterface\Tabs\blofeld_tag_editor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CacheInterface\virtual_tag.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CacheInterface\CacheVersions\gen3\gen3_resource_manager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CacheInterface\cache_file.cpp">
@@ -186,9 +186,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CacheInterface\tag_interface.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CacheInterface\virtual_tag_block.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="HaloScript\halo_script_function_definition.cpp">
@@ -207,9 +204,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="virtual_memory_container.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CacheInterface\virtual_tag.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CacheInterface\CacheVersions\haloreach\haloreach_cache_file.cpp">
@@ -297,6 +291,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="UserInterface\Tabs\blofeld_tag_editor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CacheInterface\virtual_tag.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CacheInterface\CacheVersions\gen3\gen3_resource_manager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

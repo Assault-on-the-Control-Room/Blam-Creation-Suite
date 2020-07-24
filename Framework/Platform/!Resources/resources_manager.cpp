@@ -1,36 +1,36 @@
 #include "platform-private-pch.h"
 #include "resource.h"
 
-LPCWSTR c_resources_manager::get_resource_type(e_resource_type type)
+LPCWSTR c_resources_manager::get_resource_type(e_bcs_resource_type type)
 {
 	switch (type)
 	{
-	case _resource_type_icon_application:
-	case _resource_type_icon_blam_creation_suite:
-	case _resource_type_icon_mandrill:
+	case _bcs_resource_type_icon_application:
+	case _bcs_resource_type_icon_blam_creation_suite:
+	case _bcs_resource_type_icon_mandrill:
 		return RT_ICON;
 	default:
 		return RT_RCDATA;
 	}
 }
 
-LPCWSTR c_resources_manager::get_resource_int_resource(e_resource_type type)
+LPCWSTR c_resources_manager::get_resource_int_resource(e_bcs_resource_type type)
 {
 	switch (type)
 	{
-	case _resource_type_icon_application:			return MAKEINTRESOURCEW(IDI_ICON_APPLICATION);
-	case _resource_type_icon_blam_creation_suite:	return MAKEINTRESOURCEW(IDI_ICON_BLAM_CREATION_SUITE);
-	case _resource_type_icon_mandrill:				return MAKEINTRESOURCEW(IDI_ICON_MANDRILL);
-	case _resource_type_font_cousine_regular:		return MAKEINTRESOURCEW(IDR_FONT_COUSING_REGULAR);
-	case _resource_type_font_font_awesome:			return MAKEINTRESOURCEW(IDR_FONT_FONT_AWESOME);
-	case _resource_type_symbols_blob:				return MAKEINTRESOURCEW(IDR_MAPDATABASE);
-	case _resource_type_box_pixel_shader:			return MAKEINTRESOURCEW(IDR_BOXSHADERPS);
-	case _resource_type_box_vertex_shader:			return MAKEINTRESOURCEW(IDR_BOXSHADERVS);
+	case _bcs_resource_type_icon_application:			return MAKEINTRESOURCEW(IDI_ICON_APPLICATION);
+	case _bcs_resource_type_icon_blam_creation_suite:	return MAKEINTRESOURCEW(IDI_ICON_BLAM_CREATION_SUITE);
+	case _bcs_resource_type_icon_mandrill:				return MAKEINTRESOURCEW(IDI_ICON_MANDRILL);
+	case _bcs_resource_type_font_cousine_regular:		return MAKEINTRESOURCEW(IDR_FONT_COUSING_REGULAR);
+	case _bcs_resource_type_font_font_awesome:			return MAKEINTRESOURCEW(IDR_FONT_FONT_AWESOME);
+	case _bcs_resource_type_symbols_blob:				return MAKEINTRESOURCEW(IDR_MAPDATABASE);
+	case _bcs_resource_type_box_pixel_shader:			return MAKEINTRESOURCEW(IDR_BOXSHADERPS);
+	case _bcs_resource_type_box_vertex_shader:			return MAKEINTRESOURCEW(IDR_BOXSHADERVS);
 	}
 	return NULL;
 }
 
-HRSRC c_resources_manager::get_resource_handle(e_resource_type type)
+HRSRC c_resources_manager::get_resource_handle(e_bcs_resource_type type)
 {
 	static HMODULE instance_handle = c_runtime_util::get_current_module();
 
@@ -40,7 +40,7 @@ HRSRC c_resources_manager::get_resource_handle(e_resource_type type)
 	return FindResourceW(instance_handle, int_resource, get_resource_type(type));
 }
 
-bool c_resources_manager::get_resource(e_resource_type type, char** out_data, size_t* out_data_size, bool null_terminate)
+bool c_resources_manager::get_resource(e_bcs_resource_type type, char** out_data, size_t* out_data_size, bool null_terminate)
 {
 	*out_data = nullptr;
 	*out_data_size = 0;

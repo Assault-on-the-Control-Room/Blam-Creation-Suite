@@ -12,7 +12,7 @@ public:
 };
 
 template<typename T>
-class v_tag_interface :
+class v_tag :
 	public c_virtual_tag_interface
 {
 };

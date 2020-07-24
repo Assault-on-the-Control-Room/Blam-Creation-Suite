@@ -428,6 +428,35 @@ bool c_blofeld_tag_editor_tab::render_primitive(void* data, const blofeld::s_tag
 	return result;
 }
 
+void c_blofeld_tag_editor_tab::render_string_id(void* data, const blofeld::s_tag_field& field)
+{
+	string_id& string_id_value = *reinterpret_cast<string_id*>(data);
+
+	struct s_string_editor_dynamic_data
+	{
+		s_string_editor_dynamic_data(c_cache_file& cache_file, string_id value, const blofeld::s_tag_field& field) :
+			is_active(false),
+			string_parser(*new c_blamlib_string_parser(field.name, false, nullptr)),
+			buffer(new c_fixed_string_4096())
+		{
+			*buffer = cache_file.get_string_id(value);
+		}
+
+		~s_string_editor_dynamic_data()
+		{
+			delete& string_parser;
+			delete buffer;
+		}
+
+		bool is_active;
+		c_blamlib_string_parser& string_parser; // #TODO: remove
+		c_fixed_string_4096* buffer;
+	};
+	s_string_editor_dynamic_data& dynamic_data = get_dynamic_data<s_string_editor_dynamic_data, c_cache_file&>(data, cache_file, string_id_value, field);
+
+	render_string_impl(dynamic_data.buffer->str(), field, dynamic_data.string_parser, dynamic_data.is_active);
+}
+
 void c_blofeld_tag_editor_tab::render_string(void* data, const blofeld::s_tag_field& field)
 {
 	struct s_string_editor_dynamic_data
@@ -449,53 +478,64 @@ void c_blofeld_tag_editor_tab::render_string(void* data, const blofeld::s_tag_fi
 	};
 	s_string_editor_dynamic_data& dynamic_data = get_dynamic_data<s_string_editor_dynamic_data>(data, field);
 
+	render_string_impl(data, field, dynamic_data.string_parser, dynamic_data.is_active);
+}
+
+bool c_blofeld_tag_editor_tab::render_string_impl(void* data, const blofeld::s_tag_field& field, c_blamlib_string_parser& string_parser, bool& is_active)
+{
+	bool result = false;
+
 	ImGui::Columns(2, nullptr, false);
 	ImGui::SetColumnWidth(0, k_field_display_name_width);
 
-	c_blamlib_string_parser field_formatter = c_blamlib_string_parser(field.name); // #TODO: remove
-
-	bool const current_string_has_tooltip = !field_formatter.description.is_empty();
+	bool const current_string_has_tooltip = !string_parser.description.is_empty();
 	if (current_string_has_tooltip)
 	{
-		ImGui::TextColored(MANDRILL_THEME_INFO_TEXT(MANDRILL_THEME_DEFAULT_TEXT_ALPHA), field_formatter.display_name.c_str());
+		ImGui::TextColored(MANDRILL_THEME_INFO_TEXT(MANDRILL_THEME_DEFAULT_TEXT_ALPHA), string_parser.display_name.c_str());
 	}
 	else
 	{
-		ImGui::Text(field_formatter.display_name.c_str());
+		ImGui::Text(string_parser.display_name.c_str());
 	}
 
-	if (!field_formatter.description.is_empty() && ImGui::IsItemHovered())
+	if (!string_parser.description.is_empty() && ImGui::IsItemHovered())
 	{
-		ImGui::SetTooltip(field_formatter.description.c_str());
+		ImGui::SetTooltip(string_parser.description.c_str());
 	}
 
 	ImGui::NextColumn();
 	{
-		if (dynamic_data.is_active)
+		if (is_active)
 		{
 			ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 1.0f);
 			ImGui::PushStyleColor(ImGuiCol_Border, MANDRILL_THEME_HIGH(1.0f));
 		}
 		switch (field.field_type)
 		{
+		case blofeld::_field_string_id:
+			ImGui::SetNextItemWidth(550);
+			result = ImGui::InputText("##string", static_cast<char*>(data), 4096);
+			break;
 		case blofeld::_field_string:
 			ImGui::SetNextItemWidth(350);
-			ImGui::InputText("##string", static_cast<char*>(data), 32);
+			result = ImGui::InputText("##string", static_cast<char*>(data), 32);
 			break;
 		case blofeld::_field_long_string:
 			ImGui::SetNextItemWidth(800);
-			ImGui::InputText("##string", static_cast<char*>(data), 256);
+			result = ImGui::InputText("##string", static_cast<char*>(data), 256);
 			break;
 		}
-		if (dynamic_data.is_active)
+		if (is_active)
 		{
 			ImGui::PopStyleVar();
 			ImGui::PopStyleColor();
 		}
-		dynamic_data.is_active = ImGui::IsItemActive(); // #TODO: is there a more efficient way to do this?
+		is_active = ImGui::IsItemActive(); // #TODO: is there a more efficient way to do this?
 	}
 	ImGui::NextColumn();
 	ImGui::Columns(1);
+
+	return result;
 }
 
 void c_blofeld_tag_editor_tab::render_tag_block(void* data, const blofeld::s_tag_field& field)
@@ -1445,7 +1485,7 @@ uint32_t c_blofeld_tag_editor_tab::render_tag_struct_definition(int level, char*
 
 		case blofeld::_field_string_id:
 		{
-			ImGui::Text("0x%X 0x%X %s %s", bytes_traversed, field_size, field_typename, current_field->name ? current_field->name : "");
+			render_string_id(current_data_position, *current_field);
 			break;
 		}
 		case blofeld::_field_old_string_id:

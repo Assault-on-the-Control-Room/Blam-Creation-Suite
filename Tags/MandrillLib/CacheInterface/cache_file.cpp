@@ -111,16 +111,12 @@ c_cache_file::c_cache_file(const std::wstring& map_filepath, e_engine_type engin
 	platform_type(platform_type)
 {
 	map_filename = PathFindFileNameW(map_filepath.c_str());
+	map_directory = map_filepath.c_str();
+	PathRemoveFileSpecW(map_directory.str());
 
-	char buffer[MAX_PATH + 1];
-
-	snprintf(buffer, MAX_PATH, "%S", map_filename.c_str());
-	buffer[MAX_PATH] = 0;
-	map_filename_utf8 = buffer;
-
-	snprintf(buffer, MAX_PATH, "%S", map_filepath.c_str());
-	buffer[MAX_PATH] = 0;
-	map_filepath_utf8 = buffer;
+	map_filename_utf8.format("%S", map_filename.c_str());
+	map_filepath_utf8.format("%S", map_filepath.c_str());
+	map_directory_utf8.format("%S", map_directory.c_str());
 }
 
 c_cache_file::~c_cache_file()

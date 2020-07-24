@@ -4,7 +4,7 @@ c_tag_interface_tab::c_tag_interface_tab(c_tag_interface& tag_interface, c_mandr
 	c_mandrill_tab(tag_interface.get_name_with_group_name_cstr(), tag_interface.get_path_with_group_name_cstr(), &parent_tab),
 	tag_interface(tag_interface)
 {
-	//if (v_tag_interface<blofeld::haloreach::s_bitmap_block_struct>* bitmap_tag_interface = dynamic_cast<decltype(bitmap_tag_interface)>(&tag_interface))
+	//if (v_tag<blofeld::haloreach::s_bitmap_block_struct>* bitmap_tag_interface = dynamic_cast<decltype(bitmap_tag_interface)>(&tag_interface))
 	//{
 	//	c_mandrill_bitmap_gui_tab* mandrill_bitmap_gui_tab = new c_mandrill_bitmap_gui_tab(cache_file, this, *bitmap_tag_interface);
 	//	ASSERT(mandrill_bitmap_gui_tab != nullptr);

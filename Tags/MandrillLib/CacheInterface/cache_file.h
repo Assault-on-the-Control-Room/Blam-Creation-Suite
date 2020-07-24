@@ -51,16 +51,23 @@ public:
 		return typed_data;
 	}
 
-	inline const wchar_t* get_map_filepath() const { return map_filepath.c_str(); }
-	inline const char* get_map_filepath_utf8() const { return map_filepath_utf8.c_str(); }
+	inline const wchar_t* get_directory() const { return map_directory.c_str(); }
+	inline const char* get_directory_utf8() const { return map_directory_utf8.c_str(); }
 
-	inline const wchar_t* get_map_path() const { return map_filename.c_str(); }
-	inline const char* get_map_path_utf8() const { return map_filename_utf8.c_str(); }
+	inline const wchar_t* get_filepath() const { return map_filepath.c_str(); }
+	inline const char* get_filepath_utf8() const { return map_filepath_utf8.c_str(); }
+
+	inline const wchar_t* get_filename() const { return map_filename.c_str(); }
+	inline const char* get_filename_utf8() const { return map_filename_utf8.c_str(); }
 
 	inline e_engine_type get_engine_type() const { return engine_type; }
 	inline e_platform_type get_platform_type() const { return platform_type; }
 
+	c_callback<void()> on_init;
+	c_callback<void()> on_load;
+	c_callback<void()> on_unload;
 protected:
+
 	c_virtual_memory_container& virtual_memory_container;
 	e_engine_type engine_type;
 	e_platform_type platform_type;
@@ -75,6 +82,8 @@ protected:
 protected:
 	/* initialize each tag instance */
 	BCSAPI void init_sorted_instance_lists();
+	c_fixed_wide_path map_directory;
+	c_fixed_path map_directory_utf8;
 	c_fixed_wide_path map_filepath;
 	c_fixed_path map_filepath_utf8;
 	c_fixed_wide_string_256 map_filename;

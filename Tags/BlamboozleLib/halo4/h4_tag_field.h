@@ -415,8 +415,8 @@ public:
 
 enum e_tag_resource_type
 {
-	_tag_resource_type_sound = 2,
-	_tag_resource_type_bitmap = 4,
+	_tag_bcs_resource_type_sound = 2,
+	_tag_bcs_resource_type_bitmap = 4,
 };
 
 struct s_h4_tag_resource_definition

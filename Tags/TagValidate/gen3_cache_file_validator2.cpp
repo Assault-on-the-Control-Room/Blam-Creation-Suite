@@ -223,7 +223,14 @@ void c_gen3_cache_file_validator2::validate_tag_instances()
 	//	}
 	//}
 
-	s_tag_validation_data validation_data(**cache_file.get_tag_interfaces());
+	c_tag_interface* const* tag_interfaces = cache_file.get_tag_interfaces();
+
+	if (tag_interfaces == nullptr)
+	{
+		return;
+	}
+
+	s_tag_validation_data validation_data(**tag_interfaces);
 
 	for (s_tag_validation_data* current_validation_data : validation_datas)
 	{
@@ -522,25 +529,25 @@ void c_gen3_cache_file_validator2::validate_tag_pageable(
 		return; // throw error?
 	}
 
-	c_tag_interface* cache_file_resource_gestalt = cache_file_resource_gestalt_group->get_tag_interfaces()[0];
-	if (v_tag_interface<blofeld::haloreach::s_cache_file_resource_gestalt_block_struct>* haloreach_cache_file_resource_gestalt = dynamic_cast<decltype(haloreach_cache_file_resource_gestalt)>(cache_file_resource_gestalt->get_virtual_tag_interface()))
-	{
-		blofeld::haloreach::s_cache_file_resource_data_block_block_struct& cache_file_resource_data_block = haloreach_cache_file_resource_gestalt->resources_block[index];
-		char* data = cache_file.get_tag_data(haloreach_cache_file_resource_gestalt->naive_resource_control_data); // #TODO: virtual tag data [tag_data.get_data()]
-		char* pagable_data = data + cache_file_resource_data_block.naive_data_offset;
+	//c_tag_interface* cache_file_resource_gestalt = cache_file_resource_gestalt_group->get_tag_interfaces()[0];
+	//if (v_tag<blofeld::haloreach::s_cache_file_resource_gestalt_block_struct>* haloreach_cache_file_resource_gestalt = dynamic_cast<decltype(haloreach_cache_file_resource_gestalt)>(cache_file_resource_gestalt->get_virtual_tag_interface()))
+	//{
+	//	blofeld::haloreach::s_cache_file_resource_data_block_block_struct& cache_file_resource_data_block = haloreach_cache_file_resource_gestalt->resources_block[index];
+	//	char* data = cache_file.get_tag_data(haloreach_cache_file_resource_gestalt->naive_resource_control_data); // #TODO: virtual tag data [tag_data.get_data()]
+	//	char* pagable_data = data + cache_file_resource_data_block.naive_data_offset;
 
-		traverse_tag_struct(validation_data, pagable_data, struct_definition);
+	//	traverse_tag_struct(validation_data, pagable_data, struct_definition);
 
-		debug_point;
-	}
-	else if (v_tag_interface<blofeld::halo3::s_cache_file_resource_gestalt_block_struct>* halo3_cache_file_resource_gestalt = dynamic_cast<decltype(halo3_cache_file_resource_gestalt)>(cache_file_resource_gestalt->get_virtual_tag_interface()))
-	{
-		return; // throw error?
-	}
-	else
-	{
-		return; // throw error?
-	}
+	//	debug_point;
+	//}
+	//else if (v_tag<blofeld::halo3::s_cache_file_resource_gestalt_block_struct>* halo3_cache_file_resource_gestalt = dynamic_cast<decltype(halo3_cache_file_resource_gestalt)>(cache_file_resource_gestalt->get_virtual_tag_interface()))
+	//{
+	//	return; // throw error?
+	//}
+	//else
+	//{
+	//	return; // throw error?
+	//}
 
 
 	

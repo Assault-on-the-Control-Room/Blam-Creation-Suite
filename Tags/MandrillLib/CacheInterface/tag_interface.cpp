@@ -5,7 +5,6 @@ c_tag_interface::c_tag_interface(c_cache_file& cache_file, uint32_t tag_index) :
 	is_tag_null(false),
 	blofeld_reflection_type(nullptr),
 	cache_file(cache_file),
-	reflection_initialised(false),
 	virtual_tag_interface(nullptr),
 	virtual_resource_user_data(nullptr)
 {
@@ -25,7 +24,7 @@ void c_tag_interface::associate_virtual_tag_interface(c_virtual_tag_interface& v
 	this->virtual_tag_interface = &virtual_tag_interface;
 }
 
-void c_tag_interface::init_virtual_tag_interface()
+void c_tag_interface::init_blofeld_reflection_type()
 {
 	if (is_null())
 	{
@@ -38,8 +37,15 @@ void c_tag_interface::init_virtual_tag_interface()
 	}
 
 	blofeld_reflection_type = blofeld::get_group_tag_by_group_tag(get_group_tag());
+}
 
-
+void c_tag_interface::init_virtual_tag_interface()
+{
+	init_blofeld_reflection_type();
+	if (blofeld_reflection_type == nullptr)
+	{
+		return;
+	}
 
 	for (c_mandrill_extension& extension : c_reference_loop(c_mandrill_extension::get_extensions(), c_mandrill_extension::get_extension_count()))
 	{
@@ -101,10 +107,9 @@ c_tag_group_interface* c_tag_interface::get_tag_group_interface() const
 
 c_virtual_tag_interface* c_tag_interface::get_virtual_tag_interface()
 {
-	if (!reflection_initialised)
+	if (virtual_tag_interface == nullptr)
 	{
 		init_virtual_tag_interface();
-		reflection_initialised = true;
 	}
 
 	return virtual_tag_interface;
@@ -112,11 +117,9 @@ c_virtual_tag_interface* c_tag_interface::get_virtual_tag_interface()
 
 const blofeld::s_tag_group* c_tag_interface::get_blofeld_reflection_data()
 {
-	if (!reflection_initialised)
+	if (blofeld_reflection_type == nullptr)
 	{
-		init_virtual_tag_interface();
-		reflection_initialised = true;
+		init_blofeld_reflection_type();
 	}
-
 	return blofeld_reflection_type;
 }

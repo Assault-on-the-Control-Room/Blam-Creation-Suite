@@ -3,7 +3,7 @@
 c_custom_tool_render_model::c_custom_tool_render_model(c_cache_file& cache_file, blofeld::haloreach::s_object_struct_definition* object_struct_definition) :
 	c_custom_tool_base()
 {
-	v_tag_interface<s_model_definition>* model_tag = dynamic_cast<v_tag_interface<s_model_definition>*>(cache_file.get_tag_interface(object_struct_definition->model.index));
+	v_tag<s_model_definition>* model_tag = dynamic_cast<v_tag<s_model_definition>*>(cache_file.get_tag_interface(object_struct_definition->model.index));
 
 	title = "Render model";
 	maximum_height = 500.0f;

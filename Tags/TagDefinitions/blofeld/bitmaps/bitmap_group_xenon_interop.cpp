@@ -7,7 +7,9 @@ namespace blofeld
 
 	TAG_STRUCT(render_texture_interop_definition_struct)
 	{
+		{ _field_version_greater, _engine_type_haloreach, 1 },
 		{ _field_data, "pixel data*" },
+
 		{ _field_data, "medium res data*" },
 		{ _field_data, "high res data*" },
 		{ _field_short_integer, "width*" },
@@ -15,13 +17,20 @@ namespace blofeld
 		{ _field_char_integer, "depth*" },
 		{ _field_char_integer, "total mipmap count*" },
 		{ _field_char_enum, "type*", &bitmap_types },
+
+		{ _field_version_greater, _engine_type_haloreach, 1 },
 		{ _field_char_integer, "pad1_1" },
+
 		{ _field_char_enum, "is high res bitmap", &boolean_enum_definition },
+
+		{ _field_version_greater, _engine_type_haloreach, 4 },
 		{ _field_char_enum, "is medium res bitmap", &boolean_enum_definition },
 		{ _field_char_enum, "pad2_1", &boolean_enum_definition },
 		{ _field_char_enum, "pad2_2", &boolean_enum_definition },
 		{ _field_long_integer, "exponent bias" },
+
 		{ _field_long_integer, "xenon d3d format*" },
+
 		{ _field_terminator }
 	};
 

@@ -29,6 +29,8 @@
 using namespace xxhash;
 using namespace xxhash::literals;
 
+#include "Strings/strings.h"
+
 #include "language_util.h"
 #include "threading.h"
 #include "language_runtime.h"
@@ -39,8 +41,6 @@ using namespace xxhash::literals;
 #include "enum_util.h"
 #include "callback_util.h"
 #include "settings.h"
-
-#include "Strings/strings.h"
 
 #include "Windows/window.h"
 #include "Windows/command_line.h"

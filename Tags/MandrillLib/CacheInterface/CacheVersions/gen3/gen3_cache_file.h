@@ -12,6 +12,38 @@ struct s_section_cache
 class c_gen3_cache_file_validator;
 class c_cache_file_string_id_guesstimator;
 
+enum e_resource_type
+{
+	_resource_type_stitchable_bitmap_texture_interop_resource,
+	_resource_type_bitmap_texture_interop_resource,
+	_resource_type_render_geometry_api_resource_definition,
+	_resource_type_render_collision_model_resource,
+	_resource_type_constant_buffer_resource_definition,
+	_resource_type_sound_resource_definition,
+	_resource_type_model_animation_tag_resource,
+	_resource_type_bitmap_texture_interleaved_interop_resource,
+	_resource_type_structure_bsp_tag_resources,
+	_resource_type_structure_bsp_cache_file_tag_resources,
+	_resource_type_facial_animation_resource_definition,
+	k_num_resource_types
+};
+
+enum e_interop_type
+{
+	_interop_type_tag_d3d_vertex_buffer,
+	_interop_type_tag_d3d_index_buffer,
+	_interop_type_tag_d3d_texture,
+	_interop_type_tag_d3d_texture_interleaved,
+	_interop_type_tag_d3d_vertex_shader,
+	_interop_type_tag_d3d_pixel_shader,
+	_interop_type_constant_buffer,
+	_interop_type_structured_buffer,
+	_interop_type_polyartvertexbuffer0,
+	_interop_type_polyartvertexbuffer1,
+	_interop_type_polyartindexbuffer,
+	k_num_interop_types
+};
+
 class c_gen3_cache_file :
 	public c_cache_file
 {
@@ -23,6 +55,8 @@ protected:
 	virtual ~c_gen3_cache_file();
 
 public:
+	virtual e_resource_type get_resource_type_by_index(uint32_t index) const = 0;
+	virtual e_interop_type get_interop_type_by_index(uint32_t index) const = 0;
 	virtual bool is_loading() const final;
 	virtual uint32_t get_tag_count() const final;
 	virtual uint32_t get_tag_group_count() const final;
@@ -43,6 +77,8 @@ public:
 	inline const s_section_cache& get_tags_section() const { return get_section(gen3::_cache_file_section_index_tags); };
 	inline const s_section_cache& get_resources_section() const { return get_section(gen3::_cache_file_section_index_resource); };
 	inline const s_section_cache& get_localization_section() const { return get_section(gen3::_cache_file_section_index_localization); };
+	inline c_gen3_resource_manager& get_resource_manager() { return resource_manager; };
+	inline const c_gen3_resource_manager& get_resource_manager() const { return resource_manager; };
 	inline char* get_tags_buffer() const { return tags_buffer; }
 	inline c_gen3_cache_file_validator& get_cache_file_validator() const { return *validator; }
 
@@ -59,9 +95,11 @@ public:
 	};
 
 protected:
+	void post_init();
 	virtual void* get_internal_tag_instance_impl(uint32_t tag_index) const final;
 	virtual void* get_internal_tag_group_impl(uint32_t group_index) const final;
 
+	c_gen3_resource_manager resource_manager;
 	gen3::s_cache_file_header& cache_file_header;
 	gen3::s_cache_file_tag_group* cache_file_tag_groups;
 	gen3::s_cache_file_tag_instance* cache_file_tag_instances;

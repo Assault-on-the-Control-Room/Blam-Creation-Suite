@@ -2,9 +2,9 @@
 
 HICON c_window::icon_handles[k_number_of_window_icons] =
 {
-	LoadIconW(c_runtime_util::get_current_module(), c_resources_manager::get_resource_int_resource(_resource_type_icon_application)),
-	LoadIconW(c_runtime_util::get_current_module(), c_resources_manager::get_resource_int_resource(_resource_type_icon_blam_creation_suite)),
-	LoadIconW(c_runtime_util::get_current_module(), c_resources_manager::get_resource_int_resource(_resource_type_icon_mandrill)),
+	LoadIconW(c_runtime_util::get_current_module(), c_resources_manager::get_resource_int_resource(_bcs_resource_type_icon_application)),
+	LoadIconW(c_runtime_util::get_current_module(), c_resources_manager::get_resource_int_resource(_bcs_resource_type_icon_blam_creation_suite)),
+	LoadIconW(c_runtime_util::get_current_module(), c_resources_manager::get_resource_int_resource(_bcs_resource_type_icon_mandrill)),
 };
 
 c_window::c_window(

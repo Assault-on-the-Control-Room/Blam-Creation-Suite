@@ -1,11 +1,12 @@
 #pragma once
 
+#include <TagReflection/virtual_tag_interface.h>
+
 #include "cache_utilities.h"
 #include "tag_group_interface.h"
 #include "tag_interface.h"
 #include "cache_file_string_id_guesstimator.h"
 #include "cache_file.h"
-#include "virtual_tag_block.h"
 #include "virtual_tag.h"
 
 #include "CacheVersions\halo1\halo1_cache_file_types.h"
@@ -20,6 +21,7 @@
 #include "CacheVersions\gen3\gen3_cache_file_types.h"
 #include "CacheVersions\gen3\gen3_tag_interface.h"
 #include "CacheVersions\gen3\gen3_tag_group_interface.h"
+#include "CacheVersions\gen3\gen3_resource_manager.h"
 #include "CacheVersions\gen3\gen3_cache_file.h"
 
 #include "CacheVersions\halo3\halo3_cache_file_types.h"

@@ -183,6 +183,8 @@
     <ClInclude Include="haloreach\haloreach_virtual.h" />
     <ClInclude Include="tagreflection-private-pch.h" />
     <ClInclude Include="tagreflection-public-pch.h" />
+    <ClInclude Include="virtual_struct_interface.h" />
+    <ClInclude Include="virtual_tag_block.h" />
     <ClInclude Include="virtual_tag_interface.h" />
     <ClInclude Include="xbox360_gen3\xbox360_gen3.h" />
     <ClInclude Include="xbox360_gen3\xbox360_gen3_virtual.h" />
@@ -201,6 +203,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="virtual_struct_interface.cpp" />
+    <ClCompile Include="virtual_tag_block.cpp" />
     <ClCompile Include="virtual_tag_interface.cpp" />
     <ClCompile Include="xbox360_gen3\xbox360_gen3_virtual.cpp" />
   </ItemGroup>

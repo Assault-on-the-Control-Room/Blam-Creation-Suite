@@ -659,7 +659,7 @@ namespace ImGuiAddons
             {
                 //Remember we displayed drives as *Local/Removable Disk: X* hence we need last char only
                 name = std::string(1, name.back()) + ":";
-                new_path += name + "/";
+                new_path += name + "\\";
             }
             else
                 new_path += name + "/";
@@ -694,7 +694,8 @@ namespace ImGuiAddons
             {
                 const wchar_t* absolute_path = dir->wdirp->patt;
                 std::string current_directory = wStringToString(absolute_path);
-                std::replace(current_directory.begin(), current_directory.end(), '\\', '/');
+                //std::replace(current_directory.begin(), current_directory.end(), '\\', '/');
+                std::replace(current_directory.begin(), current_directory.end(), '/', '\\');
 
                 //Remove trailing "/*" returned by ** dir->wdirp->patt **
                 current_directory.pop_back();
@@ -814,7 +815,7 @@ namespace ImGuiAddons
         current_dirlist.push_back("Computer");
 
         std::istringstream iss(path);
-        while(std::getline(iss, path_element, '/'))
+        while(std::getline(iss, path_element, '\\'))
         {
             if(!path_element.empty())
                 current_dirlist.push_back(path_element);

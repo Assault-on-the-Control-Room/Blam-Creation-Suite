@@ -10,46 +10,60 @@ c_virtual_tag_source_generator::c_virtual_tag_source_generator(e_engine_type eng
 
 }
 
-void c_virtual_tag_source_generator::generate_header()
+bool c_virtual_tag_source_generator::is_tag_group(const s_tag_struct_definition& tag_struct_definition)
 {
-	std::stringstream hs;
+	for (const s_tag_group& tag_group : c_reference_loop(blofeld::tag_groups))
+	{
+		if (&tag_struct_definition == &tag_group.block_definition.struct_definition)
+		{
+			return true;
+		}
+	}
 
+	return false;
+}
+
+void c_virtual_tag_source_generator::generate_header_impl(std::stringstream& hs, bool tag_groups)
+{
 	const char* namespace_name = engine_type_to_folder_name<const char*>(engine_type);
-
-	hs << std::endl;
-	hs << std::endl;
-
-	hs << "namespace blofeld" << std::endl;
-	hs << "{" << std::endl;
-	hs << "\tnamespace " << namespace_name << std::endl;
-	hs << "\t{" << std::endl << std::endl;
-
-
-
-	//hs << "\t\t" << "class c_cache_file;" << std::endl << std::endl;
-	//hs << "\t\t" << "class c_tag_interface { public: c_tag_interface(c_cache_file&, uint32_t tag_index); template<typename T> T* get_data(); };" << std::endl << std::endl;
-	//hs << "\t\t" << "template<typename t_value> class c_virtual_tag_block { public: c_virtual_tag_block(c_cache_file& cache_file, c_tag_interface& tag_interface, c_typed_tag_block<t_value>& tag_block); };" << std::endl << std::endl;
-	//hs << "\t\t" << "class c_virtual_tag { public: c_virtual_tag(c_cache_file& cache_file, c_tag_interface& tag_interface, s_tag_reference& tag_reference); };" << std::endl << std::endl;
-
-
-	//hs << "\t\t" << "template<typename T>" << std::endl;
-	//hs << "\t\t" << "class v_tag_interface :" << std::endl;
-	//hs << "\t\t" << "\tpublic c_tag_interface" << std::endl;
-	//hs << "\t\t" << "{" << std::endl;
-	//hs << "\t\t" << "};" << std::endl << std::endl;
-
-	hs << "\t\tc_virtual_tag_interface* create_virtual_tag_interface(c_tag_interface& tag_interface, unsigned long group_tag);" << std::endl << std::endl;
 
 	std::map<std::string, int> field_name_unique_counter;
 	for (const s_tag_struct_definition* tag_struct_definition : c_structure_relationship_node::sorted_tag_struct_definitions)
 	{
-		hs << "\t\t" << "template<>" << std::endl;
-		hs << "\t\t" << "class v_tag_interface<s_" << tag_struct_definition->name << "> : " << std::endl;
-		hs << "\t\t\t" << "public c_virtual_tag_interface" << std::endl;
-		hs << "\t\t" << "{" << std::endl;
-		hs << "\t\t\t" << "public:" << std::endl;
-		hs << "\t\t\t" << "v_tag_interface(c_tag_interface& tag_interface) : " << std::endl;
-		hs << "\t\t\t\t" << "c_virtual_tag_interface(tag_interface)";
+		if (tag_groups)
+		{
+			if (!is_tag_group(*tag_struct_definition))
+			{
+				continue;
+			}
+		}
+
+		if (tag_groups)
+		{
+			hs << "\t\t" << "template<>" << std::endl;
+			hs << "\t\t" << "class v_tag<blofeld::" << namespace_name << "::s_" << tag_struct_definition->name << "> : " << std::endl;
+			hs << "\t\t\t" << "public c_virtual_tag_interface" << std::endl;
+			hs << "\t\t\t" << "{" << std::endl;
+			hs << "\t\t\t" << "public:" << std::endl;
+			hs << "\t\t\t" << "non_copyconstructable(v_tag);" << std::endl;
+			hs << "\t\t" << "v_tag(c_tag_interface& tag_interface) : " << std::endl;
+			hs << "\t\t\t\t" << "c_virtual_tag_interface(tag_interface)";
+			hs << "," << std::endl;
+			hs << "\t\t\t\t" << "__struct(*tag_interface.get_data<blofeld::" << namespace_name << "::s_" << tag_struct_definition->name << ">())";
+		}
+		else
+		{
+			hs << "\t\t" << "template<>" << std::endl;
+			hs << "\t\t" << "class v_struct<blofeld::" << namespace_name << "::s_" << tag_struct_definition->name << "> : " << std::endl;
+			hs << "\t\t\t" << "public c_virtual_struct_interface" << std::endl;
+			hs << "\t\t\t" << "{" << std::endl;
+			hs << "\t\t\t" << "public:" << std::endl;
+			hs << "\t\t" << "non_copyconstructable(v_struct);" << std::endl;
+			hs << "\t\t\t" << "v_struct(c_tag_interface& tag_interface, blofeld::" << namespace_name << "::s_" << tag_struct_definition->name << "& tag_struct) : " << std::endl;
+			hs << "\t\t\t\t" << "c_virtual_struct_interface(tag_interface, &tag_struct)";
+			hs << "," << std::endl;
+			hs << "\t\t\t\t" << "__struct(tag_struct)";
+		}
 
 		for (const s_tag_field* current_field = tag_struct_definition->fields; current_field->field_type != _field_terminator; current_field++)
 		{
@@ -78,12 +92,15 @@ void c_virtual_tag_source_generator::generate_header()
 
 			switch (current_field->field_type)
 			{
+			case _field_struct:
+				hs << "\t\t\t\t" << field_formatter.code_name.c_str() << "(tag_interface, __struct." << field_formatter.code_name.c_str() << ")";
+				break;
 			case _field_block:
 			case _field_tag_reference:
-				hs << "\t\t\t\t" << field_formatter.code_name.c_str() << "(tag_interface, tag_interface.get_data<s_" << tag_struct_definition->name << ">()->" << field_formatter.code_name.c_str() << ")";
+				hs << "\t\t\t\t" << field_formatter.code_name.c_str() << "(tag_interface, __struct." << field_formatter.code_name.c_str() << ")";
 				break;
 			default:
-				hs << "\t\t\t\t" << field_formatter.code_name.c_str() << "(tag_interface.get_data<s_" << tag_struct_definition->name << ">()->" << field_formatter.code_name.c_str() << ")";
+				hs << "\t\t\t\t" << field_formatter.code_name.c_str() << "(__struct." << field_formatter.code_name.c_str() << ")";
 				break;
 			}
 		}
@@ -92,6 +109,14 @@ void c_virtual_tag_source_generator::generate_header()
 		hs << "\t\t\t\t" << "{ }";
 		hs << std::endl;
 		hs << std::endl;
+
+		hs << "\t\t\t" << "private:" << std::endl;
+		hs << "\t\t\t\t" << "blofeld::" << namespace_name << "::s_" << tag_struct_definition->name << "& __struct;" << std::endl;
+		hs << std::endl;
+		hs << "\t\t\t" << "public:" << std::endl;
+		hs << std::endl;
+
+		
 
 		for (const s_tag_field* current_field = tag_struct_definition->fields; current_field->field_type != _field_terminator; current_field++)
 		{
@@ -125,31 +150,31 @@ void c_virtual_tag_source_generator::generate_header()
 			case _field_array:
 			{
 				const char* field_source_type = current_field->array_definition->struct_definition.name;
-				hs << "\t\t\t\t" << "s_" << field_source_type << " (&" << field_formatter.code_name.c_str() << ")[" << current_field->array_definition->count(engine_type) << "];";
+				hs << "\t\t\t" << "blofeld::" << namespace_name << "::s_" << field_source_type << " (&" << field_formatter.code_name.c_str() << ")[" << current_field->array_definition->count(engine_type) << "];";
 				break;
 			}
 			case _field_struct:
 			{
 				const char* field_source_type = current_field->struct_definition->name;
-				hs << "\t\t\t\t" << "s_" << field_source_type << "& " << field_formatter.code_name.c_str() << ";";
+				hs << "\t\t\t" << "v_struct<blofeld::" << namespace_name << "::s_" << field_source_type << "> " << field_formatter.code_name.c_str() << ";";
 				break;
 			}
 			case _field_block:
 			{
 				const char* field_source_type = current_field->block_definition->struct_definition.name;
-				hs << "\t\t\t\t" << "c_virtual_tag_block<s_" << field_source_type << "> " << field_formatter.code_name.c_str() << ";";
+				hs << "\t\t\t" << "c_virtual_tag_block<blofeld::" << namespace_name << "::s_" << field_source_type << "> " << field_formatter.code_name.c_str() << ";";
 				break;
 			}
 			case _field_tag_reference:
 			{
-				hs << "\t\t\t\t" << "c_virtual_tag " << field_formatter.code_name.c_str() << ";";
+				hs << "\t\t\t" << "c_virtual_tag " << field_formatter.code_name.c_str() << ";";
 				break;
 			}
 			default:
 			{
 				const char* field_source_type = c_tag_source_generator::field_type_to_source_type(platform_type, current_field->field_type);
 				ASSERT(field_source_type != nullptr);
-				hs << "\t\t\t\t" << field_source_type << "& " << field_formatter.code_name.c_str() << ";";
+				hs << "\t\t\t" << field_source_type << "& " << field_formatter.code_name.c_str() << ";";
 			}
 			}
 			hs << std::endl;
@@ -164,6 +189,26 @@ void c_virtual_tag_source_generator::generate_header()
 		debug_point;
 
 	}
+}
+
+void c_virtual_tag_source_generator::generate_header()
+{
+	std::stringstream hs;
+
+	const char* namespace_name = engine_type_to_folder_name<const char*>(engine_type);
+
+	hs << std::endl;
+	hs << std::endl;
+
+	hs << "namespace blofeld" << std::endl;
+	hs << "{" << std::endl;
+	hs << "\tnamespace " << namespace_name << std::endl;
+	hs << "\t{" << std::endl << std::endl;
+
+	hs << "\t\tc_virtual_tag_interface* create_virtual_tag_interface(c_tag_interface& tag_interface, unsigned long group_tag);" << std::endl << std::endl;
+
+	generate_header_impl(hs, false);
+	generate_header_impl(hs, true);
 
 	hs << std::endl << "\t} // end namespace " << namespace_name << std::endl;
 	hs << std::endl << "} // end namespace blofeld" << std::endl;
@@ -219,7 +264,7 @@ void c_virtual_tag_source_generator::generate_source()
 
 		const s_tag_struct_definition& tag_struct_definition = (*tag_group)->block_definition.struct_definition;
 
-		ss << "\t\t\t" << "case " << tag_group_name.data << ": return new v_tag_interface<s_" << tag_struct_definition.name << ">(tag_interface);" << std::endl;
+		ss << "\t\t\t" << "case " << tag_group_name.data << ": return new v_tag<s_" << tag_struct_definition.name << ">(tag_interface);" << std::endl;
 
 		debug_point;
 

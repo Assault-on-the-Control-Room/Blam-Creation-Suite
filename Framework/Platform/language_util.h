@@ -177,4 +177,12 @@ public:
 	c_range_loop(t_value begin) : c_loop_helper<t_value, t_value>(begin) {}
 };
 
-
+inline GUID UuidFromString2(const char* guid_str)
+{
+	c_fixed_wide_string_64 buffer;
+	buffer.format(L"{%S}", guid_str);
+	GUID guid;
+	HRESULT clsid_from_string_result = IIDFromString(buffer.c_str(), &guid);
+	ASSERT(clsid_from_string_result == S_OK);
+	return guid;
+}

@@ -3,7 +3,7 @@
 
 const char* c_console::g_console_executable_name = "Resource";
 
-void update_resource_data(LPCWSTR szExecutablePath, e_resource_type type, const char* data, size_t data_length)
+void update_resource_data(LPCWSTR szExecutablePath, e_bcs_resource_type type, const char* data, size_t data_length)
 {
 	HANDLE update_resource_handle = BeginUpdateResourceW(szExecutablePath, FALSE);
 	ASSERT(update_resource_handle != NULL);
@@ -25,7 +25,7 @@ void update_resource_data(LPCWSTR szExecutablePath, e_resource_type type, const 
 
 }
 
-void update_resource(LPCWSTR executable_path, LPCWSTR file_path, e_resource_type resource_type)
+void update_resource(LPCWSTR executable_path, LPCWSTR file_path, e_bcs_resource_type resource_type)
 {
 	char* file_data = nullptr;
 	size_t file_length = 0;
@@ -97,15 +97,15 @@ int WINAPI wWinMain(
 		};
 
 		c_map_file_parser map_file_parser = c_map_file_parser(symbolfile.c_str(), excluded_symbol_libs, _countof(excluded_symbol_libs));
-		update_resource_data(executable.c_str(), _resource_type_symbols_blob, map_file_parser.get_sym_data(), map_file_parser.get_sym_size());
+		update_resource_data(executable.c_str(), _bcs_resource_type_symbols_blob, map_file_parser.get_sym_data(), map_file_parser.get_sym_size());
 	}
 
 	if (package_shaders)
 	{
 		std::wstring box_shader_ps_filepath = outputdir + L"BoxShaderPS.cso";
 		std::wstring box_shader_vs_filepath = outputdir + L"BoxShaderVS.cso";
-		update_resource(executable.c_str(), box_shader_ps_filepath.c_str(), _resource_type_box_pixel_shader);
-		update_resource(executable.c_str(), box_shader_vs_filepath.c_str(), _resource_type_box_vertex_shader);
+		update_resource(executable.c_str(), box_shader_ps_filepath.c_str(), _bcs_resource_type_box_pixel_shader);
+		update_resource(executable.c_str(), box_shader_vs_filepath.c_str(), _bcs_resource_type_box_vertex_shader);
 	}
 
 	if (mandrill)
