@@ -76,6 +76,7 @@ FunctionHookEx<version_number_callback_offset, char __fastcall(__int64, wchar_t*
 	{
 	case _build_mcc_1_1629_0_0:
 	case _build_mcc_1_1658_0_0:
+	case _build_mcc_1_1698_0_0:
 		swprintf_s(dst, len, L"%s", build_str);
 		break;
 	}
