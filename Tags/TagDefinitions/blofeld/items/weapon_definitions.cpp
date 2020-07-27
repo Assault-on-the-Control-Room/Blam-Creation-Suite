@@ -356,7 +356,7 @@ namespace blofeld
 		{ _field_struct, "autofire", &weapon_trigger_autofire_struct_struct_definition },
 		{ _field_struct, "charging", &weapon_trigger_charging_struct_struct_definition },
 
-		{ _field_version_less, _engine_type_haloreach }, // Cheers camden, ya mad lad
+		{ _field_version_less, _engine_type_haloreach, 3 }, // Cheers camden, ya mad lad
 		{ _field_real, "lock on hold time" }, 
 		{ _field_real, "lock on acquire time" }, 
 		{ _field_real, "lock on grace period" },
