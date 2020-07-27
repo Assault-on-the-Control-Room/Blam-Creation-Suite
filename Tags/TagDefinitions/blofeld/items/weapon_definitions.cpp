@@ -181,6 +181,11 @@ namespace blofeld
 		{ _field_tag_reference, "age fully recovered (sound or effect)#the sound or effect played when the weapon\'s age reaches fully recovered", &weapon_block_struct_ready_effect_reference },
 		
 		{ _field_real_vector_3d, "first person weapon offset" },
+
+		{ _field_version_platform_include, _platform_type_pc, 2 },
+		{ _field_version_equal, _engine_type_halo3 },
+		{ _field_real_vector_3d, "centered first person weapon offset" },
+
 		{ _field_real_vector_2d, "first person scope size" },
 		{ _field_real_bounds, "support third person camera range:degrees#range in degrees. 0 is straight, -90 is down, 90 is up" },
 		{ _field_real, "weapon zoom time#seconds" },
@@ -351,6 +356,11 @@ namespace blofeld
 		{ _field_struct, "autofire", &weapon_trigger_autofire_struct_struct_definition },
 		{ _field_struct, "charging", &weapon_trigger_charging_struct_struct_definition },
 
+		{ _field_version_less, _engine_type_haloreach }, // Cheers camden, ya mad lad
+		{ _field_real, "lock on hold time" }, 
+		{ _field_real, "lock on acquire time" }, 
+		{ _field_real, "lock on grace period" },
+
 		{ _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_tag_reference, "double latch projectile releasable effect#created once player is able to release the tethered projectile", &global_effect_reference },
 		{ _field_tag_reference, "double latch projectile released effect#created when player releases the tethered projectile", &global_effect_reference },
@@ -418,13 +428,26 @@ namespace blofeld
 		{ _field_short_integer, "rounds between tracers#the number of non-tracer rounds fired between tracers" },
 		{ _field_custom },
 		{ _field_string_id, "optional barrel marker name" },
+
+		{ _field_version_less, _engine_type_haloreach, 3 },
+		{ _field_explanation, "prediction properties", "what the behavior of this barrel is in a predicted network game" },
+		{ _field_enum, "prediction type", &barrel_prediction_type_enum },
+		{ _field_enum, "firing noise#how loud this weapon appears to the AI", &ai_sound_volume_enum },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach, 5 },
 		{ _field_enum, "firing noise#how loud this weapon appears to the AI", &ai_sound_volume_enum },
 		{ _field_explanation, "prediction properties", "what the behavior of this barrel is in a predicted network game" },
 		{ _field_enum, "prediction type", &barrel_prediction_type_enum },
 		{ _field_real, "event_synchronized_projectiles_per_second#Valid only for barrels set to prediction type \"continuous\". Controls how many projectiles per second can be individually synchronized (use debug_projectiles to diagnose)." },
 		{ _field_real, "maximum_barrel_error_for_event_synchronization#Valid only for barrels set to prediction type \"continuous\". If the barrel\'s current error level is over this value (zero to one scale), we will not consider synchronizing projectiles with individual events (use debug_projectiles to diagnose)." },
+
 		{ _field_explanation, "firing error", "full error look pitch rate controlls how fast you can turn \nwith full error, yaw is implied from pitch. 0==130.\nfor reference, profile sensitivities are set to:\n1: 40\n3: 60\n9: 130\n" },
 		{ _field_struct, "firing error", &weapon_barrel_firing_error_struct_struct_definition },
+
+		{ _field_version_less, _engine_type_haloreach, 2 }, // H3
+		{ _field_struct, "turning", &weapon_barrel_turning_struct_struct_definition },
+		{ _field_struct, "dual weapon error", &weapon_barrel_dual_error_struct_struct_definition },
+
 		{ _field_explanation, "projectile", "" },
 		{ _field_enum, "distribution function", &weapon_barrel_distribution_functions },
 		{ _field_short_integer, "projectiles per shot" },
@@ -435,7 +458,10 @@ namespace blofeld
 		{ _field_real, "distribution angle:degrees#used by distribution function \'horizontal fan\' above" },
 		{ _field_angle, "minimum error:degrees#projectile direction is randomly selected between this and max_error_angle below" },
 		{ _field_angle_bounds, "error angle:degrees (max_error_angle)#current barrel_error is linearly interpolated between these to generate max_error_angle" },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_struct, "accuracy penalties", &weapon_barrel_projectile_accuracy_penalty_struct_struct_definition },
+
 		{ _field_block, "first person offset", &weapon_barrel_first_person_offset_block_block },
 		{ _field_char_enum, "damage effect reporting type", &global_damage_reporting_enum_definition },
 		{ _field_pad, "DGSXQ", 3 },
@@ -448,14 +474,31 @@ namespace blofeld
 		{ _field_real, "ejection port recovery time#the amount of time (in seconds) it takes for the ejection port to transition from 1.0 (open) to 0.0 (closed) after a shot has been fired" },
 		{ _field_real, "illumination recovery time#the amount of time (in seconds) it takes the illumination function to transition from 1.0 (bright) to 0.0 (dark) after a shot has been fired" },
 		{ _field_real_fraction, "heat generated per round:[0,1]#the amount of heat generated each time the barrel fires. Unlike the name suggests, this amount of heat is NOT applied per projectile created." },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_string_id, "heat generated per round function&heat generated per round#function value sets the amount of heat to add to the weapon each tick the barrel is firing" },
+
 		{ _field_real_fraction, "age generated per round:[0,1]#the amount the weapon ages each time the trigger is fired" },
 		{ _field_real_fraction, "CAMPAIGN age generated per round:[0,1]#the amount the weapon ages each time the trigger is fired" },
 		{ _field_real, "overload time:seconds#the next trigger fires this often while holding down this trigger" },
+
+		{ _field_version_less, _engine_type_haloreach, 7 }, //pulled from assembly, probs exists in h2ek definitions(?)
+		{ _field_real_bounds, "angle change per shot" },
+		{ _field_real, "angle change acceleration time" },
+		{ _field_real, "angle change deceleration time" },
+		{ _field_enum, "angle change function", &weapon_barrel_angle_change_functions },
+		{ _field_short_integer, "@unknown" },
+		{ _field_real, "runtime angle change acceleration rate" },
+		{ _field_real, "runtime angle change deceleration rate" },
+
 		{ _field_real, "runtime illumination recovery rate!" },
 		{ _field_real, "runtime ejection port recovery rate!" },
 		{ _field_real, "runtime rate of fire acceleration rate!" },
 		{ _field_real, "runtime rate of fire deceleration rate!" },
+
+		{ _field_version_less, _engine_type_haloreach },
+		{ _field_real, "runtime error acceleration rate!" },
+
 		{ _field_real, "runtime error deceleration rate!" },
 		{ _field_block, "firing effects#firing effects determine what happens when this trigger is fired", &barrel_firing_effect_block_block },
 		{ _field_terminator }
@@ -578,44 +621,94 @@ namespace blofeld
 		{ _field_explanation, "CHARGING", "" },
 		{ _field_real, "charging time:seconds#the amount of time it takes for this trigger to become fully charged" },
 		{ _field_real, "charged time:seconds#the amount of time this trigger can be charged before becoming overcharged" },
+
+		{ _field_version_less, _engine_type_haloreach, 2 },
+		{ _field_enum, "overcharged action", &weapon_trigger_overcharged_actions },
+		{ _field_word_flags, "flags", &weapon_trigger_charging_flags },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach, 2 },
 		{ _field_char_enum, "overcharged action", &weapon_trigger_overcharged_actions },
 		{ _field_byte_flags, "flags", &weapon_trigger_charging_flags },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_short_integer, "cancelled trigger throw#96 was the constant in code for the pp" },
+
 		{ _field_real, "charged illumination:[0,1]#the amount of illumination given off when the weapon is fully charged" },
+
+		{ _field_version_less, _engine_type_haloreach },
+		{ _field_real, "spew time" },
+
 		{ _field_tag_reference, "charging effect#the charging effect is created once when the trigger begins to charge", &weapon_block_struct_ready_effect_reference },
 		{ _field_tag_reference, "charging damage effect#the charging effect is created once when the trigger begins to charge", &global_damage_effect_or_response_definition_reference },
 		{ _field_tag_reference, "charging continuous damage response#plays every tick you\'re charging or charged, scaled to charging fraction", &global_damage_response_definition_reference },
 		{ _field_real, "charged drain rate#how much battery to drain per second when charged" },
 		{ _field_tag_reference, "discharge effect#the discharging effect is created once when the trigger releases its charge", &weapon_block_struct_ready_effect_reference },
 		{ _field_tag_reference, "discharge damage effect#the discharging effect is created once when the trigger releases its charge", &global_damage_effect_or_response_definition_reference },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach }, //Versioned for H3
 		{ _field_block, "fire fractions", &weapon_trigger_charging_fire_fraction_block },
+
 		{ _field_terminator }
 	};
 
 	TAG_STRUCT(weapon_barrel_firing_parameters_struct)
 	{
 		{ _field_real_bounds, "rounds per second#the number of firing effects created per second" },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_string_id, "rate of fire acceleration#function value sets the current rate of fire when the barrel is firing" },
+
 		{ _field_real, "acceleration time:seconds#the continuous firing time it takes for the weapon to achieve its final rounds per second" },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_string_id, "rate of fire deceleration#function value sets the current rate of fire when the barrel is not firing" },
+
 		{ _field_real, "deceleration time:seconds#the continuous idle time it takes for the weapon to return from its final rounds per second to its initial" },
 		{ _field_real, "barrel spin scale#scale the barrel spin speed by this amount" },
 		{ _field_real_fraction, "blurred rate of fire#a percentage between 0 and 1 which controls how soon in its firing animation the weapon blurs" },
 		{ _field_short_bounds, "shots per fire#allows designer caps to the shots you can fire from one firing action" },
 		{ _field_real, "fire recovery time:seconds#how long after a set of shots it takes before the barrel can fire again" },
 		{ _field_real_fraction, "soft recovery fraction#how much of the recovery allows shots to be queued" },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach, 2 },
 		{ _field_real, "melee  fire recovery time:seconds#how long after a set of shots it takes before the weapon can melee" },
 		{ _field_real_fraction, "melee soft recovery fraction#how much of the melee recovery allows melee to be queued" },
+
 		{ _field_terminator }
 	};
 
 	TAG_STRUCT(weapon_barrel_firing_error_struct)
 	{
+		{ _field_version_less, _engine_type_haloreach },
+		{ _field_real, "acceleration time:seconds" },
+
 		{ _field_real, "deceleration time:seconds#the continuous idle time it would take for a barrel_error of 1.0 to return to its minimum value.\nMinimum value is usually 0.0 but sprinting can override this. See\n\'globals@Player information.momentum and sprinting.min weapon error\'" },
 		{ _field_real_bounds, "damage error#the range of angles (in degrees) that a damaged weapon will skew fire" },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach, 3 },
 		{ _field_angle, "min error look pitch rate#yaw rate is doubled" },
 		{ _field_angle, "full error look pitch rate#yaw rate is doubled" },
 		{ _field_real, "look pitch error power#use to soften or sharpen the rate ding" },
+
+		{ _field_terminator }
+	};
+
+	TAG_STRUCT(weapon_barrel_turning_struct)
+	{
+		{ _field_real, "base turning speed" },
+		{ _field_real_bounds , "error angle" },
+		{ _field_terminator }
+	};
+
+	TAG_STRUCT(weapon_barrel_dual_error_struct)
+	{
+		{ _field_real, "acceleration time:seconds" },
+		{ _field_real, "deceleration time:seconds" },
+		{ _field_real, "@unknown" },
+		{ _field_real, "@unknown" },
+		{ _field_real, "minimum error" },
+		{ _field_real_bounds , "error angle" },
+		{ _field_real, "dual wield damage scale" },
 		{ _field_terminator }
 	};
 
@@ -656,100 +749,113 @@ namespace blofeld
 	STRINGS(magazine_flags)
 	{
 		"wastes rounds when reloaded",
-			"every round must be chambered",
-			"magazine cannot change state while firing#will prevent reload until fire is complete (sticky det)",
-			"allow overheated reload when empty",
-			"bottomless inventory"
+		"every round must be chambered",
+		"magazine cannot change state while firing#will prevent reload until fire is complete (sticky det)",
+		"allow overheated reload when empty",
+		"bottomless inventory"
 	};
 	STRING_LIST(magazine_flags, magazine_flags_strings, _countof(magazine_flags_strings));
 
 	STRINGS(barrel_prediction_type_enum)
 	{
 		"none",
-			"continuous",
-			"instant"
+		"continuous",
+		"instant"
 	};
 	STRING_LIST(barrel_prediction_type_enum, barrel_prediction_type_enum_strings, _countof(barrel_prediction_type_enum_strings));
 
 	STRINGS(weapon_barrel_flags)
 	{
 		"random firing effects#rather than being chosen sequentially, firing effects are picked randomly",
-			"can fire with partial ammo#allows a weapon to be fired as long as there is a non-zero amount of ammunition loaded",
-			"projectiles use weapon origin#instead of coming out of the magic first person camera origin, the projectiles for this weapon actually come out of the gun",
-			"ejects during chamber#this trigger\'s ejection port is started during the key frame of its chamber animation",
-			"projectile vector cannot be adjusted#projectiles fired by this weapon cannot have their direction adjusted by the AI to hit the target",
-			"projectiles have identical error",
-			"projectiles fire parallel#If there are multiple guns for this trigger, the projectiles emerge in parallel beams (rather than independant aiming)",
-			"cant fire when others firing",
-			"cant fire when others recovering",
-			"don\'t clear fire bit after recovering",
-			"stagger fire across multiple markers",
-			"can fire at maximum age",
-			"use 1 firing effect per burst",
-			"prevent marker deviation#the barrel will not fire if all markers are pointed further away from the desired aiming vector than the aim assist deviation angle",
-			"error ignores zoom#disables of the barrel error inversely with the zoom magnification",
-			"projectile fires in marker direction#projectiles shoot out the marker direction instead of the player\'s aim vector",
-			"skip test for object being outside BSP#Prevents projectile origin from changing when object is outside of BSP; Useful for units that can be placed inside physics.",
-			"only reload if all barrels idle",
-			"only switch weapons if barrel idle#the weapon\'s owner cannot switch weapons unless this barrel is in the idle state"
+		"can fire with partial ammo#allows a weapon to be fired as long as there is a non-zero amount of ammunition loaded",
+		"projectiles use weapon origin#instead of coming out of the magic first person camera origin, the projectiles for this weapon actually come out of the gun",
+		"ejects during chamber#this trigger\'s ejection port is started during the key frame of its chamber animation",
+		"projectile vector cannot be adjusted#projectiles fired by this weapon cannot have their direction adjusted by the AI to hit the target",
+		"projectiles have identical error",
+		"projectiles fire parallel#If there are multiple guns for this trigger, the projectiles emerge in parallel beams (rather than independant aiming)",
+		"cant fire when others firing",
+		"cant fire when others recovering",
+		"don\'t clear fire bit after recovering",
+		"stagger fire across multiple markers",
+		"can fire at maximum age",
+		"use 1 firing effect per burst",
+		"prevent marker deviation#the barrel will not fire if all markers are pointed further away from the desired aiming vector than the aim assist deviation angle",
+		"error ignores zoom#disables of the barrel error inversely with the zoom magnification",
+		"projectile fires in marker direction#projectiles shoot out the marker direction instead of the player\'s aim vector",
+		"skip test for object being outside BSP#Prevents projectile origin from changing when object is outside of BSP; Useful for units that can be placed inside physics.",
+		"only reload if all barrels idle",
+		"only switch weapons if barrel idle#the weapon\'s owner cannot switch weapons unless this barrel is in the idle state"
 	};
 	STRING_LIST(weapon_barrel_flags, weapon_barrel_flags_strings, _countof(weapon_barrel_flags_strings));
 
 	STRINGS(weapon_barrel_distribution_functions)
 	{
 		"point",
-			"horizontal fan",
-			"custom vectors",
-			"custom positions"
+		"horizontal fan",
+		"custom vectors",
+		"custom positions"
 	};
 	STRING_LIST(weapon_barrel_distribution_functions, weapon_barrel_distribution_functions_strings, _countof(weapon_barrel_distribution_functions_strings));
+
+	STRINGS(weapon_barrel_angle_change_functions)
+	{
+		"linear",
+		"early",
+		"very early",
+		"late",
+		"very late",
+		"cosine",
+		"one",
+		"zero"
+	};
+	STRING_LIST(weapon_barrel_angle_change_functions, weapon_barrel_angle_change_functions_strings, _countof(weapon_barrel_angle_change_functions_strings));
 
 	STRINGS(weapon_trigger_inputs)
 	{
 		"right trigger",
-			"left trigger",
-			"melee attack",
-			"ai only secondary"
+		"left trigger",
+		"melee attack",
+		"ai only secondary"
 	};
 	STRING_LIST(weapon_trigger_inputs, weapon_trigger_inputs_strings, _countof(weapon_trigger_inputs_strings));
 
 	STRINGS(weapon_trigger_overcharged_actions)
 	{
 		"none",
-			"explode",
-			"discharge"
+		"explode",
+		"discharge"
 	};
 	STRING_LIST(weapon_trigger_overcharged_actions, weapon_trigger_overcharged_actions_strings, _countof(weapon_trigger_overcharged_actions_strings));
 
 	STRINGS(weapon_trigger_behaviors)
 	{
 		"spew#fires its primary action barrel whenever the trigger is down",
-			"latch#fires its primary action barrel when the trigger is down and then latches",
-			"latch-autofire#fires its primary action barrel once if pulsed quickly or if not depressed all the way, otherwise does secondary behavior",
-			"latch-tether#tethers projectiles if latched long enough, on release the tethered projectile detonates",
-			"charge#charges the trigger",
-			"latch-zoom#latched; fires its primary action barrel when unzoomed, secondary when zoomed",
-			"spew-charge",
-			"sword-charge",
-			"paint-target",
-			"double-latch-tether#projectile is tethered by 1st latch, 2nd releases and detonates it",
-			"charge-with-magazine#like charge, but pays attention to any magazine and will not charge unless magazine is idle and barrel is actually able to fire"
+		"latch#fires its primary action barrel when the trigger is down and then latches",
+		"latch-autofire#fires its primary action barrel once if pulsed quickly or if not depressed all the way, otherwise does secondary behavior",
+		"latch-tether#tethers projectiles if latched long enough, on release the tethered projectile detonates",
+		"charge#charges the trigger",
+		"latch-zoom#latched; fires its primary action barrel when unzoomed, secondary when zoomed",
+		"spew-charge",
+		"sword-charge",
+		"paint-target",
+		"double-latch-tether#projectile is tethered by 1st latch, 2nd releases and detonates it",
+		"charge-with-magazine#like charge, but pays attention to any magazine and will not charge unless magazine is idle and barrel is actually able to fire"
 	};
 	STRING_LIST(weapon_trigger_behaviors, weapon_trigger_behaviors_strings, _countof(weapon_trigger_behaviors_strings));
 
 	STRINGS(weapon_trigger_autofire_actions)
 	{
 		"fire",
-			"charge",
-			"fire other"
+		"charge",
+		"fire other"
 	};
 	STRING_LIST(weapon_trigger_autofire_actions, weapon_trigger_autofire_actions_strings, _countof(weapon_trigger_autofire_actions_strings));
 
 	STRINGS(trigger_prediction_type_enum)
 	{
 		"none",
-			"spew",
-			"charge"
+		"spew",
+		"charge"
 	};
 	STRING_LIST(trigger_prediction_type_enum, trigger_prediction_type_enum_strings, _countof(trigger_prediction_type_enum_strings));
 
@@ -762,100 +868,100 @@ namespace blofeld
 	STRINGS(weapon_trigger_charging_flags)
 	{
 		"can fire from partial charge#discharging a partially charged weapon will spew for the charged fraction of the spew time set below",
-			"limit to current rounds loaded#if magazine present, do not fire more than current rounds loaded (mantis rocket launcher)",
-			"Wont charge unless tracked target is valid#spew-charge triggers only"
+		"limit to current rounds loaded#if magazine present, do not fire more than current rounds loaded (mantis rocket launcher)",
+		"Wont charge unless tracked target is valid#spew-charge triggers only"
 	};
 	STRING_LIST(weapon_trigger_charging_flags, weapon_trigger_charging_flags_strings, _countof(weapon_trigger_charging_flags_strings));
 
 	STRINGS(weapon_definition_flags)
 	{
 		"vertical heat display",
-			"mutually exclusive triggers",
-			"attacks automatically on bump",
-			"must be readied",
-			"doesn\'t count toward maximum",
-			"aim assists only when zoomed",
-			"prevents grenade throwing",
-			"must be picked up",
-			"holds triggers when dropped",
-			"prevents melee attack",
-			"detonates when dropped",
-			"cannot fire at maximum age",
-			"secondary trigger overrides grenades",
-			"support weapon",
-			"hide FP weapon when in iron sights#for scoped weapons",
-			"AIs use weapon melee damage",
-			"allows binoculars",
-			"loop fp firing animation",
-			"prevents crouching",
-			"cannot fire while boosting",
-			"use empty melee on empty",
-			"uses 3rd person camera",
-			"can be dual wielded",
-			"can only be dual wielded",
-			"melee only",
-			"cant fire if parent dead",
-			"weapon ages with each kill#see \'weapon ages when damage is inflicted\', \'per kill or hit aging amount\'",
-			"allows unaimed lunge",
-			"cannot be used by player",
-			"hold fp firing animation",
-			"strict deviation angle#deviation angle is allowed to be less than primary autoaim angle - for the rocket launcher",
-			"notifies target units#aiming this weapon at another player can be important to them - for lock-on weapons"
+		"mutually exclusive triggers",
+		"attacks automatically on bump",
+		"must be readied",
+		"doesn\'t count toward maximum",
+		"aim assists only when zoomed",
+		"prevents grenade throwing",
+		"must be picked up",
+		"holds triggers when dropped",
+		"prevents melee attack",
+		"detonates when dropped",
+		"cannot fire at maximum age",
+		"secondary trigger overrides grenades",
+		"support weapon",
+		"hide FP weapon when in iron sights#for scoped weapons",
+		"AIs use weapon melee damage",
+		"allows binoculars",
+		"loop fp firing animation",
+		"prevents crouching",
+		"cannot fire while boosting",
+		"use empty melee on empty",
+		"uses 3rd person camera",
+		"can be dual wielded",
+		"can only be dual wielded",
+		"melee only",
+		"cant fire if parent dead",
+		"weapon ages with each kill#see \'weapon ages when damage is inflicted\', \'per kill or hit aging amount\'",
+		"allows unaimed lunge",
+		"cannot be used by player",
+		"hold fp firing animation",
+		"strict deviation angle#deviation angle is allowed to be less than primary autoaim angle - for the rocket launcher",
+		"notifies target units#aiming this weapon at another player can be important to them - for lock-on weapons"
 	};
 	STRING_LIST(weapon_definition_flags, weapon_definition_flags_strings, _countof(weapon_definition_flags_strings));
 
 	STRINGS(weapon_definition_secondary_flags)
 	{
 		"magnetizes only when zoomed",
-			"force enable equipment tossing",
-			"non-lunge melee dash disabled#melee-physics dash is disabled on melees that are not lunges",
-			"don\'t drop on dual wield melee",
-			"is equipment special weapon#when checked, this weapon\n-is deleted when dropped\n-does not count against maximum inventory\n-gets deleted on host migrations\n-prevents swapping or switching weapons",
-			"uses ghost reticle",
-			"never overheats",
-			"force tracers to come from weapon barrel#setting this forces effects tracers to come from weapon barrel instead of eye point",
-			"cannot fire during emp",
-			"weapon can headshot",
-			"AI cannot fire tracking projectiles#setting this will remove tracking data from AI-fired projectiles",
-			"second barrel fires if friend is targeted#bishop beam support- primary barrel fires if foe is targeted, secondary if targeting friend",
-			"weapon unzooms on damage#taking damage while wielding this will ping player out of zoom/iron sights",
-			"do not drop on equipment activation#will counteract default support weapon behavior to drop on equipment activation",
-			"weapon can not be dropped#used for CTF magnum, weapon can not be dropped or swapped out",
-			"disable function overlays during reload",
-			"throw weapon instead of grenade#Throws weapon when grenade trigger is pressed",
-			"do not drop \'must be readied\' on primary trigger#Allows \'must be readied\' weapons to have a primary attack",
-			"delete on drop",
-			"allow melee when using device#Default behavior prevents melee attacks when using device.  Setting this bit allows them.",
-			"do not lower weapon when using device#Default behavior lowers weapon when using device.  Setting this leaves the weapon up.",
-			"cannot fire while zooming",
-			"weapon ages when damage is inflicted#see \'weapon ages with each kill\', \'per kill or hit aging amount\'",
-			"apply gunner armor mod abilites#Apply weapon\'s gunner armor mod movement penalty multipliers rather than base multipliers when gunner armor mod is active in _trait_weapons_gunner_armor_modifier",
-			"wielders sprint is unaffected by soft ping#see momentum globals \'disable soft ping check\'",
-			"weapon drops further away#Adds velocity to weapon\'s default drop (useful for weapons with auto-pickup)",
-			"use automatic firing looping sounds",
-			"do not drop on assassination#Keeps the weapon in your hand while being assassinated or performing an assassination (for must_be_readied or support weapons)",
-			"is part of body#Keeps the weapon from dropping or being hidden at the start of assassinations, and must instead be dropped using the drop weapon keyframe",
-			"force deny equipment use#Disallows any equipment usage while holding this weapon regardless of any other traits you may have",
-			"hide pickup prompt unless special pickup priority#Used for Oddball that only shows the pickup prompt when megalo script sets pickup priority to special",
-			"weapon ignores player_pickup_allowed trait#Player will always pickup this weapon if requested, Used for CTF that needs to force storm_magnum_ctf onto the player"
+		"force enable equipment tossing",
+		"non-lunge melee dash disabled#melee-physics dash is disabled on melees that are not lunges",
+		"don\'t drop on dual wield melee",
+		"is equipment special weapon#when checked, this weapon\n-is deleted when dropped\n-does not count against maximum inventory\n-gets deleted on host migrations\n-prevents swapping or switching weapons",
+		"uses ghost reticle",
+		"never overheats",
+		"force tracers to come from weapon barrel#setting this forces effects tracers to come from weapon barrel instead of eye point",
+		"cannot fire during emp",
+		"weapon can headshot",
+		"AI cannot fire tracking projectiles#setting this will remove tracking data from AI-fired projectiles",
+		"second barrel fires if friend is targeted#bishop beam support- primary barrel fires if foe is targeted, secondary if targeting friend",
+		"weapon unzooms on damage#taking damage while wielding this will ping player out of zoom/iron sights",
+		"do not drop on equipment activation#will counteract default support weapon behavior to drop on equipment activation",
+		"weapon can not be dropped#used for CTF magnum, weapon can not be dropped or swapped out",
+		"disable function overlays during reload",
+		"throw weapon instead of grenade#Throws weapon when grenade trigger is pressed",
+		"do not drop \'must be readied\' on primary trigger#Allows \'must be readied\' weapons to have a primary attack",
+		"delete on drop",
+		"allow melee when using device#Default behavior prevents melee attacks when using device.  Setting this bit allows them.",
+		"do not lower weapon when using device#Default behavior lowers weapon when using device.  Setting this leaves the weapon up.",
+		"cannot fire while zooming",
+		"weapon ages when damage is inflicted#see \'weapon ages with each kill\', \'per kill or hit aging amount\'",
+		"apply gunner armor mod abilites#Apply weapon\'s gunner armor mod movement penalty multipliers rather than base multipliers when gunner armor mod is active in _trait_weapons_gunner_armor_modifier",
+		"wielders sprint is unaffected by soft ping#see momentum globals \'disable soft ping check\'",
+		"weapon drops further away#Adds velocity to weapon\'s default drop (useful for weapons with auto-pickup)",
+		"use automatic firing looping sounds",
+		"do not drop on assassination#Keeps the weapon in your hand while being assassinated or performing an assassination (for must_be_readied or support weapons)",
+		"is part of body#Keeps the weapon from dropping or being hidden at the start of assassinations, and must instead be dropped using the drop weapon keyframe",
+		"force deny equipment use#Disallows any equipment usage while holding this weapon regardless of any other traits you may have",
+		"hide pickup prompt unless special pickup priority#Used for Oddball that only shows the pickup prompt when megalo script sets pickup priority to special",
+		"weapon ignores player_pickup_allowed trait#Player will always pickup this weapon if requested, Used for CTF that needs to force storm_magnum_ctf onto the player"
 	};
 	STRING_LIST(weapon_definition_secondary_flags, weapon_definition_secondary_flags_strings, _countof(weapon_definition_secondary_flags_strings));
 
 	STRINGS(secondary_trigger_modes)
 	{
 		"normal",
-			"slaved to primary",
-			"inhibits primary",
-			"loads alterate ammunition",
-			"loads multiple primary ammunition"
+		"slaved to primary",
+		"inhibits primary",
+		"loads alterate ammunition",
+		"loads multiple primary ammunition"
 	};
 	STRING_LIST(secondary_trigger_modes, secondary_trigger_modes_strings, _countof(secondary_trigger_modes_strings));
 
 	STRINGS(movement_penalty_modes)
 	{
 		"always",
-			"when zoomed",
-			"when zoomed or reloading"
+		"when zoomed",
+		"when zoomed or reloading"
 	};
 	STRING_LIST(movement_penalty_modes, movement_penalty_modes_strings, _countof(movement_penalty_modes_strings));
 
@@ -872,20 +978,20 @@ namespace blofeld
 	STRINGS(weapon_types)
 	{
 		"undefined",
-			"shotgun",
-			"needler",
-			"plasma pistol",
-			"plasma rifle",
-			"rocket launcher",
-			"energy blade",
-			"splaser",
-			"shield",
-			"scarab gun",
-			"wolverine quad",
-			"flak cannon",
-			"plasma launcher",
-			"laser designator",
-			"sticky detonator"
+		"shotgun",
+		"needler",
+		"plasma pistol",
+		"plasma rifle",
+		"rocket launcher",
+		"energy blade",
+		"splaser",
+		"shield",
+		"scarab gun",
+		"wolverine quad",
+		"flak cannon",
+		"plasma launcher",
+		"laser designator",
+		"sticky detonator"
 	};
 	STRING_LIST(weapon_types, weapon_types_strings, _countof(weapon_types_strings));
 
@@ -900,28 +1006,28 @@ namespace blofeld
 	STRINGS(first_time_pickup_types)
 	{
 		"unassigned",
-			"bolt pistol",
-			"light rifle",
-			"suppressor",
-			"binary rifle",
-			"scattershot",
-			"incineration cannon"
+		"bolt pistol",
+		"light rifle",
+		"suppressor",
+		"binary rifle",
+		"scattershot",
+		"incineration cannon"
 	};
 	STRING_LIST(first_time_pickup_types, first_time_pickup_types_strings, _countof(first_time_pickup_types_strings));
 
 	STRINGS(global_melee_class_enum_definition)
 	{
 		"default class",
-			"elite class"
+		"elite class"
 	};
 	STRING_LIST(global_melee_class_enum_definition, global_melee_class_enum_definition_strings, _countof(global_melee_class_enum_definition_strings));
 
 	STRINGS(weapon_screen_effect_flags)
 	{
 		"overrides unit and camera screen effects",
-			"unzoomed",
-			"zoom level 1",
-			"zoom level 2"
+		"unzoomed",
+		"zoom level 1",
+		"zoom level 2"
 	};
 	STRING_LIST(weapon_screen_effect_flags, weapon_screen_effect_flags_strings, _countof(weapon_screen_effect_flags_strings));
 
