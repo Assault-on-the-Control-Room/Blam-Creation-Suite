@@ -197,8 +197,6 @@ namespace blofeld
 		{ _field_tag_reference, "death spawn character#when I die, out of the ashes of my death crawls a ...", &character_reference$2 },
 		{ _field_short_integer, "death spawn count" },
 		{ _field_pad, "TQYQEWG", 2 },
-
-		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_struct, "leaping data", &biped_leaping_data_struct_struct_definition },
 
 		{ _field_version_greater, _engine_type_haloreach, 3 },
@@ -282,33 +280,38 @@ namespace blofeld
 	{
 		{ _field_custom, "ground fitting" },
 		{ _field_explanation, "ground fitting data", "" },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_long_flags, "ground fitting flags", &biped_ground_fitting_flags_definition },
+
 		{ _field_real_fraction, "ground normal dampening:react to slope changes (0=slow, 1= fast)" },
 		{ _field_real, "root offset max scale idle{root offset max scale}:vertical drop to ground allowed (0=none, 1=full)" },
 		{ _field_real, "root offset max scale moving:vertical drop to ground allowed (0=none, 1=full)" },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_real_fraction, "root offset dampening:react to root changes (0=slow, 1= fast)" },
+
 		{ _field_real_fraction, "following cam scale:root offset effect on following cam (0=none, 1=full)" },
 		{ _field_real_fraction, "root leaning scale:lean into slopes (0=none, 1=full)" },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_real, "stance width scale:scale pill width to use as stance radius" },
+
 		{ _field_angle, "foot roll max:orient to ground slope (degrees)" },
 		{ _field_angle, "foot pitch max:orient to ground slope (degrees)" },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach, 13 },
 		{ _field_real_fraction, "foot normal dampening:(0=slow, 1= fast)" },
 		{ _field_real, "foot fitting test distance" },
-
-		{ _field_version_greater_or_equal, _engine_type_haloreach, 2 }, // TODO: biped definitions, actually work these out
 		{ _field_real_fraction, "foot displacement upward dampening:(0=slow, 1= fast)" },
 		{ _field_real_fraction, "foot displacement downward dampening:(0=slow, 1= fast)" },
-
 		{ _field_real, "foot pull threshold distance idle:amount past the authored plane the foot can be pulled (wu)" },
 		{ _field_real, "foot pull threshold distance moving:amount past the authored plane the foot can be pulled (wu)" },
 		{ _field_real, "foot turn minimum radius:minimum radius at which foot is fit to turn radius" },
 		{ _field_real, "foot turn maximum radius:maximum radius at which foot is fit to turn radius" },
 		{ _field_real, "foot turn threshold radius:foot is fit to turn radius fully at minimum plus threshold and above" },
-
-		{ _field_version_greater_or_equal, _engine_type_haloreach, 2 }, // TODO: biped definitions, actually work these out
 		{ _field_real, "foot turn rate dampening:(0=slow, 1=fast)" },
 		{ _field_real, "foot turn weight dampening:dampening of fitting value for fit to turn radius(0=none, 1=fast)" },
-
 		{ _field_real, "foot turn blend on time:time to blend on the foot turn effect (seconds)" },
 		{ _field_real, "foot turn blend off time:time to blend off the foot turn effect (seconds)" },
 
