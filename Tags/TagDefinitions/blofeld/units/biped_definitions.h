@@ -44,5 +44,7 @@ namespace blofeld
 	extern c_versioned_string_list biped_wall_proximity_composition_mode_strings;
 	extern s_string_list_definition biped_wall_proximity_composition_mode;
 
+	extern c_versioned_string_list biped_lock_on_flags_definition_strings;
+	extern s_string_list_definition biped_lock_on_flags_definition;
 } // namespace blofeld
 

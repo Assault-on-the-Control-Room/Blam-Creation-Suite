@@ -94,15 +94,20 @@ namespace blofeld
 		{ _field_angle, "stationary turning threshold" },
 		{ _field_useless_pad },
 		{ _field_useless_pad },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach, 3 },
 		{ _field_tag_reference, "death program selector", &death_program_selector_reference },
 		{ _field_string_id, "ragdoll region name#when the biped transitions to ragdoll, this region will change to the destroyed state" },
 		{ _field_string_id, "assassination chud text#The string id for the assassination action text in the CHUD" },
+
 		{ _field_explanation, "jumping and landing", "" },
 		{ _field_real, "jump velocity:world units per second" },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_block, "tricks", &unit_trick_definition_block_block },
 
 		// #TODO: This is assumed to be a tag block. Assert on these values and check if they are non zero
-		{ _field_version_less_or_equal, _engine_type_haloreach, 3 },
+		{ _field_version_equal, _engine_type_haloreach, 3 },
 		{ _field_long_integer, "unknown@" }, // assembly
 		{ _field_long_integer, "unknown@" }, // assembly
 		{ _field_long_integer, "unknown@" }, // assembly
@@ -113,33 +118,68 @@ namespace blofeld
 		{ _field_real, "minimum soft landing velocity:world units per second#below this velocity the biped does not react when landing" },
 		{ _field_real, "minimum hard landing velocity:world units per second#below this velocity the biped will not do a soft landing when returning to the ground" },
 		{ _field_real, "maximum hard landing velocity:world units per second#the velocity corresponding to the maximum landing time" },
+
+		{ _field_version_less, _engine_type_haloreach },
+		{ _field_real, "death hard landing velocity" },
+
 		{ _field_useless_pad },
 		{ _field_real, "stun duration#0 is the default.  Bipeds are stunned when damaged by vehicle collisions, also some are when they take emp damage" },
 		{ _field_explanation, "camera, collision, and autoaim", "" },
 		{ _field_real, "standing camera height:world units" },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_real, "running camera height:world units" },
+
 		{ _field_real, "crouching camera height:world units" },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_real, "crouch walking camera height:world units" },
+
 		{ _field_real, "crouch transition time:seconds" },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach, 3 },
 		{ _field_custom },
 		{ _field_struct, "camera height velocity function", &mapping_function_struct_definition },
 		{ _field_block, "camera heights", &biped_camera_height_block_block },
+
 		{ _field_angle, "camera interpolation start:degrees#looking-downward angle that starts camera interpolation to fp position" },
 		{ _field_angle, "camera interpolation end:degrees#looking-downward angle at which camera interpolation to fp position is complete" },
 		{ _field_real_vector_3d, "camera offset:wu#amount of fp camera movement in (forward, right, down) when pitched down by \'camera interpolation end\' above" },
+
+		{ _field_version_less, _engine_type_haloreach }, //h2ek
+		{ _field_real, "camera exclusion distance" },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach, 2 },
 		{ _field_real, "root offset camera scale" },
 		{ _field_real, "root offset camera dampening" },
+
 		{ _field_real, "autoaim width:world units" },
+
+		{ _field_version_less, _engine_type_haloreach, 2 }, // h2ek / assembly
+		{ _field_long_flags, "lock-on flags", &biped_lock_on_flags_definition },
+		{ _field_real, "lock-on distance" },
+
 		{ _field_short_integer, "runtime physics control node index!" },
 		{ _field_pad, "JWSSY", 2 },
 		{ _field_real, "runtime cosine stationary turning threshold!" },
 		{ _field_real, "runtime crouch transition velocity!*" },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_real, "runtime_camera_height_velocity!*" },
+
 		{ _field_short_integer, "runtime pelvis node index!" },
 		{ _field_short_integer, "runtime head node index!" },
 		{ _field_useless_pad },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_block, "wall proximity feelers", &biped_wall_proximity_block_block },
+
+		{ _field_version_less, _engine_type_haloreach },
+		{ _field_real, "headshot acceleration scale" },
+
 		{ _field_tag_reference, "area damage effect", &global_effect_reference },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach, 9 },
 		{ _field_tag_reference, "health station recharge effect", &global_effect_reference },
 		{ _field_block, "movement gates", &biped_movement_gate_block_block },
 		{ _field_block, "movement gates crouching", &biped_movement_gate_block_block },
@@ -149,6 +189,7 @@ namespace blofeld
 		{ _field_real, "land aim offset duration:seconds" },
 		{ _field_real, "aim compensate minimum distance:world units" },
 		{ _field_real, "aim compensate maximum distance:world units" },
+
 		{ _field_struct, "physics", &character_physics_struct_struct_definition },
 		{ _field_block, "contact points#these are the points where the biped touches the ground", &contact_point_block_block },
 		{ _field_tag_reference, "reanimation character#when the flood reanimate this guy, he turns into a ...", &character_reference$2 },
@@ -156,6 +197,8 @@ namespace blofeld
 		{ _field_tag_reference, "death spawn character#when I die, out of the ashes of my death crawls a ...", &character_reference$2 },
 		{ _field_short_integer, "death spawn count" },
 		{ _field_pad, "TQYQEWG", 2 },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_struct, "leaping data", &biped_leaping_data_struct_struct_definition },
 
 		{ _field_version_greater, _engine_type_haloreach, 3 },
@@ -251,19 +294,25 @@ namespace blofeld
 		{ _field_angle, "foot pitch max:orient to ground slope (degrees)" },
 		{ _field_real_fraction, "foot normal dampening:(0=slow, 1= fast)" },
 		{ _field_real, "foot fitting test distance" },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach, 2 }, // TODO: biped definitions, actually work these out
 		{ _field_real_fraction, "foot displacement upward dampening:(0=slow, 1= fast)" },
 		{ _field_real_fraction, "foot displacement downward dampening:(0=slow, 1= fast)" },
+
 		{ _field_real, "foot pull threshold distance idle:amount past the authored plane the foot can be pulled (wu)" },
 		{ _field_real, "foot pull threshold distance moving:amount past the authored plane the foot can be pulled (wu)" },
 		{ _field_real, "foot turn minimum radius:minimum radius at which foot is fit to turn radius" },
 		{ _field_real, "foot turn maximum radius:maximum radius at which foot is fit to turn radius" },
 		{ _field_real, "foot turn threshold radius:foot is fit to turn radius fully at minimum plus threshold and above" },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach, 2 }, // TODO: biped definitions, actually work these out
 		{ _field_real, "foot turn rate dampening:(0=slow, 1=fast)" },
 		{ _field_real, "foot turn weight dampening:dampening of fitting value for fit to turn radius(0=none, 1=fast)" },
+
 		{ _field_real, "foot turn blend on time:time to blend on the foot turn effect (seconds)" },
 		{ _field_real, "foot turn blend off time:time to blend off the foot turn effect (seconds)" },
 
-		{ _field_version_less_or_equal, _engine_type_haloreach, 2 },
+		{ _field_version_equal, _engine_type_haloreach, 2 },
 		{ _field_real, "unknown@" },
 		{ _field_real, "unknown@" },
 
@@ -368,6 +417,14 @@ namespace blofeld
 		"average#average the distances from each marker"
 	};
 	STRING_LIST(biped_wall_proximity_composition_mode, biped_wall_proximity_composition_mode_strings, _countof(biped_wall_proximity_composition_mode_strings));
+
+	STRINGS(biped_lock_on_flags_definition)
+	{
+		"locked by human targeting",
+		"locked by plasma targeting",
+		"always locked by human targeting" // could be plasma, based on assembly; but h2ek is plasma
+	};
+	STRING_LIST(biped_lock_on_flags_definition, biped_lock_on_flags_definition_strings, _countof(biped_lock_on_flags_definition_strings));
 
 } // namespace blofeld
 

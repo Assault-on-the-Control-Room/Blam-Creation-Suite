@@ -328,8 +328,13 @@ namespace blofeld
 		{ _field_real, "defensive screen duration:seconds#The duration of the defensive function\n0 defaults to 2.0" },
 		{ _field_real_fraction, "defensive screen scrub fallback fraction:[0,1]#When receiving multiple pings, this is the min percentage of the defensive screen scrub value will fallback to." },
 
+		{ _field_version_less, _engine_type_haloreach },
+		{ _field_real, "distance of evade anim:world units#this must be set to tell the AI how far it should expect our evade animation to move us" },
+
 		{ _field_custom },
 		{ _field_real, "distance of dive anim:world units#this must be set to tell the AI how far it should expect our dive animation to move us" },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_real_fraction, "terminal velocity fall ratio#ratio of airborne_arc animation to switch off falling overlay" },
 
 		{ _field_custom, "stun" },
@@ -347,7 +352,6 @@ namespace blofeld
 		{ _field_tag_reference, "spawned turret character#automatically created character when this unit is driven", &character_reference },
 		{ _field_short_bounds, "spawned actor count#number of actors which we spawn" },
 		{ _field_real, "spawned velocity#velocity at which we throw spawned actors" },
-
 		{ _field_custom, "aiming/looking" },
 
 		{ _field_version_greater_or_equal, _engine_type_haloreach, 1 },
@@ -358,7 +362,6 @@ namespace blofeld
 		{ _field_real_fraction, "casual aiming modifier:[0,1]" },
 		{ _field_angle, "looking velocity maximum:degrees per second" },
 		{ _field_angle, "looking acceleration maximum:degrees per second squared" },
-
 		{ _field_custom },
 
 		{ _field_version_greater_or_equal, _engine_type_haloreach, 1 },
@@ -379,7 +382,6 @@ namespace blofeld
 		{ _field_tag_reference, "native melee override#when set, characters will melee with these settings rather than their actual held weapon. (for characters that melee with an off hand)", &weapon_reference },
 
 		{ _field_struct, "your momma", &unit_boarding_melee_struct_struct_definition },
-
 		{ _field_custom },
 		{ _field_enum, "motion sensor blip size", &global_chud_blip_type_definition },
 		{ _field_enum, "item owner size", &unit_item_owner_size_enum },
@@ -397,7 +399,6 @@ namespace blofeld
 		{ _field_block, "Hud audio cues", &hud_unit_sound_block_block },
 
 		{ _field_block, "dialogue variants", &dialogue_variant_block_block },
-
 		{ _field_custom, "standard grenade throw" },
 
 		{ _field_version_greater_or_equal, _engine_type_haloreach, 3 },

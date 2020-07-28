@@ -47,7 +47,10 @@ namespace blofeld
 		{ _field_real, "runtime_downhill_k1!" },
 		{ _field_real, "runtime_uphill_k0!" },
 		{ _field_real, "runtime_uphill_k1!" },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach }, // one of the follow fields is not in h3, this is the logical choice base on assembly's defs
 		{ _field_angle, "climb inflection angle#angle for bipeds at which climb direction changes between up and down" },
+
 		{ _field_real, "scale airborne reaction time#scale on the time for the entity to realize it is airborne" },
 		{ _field_real, "scale ground adhesion velocity#scale on velocity with which the entity is pushed back into its ground plane (set to -1 to lock to ground)" },
 		{ _field_real, "gravity scale#scale on gravity for this entity" },
