@@ -34,6 +34,8 @@ namespace blofeld
 	extern s_string_list_definition effect_scale_enum;
 	extern c_versioned_string_list material_response_strings;
 	extern s_string_list_definition material_response;
+	extern c_versioned_string_list material_response_flags_strings;
+	extern s_string_list_definition material_response_flags;
 	extern c_versioned_string_list material_possible_response_flags_strings;
 	extern s_string_list_definition material_possible_response_flags;
 	extern c_versioned_string_list projectile_flags_strings;

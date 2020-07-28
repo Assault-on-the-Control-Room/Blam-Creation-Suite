@@ -13,8 +13,15 @@ namespace blofeld
 	TAG_BLOCK(old_projectile_material_response_block, k_maximum_material_responses)
 	{
 		{ _field_explanation, "default result", "(if the potential result, below, fails to happen)" },
+
+		{ _field_version_less, _engine_type_haloreach },
+		{ _field_word_flags, "flags", &material_response_flags },
+
 		{ _field_enum, "default response", &material_response },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_pad, "KJSH", 2 },
+
 		{ _field_string_id, "material name" },
 		{ _field_short_integer, "runtime material index!" },
 		{ _field_pad, "JJHT", 2 },
@@ -34,6 +41,10 @@ namespace blofeld
 		{ _field_useless_pad },
 		{ _field_explanation, "penetration", "" },
 		{ _field_real, "initial friction#the fraction of the projectile\'s velocity lost on penetration" },
+
+		{ _field_version_less, _engine_type_haloreach },
+		{ _field_real, "maximum distance" },
+
 		{ _field_explanation, "reflection", "" },
 		{ _field_real, "parallel friction#the fraction of the projectile\'s velocity parallel to the surface lost on impact" },
 		{ _field_real, "perpendicular friction#the fraction of the projectile\'s velocity perpendicular to the surface lost on impact" },
@@ -134,15 +145,21 @@ namespace blofeld
 		{ _field_explanation, "detonation", "" },
 		{ _field_real, "arming time:seconds#won\'t detonate before this time elapses" },
 		{ _field_real, "danger radius:world units" },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach, 3 },
 		{ _field_real, "danger stimuli radius:world units#Overrides the danger radius when non-zero for stimuli related danger radius calculations." },
 		{ _field_short_integer, "danger group burst count#The number of projectiles in this burst before this burst is considered dangerous" },
 		{ _field_short_integer, "danger group burst max count#The maximum number of projectiles we allow in a group" },
+
 		{ _field_real_bounds, "timer:seconds#detonation countdown (zero is untimed)" },
 		{ _field_real, "minimum velocity:world units per second#detonates when slowed below this velocity" },
 		{ _field_real, "maximum range:world units#detonates after travelling this distance" },
 		{ _field_real, "bounce maximum range:world units#detonates after travelling this distance, but is reset after a bounce.  Combines with maximum range" },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach, 2 },
 		{ _field_real, "max latch time to detonate:seconds#projectile will detonate regardless of weapon latching after this total time" },
 		{ _field_real, "max latch time to arm:seconds#projectile will arm itself regardless of detonation mode if latched for this amount of time." },
+
 		{ _field_enum, "detonation noise", &ai_sound_volume_enum },
 		{ _field_short_integer, "super det. projectile count" },
 		{ _field_real, "super det. time" },
@@ -173,9 +190,15 @@ namespace blofeld
 		{ _field_explanation, "flyby/impact", "" },
 		{ _field_tag_reference, "flyby sound", &global_sound_reference },
 		{ _field_tag_reference, "flyby damage response", &global_damage_response_definition_reference },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_real, "flyby damage response max distance" },
+
 		{ _field_tag_reference, "impact effect", &global_effect_reference },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_tag_reference, "object impact effect", &global_effect_reference },
+
 		{ _field_tag_reference, "impact damage", &global_damage_reference },
 		{ _field_explanation, "boarding fields", "" },
 		{ _field_real, "boarding detonation time" },
@@ -188,10 +211,13 @@ namespace blofeld
 		{ _field_real_bounds, "water damage range:world units#the range over which damage is scaled when the projectile is in water." },
 		{ _field_real, "initial velocity:world units per second#bullet\'s velocity when inflicting maximum damage" },
 		{ _field_real, "final velocity:world units per second#bullet\'s velocity when inflicting minimum damage" },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach, 4 },
 		{ _field_real, "indirect fire velocity:world units per second#base velocity used for ballistics calculations for indirect firing." },
 		{ _field_real, "ai velocity scale (normal):[0-1]#scale on the initial velocity when fired by the ai on normal difficulty (0 defaults to 1.0" },
 		{ _field_real, "ai velocity scale (heroic):[0-1]#scale on the initial velocity when fired by the ai on heroic difficulty (0 defaults to 1.0)" },
 		{ _field_real, "ai velocity scale (legendary):[0-1]#scale on the initial velocity when fired by the ai on legendary difficulty (0 defaults to 1.0)" },
+
 		{ _field_real, "ai guided angular velocity scale (normal):[0-1]#scale on the guided angular velocity when fired by the ai on normal difficulty (0 defaults to 1.0" },
 		{ _field_real, "ai guided angular velocity scale (legendary):[0-1]#scale on the guided angular velocity when fired by the ai on legendary difficulty (0 defaults to 1.0)" },
 		{ _field_struct, "blah", &angular_velocity_lower_bound_struct_struct_definition },
@@ -203,10 +229,15 @@ namespace blofeld
 		{ _field_real, "guided projectile (outer range) error radius" },
 		{ _field_real, "autoaim leading max lead time" },
 		{ _field_block, "old material responses{material responses}!", &old_projectile_material_response_block_block },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_block, "material response", &projectile_material_response_block_block },
+
 		{ _field_block, "brute grenade", &brute_grenade_block_block },
 		{ _field_block, "fire bomb grenade", &fire_bomb_grenade_block_block },
 		{ _field_block, "conical spread", &conical_projection_block_block },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_tag_reference, "grounded friction settings#If not present, the default from global.globals is used.", &global_grounded_friction_reference },
 
 		{ _field_version_greater, _engine_type_haloreach, 2 },
@@ -275,6 +306,12 @@ namespace blofeld
 		}
 	};
 	STRING_LIST(material_response, material_response_strings, _countof(material_response_strings));
+
+	STRINGS(material_response_flags)
+	{
+		"cannot be overpenetrated"
+	};
+	STRING_LIST(material_response_flags, material_response_flags_strings, _countof(material_response_flags_strings));
 
 	STRINGS(material_possible_response_flags)
 	{
