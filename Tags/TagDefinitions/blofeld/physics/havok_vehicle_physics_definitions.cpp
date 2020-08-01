@@ -64,9 +64,15 @@ namespace blofeld
 		{ _field_real, "radius" },
 		{ _field_real, "damaged radius#radius when the tire is blown off." },
 
+		{ _field_version_less, _engine_type_haloreach },
+		{ _field_enum, "friction type", &friction_type_enum }, //h2ek
+
 		{ _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_real, "ground friction scale# scale the non sliding friction on this friction point" },
 		{ _field_real, "AI ground friction scale override# use this value when an AI is driving" },
+
+		{ _field_version_less, _engine_type_haloreach },
+		{ _field_short_integer, "unknown@" },
 
 		{ _field_real, "moving friction velocity diff" },
 
@@ -77,6 +83,14 @@ namespace blofeld
 		{ _field_real, "e-brake moving friction" },
 		{ _field_real, "e-brake friction" },
 		{ _field_real, "e-brake moving friction vel diff" },
+
+		{ _field_version_less, _engine_type_haloreach, 5 },
+		{ _field_long_integer, "unknown@" },
+		{ _field_long_integer, "unknown@" },
+		{ _field_long_integer, "unknown@" },
+		{ _field_long_integer, "unknown@" },
+		{ _field_long_integer, "unknown@" },
+
 		{ _field_custom },
 		{ _field_string_id, "collision global material name" },
 		{ _field_short_integer, "runtime global material index!" },
@@ -154,6 +168,13 @@ namespace blofeld
 		"AI override moving friction scale"
 	};
 	STRING_LIST(friction_point_definition_flags, friction_point_definition_flags_strings, _countof(friction_point_definition_flags_strings));
+
+	STRINGS(friction_type_enum)
+	{
+		"point",
+		"forward"
+	};
+	STRING_LIST(friction_type_enum, friction_type_enum_strings, _countof(friction_type_enum_strings));
 
 	STRINGS(havok_vehicle_physics_definition_flags)
 	{

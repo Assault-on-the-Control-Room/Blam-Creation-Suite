@@ -7,9 +7,21 @@ namespace blofeld
 	TAG_BLOCK(gear_block, s_vehicle_engine_definition::k_gear_count_max)
 	{
 		{ _field_explanation, "loaded torque", "" },
+
+		{ _field_version_less, _engine_type_haloreach },
+		{ _field_struct, "loaded torque", &old_torque_struct_struct_definition },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_struct, "loaded torque curve", &torque_curve_struct_struct_definition },
+
 		{ _field_explanation, "cruising torque", "" },
+
+		{ _field_version_less, _engine_type_haloreach },
+		{ _field_struct, "cruising torque", &old_torque_struct_struct_definition },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_struct, "cruising torque curve", &torque_curve_struct_struct_definition },
+
 		{ _field_explanation, "gearing", "" },
 		{ _field_real, "min time to upshift#seconds" },
 		{ _field_real, "engine up-shift scale#0-1" },
@@ -17,7 +29,7 @@ namespace blofeld
 		{ _field_real, "min time to downshift#seconds" },
 		{ _field_real, "engine down-shift scale#0-1" },
 
-		{ _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_version_equal, _engine_type_haloreach },
 		{ _field_real, "unknown@" },
 
 		{ _field_version_greater, _engine_type_haloreach, 2 },
@@ -41,7 +53,10 @@ namespace blofeld
 		{ _field_real, "engine max angular velocity#higher moments make engine spin up slower" },
 		{ _field_block, "gears", &gear_block_block },
 		{ _field_tag_reference, "gear shift sound", &global_sound_reference },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_block, "load and cruise sound", &load_and_cruise_block_block },
+
 		{ _field_terminator }
 	};
 
@@ -55,5 +70,15 @@ namespace blofeld
 		{ _field_terminator }
 	};
 
+	TAG_STRUCT(old_torque_struct)
+	{
+		{ _field_real, "min torque" },
+		{ _field_real, "max torque" },
+		{ _field_real, "peak torque scale" },
+		{ _field_real, "past peak torque scale exponent" },
+		{ _field_real, "torque at max angular velocity" },
+		{ _field_real, "torque at 2x max angular velocity" },
+		{ _field_terminator }
+	};
 } // namespace blofeld
 

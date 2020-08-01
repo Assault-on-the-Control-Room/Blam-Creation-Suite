@@ -45,6 +45,7 @@ namespace blofeld
 	extern s_tag_struct_definition physics_transitions_block_block_struct;
 	extern s_tag_block_definition physics_transitions_block_block;
 	extern s_tag_block_definition vehicle_block_block;
+	extern s_tag_block_definition phantom_shapes_block;
 
 	extern s_tag_struct_definition vehicle_group_struct_definition; // tag group
 	extern s_tag_struct_definition vehicle_physics_types_struct_struct_definition;

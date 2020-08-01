@@ -16,6 +16,8 @@ namespace blofeld
 	extern s_string_list_definition anti_gravity_point_definition_damping;
 	extern c_versioned_string_list friction_point_definition_flags_strings;
 	extern s_string_list_definition friction_point_definition_flags;
+	extern c_versioned_string_list friction_type_enum_strings;
+	extern s_string_list_definition friction_type_enum;
 	extern c_versioned_string_list havok_vehicle_physics_definition_flags_strings;
 	extern s_string_list_definition havok_vehicle_physics_definition_flags;
 	extern c_versioned_string_list physics_update_period_enum_strings;
