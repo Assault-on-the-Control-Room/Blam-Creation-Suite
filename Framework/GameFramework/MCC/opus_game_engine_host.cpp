@@ -319,8 +319,8 @@ char c_opus_game_engine_host::controller_inverted_look_update_handler(int contro
 	{
 		ConfigurePlayerConfiguration(*player_configuration);
 
-		player_configuration->look_controls_inverted = inverted;
-		player_configuration->mouse_look_controls_inverted = inverted;
+		player_configuration->LookControlsInverted = inverted;
+		player_configuration->MouseLookControlsInverted = inverted;
 	}
 
 	return 1;
@@ -332,7 +332,7 @@ char c_opus_game_engine_host::game_specific_bindings_get(int controller_index, c
 	if (PlayerConfigurationFromBuild(build, &player_configuration))
 	{
 		ConfigurePlayerConfiguration(*player_configuration);
-		memcpy(&player_configuration->game_specific, buffer, 256);
+		memcpy(&player_configuration->GameSpecific, buffer, 256);
 	}
 
 	return 1;

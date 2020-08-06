@@ -5,9 +5,9 @@ enum e_settings_section
 	_settings_section_game,
 	_settings_section_camera,
 	_settings_section_player,
+	_settings_section_player_configuration,
 	_settings_section_debug,
 	_settings_section_launch,
-	_settings_section_controls,
 	_settings_section_mandrill
 };
 

@@ -79,7 +79,7 @@ bool c_settings::write_integer(e_settings_section section, const char* name, int
 bool c_settings::write_float(e_settings_section section, const char* name, float value)
 {
 	const char* section_name = get_section_name_string(section);
-	size_t buffer_length = static_cast<int>(logf(value)) + 16;
+	size_t buffer_length = value == 0.0f ? 16 : static_cast<int>(logf(value)) + 16;
 	char* buffer = static_cast<char*>(alloca(buffer_length));
 	memset(buffer, 0, buffer_length);
 	snprintf(buffer, buffer_length, "%f", value);
@@ -112,12 +112,12 @@ const char* c_settings::get_section_name_string(e_settings_section section)
 		return "Camera";
 	case _settings_section_player:
 		return "Player";
+	case _settings_section_player_configuration:
+		return "PlayerConfiguration";
 	case _settings_section_debug:
 		return "Debug";
 	case _settings_section_launch:
 		return "Launch";
-	case _settings_section_controls:
-		return "Controls";
 	case _settings_section_mandrill:
 		return "Mandrill";
 	default:

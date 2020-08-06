@@ -227,8 +227,8 @@ void c_game_launcher::window_destroy_callback()
 
 void c_game_launcher::load_settings()
 {
-	float horizontalSensitivity = c_settings::read_float(_settings_section_controls, "HorizontalSensitivity", 1.0f);
-	float verticalSensitivity = c_settings::read_float(_settings_section_controls, "VerticalSensitivity", 1.0f);
+	float horizontalSensitivity = c_settings::read_float(_settings_section_player_configuration, "HorizontalLookSensitivity", 1.0f);
+	float verticalSensitivity = c_settings::read_float(_settings_section_player_configuration, "VerticalLookSensitivity", 1.0f);
 	s_mouse_input->set_sensitivity(horizontalSensitivity, verticalSensitivity);
 }
 
