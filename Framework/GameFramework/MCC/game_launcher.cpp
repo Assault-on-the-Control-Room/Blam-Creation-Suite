@@ -239,6 +239,7 @@ void c_game_launcher::opus_tick()
 		update();
 	}
 
+	c_presense_api::update();
 	c_debug_gui::start_frame(); // OpusUITick is registered to the DebugUI
 	//OpusUITick();
 	if (c_debug_gui::is_rendering() && s_is_game_running) // render a debug layer for the game to render text to
@@ -318,6 +319,14 @@ void c_game_launcher::launch_game(e_engine_type engine_type)
 	// #TODO: We currently can't resize the game without crashing
 	// we should do this at the beginning of the frame.
 
+	s_presense_info presense_info = {};
+	presense_info.engine_type = engine_type;
+	presense_info.party_max = 1;
+	presense_info.party_size = 1;
+	presense_info.map_name = "unknown"; // #TODO
+	presense_info.gametype_name = "unknown"; // #TODO
+	c_presense_api::set_state(&presense_info);
+
 	c_render::set_resize_enabled(false);
 	switch (engine_type)
 	{
@@ -336,6 +345,8 @@ void c_game_launcher::launch_game(e_engine_type engine_type)
 #endif
 	}
 	c_render::set_resize_enabled(true);
+
+	c_presense_api::set_default_state();
 
 	s_is_game_running = false;
 }
@@ -381,6 +392,7 @@ void c_game_launcher::launch_mcc_game(e_engine_type engine_type)
 		c_console::write_line_verbose(__FUNCTION__"> unknown engine_type");
 		return;
 	}
+
 	ASSERT(current_game_host != nullptr);
 	IGameEngine* game_engine = current_game_host->get_game_engine();
 	ASSERT(game_engine != nullptr);

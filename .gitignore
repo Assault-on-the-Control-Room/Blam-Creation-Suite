@@ -352,6 +352,11 @@ ASALocalRun/
 #Blamder
 **/blamder/lib
 **/blamder/build*
+
+#Discord RPC
+**/discord-rpc-build/cmake
+**/discord-rpc-build/cmake_x86
+**/discord-rpc-build/cmake_x64
                
 #Mantle
 MantleGen/LegacyGen/reflection_data_legacy.h

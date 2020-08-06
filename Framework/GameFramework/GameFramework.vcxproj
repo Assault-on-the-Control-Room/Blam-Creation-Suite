@@ -179,7 +179,9 @@
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Presense\discord_presense_api.cpp" />
     <ClCompile Include="MCC\map_id.cpp" />
+    <ClCompile Include="Presense\presense_api.cpp" />
     <ClCompile Include="session_manager.cpp" />
     <ClCompile Include="RuntimeManipulation\data_patch.cpp" />
     <ClCompile Include="c_file_array.cpp" />
@@ -217,9 +219,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ApplicationReflection\ApplicationReflection.h" />
+    <ClInclude Include="Presense\discord_presense_api.h" />
     <ClInclude Include="is_valid.h" />
     <ClInclude Include="MCC\map_id.h" />
     <ClInclude Include="MCC\player_configuration.h" />
+    <ClInclude Include="Presense\presense_info.h" />
     <ClInclude Include="session_manager.h" />
     <ClInclude Include="MCC\game_context.h" />
     <ClInclude Include="RuntimeManipulation\data_patch.h" />

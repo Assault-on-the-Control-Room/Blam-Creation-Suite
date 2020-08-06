@@ -7,3 +7,6 @@
 [submodule "blamlib"]
 	path = Framework/blamlib
 	url = https://github.com/Assault-on-the-Control-Room/blamlib.git
+[submodule "discord-rpc"]
+	path = ThirdParty/discord-rpc
+	url = https://github.com/Assault-on-the-Control-Room/discord-rpc.git

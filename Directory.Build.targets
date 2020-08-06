@@ -25,7 +25,7 @@
   <IncludePath>$(SolutionDir)ThirdParty\llvm\clang\include\;$(IncludePath)</IncludePath>
   <IncludePath>$(SolutionDir)ThirdParty\llvm-build\cmake_$(PlatformShortName)\include\;$(IncludePath)</IncludePath>
   <IncludePath>$(SolutionDir)ThirdParty\llvm-build\cmake_$(PlatformShortName)\tools\clang\include\;$(IncludePath)</IncludePath>
-  
+  <IncludePath>$(SolutionDir)ThirdParty\discord-rpc\include\;$(IncludePath)</IncludePath>
   
   <LibraryPath>$(SolutionDir)Libraries\lib\$(PlatformShortName)\;$(LibraryPath)</LibraryPath>
   <LibraryPath>$(SolutionDir)$(PlatformName)\$(CustomConfiguration)\;$(LibraryPath)</LibraryPath>
@@ -33,6 +33,7 @@
   <LibraryPath>$(SolutionDir)ThirdParty\tbb-build\cmake_$(PlatformShortName)\$(CustomConfiguration)\;$(LibraryPath)</LibraryPath>
   <LibraryPath>$(SolutionDir)ThirdParty\tbb-build\cmake_$(PlatformShortName)\$(CustomConfiguration)\;$(LibraryPath)</LibraryPath>
   <LibraryPath>$(SolutionDir)ThirdParty\llvm-build\cmake_$(PlatformShortName)\$(CustomConfiguration)\lib\;$(LibraryPath)</LibraryPath>
+  <LibraryPath>$(SolutionDir)ThirdParty\discord-rpc-build\cmake_$(PlatformShortName)\src\$(Configuration)\;$(LibraryPath)</LibraryPath>
     
   </PropertyGroup>
 </Project>

@@ -18,6 +18,10 @@ int WINAPI WinMain(
 	_In_ int nShowCmd
 )
 {
+	c_discord_presense_api discord = c_discord_presense_api("483795144114569227");
+
+	c_presense_api::set_default_state();
+
 	int result = 0;
 	if (rhesus_crash_reporter(result))
 	{
@@ -31,7 +35,7 @@ int WINAPI WinMain(
 	SystemPatch::PatchEnumWindows();
 
 	static bool s_running = true;
-	void(*UpdateCallback)() = []()
+	auto update_callback = [&discord]()
 	{
 		c_render::begin_frame(true, &clearColor.x);
 		c_game_launcher::opus_tick();
@@ -54,7 +58,7 @@ int WINAPI WinMain(
 	c_console::write_line("init_game_launcher");
 	c_game_launcher::init_game_launcher(*window);
 
-	window->on_update.register_callback(UpdateCallback);
+	window->on_update.register_callback(&update_callback, update_callback);
 	window->on_destroy.register_callback(DestroyCallback);
 
 	c_console::show_startup_banner();
@@ -64,7 +68,7 @@ int WINAPI WinMain(
 		window->update();
 	}
 
-	window->on_update.unregister_callback(UpdateCallback);
+	window->on_update.unregister_callback(&update_callback, update_callback);
 	window->on_destroy.unregister_callback(DestroyCallback);
 
 	c_game_launcher::deinit_game_launcher();

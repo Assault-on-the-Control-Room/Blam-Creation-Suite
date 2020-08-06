@@ -90,6 +90,12 @@
     <ClCompile Include="MCC\map_id.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Presense\presense_api.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Presense\discord_presense_api.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RuntimeManipulation\RuntimeManipulation.h">
@@ -219,6 +225,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MCC\map_id.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Presense\presense_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Presense\discord_presense_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Presense\presense_info.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
