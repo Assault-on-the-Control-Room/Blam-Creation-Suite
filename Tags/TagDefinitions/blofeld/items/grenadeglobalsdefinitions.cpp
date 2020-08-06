@@ -42,7 +42,18 @@ namespace blofeld
 	{
 		"human fragmentation",
 		"covenant plasma",
+
+		{ _field_version_less, _engine_type_haloreach, 2 },
+		"brute spike",
+		"fire bomb",
+
+		{ _field_version_equal, _engine_type_haloreach },
+		"grenade type 2",
+
+		{ _field_version_greater, _engine_type_haloreach },
 		"pulse grenade",
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach, 5 },
 		"grenade type 3",
 		"grenade type 4",
 		"grenade type 5",

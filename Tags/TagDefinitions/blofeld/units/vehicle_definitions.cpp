@@ -8,7 +8,7 @@ namespace blofeld
 
 	TAG_BLOCK_FROM_STRUCT(human_tank_block, 1, human_tank_struct_struct_definition);
 
-	TAG_BLOCK(phantom_shapes_block, 1) //0x3C0 Don't hurt me, I beg you.
+	TAG_BLOCK(phantom_shapes_block, 1) //0x3C0 Don't hurt me, I beg you. #TODO: populate this havok structure
 	{
 		{ _field_long_integer, "Unknown" },
 		{ _field_long_integer, "Unknown" },
@@ -993,6 +993,10 @@ namespace blofeld
 	STRINGS(vehicle_flags)
 	{
 		"no friction w/driver",
+
+		{ _field_version_less, _engine_type_haloreach },
+		"can trigger automatic opening of doors",
+
 		"autoaim when teamless",
 		"ai weapon cannot rotate",
 		"ai does not require driver",

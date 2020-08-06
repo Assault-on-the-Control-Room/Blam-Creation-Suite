@@ -27,12 +27,29 @@ namespace blofeld
 		"flying vehicle",
 		"turret",
 		"device",
+
+		{ _field_version_greater, _engine_type_haloreach },
 		"dispenser",
+
 		"teleporter 2way",
 		"teleporter sender",
 		"teleporter receiver",
 		"player spawn location",
 		"player respawn zone",
+
+		{ _field_version_less, _engine_type_haloreach, 10 },
+		"hold spawn objective",
+		"capture spawn objective",
+		"hold destination objective",
+		"capture destination objective",
+		"hill objective",
+		"infection haven objective",
+		"territory objective",
+		"vip boundary objective",
+		"vip destination objective",
+		"juggernaut destination objective",
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach, 11 },
 		"secondary objective",
 		"primary objective",
 		"named location area",
@@ -44,6 +61,8 @@ namespace blofeld
 		"safe volume",
 		"kill volume",
 		"cinematic camera position",
+
+		{ _field_version_greater, _engine_type_haloreach, 7 },
 		"mosh enemy spawn location",
 		"ordnance drop point",
 		"trait zone",

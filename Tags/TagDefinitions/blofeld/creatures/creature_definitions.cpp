@@ -102,6 +102,15 @@ namespace blofeld
 		"player",
 		"human",
 		"covenant",
+
+		{ _field_version_less, _engine_type_haloreach, 5 },
+		"Flood",
+		"Sentinel",
+		"Heretic",
+		"Prophet",
+		"Guilty",
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach, 5 },
 		"brute",
 		"mule",
 		"spare",

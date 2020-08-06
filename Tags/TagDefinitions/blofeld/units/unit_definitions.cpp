@@ -725,25 +725,46 @@ namespace blofeld
 		"melee attack is fatal",
 		"don\'t reface during pings",
 		"has no aiming",
+
+		{ _field_version_less, _engine_type_haloreach },
+		"simple creature",
+
 		"impact melee attaches to unit",
 		"impact melee dies on shields",
 		"cannot open doors automatically",
 		"melee attackers cannot attach",
 		"not instantly killed by melee",
 		"flashlight power doesnt transfer to weapon",
+
 		"runs around flaming",
+
+		{ _field_version_less, _engine_type_haloreach },
+		"inconsequential",
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		"top level for AOE damage",
+
 		"special cinematic unit",
 		"ignored by autoaiming",
 		"shields fry infection forms",
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		"use velocity as acceleration",
+
 		"can dual wield",
+
+		{ _field_version_less, _engine_type_haloreach },
+		"unused bit",
+
 		"acts as gunner for parent",
 		"controlled by parent gunner",
 		"parent\'s primary weapon",
+
+		{ _field_version_greater, _engine_type_haloreach },
 		"parent\'s secondary weapon",
+
 		"unit has boost",
-		"unit has vectored thrust",
+		"unit has vectored thrust", // need to check these three
 		"allow aim while opening or closing",
 		"compute acceleration from aiming"
 	};
@@ -774,6 +795,15 @@ namespace blofeld
 		"player",
 		"human",
 		"covenant",
+
+		{ _field_version_less, _engine_type_haloreach, 5 },
+		"Flood",
+		"Sentinel",
+		"Heretic",
+		"Prophet",
+		"Guilty",
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach, 5 },
 		"brute",
 		"mule",
 		"spare",

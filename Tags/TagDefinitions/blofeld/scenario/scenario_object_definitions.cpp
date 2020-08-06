@@ -785,6 +785,8 @@ namespace blofeld
 		"megalogamengine",
 		"campaign",
 		"survival",
+
+		{ _field_version_greater, _engine_type_haloreach },
 		"firefight"
 	};
 	STRING_LIST(global_game_engine_type_flags, global_game_engine_type_flags_strings, _countof(global_game_engine_type_flags_strings));

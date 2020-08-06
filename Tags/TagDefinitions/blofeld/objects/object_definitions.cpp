@@ -499,10 +499,13 @@ namespace blofeld
 	STRINGS(object_definition_flags)
 	{
 		"does not cast shadow",
+
+		{ _field_version_greater, _engine_type_haloreach, 4 },
 		"children do not cast shadow",
 		"first class child",
 		"object samples lightprobes only",
 		"object uses only own static lightmap",
+
 		"search cardinal direction lightmaps on failure",
 		"preserves initial damage owner",
 		"not a pathfinding obstacle",
@@ -510,16 +513,31 @@ namespace blofeld
 		"does not cause collision damage",
 		"early mover",
 		"early mover localized physics",
+
+		{ _field_version_less_or_equal, _engine_type_haloreach },
+		"use static massive lightmap sample",
+
 		"object scales attachments",
 		"inherits player\'s appearance",
+
+		{ _field_version_less, _engine_type_haloreach, 2 },
+		"dead bipeds cant localize",
+		"attach to clusters by dynamic sphere",
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach, 3 },
 		"non physical in map editor",
 		"object is always on the ceiling",
 		"sample enviroment lighting only ignore object lighting",
+
 		"effects created by this object do not spawn objects in multiplayer",
-		"does not collide with camera#force camera not to collide with object.  By default small sweetener objects do not collide",
+		"does not collide with camera#force camera not to collide with object.  By default small sweetener objects do not collide", // #TODO: test these 2 flags in h3
 		"force collide with camera#force the camera to collide with this object,  By default small sweetener objects do not collide",
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach, 2 },
 		"damage not blocked by obstructions#AOE damage being applied to this object does not test for obstrutions.",
 		"does not damage breakable surfaces",
+
+		{ _field_version_greater, _engine_type_haloreach, 9 },
 		"early mover localize projectiles",
 		"requires shadow bounds visibility test",
 		"grab parent object in forge editing",
