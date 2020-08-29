@@ -33,7 +33,10 @@ namespace blofeld
 		{ _field_explanation, "damage", "" },
 		{ _field_enum, "side effect", &damage_side_effects },
 		{ _field_enum, "category", &damage_categories },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_long_enum, "death vocalization", &damage_death_vocalizations },
+
 		{ _field_long_flags, "flags", &damage_flags },
 
 		{ _field_version_greater, _engine_type_haloreach, 2 },
@@ -43,14 +46,26 @@ namespace blofeld
 		{ _field_real, "AOE core radius:world units#if >0 then higher fidelity obstruction collision checks are preformed. This field has no other ramifications." },
 		{ _field_real, "damage lower bound" },
 		{ _field_real_bounds, "damage upper bound" },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_struct, "damage falloff function", &scalar_function_named_struct_struct_definition },
+
 		{ _field_angle, "dmg inner cone angle" },
+
+		{ _field_version_less, _engine_type_haloreach },
+		{ _field_angle, "dmg inner cone angle" },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_struct, "blah", &damage_outer_cone_angle_struct_struct_definition },
+
 		{ _field_real, "active camouflage damage:[0,1]#how much more visible this damage makes a player who is active camouflaged" },
 		{ _field_real, "stun:[0,1]#amount of stun added to damaged unit" },
 		{ _field_real, "maximum stun:[0,1]#damaged unit\'s stun will never exceed this amount" },
 		{ _field_real, "stun time:seconds#duration of stun due to this damage" },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_long_integer, "damage stun:ticks#how long we stun recovering current body damage" },
+
 		{ _field_real, "instantaneous acceleration:[0,+inf]" },
 
 		{ _field_version_greater, _engine_type_haloreach, 2 },
@@ -67,17 +82,27 @@ namespace blofeld
 		{ _field_version_greater, _engine_type_haloreach },
 		{ _field_real, "vehicle damage multiplier" },
 		
+		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_real_fraction, "soft ping pain screen scale:[0,1]#The maximum amount to apply the pain screen pose overlay" },
+
 		{ _field_useless_pad },
 		{ _field_string_id, "general_damage" },
 		{ _field_string_id, "specific_damage" },
+
+		{ _field_version_less, _engine_type_haloreach },
+		{ _field_string_id, "custom response label" },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_block, "custom response labels", &custom_damage_response_label_block_block },
+
 		{ _field_real, "AI stun radius:world units" },
 		{ _field_real_bounds, "AI stun bounds:(0-1)" },
 		{ _field_real, "shake radius" },
 		{ _field_real, "EMP radius" },
 		{ _field_real, "aoe spike radius" },
 		{ _field_real, "aoe spike damage bump" },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_real, "shield render effects scale" },
 
 		{ _field_version_greater, _engine_type_haloreach, 17 },
@@ -99,11 +124,16 @@ namespace blofeld
 		{ _field_real, "shield minimum stun time:seconds" },
 		{ _field_real, "health minimum stun time:seconds" },
 		
+		// reach moved a bunch of this into its own tag
 		{ _field_explanation, "damage response", "" },
 		{ _field_tag_reference, "damage response", &global_damage_response_definition_reference },
+
 		{ _field_explanation, "sound", "" },
 		{ _field_tag_reference, "old melee sound{sound}", &global_sound_reference },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_block, "damage sounds", &damage_effect_sound_block_block },
+
 		{ _field_useless_pad },
 		{ _field_explanation, "breaking effect", "Controls particle velocities when a damage effect shatters a materal.\n\nAll particles created within \'forward radius\' will be kicked along the\ndamage direction with a speed equivalent to \'forward velocity\' at the\nepicenter of the damage and 0 at the outer radius.  \'Forward exponent\'\nis used to modify the velocity scale.  A low exponent (like 0.5) means that\nparticles between the epicenter and the radius will be kicked out with a speed\ncloser to \'forward velocity\' than if a higher exponent (like 2.0) was used\n\nThe outward fields work in a similar way, except instead of kicking along the\ndamage direction, they get kick away from the damage epicenter." },
 		{ _field_real, "forward velocity:world units per second" },
