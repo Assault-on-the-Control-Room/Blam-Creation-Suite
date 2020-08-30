@@ -72,10 +72,10 @@ namespace blofeld
 		{ _field_block, "model materials*", &model_material_block_new_block },
 		{ _field_block, "new damage info!", &global_damage_info_block_block },
 
-		{ _field_version_greater_or_equal, _engine_type_haloreach, 1 },
+		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_struct, "damage info", &model_damage_info_struct_struct_definition },
 
-		{ _field_version_less, _engine_type_haloreach, 1 },
+		{ _field_version_less, _engine_type_haloreach },
 		{ _field_block, "targets!", &model_target_block_old_block },
 
 		{ _field_version_greater_or_equal, _engine_type_haloreach, 2 },
@@ -85,6 +85,10 @@ namespace blofeld
 		{ _field_block, "runtime regions!", &model_region_block_block },
 		{ _field_block, "runtime nodes!", &model_node_block_block },
 		{ _field_long_integer, "runtime node list checksum!" },
+
+		{ _field_version_less, _engine_type_haloreach },
+		{ _field_block, "model object data", &model_object_data_block_block },
+
 		{ _field_explanation, "more stuff", "" },
 		{ _field_tag_reference, "default dialogue#The default dialogue tag for this model (overriden by variants)", &dialogue_reference$3 },
 		{ _field_tag_reference, "default dialogue female#The default FEMALE dialogue tag for this model (overriden by variants)", &dialogue_reference$3 },
@@ -129,6 +133,11 @@ namespace blofeld
 		{ _field_char_integer, "runtime permutation index!" },
 		{ _field_byte_flags, "property flags", &model_state_property_flags_definition },
 		{ _field_enum, "state^", &model_state_enum_definition },
+
+		{ _field_version_less, _engine_type_haloreach, 2 },
+		{ _field_tag_reference, "looping effect", &effect_reference },
+		{ _field_string_id, "looping effect marker name" },
+
 		{ _field_real_fraction, "initial probability" },
 		{ _field_terminator }
 	};
@@ -170,9 +179,12 @@ namespace blofeld
 		{ _field_string_id, "child marker" },
 		{ _field_string_id, "child variant name#optional" },
 		{ _field_tag_reference, "child object", &object_reference$5 },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach, 3 },
 		{ _field_short_block_index, "damage section" },
 		{ _field_byte_flags, "flags", &ModelVariantObjectFlagsDefinition },
 		{ _field_pad, "MVOBP1", 1 },
+
 		{ _field_terminator }
 	};
 
@@ -313,6 +325,15 @@ namespace blofeld
 		{ _field_terminator }
 	};
 
+	TAG_BLOCK(model_object_data_block, 65535)
+	{
+		{ _field_short_integer, "type" }, // lazy fucker
+		{ _field_short_integer, "@unknown" },
+		{ _field_real_point_3d, "offset" },
+		{ _field_real, "radius" },
+		{ _field_terminator }
+	};
+
 	TAG_BLOCK(model_game_mode_render_model_override, k_maximum_model_game_mode_types)
 	{
 		{ _field_enum, "game mode^", &model_game_mode_types },
@@ -362,10 +383,19 @@ namespace blofeld
 	TAG_STRUCT(model_target_lock_on_data_struct)
 	{
 		{ _field_explanation, "lock-on fields", "" },
+
+		{ _field_version_less, _engine_type_haloreach },
+		{ _field_long_flags, "flags", &model_target_lock_on_flags_definition },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach, 2 },
 		{ _field_byte_flags, "flags", &model_target_lock_on_flags_definition },
 		{ _field_pad, "SVLKJERAF", 3 },
+
 		{ _field_real, "lock on distance" },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_string_id, "tracking type#a weapon can track/lock on this target if this string is in the weapon\'s tracking block" },
+
 		{ _field_terminator }
 	};
 
@@ -510,7 +540,11 @@ namespace blofeld
 		"headshot",
 		"vulnerable",
 		"ignored on local physics",
-		"use for network lead vector only"
+		"use for network lead vector only",
+		"bit 4",
+		"bit 5",
+		"bit 6"
+
 	};
 	STRING_LIST(model_target_lock_on_flags_definition, model_target_lock_on_flags_definition_strings, _countof(model_target_lock_on_flags_definition_strings));
 

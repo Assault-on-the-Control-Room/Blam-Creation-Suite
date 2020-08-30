@@ -18,8 +18,11 @@ namespace blofeld
 		{ _field_long_flags, "flags2", &damage_response_set2 },
 
 		{ _field_real_fraction, "damage threshold#response fires after crossing this threshold.  1=full health" },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach, 2 },
 		{ _field_long_flags, "body threshold flags", &damage_response_body_threshold_flags_definition },
 		{ _field_real, "body damage threshold#response fires after object body damage crosses this threshold, numbers can be negative.  You need to set the flag \"body threshold active\" for this number to be used. 1=full health" },
+
 		{ _field_tag_reference, "transition effect (generic){transition effect}", &global_effect_reference },
 		{ _field_tag_reference, "transition effect (specific)", &global_effect_reference },
 		{ _field_struct, "damage effect", &instantaneous_response_damage_effect_struct_struct_definition },
@@ -139,9 +142,16 @@ namespace blofeld
 		{ _field_block, "nodes*", &global_damage_nodes_block_block },
 		{ _field_short_integer, "runtime shield material type!*" },
 		{ _field_short_integer, "runtime indirect material type!*" },
+
+		{ _field_version_less, _engine_type_haloreach },
+		{ _field_real, "@unknown" },
+		{ _field_real, "@unknown" },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach, 3 },
 		{ _field_real, "runtime shield recharge velocity!*" },
 		{ _field_real, "runtime overcharge velocity!*" },
 		{ _field_real, "runtime health recharge velocity!*" },
+
 		{ _field_block, "damage seats", &damage_seat_info_block_block },
 		{ _field_block, "damage constraints", &damage_constraint_info_block_block },
 		{ _field_explanation, "overshield", "" },
@@ -314,8 +324,11 @@ namespace blofeld
 		{ _field_real, "minimum stun damage#the minimum damage required to stun this object\'s shields" },
 		{ _field_real, "stun time:seconds#the length of time the shields stay stunned (do not recharge) after taking damage" },
 		{ _field_real, "recharge time:seconds#the length of time it would take for the shields to fully recharge after being completely depleted" },
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach, 2 },
 		{ _field_real, "shield overcharge fraction#fraction to which shields will automatically overcharge, values <= 1.0 are ignored" },
 		{ _field_real, "shield overcharge time#time it takes to reach full \"shield overcharge fraction\"" },
+
 		{ _field_real, "shield damaged threshold" },
 		{ _field_tag_reference, "shield damaged effect", &global_effect_reference },
 		{ _field_tag_reference, "shield depleted effect", &global_effect_reference },

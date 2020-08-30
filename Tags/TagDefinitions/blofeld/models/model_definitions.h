@@ -39,6 +39,8 @@ namespace blofeld
 	extern s_tag_block_definition model_region_block_block;
 	extern s_tag_struct_definition model_node_block_block_struct;
 	extern s_tag_block_definition model_node_block_block;
+	extern s_tag_struct_definition model_object_data_block_struct;
+	extern s_tag_block_definition model_object_data_block_block;
 	extern s_tag_struct_definition model_game_mode_render_model_override_block_struct;
 	extern s_tag_block_definition model_game_mode_render_model_override_block;
 	extern s_tag_struct_definition model_self_shadow_region_cast_override_block_block_struct;
