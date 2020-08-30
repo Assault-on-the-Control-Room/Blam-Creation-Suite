@@ -2023,6 +2023,10 @@ namespace blofeld
 		"loop",
 		"loop seesaw",
 		"dont correct translation",
+		"bit 4", // Reach
+		"bit 5",
+		"bit 6",
+		"bit 7",
 	};
 	STRING_LIST(chad_flags_definition, chad_flags_definition_strings, _countof(chad_flags_definition_strings));
 }
