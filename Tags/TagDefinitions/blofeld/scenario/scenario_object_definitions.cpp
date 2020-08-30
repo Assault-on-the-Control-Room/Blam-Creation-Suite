@@ -780,6 +780,18 @@ namespace blofeld
 
 	STRINGS(global_game_engine_type_flags)
 	{
+		{ _field_version_less, _engine_type_haloreach, 9 },
+		"capture the flag",
+		"slayer",
+		"oddball",
+		"king of the hill",
+		"juggernaut",
+		"territories",
+		"assault",
+		"VIP",
+		"infection",
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach, 6 },
 		"none",
 		"sandbox",
 		"megalogamengine",
