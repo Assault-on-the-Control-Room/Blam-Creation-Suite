@@ -8,10 +8,13 @@ namespace blofeld
 	TAG_BLOCK(lighting_variable_block, 65536)
 	{
 		{ _field_real, "lightmap brightness offset" },
+		
+		{ _field_version_greater, _engine_type_halo3, 4 },
 		{ _field_real, "lightmap darkness offset" },
 		{ _field_real, "unknown" },
 		{ _field_real, "dynamic lightmap brightness offset" },
 		{ _field_real, "dynamic lightmap darkness offset" },
+		
 		{ _field_terminator }
 	};
 
@@ -19,10 +22,12 @@ namespace blofeld
 
 	TAG_STRUCT(chocolate_mountain_struct_definition)
 	{
+		{ _field_version_greater, _engine_type_halo3, 4 },
 		{ _field_byte_integer, "unknown" },
 		{ _field_byte_integer, "unknown" },
 		{ _field_byte_integer, "unknown" },
 		{ _field_byte_integer, "unknown" },
+		
 		{ _field_block, "lighting variables", &lighting_variable_block_block },
 		{ _field_terminator }
 	};
