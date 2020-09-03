@@ -49,7 +49,7 @@ namespace blofeld
 		{ _field_real, "player skip fraction" },
 		{ _field_real, "flood skip fraction" },
 
-		{ _field_version_greater, _engine_type_halo3, 3 },
+		{ _field_version_greater_or_equal, _engine_type_haloreach, 3 },
 		{ _field_real, "skip fraction" },
 		{ _field_short_integer, "mission min value#The lowest mission id that we play this line in" },
 		{ _field_short_integer, "mission max value#The highest mission id that we play this line in" },
@@ -90,14 +90,14 @@ namespace blofeld
 		{ _field_enum, "spatial relation#with respect to the subject, the cause is ...", &spatial_relation_enum },
 		{ _field_enum, "damage type", &damage_enum },
 
-		{ _field_version_greater, _engine_type_halo3 },
+		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_enum, "game type", &game_type_enum },
 		
 		{ _field_explanation, "Subject", "" },
 		{ _field_enum, "subject actor type", &actor_type_enum },
 		{ _field_enum, "subject type", &dialogue_object_types_enum },
 		
-		{ _field_version_greater, _engine_type_halo3 },
+		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_pad, "post-subject-type-pad", 2 },
 		
 		{ _field_string_id, "subject ai type name" },
@@ -133,7 +133,7 @@ namespace blofeld
 		{ _field_real, "remind delay:secs" },
 		{ _field_real, "cover curse chance" },
 		
-		{ _field_version_greater, _engine_type_halo3, 13 },
+		{ _field_version_greater_or_equal, _engine_type_haloreach, 13 },
 		{ _field_explanation, "Player look settings", "used to play look and look_longtime dialogue in campain and firefight" },
 		{ _field_real, "player look max distance:wu#defaults to 10 wu" },
 		{ _field_real, "player look:secs#defaults to 3 secs" },
@@ -154,7 +154,7 @@ namespace blofeld
 		{ _field_block, "dialogue data", &dialogue_data_block_block },
 		{ _field_block, "involuntary data", &involuntary_data_block_block },
 
-		{ _field_version_greater, _engine_type_halo3 },
+		{ _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_block, "predicted vocalizations", &predicted_data_block_block },
 		
 		{ _field_terminator }
