@@ -48,9 +48,12 @@ namespace blofeld
 		{ _field_real, "player speaker skip fraction" },
 		{ _field_real, "player skip fraction" },
 		{ _field_real, "flood skip fraction" },
+
+		{ _field_version_greater, _engine_type_halo3, 3 },
 		{ _field_real, "skip fraction" },
 		{ _field_short_integer, "mission min value#The lowest mission id that we play this line in" },
 		{ _field_short_integer, "mission max value#The highest mission id that we play this line in" },
+		
 		{ _field_string_id, "Sample line" },
 		{ _field_block, "reponses", &response_block_block },
 		{ _field_terminator }
@@ -86,11 +89,17 @@ namespace blofeld
 		{ _field_explanation, "Matching", "" },
 		{ _field_enum, "spatial relation#with respect to the subject, the cause is ...", &spatial_relation_enum },
 		{ _field_enum, "damage type", &damage_enum },
+
+		{ _field_version_greater, _engine_type_halo3 },
 		{ _field_enum, "game type", &game_type_enum },
+		
 		{ _field_explanation, "Subject", "" },
 		{ _field_enum, "subject actor type", &actor_type_enum },
 		{ _field_enum, "subject type", &dialogue_object_types_enum },
+		
+		{ _field_version_greater, _engine_type_halo3 },
 		{ _field_pad, "post-subject-type-pad", 2 },
+		
 		{ _field_string_id, "subject ai type name" },
 		{ _field_terminator }
 	};
@@ -123,6 +132,8 @@ namespace blofeld
 		{ _field_real_bounds, "strike delay bounds:secs" },
 		{ _field_real, "remind delay:secs" },
 		{ _field_real, "cover curse chance" },
+		
+		{ _field_version_greater, _engine_type_halo3, 13 },
 		{ _field_explanation, "Player look settings", "used to play look and look_longtime dialogue in campain and firefight" },
 		{ _field_real, "player look max distance:wu#defaults to 10 wu" },
 		{ _field_real, "player look:secs#defaults to 3 secs" },
@@ -136,12 +147,16 @@ namespace blofeld
 		{ _field_explanation, "Default stimulus suppressors", "when these stimuli are active on an actor, default stimulus permutations will be suppressed." },
 		{ _field_block, "default stimulus suppressors", &default_stimulus_suppressor_block_block },
 		{ _field_explanation, "Imported Data. Don\'t touch me.", "" },
+		
 		{ _field_block, "vocalizations", &vocalization_definitions_block_block },
 		{ _field_block, "patterns", &vocalization_patterns_block_block },
 		{ _field_pad, "WWKMVLL", 12 },
 		{ _field_block, "dialogue data", &dialogue_data_block_block },
 		{ _field_block, "involuntary data", &involuntary_data_block_block },
+
+		{ _field_version_greater, _engine_type_halo3 },
 		{ _field_block, "predicted vocalizations", &predicted_data_block_block },
+		
 		{ _field_terminator }
 	};
 
@@ -341,6 +356,7 @@ namespace blofeld
 
 	STRINGS(priority_enum)
 	{
+		{ _field_version_greater_or_equal, _engine_type_haloreach, 16 },
 		"none",
 		"recall",
 		"idle",
@@ -356,7 +372,27 @@ namespace blofeld
 		"involuntary",
 		"scream",
 		"scripted",
-		"death"
+		"death",
+
+		{ _field_version_less, _engine_type_haloreach, 9 },
+		"None",
+		"Autonomic",
+		"Recall",
+		"Idle",
+		"Comment",
+		"Idle Response",
+		"Postcombat",
+		"Combat",
+		"Status",
+		"Respond",
+		"Warn",
+		"Act",
+		"React",
+		"Involuntary",
+		"Scream",
+		"Scripted",
+		"Death"
+		
 	};
 	STRING_LIST(priority_enum, priority_enum_strings, _countof(priority_enum_strings));
 
