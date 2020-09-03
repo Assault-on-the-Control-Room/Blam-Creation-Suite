@@ -356,23 +356,6 @@ namespace blofeld
 
 	STRINGS(priority_enum)
 	{
-		{ _field_version_greater_or_equal, _engine_type_haloreach, 16 },
-		"none",
-		"recall",
-		"idle",
-		"comment",
-		"idle_response",
-		"postcombat",
-		"combat",
-		"status",
-		"respond",
-		"warn",
-		"act",
-		"react",
-		"involuntary",
-		"scream",
-		"scripted",
-		"death",
 
 		{ _field_version_less, _engine_type_haloreach, 9 },
 		"None",
@@ -391,7 +374,25 @@ namespace blofeld
 		"Involuntary",
 		"Scream",
 		"Scripted",
-		"Death"
+		"Death",
+
+		{ _field_version_greater_or_equal, _engine_type_haloreach, 16 },
+		"none",
+		"recall",
+		"idle",
+		"comment",
+		"idle_response",
+		"postcombat",
+		"combat",
+		"status",
+		"respond",
+		"warn",
+		"act",
+		"react",
+		"involuntary",
+		"scream",
+		"scripted",
+		"death",
 		
 	};
 	STRING_LIST(priority_enum, priority_enum_strings, _countof(priority_enum_strings));
