@@ -28,16 +28,17 @@ namespace blofeld
 
 	TAG_BLOCK(cloth_links_block, k_maximum_links_per_cloth)
 	{
+		
+		{ _field_version_less, _engine_type_haloreach, 3 },
+		{ _field_short_integer, "index1*" },
+		{ _field_short_integer, "index2*" },
+		{ _field_real, "default_distance*" },
+		
 		{ _field_version_greater_or_equal, _engine_type_haloreach, 4 },
 		{ _field_real, "default_distance*" },
 		{ _field_long_integer, "index1*" },
 		{ _field_long_integer, "index2*" },
 		{ _field_pad, "vmx_pad", 4 },
-
-		{ _field_version_less, _engine_type_haloreach, 3 },
-		{ _field_short_integer, "index1*" },
-		{ _field_short_integer, "index2*" },
-		{ _field_real, "default_distance*" },
 		
 		{ _field_terminator }
 	};
