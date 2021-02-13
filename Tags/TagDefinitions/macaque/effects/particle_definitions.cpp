@@ -45,8 +45,10 @@ namespace macaque
 		TAG_MEMORY_ATTRIBUTES(MEMORY_ALLOCATION_DEFAULT, TAG_MEMORY_USAGE_READ_ONLY),
 		ATTACHMENT_BLOCK_ID)
 	{
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_byte_flags, "flags", &attachment_flags },
 		FIELD_PAD("gerrrrr", nullptr, FIELD_FLAG_NONE, 3),
+
 		{ _field_tag_reference, "type", &attachment_block_type_reference },
 		{ _field_char_enum, "trigger", &attachment_type_enum },
 		{ _field_byte_integer, "skip fraction", "0 will always play, 127 will be extremely rare", nullptr, "[0-127]" },
@@ -111,29 +113,55 @@ namespace macaque
 		{ _field_real, "motion blur translation scale", "affects billboard tilt from observer motion" },
 		{ _field_real, "motion blur rotation scale", "affects billboard tilt from observer turning" },
 		{ _field_real, "motion blur aspect scale", "affects aspect ratio stretching from particle and observer motion" },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 2 },
+		{ _field_legacy, _field_explanation, "Render Method" }, // Unknown field ID, leaving as legacy
+		{ _field_legacy, _field_struct, "render method", &render_method_struct_definition },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 3 },
 		FIELD_CUSTOM("material", nullptr, FIELD_FLAG_NONE, _field_id_shader_template),
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_hidd_begin),
 		{ _field_struct, "actual material?", &material_struct },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 10 },
+		{ _field_legacy, _field_real, "unknown@" },
+		{ _field_legacy, _field_real, "unknown@" },
+		{ _field_legacy, _field_real, "unknown@" },
+		{ _field_legacy, _field_real, "unknown@" },
+		{ _field_legacy, _field_real, "unknown@" },
+		{ _field_legacy, _field_real, "unknown@" },
+		{ _field_legacy, _field_real, "unknown@" },
+		{ _field_legacy, _field_real, "unknown@" },
+		{ _field_legacy, _field_real, "unknown@" },
+		{ _field_legacy, _field_tag_reference, "unknown@" },
+
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_hidd_end),
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_unknown_end),
 		{ _field_struct, "aspect ratio", &particle_property_scalar_struct_new },
 		{ _field_struct, "color", "controls how the color of the particle changes as a function of its input", "RGB", &particle_property_color_struct_new },
 		{ _field_struct, "intensity", "multiplies color to give dynamic range outside [0,1]", &particle_property_scalar_struct_new },
 		{ _field_struct, "alpha", "separate from color, controls how the particle fades as a function of its input", &particle_property_scalar_struct_new },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_real, "tint factor", "switches between modulate (multiply) and tint(preserve whites)", "0=modulate, 1=tint" },
+
 		FIELD_EXPLANATION("PARTICLE ANIMATION", nullptr, FIELD_FLAG_NONE, ""),
 		{ _field_long_flags, "animation flags", &particle_animation_flags },
+
 		{ _field_struct, "frame index", "0=first frame, 1=last frame", &particle_property_scalar_struct_new },
 		{ _field_struct, "animation rate", nullptr, "index cycles per second", &particle_property_scalar_struct_new },
 		{ _field_struct, "palette animation", nullptr, "v coord of palette", &particle_property_scalar_struct_new },
 		FIELD_EXPLANATION("Mesh data, if this is a mesh particle", nullptr, FIELD_FLAG_NONE, ""),
 		{ _field_tag_reference, "Model", &particle_model_reference$2 },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 6 },
 		FIELD_CUSTOM("OLD DEPRECATED shader definition", nullptr, FIELD_FLAG_NONE, _field_id_field_group_begin),
 		FIELD_CUSTOM("shader", nullptr, FIELD_FLAG_NONE, _field_id_shader_template),
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_field_group_end),
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_hidd_begin),
 		{ _field_struct, "actual shader?", &shader_particle_struct_definition },
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_hidd_end),
+
 		{ _field_dword_integer, "runtime m_used_particle_states", FIELD_FLAG_UNKNOWN0 },
 		{ _field_dword_integer, "runtime m_constant_per_particle_properties", FIELD_FLAG_UNKNOWN0 },
 		{ _field_dword_integer, "runtime m_constant_over_time_properties", FIELD_FLAG_UNKNOWN0 },
@@ -163,6 +191,11 @@ namespace macaque
 		"dies in air",
 		"has sweetener",
 		"uses cheap shader"
+		// { _field_version_platform_include, _platform_type_pc, 4 },
+		// "bit 7",
+		// "bit 8",
+		// "bit 9",
+		// "bit 10",
 	};
 	STRING_LIST(particle_main_flags, particle_main_flags_strings, _countof(particle_main_flags_strings));
 
@@ -182,6 +215,17 @@ namespace macaque
 		"low res tighter mask#requires depth fade",
 		"never kill verts on GPU (expensive)",
 		"particle velocity relative to camera#makes parallel and perpindicular to velocity behave differently based upon camera motion"
+		// { _field_legacy, _field_version_platform_include, _platform_type_pc, 9 },
+		// "unknown bit 15",
+		// "unknown bit 16",
+		// "unknown bit 17",
+		// "unknown bit 18",
+		// "unknown bit 19",
+		// "unknown bit 20",
+		// "unknown bit 21",
+		// "unknown bit 22",
+		// "unknown bit 23",
+
 	};
 	STRING_LIST(particle_appearance_flags, particle_appearance_flags_strings, _countof(particle_appearance_flags_strings));
 
@@ -189,6 +233,9 @@ namespace macaque
 	{
 		"frame animation one shot",
 		"can animate backwards"
+		// { _field_legacy, _field_version_platform_include, _platform_type_pc, 2 },
+		// "bit 3",
+		// "bit 4"
 	};
 	STRING_LIST(particle_animation_flags, particle_animation_flags_strings, _countof(particle_animation_flags_strings));
 
