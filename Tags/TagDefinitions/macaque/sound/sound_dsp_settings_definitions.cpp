@@ -102,6 +102,8 @@ namespace macaque
 		{ _field_real, "density", _field_id_slider_editor },
 		FIELD_CUSTOM("hf reference(20 to 20,000)", "for hf values, what frequency defines hf, from 20 to 20,000", FIELD_FLAG_NONE, _field_id_slider_editor),
 		{ _field_real, "hf reference(20 to 20,000)", "for hf values, what frequency defines hf, from 20 to 20,000", "Hz", _field_id_slider_editor },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 8 },
 		FIELD_EXPLANATION("WWise Environment", nullptr, FIELD_FLAG_NONE, "Use these values for WWise reverb. Above stuff will be removed eventually."),
 		{ _field_string_id, "Environment name", "Name of the environment from WWise. This will be a DSP effect with Environmental Effect checked." },
 		FIELD_CUSTOM("Dry mix value", "0 to 1 with 0 being none, and 1 being full.", FIELD_FLAG_NONE, _field_id_slider_editor),
@@ -110,6 +112,7 @@ namespace macaque
 		{ _field_real, "Wet mix value", "0 to 1 with 0 being none, and 1 being full.", _field_id_slider_editor },
 		FIELD_CUSTOM("Player wet mix value", "0 to 1 with 0 being none, and 1 being full.", FIELD_FLAG_NONE, _field_id_slider_editor),
 		{ _field_real, "Player wet mix value", "0 to 1 with 0 being none, and 1 being full.", _field_id_slider_editor },
+
 		{ _field_terminator }
 	};
 
