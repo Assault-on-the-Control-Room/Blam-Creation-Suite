@@ -43,6 +43,10 @@ namespace macaque
 		FIELD_CUSTOM("IO settings", nullptr, FIELD_FLAG_NONE, _field_id_field_group_begin),
 		{ _field_real, "IO fade modifier", "scales down the distances at which IOs imposter" },
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_field_group_end),
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_real, "instanced geometry modifier" },
+
 		FIELD_CUSTOM("Dynamic light settings", nullptr, FIELD_FLAG_NONE, _field_id_field_group_begin),
 		{ _field_long_integer, "max forward dynamic lights", "will quickly fade gpu lights when we try to render more than this many:0 = off", MAKE_OLD_NAMES("max gpu dynamic lights") },
 		{ _field_real, "forward dynamic light fade distance scale", "scales the size used for distance-fade (set smaller to make it fade earlier)", MAKE_OLD_NAMES("gpu light fade distance scale") },
@@ -50,10 +54,19 @@ namespace macaque
 		{ _field_real, "screenspace light fade distance scale", "scales the size used for distance-fade (set smaller to make it fade earlier)" },
 		{ _field_long_integer, "max effect lights (screenspace)", "limits the number of effect lights we allow to be active at a time (eg. needler needles lighting up objects):0 = off" },
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_field_group_end),
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_real, "unknown" },
+
 		FIELD_CUSTOM("Shadow settings", nullptr, FIELD_FLAG_NONE, _field_id_field_group_begin),
 		{ _field_long_integer, "max shadow casting objects", nullptr, "0 = off" },
 		{ _field_real, "shadow quality lod", "scales resolution of object shadows:[0.0 to 1.0]" },
 		{ _field_real, "floating shadow quality lod", "scales resolution of floating shadow:[0.0 to 1.0], 0 = off" },
+
+		{ _field_legacy, _field_version_platform_include, _platform_type_pc, 2 },
+		{ _field_legacy, _field_version_equal, _engine_type_haloreach, 1 },
+		{ _field_legacy, _field_real, "anisotropic filtering" },
+
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_field_group_end),
 		{ _field_terminator }
 	};
@@ -67,6 +80,9 @@ namespace macaque
 		TAG_MEMORY_ATTRIBUTES(MEMORY_ALLOCATION_NODE, TAG_MEMORY_USAGE_READ_ONLY),
 		PERFORMANCE_THROTTLES_STRUCT_DEFINITION_ID)
 	{
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_long_integer, "unknown" },
+
 		FIELD_EXPLANATION("Performance Throttles", nullptr, FIELD_FLAG_NONE, "Split-screen throttle settings should be more aggresive than non-local co-op settings\nblock index 0:\tdefault non split screen\nblock index 1: two way split screen\nblock index 2: three way split screen\nblock index 3: four way split screen\nblock index 4: one additional non-local player\nblock index 5: two additional non-local players\nblock index 6: three additional non-local players\n\n"),
 		{ _field_block, "Performance Throttles", &performane_throttle_block },
 		{ _field_terminator }
