@@ -19,15 +19,42 @@ namespace macaque
 		GEAR_BLOCK_ID)
 	{
 		FIELD_EXPLANATION("loaded torque", nullptr, FIELD_FLAG_NONE, ""),
+
+		{ _field_legacy, _field_version_less, _engine_type_haloreach, 6 }, // Struct but linker time yo
+		{ _field_real, "min torque" },
+		{ _field_real, "max torque" },
+		{ _field_real, "peak torque scale" },
+		{ _field_real, "past peak torque scale exponent" },
+		{ _field_real, "torque at max angular velocity" },
+		{ _field_real, "torque at 2x max angular velocity" },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_struct, "loaded torque curve", &torque_curve_struct },
+
 		FIELD_EXPLANATION("cruising torque", nullptr, FIELD_FLAG_NONE, ""),
+
+		{ _field_legacy, _field_version_less, _engine_type_haloreach, 6 }, // Struct but linker time yo
+		{ _field_real, "min torque" },
+		{ _field_real, "max torque" },
+		{ _field_real, "peak torque scale" },
+		{ _field_real, "past peak torque scale exponent" },
+		{ _field_real, "torque at max angular velocity" },
+		{ _field_real, "torque at 2x max angular velocity" },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_struct, "cruising torque curve", &torque_curve_struct },
+
 		FIELD_EXPLANATION("gearing", nullptr, FIELD_FLAG_NONE, ""),
 		{ _field_real, "min time to upshift", "seconds" },
 		{ _field_real, "engine up-shift scale", "0-1" },
 		{ _field_real, "gear ratio" },
 		{ _field_real, "min time to downshift", "seconds" },
 		{ _field_real, "engine down-shift scale", "0-1" },
+
+		{ _field_legacy, _field_version_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_real, "@unknown" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_tag_reference, "gear shift sound - shifting up", &global_sound_reference },
 		{ _field_tag_reference, "gear shift sound - shifting down", &global_sound_reference },
 		{ _field_terminator }
@@ -62,7 +89,10 @@ namespace macaque
 		{ _field_real, "engine max angular velocity", "higher moments make engine spin up slower" },
 		{ _field_block, "gears", &gear_block },
 		{ _field_tag_reference, "gear shift sound", &global_sound_reference },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_block, "load and cruise sound", &load_and_cruise_block },
+
 		{ _field_terminator }
 	};
 
