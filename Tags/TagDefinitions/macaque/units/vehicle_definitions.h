@@ -9,6 +9,8 @@ namespace macaque
 	constexpr unsigned long VEHICLE_TAG = 'vehi';
 	extern s_tag_group vehicle_group; // vehicle_block
 
+	extern s_tag_block_definition phantom_shapes_block;
+	extern s_tag_struct_definition phantom_shapes_definition; // temp
 
 	extern s_tag_block_definition vehicle_block;
 	extern s_tag_block_definition human_tank_block;

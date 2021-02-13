@@ -40,11 +40,17 @@ namespace macaque
 		{ _field_struct, "steering control", &vehicle_steering_control_struct },
 		{ _field_struct, "turning control", &vehicle_turning_control_struct },
 		{ _field_struct, "engine", &global_vehicle_engine_struct },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_block, "boat engine", &boat_engine_definition_block },
+
 		FIELD_EXPLANATION("wheel circumferance", nullptr, FIELD_FLAG_NONE, ""),
 		{ _field_real, "wheel circumferance" },
 		{ _field_real, "gravity adjust", "0-1 fraction by which we scale gravity that is not along the ground plane" },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_real, "antiroll torque factor", "how much torque should be applied to prevent a vehicle from rolling. Default should be 0.0, 1.0 is a good value for making it hard to roll." },
+
 		{ _field_terminator }
 	};
 
@@ -63,20 +69,29 @@ namespace macaque
 		{ _field_real, "maximum reverse speed" },
 		{ _field_real, "speed acceleration" },
 		{ _field_real, "speed deceleration" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_real, "speed accel against direction", "acceleration when trying to throttle against current speed direction" },
 		{ _field_real, "maximum forward speed during boost" },
+
 		{ _field_real, "maximum left slide" },
 		{ _field_real, "maximum right slide" },
 		{ _field_real, "slide acceleration" },
 		{ _field_real, "slide deceleration" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_real, "slide accel against direction", "acceleration when trying to throttle against current slide direction" },
 		{ _field_real, "maximum slide speed during boost" },
+
 		{ _field_real, "maximum up rise" },
 		{ _field_real, "maximum down rise" },
 		{ _field_real, "rise acceleration" },
 		{ _field_real, "rise deceleration" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_real, "rise accel against direction", "acceleration when trying to throttle against current rise direction" },
 		{ _field_real, "maximum rise speed during boost" },
+
 		FIELD_EXPLANATION("human plane tuning variables", nullptr, FIELD_FLAG_NONE, ""),
 		{ _field_real, "flying torque scale", "big vehicles need to scale this down.  0 defaults to 1, which is generally a good value." },
 		{ _field_real, "air friction deceleration", "human plane physics only. 0 is nothing.  1 is like thowing the engine to full reverse" },
@@ -134,8 +149,13 @@ namespace macaque
 		{ _field_real, "maximum right slide" },
 		{ _field_real, "slide acceleration" },
 		{ _field_real, "slide deceleration" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_real, "slide accel against direction", "acceleration when trying to throttle against current slide direction" },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_real, "slide speed at top speed", "the slide speeds are interpolated down to this value, reaching it when the vehicle is moving at its top speed", "wu/s" },
+
 		FIELD_EXPLANATION("specific types", nullptr, FIELD_FLAG_NONE, "different types are treated differently alien scout controller"),
 		{ _field_char_enum, "specific type", &alien_scout_specific_type_enum },
 		{ _field_byte_flags, "flags", &alien_scout_flags },
@@ -275,6 +295,30 @@ namespace macaque
 		{ _field_string_id, "right lift marker" },
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_marker),
 		{ _field_string_id, "thrust marker" },
+
+		{ _field_legacy, _field_version_less, _engine_type_haloreach, 19 }, // #TODO: vtol block needs research badly
+		{ _field_legacy, _field_angle, "@unknown" },
+		{ _field_legacy, _field_angle, "@unknown" },
+		{ _field_legacy, _field_angle, "@unknown" },
+		{ _field_legacy, _field_angle, "@unknown" },
+		{ _field_legacy, _field_real, "@unknown" },
+		{ _field_legacy, _field_real, "@unknown" },
+		{ _field_legacy, _field_real, "@unknown" },
+		{ _field_legacy, _field_real, "@unknown" },
+		{ _field_legacy, _field_real, "@unknown" },
+		{ _field_legacy, _field_real, "@unknown" },
+		{ _field_legacy, _field_real, "@unknown" },
+		{ _field_legacy, _field_real, "@unknown" },
+		{ _field_legacy, _field_real, "@unknown" },
+		{ _field_legacy, _field_real, "@unknown" },
+		{ _field_legacy, _field_real, "@unknown" },
+		{ _field_legacy, _field_real, "@unknown" },
+		{ _field_legacy, _field_real, "@unknown" },
+		{ _field_legacy, _field_real, "@unknown" },
+		{ _field_legacy, _field_real, "@unknown" },
+
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach, 18 },
 		{ _field_struct, "trigger to throttle", &scalar_function_named_struct },
 		{ _field_struct, "descent to boost", &vtol_descent_function_struct },
 		FIELD_EXPLANATION("minimum and maximum up acceleration", nullptr, FIELD_FLAG_NONE, ""),
@@ -293,8 +337,15 @@ namespace macaque
 		{ _field_struct, "INTERPOLATION_ACC()", &scalar_function_named_struct },
 		{ _field_struct, "A_B_INTERPOLATION() interpolation mapping", &scalar_function_named_struct },
 		{ _field_block, "speed interpolated parameters", &vtol_speed_interpolated_block },
+
 		{ _field_angle, "lift angles acc", "how fast can the engine animations accelerate their turn in degress/SQR(sec)" },
 		{ _field_angle, "render lift angles acc", "how fast can the engine animations accelerate their turn in degress/SQR(sec)" },
+
+		{ _field_legacy, _field_version_less, _engine_type_haloreach, 2 }, // More research needed
+		{ _field_legacy, _field_real, "@unknown" },
+		{ _field_legacy, _field_real, "@unknown" },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach, 9 },
 		{ _field_real, "alt. lock offset coefficient", "scalar for altitude lock based on distance to target - higher numbers reach the target more quickly but may cause bounciness" },
 		{ _field_real, "alt. lock velocity coefficient", "scalar for altitude lock based on velocity.  Acts like friction, trying to remove vertical velocity from the system" },
 		FIELD_EXPLANATION("prop rotation", nullptr, FIELD_FLAG_NONE, "propeller speed data to drive propeller animations"),
@@ -304,6 +355,7 @@ namespace macaque
 		{ _field_real, "takeoff time", "how long it takes to leave the landed state", "s" },
 		{ _field_real, "landing linear velocity", "must be under this linear velocity to enter/maintain landing state", "wu/s" },
 		{ _field_real, "landing angular velocity", "must be under this angular velocity to enter/maintain landing state", "rad/s" },
+
 		{ _field_terminator }
 	};
 
@@ -493,7 +545,10 @@ namespace macaque
 		{ _field_real, "maximum right slide" },
 		{ _field_real, "slide acceleration" },
 		{ _field_real, "slide deceleration" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_real, "slide accel against direction", "acceleration when trying to throttle against current slide direction" },
+
 		FIELD_EXPLANATION("torque scale", nullptr, FIELD_FLAG_NONE, "how hard the vehicle trys to rotate to it\'s desired rotation"),
 		{ _field_real, "flying torque scale", "big vehicles need to scale this down.  0 defaults to 1, which is generally a good value." },
 		FIELD_EXPLANATION("fixed gun offset", nullptr, FIELD_FLAG_NONE, "this offset will be aligned to the units aiming vector instead of the vehicle forward vector"),
@@ -526,6 +581,8 @@ namespace macaque
 		{ _field_angle, "cosmetic roll acceleration", "maximum angular acceleration for cosmetic roll", "deg/sec/sec" },
 		{ _field_real, "cosmetic roll spring k", "controls relationship between displacement and acceleration - higher values mean faster acceleration when the desired position is far from current position" },
 		{ _field_real, "cosmetic roll spring c", "controls relationship between velocity and friction - higher values will slow the system down, lower values may let the system oscillate" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 8 },
 		FIELD_EXPLANATION("new roll", nullptr, FIELD_FLAG_NONE, ""),
 		{ _field_long_flags, "roll flags", &space_fighter_roll_flags },
 		{ _field_angle, "maximum left stick roll angle" },
@@ -534,6 +591,7 @@ namespace macaque
 		{ _field_angle, "maximum right stick roll angle" },
 		{ _field_real, "right stick rate smoothing" },
 		{ _field_real, "right stick trend smoothing" },
+
 		FIELD_EXPLANATION("turn deceleration", nullptr, FIELD_FLAG_NONE, ""),
 		{ _field_angle, "turn deceleration threshold", "turn deceleration kicks in when turning faster than this", "deg/sec" },
 		{ _field_real_fraction, "turn deceleration fraction", "when turning at the maximum rate, throttle is limited to this value" },
@@ -644,6 +702,259 @@ namespace macaque
 		{ _field_terminator }
 	};
 
+	#define PHANTOM_SHAPES_BLOCK_ID { 0x69696969, 0x69696969, 0x69696969, 0x69696420 } // #TODO: This should be a global havok structure when we import them
+	TAG_BLOCK(
+		phantom_shapes_block,
+		"phantom_shapes_block",
+		420, // Unknown constant, should be a havok global iirc -Ak
+		"phantom_shapes_definition",
+		SET_IS_MEMCPYABLE | SET_CAN_MEMSET_TO_INITIALIZE,
+		TAG_MEMORY_ATTRIBUTES(MEMORY_ALLOCATION_DEFAULT, TAG_MEMORY_USAGE_READ_ONLY),
+		PHANTOM_SHAPES_BLOCK_ID)
+	{
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_legacy, _field_long_integer, "Unknown" }, // rest in piss
+		{ _field_terminator }
+	};
+
 	#define VEHICLE_STRUCT_DEFINITION_ID { 0xC6A4B989, 0x09714F2B, 0xBF522976, 0xF69B2344 }
 	TAG_STRUCT(
 		vehicle_struct_definition,
@@ -662,25 +973,45 @@ namespace macaque
 		{ _field_struct, "physics types", &vehicle_physics_types_struct },
 		FIELD_EXPLANATION("friction and antigravity points", nullptr, FIELD_FLAG_NONE, ""),
 		{ _field_struct, "havok vehicle physics", &havok_vehicle_physics_struct },
+
+		{ _field_legacy, _field_version_less, _engine_type_haloreach },
+		{ _field_legacy, _field_block, "havok phantom shapes", &phantom_shapes_block }, // #TODO: replace with actual global havok block
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_block, "tricks", &unit_trick_definition_block },
+
 		{ _field_char_enum, "player training vehicle type", &player_training_vehicle_type_enum },
 		{ _field_char_enum, "vehicle size", "The size determine what kind of seats in larger vehicles it may occupy (i.e. small or large cargo seats)", &vehicle_size_enum },
 		{ _field_char_integer, "complex suspension sample count", "How many additional raycasts to perform per side of a tire." },
 		FIELD_PAD("VQWHV", nullptr, FIELD_FLAG_NONE, 1),
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 3 },
 		{ _field_angle, "complex suspension distribution angle", "0-90 degrees of the wedge portion of the wheel to test suspension", "degrees" },
 		{ _field_real, "complex suspension wheel diameter" },
 		{ _field_real, "complex suspension wheel width" },
+
 		{ _field_real, "minimum flipping angular velocity" },
 		{ _field_real, "maximum flipping angular velocity" },
 		{ _field_real, "crouch transition time", nullptr, "seconds" },
 		{ _field_real, "HOOJYTSU", FIELD_FLAG_UNKNOWN0 },
 		{ _field_real, "seat enterance acceleration scale", "how much do we scale the force the vehicle the applies down on the seat when he enters. 0 == no acceleration" },
 		{ _field_real, "seat exit accelersation scale", "how much do we scale the force the vehicle the applies down on the seat when he exits. 0 == no acceleration" },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_real, "blur speed" },
+
+		{ _field_legacy, _field_version_less, _engine_type_haloreach },
+		{ _field_real, "flip time" }, // assembly #TODO: VALIDATE
+
 		{ _field_string_id, "flip message" },
 		FIELD_EXPLANATION("sounds and effects", nullptr, FIELD_FLAG_NONE, ""),
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_tag_reference, "Player vehicle sound bank", "High quality player sound bank to be prefetched. Can be empty.", &global_soundbank_reference },
+
 		{ _field_tag_reference, "suspension sound", &global_sound_reference },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 7 },
 		{ _field_real, "fake audio speed - speed increase amount", "amount to increase per frame while speeding up(.002 is a good number)" },
 		{ _field_real, "fake audio speed - boost speed increase amount", "amount to increase per frame while boosting (.006 is a good number)" },
 		{ _field_real, "fake audio speed - speed decrease amount", "amount to decrease per frame while slowing down (.002 is a good number)" },
@@ -688,12 +1019,16 @@ namespace macaque
 		{ _field_real, "fake audio speed - max speed scale", "scales speed value. Must be > 0 for this to work (ie for banshee, 5 is good)" },
 		{ _field_block, "Sound RTPCs", &SoundRTPCBlock_block },
 		{ _field_block, "Sound Sweeteners", &SoundSweetenerBlock_block },
+
 		{ _field_tag_reference, "special effect", &global_effect_reference },
 		{ _field_tag_reference, "driver boost damage effect or response", &global_damage_effect_or_response_definition_reference },
 		{ _field_tag_reference, "rider boost damage effect or response", &global_damage_effect_or_response_definition_reference },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 3 },
 		{ _field_string_id, "vehicle name" },
 		{ _field_block, "physics transitions", &physics_transitions_block },
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_field_group_end),
+
 		{ _field_terminator }
 	};
 
@@ -710,18 +1045,32 @@ namespace macaque
 		{ _field_block, "type-human_tank", &human_tank_block },
 		{ _field_block, "type-human_jeep", &human_jeep_block },
 		{ _field_block, "type-human_plane", &human_plane_block },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_block, "type-wolverine", &wolverine_block },
+
 		{ _field_block, "type-alien_scout", &alien_scout_block },
 		{ _field_block, "type-alien_fighter", &alien_fighter_block },
 		{ _field_block, "type-turret", &turret_block },
+
+		{ _field_legacy, _field_version_less, _engine_type_haloreach, 3 }, // #TODO: Research this, another physics type IMPORTANT!!!
+		{ _field_legacy, _field_long_integer, "unknown@" }, // Cloud be padding from a removed type
+		{ _field_legacy, _field_long_integer, "unknown@" }, // Cloud be padding from a removed type
+		{ _field_legacy, _field_long_integer, "unknown@" }, // Cloud be padding from a removed type
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_block, "type-mantis", &mantis_block },
+
 		{ _field_block, "type-vtol", &vtol_block },
 		{ _field_block, "type-chopper", &chopper_block },
 		{ _field_block, "type-guardian", &guardian_block },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach, 4 },
 		{ _field_block, "type-jackal-glider", &jackal_glider_block },
 		{ _field_block, "type-boat", &boat_block },
 		{ _field_block, "type-space-fighter", &space_fighter_block },
 		{ _field_block, "type-revenant", &revenant_block },
+
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_unknown_end),
 		{ _field_terminator }
 	};
@@ -738,10 +1087,16 @@ namespace macaque
 	{
 		{ _field_angle, "forward arc", "outside of this arc the vehicle reverse direciton, around 110 degrees seems to be nice..." },
 		{ _field_angle, "perpendicular forward arc", "this is the value of forward arc when turned sideways.  We interpolate from forward arc to this value when camera becomes perpendicular to the vehicle" },
+		
+		{ _field_legacy, _field_version_less, _engine_type_haloreach },
+		{ _field_angle, "reverse turning scale", "Think of this as oversteer, similar to the field above" }, // Assembly
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach, 4 },
 		{ _field_real, "flip window", "seconds" },
 		{ _field_real, "pegged fraction", "0-1" },
 		{ _field_real, "forward turn scale", "think of this as oversteer" },
 		{ _field_real, "reverse turn scale", "think of this as oversteer" },
+
 		FIELD_EXPLANATION("forward differential", nullptr, FIELD_FLAG_NONE, "how quickly the differential reaches it\'s target and what the ratio is"),
 		{ _field_real, "maximum left differential" },
 		{ _field_real, "maximum right differential" },
@@ -756,6 +1111,8 @@ namespace macaque
 		FIELD_EXPLANATION("wheel circumferance", nullptr, FIELD_FLAG_NONE, ""),
 		{ _field_real, "wheel circumferance" },
 		{ _field_real, "gravity adjust", "0-1 fraction by which we scale gravity that is not along the ground plane" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 11 },
 		FIELD_EXPLANATION("New Tank Controls", nullptr, FIELD_FLAG_NONE, ""),
 		{ _field_byte_flags, "control flags", &tank_flags },
 		FIELD_PAD("pad", nullptr, FIELD_FLAG_NONE, 3),
@@ -767,6 +1124,7 @@ namespace macaque
 		{ _field_real, "at rest facing backward reverse angle(pink)", "#angle forming arc in which the control will cause the tank to reverse while at rest and facing backwards" },
 		{ _field_real, "in motion opposing direction angle", "when in motion the angle in which the control must be to start moving in the opposite direction" },
 		{ _field_real, "in motion speed", "the speed a tank must reach before we consider it in motion, changing the control mode" },
+
 		{ _field_terminator }
 	};
 
