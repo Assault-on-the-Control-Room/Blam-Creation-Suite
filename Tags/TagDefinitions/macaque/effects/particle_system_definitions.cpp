@@ -252,9 +252,16 @@ namespace macaque
 		TAG_MEMORY_ATTRIBUTES(MEMORY_ALLOCATION_NODE, TAG_MEMORY_USAGE_READ_ONLY),
 		GPU_PROPERTY_FUNCTION_COLOR_STRUCT_ID)
 	{
+		{ _field_legacy, _field_version_platform_include, _platform_type_pc, 3  },
+		{ _field_legacy, _field_api_interop, "runtime gpu data", &constant_buffer_struct_definition },
+		{ _field_legacy, _field_version_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_long_integer, "@unknown" },
+
+		{ _field_legacy, _field_version_platform_exclude, _platform_type_pc, 3 },
 		{ _field_block, "runtime gpu_property_block", FIELD_FLAG_UNKNOWN0, &gpu_property_block },
 		{ _field_block, "runtime gpu_functions_block", FIELD_FLAG_UNKNOWN0, &gpu_function_block },
 		{ _field_block, "runtime gpu_colors_block", FIELD_FLAG_UNKNOWN0, &gpu_color_block },
+
 		{ _field_terminator }
 	};
 
