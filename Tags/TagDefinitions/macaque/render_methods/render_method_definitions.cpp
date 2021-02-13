@@ -145,6 +145,10 @@ namespace macaque
 		{ _field_long_integer, "flags" },
 		{ _field_long_integer, "im_so_fired_pad", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY },
 		{ _field_array, "runtime queryable properties table", &runtime_queryable_properties_array },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_pageable, "unknown pageable" },
+
 		{ _field_terminator }
 	};
 
@@ -321,7 +325,10 @@ namespace macaque
 		{ _field_word_flags, "flags", &render_method_pass_flags },
 		FIELD_PAD("nothing", nullptr, FIELD_FLAG_NONE, 2),
 		{ _field_block, "category dependencies&shared PS category dependencies", &render_method_pass_category_dependencies_block },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_block, "shared VS category dependencies", &render_method_pass_category_dependencies_block },
+
 		{ _field_terminator }
 	};
 
@@ -365,7 +372,10 @@ namespace macaque
 		RENDER_METHOD_OPTION_PARAMETER_BLOCK_ID)
 	{
 		{ _field_string_id, "parameter name" },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_string_id, "parameter ui override name" },
+
 		{ _field_long_enum, "parameter type", &render_method_parameter_type_enum },
 		{ _field_long_enum, "source extern", &render_method_extern_enum },
 		{ _field_tag_reference, "default bitmap", &global_bitmap_reference },
@@ -383,7 +393,15 @@ namespace macaque
 		{ _field_real, "suggested real min" },
 		{ _field_real, "suggested real max" },
 		{ _field_long_integer, "ticks from min to max" },
+
+		{ _field_legacy, _field_version_equal, _engine_type_halo3odst, 4 },
+		{ _field_legacy, _field_long_integer, "@unknown" },
+		{ _field_legacy, _field_long_integer, "@unknown" },
+		{ _field_legacy, _field_long_integer, "@unknown" },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_data, "help text" },
+
 		{ _field_terminator }
 	};
 
@@ -410,6 +428,10 @@ namespace macaque
 		{ _field_word_integer, "extern pixel real constants", "divide by 1024 for count, remainder is start index" },
 		{ _field_word_integer, "extern pixel int constants", "divide by 1024 for count, remainder is start index" },
 		{ _field_long_integer, "alpha blend mode" },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_long_integer, "unknown@" },
+
 		{ _field_terminator }
 	};
 
