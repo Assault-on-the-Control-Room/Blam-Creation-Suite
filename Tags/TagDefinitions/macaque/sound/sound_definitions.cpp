@@ -66,6 +66,11 @@ namespace macaque
 		TAG_MEMORY_ATTRIBUTES(MEMORY_ALLOCATION_NODE, TAG_MEMORY_USAGE_READ_ONLY),
 		SOUND_STRUCT_DEFINITION_ID)
 	{
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 2 },
+		{ _field_legacy, _field_struct, "playback", &cache_file_sound_struct_definition_struct_definition },
+		{ _field_legacy, _field_block, "extra info!", &sound_extra_info_block_block },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 13 },
 		{ _field_long_flags, "flags", &SoundEventDefinitionFlags },
 		{ _field_long_flags, "import flags", FIELD_FLAG_UNKNOWN0, &sound_import_flags },
 		{ _field_long_flags, "xsync flags", FIELD_FLAG_UNKNOWN0, &sound_xsync_flags },
@@ -79,6 +84,7 @@ namespace macaque
 		{ _field_tag_reference, "Sound bank", "Reference to the sound bank tag this event is in. Can be empty.", &global_soundbank_reference },
 		{ _field_block, "lipsync info", &soundLipSyncInfoBlock_block },
 		{ _field_long_integer, "deterministic flag index" },
+
 		{ _field_terminator }
 	};
 
@@ -459,6 +465,14 @@ namespace macaque
 		SOUND_EXTRA_INFO_BLOCK_STRUCT_ID)
 	{
 		{ _field_block, "language permutation info", &sound_definition_language_permutation_info_block },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 4 },
+		{ _field_legacy, _field_data, "facial animation resource" }, // #TODO: Research, not 100% that this is facial animation resource but the format might have changed?
+		{ _field_legacy, _field_long_integer, "unknown" },
+		{ _field_legacy, _field_long_integer, "unknown@" },
+		{ _field_legacy, _field_long_enum, "language", &sound_language_enum_definition },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_block, "facial animation resource languages", &facial_animation_language_block },
 		{ _field_terminator }
 	};
@@ -473,6 +487,12 @@ namespace macaque
 		TAG_MEMORY_ATTRIBUTES(MEMORY_ALLOCATION_NODE, TAG_MEMORY_USAGE_READ_ONLY),
 		SOUND_DEFINITION_LANGUAGE_PERMUTATION_INFO_BLOCK_ID)
 	{
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 4 },
+		{ _field_legacy, _field_real, "@unknown" },
+		{ _field_legacy, _field_real, "@unknown" },
+		{ _field_legacy, _field_real, "@unknown" },
+		{ _field_legacy, _field_real, "@unknown" },
+
 		{ _field_block, "raw info block", &sound_permutation_raw_info_block },
 		{ _field_terminator }
 	};
@@ -487,6 +507,10 @@ namespace macaque
 		TAG_MEMORY_ATTRIBUTES(MEMORY_ALLOCATION_NODE, TAG_MEMORY_USAGE_READ_ONLY),
 		SOUND_PERMUTATION_RAW_INFO_BLOCK_ID)
 	{
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 1 },
+		{ _field_long_integer, "@unknown" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 9 },
 		{ _field_string_id, "skip fraction name" },
 		{ _field_data, "samples", "sampled sound data", FIELD_FLAG_UNKNOWN0 },
 		{ _field_block, "markers", FIELD_FLAG_UNKNOWN0, &sound_permutation_marker_block },
@@ -496,6 +520,7 @@ namespace macaque
 		{ _field_char_enum, "language", FIELD_FLAG_READ_ONLY, &sound_language_enum_definition },
 		FIELD_PAD("ZHDGBHWS", nullptr, FIELD_FLAG_NONE, 1),
 		{ _field_long_integer, "sample count", FIELD_FLAG_UNKNOWN0 },
+
 		{ _field_long_integer, "resource sample offset", FIELD_FLAG_UNKNOWN0 },
 		{ _field_long_integer, "resource sample size", FIELD_FLAG_UNKNOWN0 },
 		{ _field_terminator }
