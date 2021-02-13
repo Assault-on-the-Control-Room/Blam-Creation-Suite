@@ -86,9 +86,12 @@ namespace macaque
 	{
 		{ _field_long_flags, "flags", &platform_sound_effect_flags_definition },
 		{ _field_tag_reference, "radio effect", &global_sound_radio_settings_reference },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 3 },
 		{ _field_tag_reference, "Start event", &global_sound_reference },
 		{ _field_tag_reference, "End event", &global_sound_reference },
 		{ _field_tag_reference, "Immediate stop event", "Must clear the effect without any transition - used for exiting levels, etc", &global_sound_reference },
+
 		{ _field_block, "lowpass effect", &platform_sound_playback_lowpass_block },
 		{ _field_block, "sound components", &platform_sound_playback_component_block },
 		{ _field_terminator }
