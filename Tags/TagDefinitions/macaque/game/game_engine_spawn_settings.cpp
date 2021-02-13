@@ -161,6 +161,8 @@ namespace macaque
 		{ _field_real, "dt lower height", nullptr, "wu" },
 		{ _field_real, "dt weight" },
 		{ _field_real, "dead teammate influence duration", nullptr, "seconds" },
+
+		{ _field_legacy, _field_version_less, _engine_type_groundhog, 7 },
 		FIELD_EXPLANATION("DROP POD BIAS", nullptr, FIELD_FLAG_NONE, "Drop pods influences are cylinders centered on unclaimed ordnance."),
 		{ _field_real, "Drop Pod full weight radius", nullptr, "wu" },
 		{ _field_real, "Drop Pod fall-off radius", nullptr, "wu" },
@@ -168,6 +170,8 @@ namespace macaque
 		{ _field_real, "Drop Pod upper height", nullptr, "wu" },
 		{ _field_real, "Drop Pod lower height", nullptr, "wu" },
 		{ _field_real, "Drop Pod weight" },
+
+		{ _field_legacy, _field_version_less, _engine_type_groundhog, 7 },
 		FIELD_EXPLANATION("PLAYER AUTO TURRET BIAS", nullptr, FIELD_FLAG_NONE, "Auto Turret influences are cylinders centered on players\' auto turrets."),
 		{ _field_real, "Auto Turret full weight radius", nullptr, "wu" },
 		{ _field_real, "Auto Turret fall-off radius", nullptr, "wu" },
@@ -175,6 +179,17 @@ namespace macaque
 		{ _field_real, "Auto Turret upper height", nullptr, "wu" },
 		{ _field_real, "Auto Turret lower height", nullptr, "wu" },
 		{ _field_real, "Auto Turret weight" },
+
+		{ _field_legacy, _field_version_equal, _engine_type_groundhog, 8 },
+		{ _field_legacy, _field_explanation, "UNKNOWN BIAS" },
+		{ _field_legacy, _field_real, "@unknown full weight radius:wu" },
+		{ _field_legacy, _field_real, "@unknown fall-off radius:wu" },
+		{ _field_legacy, _field_block, "@unknown falloff function#Multiplier applied to weight (domain is full weight radius to fall-off radius, range should be 0 to 1).", &spawn_influence_weight_falloff_function_block_block },
+		{ _field_legacy, _field_real, "@unknown upper height:wu" },
+		{ _field_legacy, _field_real, "@unknown lower height:wu" },
+		{ _field_legacy, _field_real, "@unknown weight" },
+		{ _field_legacy, _field_real, "@unknown" },
+
 		FIELD_EXPLANATION("WEAPON INFLUENCERS", nullptr, FIELD_FLAG_NONE, "These influencers are induced by weapons either weilded or carried in the player\'s backpack"),
 		{ _field_block, "weapon influencers", &weaponSpawnInfluenceBlock_block },
 		FIELD_EXPLANATION("VEHICLE INFLUENCERS", nullptr, FIELD_FLAG_NONE, "These influencers are induced by vehicles."),
