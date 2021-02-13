@@ -38,8 +38,11 @@ namespace macaque
 		FIELD_EXPLANATION("Lightmapping", nullptr, FIELD_FLAG_NONE, "Indicate whether, by default, how we should lightmap this type of scenery"),
 		{ _field_enum, "lightmapping policy", &lightmapping_policy_enum },
 		FIELD_PAD("WGW", nullptr, FIELD_FLAG_NONE, 2),
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_tag_reference, "Structure Lighting Tag", &Tag::Reference<struct s_structure_lighting_info>::s_defaultDefinition },
 		{ _field_useless_pad, "" },
+
 		{ _field_terminator }
 	};
 
