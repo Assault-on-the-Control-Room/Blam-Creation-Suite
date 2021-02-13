@@ -71,7 +71,7 @@ namespace macaque
 		{ _field_tag_reference, "detonation damage effect", &global_damage_effect_or_response_definition_reference },
 
 		{ _field_legacy, _field_version_less, _engine_type_haloreach },
-		{ _field_legacy, _field_struct, "melee damage parameters", &melee_damage_parameters_old_struct }, // sourced from assembly | Upgrades: just making the struct as a structure
+		{ _field_legacy, _field_struct, "melee damage parameters", &melee_damage_parameters_block_struct_definition }, // sourced from assembly
 
 		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach }, // Later field, becomes a block rather than a struct
 		{ _field_block, "melee damage parameters", &melee_damage_parameters_block },
@@ -240,49 +240,6 @@ namespace macaque
 		&item_group,
 		ITEM_TAG,
 		weapon_block );
-
-	// Upgrades: this is terrible but I have no idea how we can use a tag block as a struct in the new system -Ak
-
-	#define MELEE_DAMAGE_PARAMETERS_OLD_STRUCT_ID { 0xB9EBA02E, 0xE895A76C, 0xAB8BEA74, 0x409CC1A4 }
-	TAG_STRUCT(
-		melee_damage_parameters_old_struct,
-		"melee_damage_parameters_old_struct",
-		"s_melee_damage_parameters_old",
-		SET_IS_MEMCPYABLE | SET_CAN_MEMSET_TO_INITIALIZE,
-		TAG_MEMORY_ATTRIBUTES(MEMORY_ALLOCATION_DEFAULT, TAG_MEMORY_USAGE_READ_ONLY),
-		MELEE_DAMAGE_PARAMETERS_OLD_STRUCT_ID)
-	{
-		FIELD_EXPLANATION("melee damage parameters", nullptr, FIELD_FLAG_NONE, "damage pyramid angles: defines the frustum from the camera that the melee-attack uses to find targets\ndamage pyramid depth: how far the melee attack searches for a target"),
-
-		{ _field_legacy, _field_version_less_or_equal, _engine_type_halo3odst, 2 },
-		{ _field_legacy, _field_tag_reference, "player melee damage", &global_damage_reference }, // source: assembly
-		{ _field_legacy, _field_tag_reference, "player melee response", &global_damage_reference }, // source: assembly
-
-		{ _field_real_euler_angles_2d, "damage pyramid angles" },
-		{ _field_real, "damage pyramid depth", "0 defaults to 0.8f", "wu" },
-
-		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach, 3 },
-		{ _field_real, "maximum lunge range", "0 defaults to 1.22f", "wu" },
-		{ _field_real, "damage lunge explosive depth", "the distance out from the pyramid center to spawn explosive effects.  This value will be clamped to the damage pyramid depth. 0 defaults to the damage pyramid depth", "wu" },
-		{ _field_real, "runtime damage lunge explosive fraction", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY },
-
-		{ _field_tag_reference, "melee damage", &global_damage_reference },
-		{ _field_tag_reference, "melee response", &global_damage_effect_or_response_definition_reference },
-		{ _field_tag_reference, "lunge melee damage", "this is only important for the energy sword", &global_damage_reference },
-		{ _field_tag_reference, "lunge melee response", "this is only important for the energy sword", &global_damage_effect_or_response_definition_reference },
-		{ _field_tag_reference, "empty melee damage", "this is only important for the energy sword", &global_damage_reference },
-		{ _field_tag_reference, "empty melee response", "this is only important for the energy sword", &global_damage_effect_or_response_definition_reference },
-		{ _field_tag_reference, "clang melee damage", "this is only important for the energy sword", &global_damage_reference },
-		{ _field_tag_reference, "clang melee response", "this is only important for the energy sword", &global_damage_effect_or_response_definition_reference },
-		{ _field_tag_reference, "clang melee against melee weapon damage", "e.g. used by AR to damage sword guy when clanging sword attack", &global_damage_reference },
-		{ _field_tag_reference, "clang melee against melee weapon damage response", "e.g. used by AR to damage sword guy when clanging sword attack", &global_damage_effect_or_response_definition_reference },
-		{ _field_tag_reference, "lunge melee explosive damage", &global_effect_reference },
-
-		{ _field_legacy, _field_version_less_or_equal, _engine_type_halo3odst, 1 },
-		{ _field_legacy, _field_tag_reference, "lunge melee explosive response", &global_effect_reference }, // source: assembly
-
-		{ _field_terminator }
-	};
 
 	#define MELEE_DAMAGE_PARAMETERS_BLOCK_ID { 0xB9EBA02E, 0xE895A76C, 0xAB8BEA74, 0x409CC1A5 }
 	TAG_BLOCK(
