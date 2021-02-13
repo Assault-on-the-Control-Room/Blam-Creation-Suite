@@ -100,6 +100,9 @@ namespace macaque
 		TAG_MEMORY_ATTRIBUTES(MEMORY_ALLOCATION_NODE, TAG_MEMORY_USAGE_READ_ONLY),
 		VERTEX_SHADER_STRUCT_DEFINITION_ID)
 	{
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_dword_integer, "unknown@" },
+
 		{ _field_block, "entry points", &vertex_entry_point_block },
 		{ _field_dword_integer, "version", FIELD_FLAG_READ_ONLY },
 		{ _field_block, "compiled shaders", &compiled_vertex_shader_block },
