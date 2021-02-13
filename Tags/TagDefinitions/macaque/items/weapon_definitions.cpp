@@ -28,9 +28,12 @@ namespace macaque
 		{ _field_enum, "secondary trigger mode", &secondary_trigger_modes },
 		{ _field_short_integer, "maximum alternate shots loaded", "if the second trigger loads alternate ammunition, this is the maximum number of shots that can be loaded at a time" },
 		{ _field_real, "turn on time", "how long after being readied it takes this weapon to switch its 'turned_on' attachment to 1.0" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 3 },
 		FIELD_EXPLANATION("weapon vision mode settings", nullptr, FIELD_FLAG_NONE, ""),
 		{ _field_tag_reference, "vision mode", "activated when this weapon is charging", &Tag::Reference<struct VisionModeDefinition>::s_defaultDefinition },
 		{ _field_real, "vision cooldown time", nullptr, "seconds" },
+
 		FIELD_EXPLANATION("old obsolete export to functions", nullptr, FIELD_FLAG_NONE, ""),
 		{ _field_real, "ready time", nullptr, "seconds" },
 		{ _field_tag_reference, "ready effect", &weapon_block_struct_ready_effect_reference },
@@ -41,49 +44,83 @@ namespace macaque
 		{ _field_real_fraction, "heat detonation threshold", "the heat value above which the weapon has a chance of exploding each time it is fired", nullptr, "[0,1]" },
 		{ _field_real_fraction, "heat detonation fraction", "the percent chance (between 0.0 and 1.0) the weapon will explode when fired over the heat detonation threshold", nullptr, "[0,1]" },
 		{ _field_real_fraction, "heat loss per second", "the amount of heat lost each second when the weapon is not being fired", nullptr, "[0,1]" },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach, 4 },
 		{ _field_string_id, "heat loss", "function values sets the current heat loss per second" },
 		{ _field_string_id, "heat loss venting", "function value sets the heat loss per second while weapon is being vented" },
 		{ _field_real, "heat venting time", nullptr, "seconds" },
 		{ _field_real_fraction, "heat venting exit heat", "heat at which to begin the venting exit animations so that the weapon is just about fully cooled when the exit animation completes." },
+
 		{ _field_real_fraction, "heat illumination", "the amount of illumination given off when the weapon is overheated", nullptr, "[0,1]" },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_real_fraction, "heat warning threshold", "the amount of heat at which a warning will be displayed on the hud" },
+
+		{ _field_legacy, _field_version_equal, _engine_type_groundhog, 2 }, // #TODO: Definition Research, where did these come from?
+		{ _field_legacy, _field_real, "@unknown" },
+		{ _field_legacy, _field_real, "@unknown" },
+
 		{ _field_real_fraction, "overheated heat loss per second", "the amount of heat lost each second when the weapon is not being fired", nullptr, "[0,1]" },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_string_id, "overheated heat loss", "function values sets the heat loss per second when weapon is overheated" },
+
 		{ _field_tag_reference, "overheated", &weapon_block_struct_ready_effect_reference },
 		{ _field_tag_reference, "overheated damage effect", &global_damage_effect_or_response_definition_reference },
 		{ _field_tag_reference, "detonation", &weapon_block_struct_ready_effect_reference },
 		{ _field_tag_reference, "detonation damage effect", &global_damage_effect_or_response_definition_reference },
+
+		{ _field_legacy, _field_version_less, _engine_type_haloreach },
+		{ _field_legacy, _field_struct, "melee damage parameters", &melee_damage_parameters_old_struct }, // sourced from assembly | Upgrades: just making the struct as a structure
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach }, // Later field, becomes a block rather than a struct
 		{ _field_block, "melee damage parameters", &melee_damage_parameters_block },
+
 		{ _field_tag_reference, "clang effect", "effect that is played in the air between two players that clang with this weapon", &weapon_block_struct_ready_effect_reference },
 		{ _field_char_enum, "melee damage reporting type", &global_damage_reporting_enum_definition },
 		FIELD_PAD("FEOROBJE", nullptr, FIELD_FLAG_NONE, 1),
 		FIELD_EXPLANATION("zoom", nullptr, FIELD_FLAG_NONE, ""),
 		{ _field_short_integer, "magnification levels", "the number of magnification levels this weapon allows" },
 		{ _field_real_bounds, "magnification range" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 3 },
 		{ _field_char_integer, "zoom effect ticks", "how often 'zoom effect' will be triggered (while zoomed)" },
 		FIELD_PAD("wzt", nullptr, FIELD_FLAG_NONE, 3),
 		{ _field_tag_reference, "zoom effect", "effect that is played while zoomed", &weapon_block_struct_ready_effect_reference },
+
 		FIELD_EXPLANATION("weapon aim assist", "DEPRECATED -- this will go away in favor of aim assist modes below", FIELD_FLAG_UNKNOWN0, "DEPRECATED -- this will go away in favor of aim assist modes below"),
 		{ _field_struct, "weapon aim assist", &aim_assist_struct },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_struct, "iron sights modifiers", &WeaponBarrelIronSightsStruct },
 		{ _field_block, "aim assist modes", "First mode is normal, second mode is iron sights/scoped", &globalAimAssistBlock_block },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_block, "target tracking", &global_target_tracking_parameters_block },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		FIELD_EXPLANATION("aim swim indexing", nullptr, FIELD_FLAG_NONE, "swim index 0 used when unzoomed, index 1 is for first zoom level, index 2 is 2nd zoom, etc."),
 		{ _field_block, "aim swim", &globalAimSwimBlock_block },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach, 3 },
 		FIELD_EXPLANATION("ballistics", nullptr, FIELD_FLAG_NONE, ""),
 		{ _field_real_bounds, "ballistic arcing firing bounds", "At the min range (or closer), the minimum ballistic arcing is used, at the max (or farther away), the maximum arcing is used", "world units" },
 		{ _field_real_bounds, "ballistic arcing fraction bounds", "Controls speed and degree of arc. 0 = low, fast, 1 = high, slow", nullptr, "[0-1]" },
+
 		FIELD_EXPLANATION("movement", nullptr, FIELD_FLAG_NONE, ""),
 		{ _field_enum, "movement penalized", &movement_penalty_modes },
 		FIELD_PAD("GTIXVRPA", nullptr, FIELD_FLAG_NONE, 2),
 		{ _field_real_fraction, "forward movement penalty", "percent slowdown to forward movement for units carrying this weapon" },
 		{ _field_real_fraction, "sideways movement penalty", "percent slowdown to sideways and backward movement for units carrying this weapon" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 6 },
 		{ _field_real_fraction, "gunner armor mod forward movement penalty", "percent slowdown to forward movement for units carrying this weapon with the gunner armor mod active" },
 		{ _field_real_fraction, "gunner armor mod sideways movement penalty", "percent slowdown to sideways and backward movement for units carrying this weapon with the gunner armor mod active" },
 		FIELD_EXPLANATION("Aiming", nullptr, FIELD_FLAG_NONE, ""),
 		{ _field_real, "Maximum pitch rate", "This will cap the speed at which the player can aim when holding this weapon, probably want to set something sensible for turrets etc", "degrees per second" },
 		FIELD_EXPLANATION("ArmorMod Parameters", nullptr, FIELD_FLAG_NONE, ""),
 		{ _field_real, "Ammopack power capacity", "Ammopack armormod - 0.2 would give 20% additional capacity to an energy weapon" },
+
 		FIELD_EXPLANATION("AI targeting parameters", nullptr, FIELD_FLAG_NONE, ""),
 		{ _field_real, "AI scariness" },
 		FIELD_EXPLANATION("miscellaneous", nullptr, FIELD_FLAG_NONE, ""),
@@ -99,22 +136,39 @@ namespace macaque
 		{ _field_tag_reference, "zoom-in sound", &global_sound_reference },
 		{ _field_tag_reference, "zoom-out sound", &global_sound_reference },
 		{ _field_real, "active camo ding", "how much to decrease active camo when a round is fired" },
+
+		{ _field_legacy, _field_version_less, _engine_type_haloreach },
+		{ _field_legacy, _field_real, "active camo regrowth rate" }, // assembly
+
 		{ _field_string_id, "handle node", "the node that get's attached to the unit's hand" },
 		FIELD_EXPLANATION("weapon labels", nullptr, FIELD_FLAG_NONE, ""),
 		{ _field_string_id, "weapon class" },
 		{ _field_string_id, "weapon name" },
 		FIELD_EXPLANATION("more miscellaneous", nullptr, FIELD_FLAG_NONE, ""),
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_char_enum, "first time pickup type", &first_time_pickup_types },
 		FIELD_PAD("PAD", nullptr, FIELD_FLAG_NONE, 3),
+
+		{ _field_legacy, _field_version_less, _engine_type_haloreach },
+		{ _field_legacy, _field_enum, "multiplayer weapon type", &multiplayer_weapon_types },
+
 		{ _field_enum, "weapon type", &weapon_types },
+
+		{ _field_legacy, _field_version_less, _engine_type_haloreach },
+		{ _field_legacy, _field_enum, "tracking type", &tracking_types }, // Upgrade: Where was this sourced from? H2EK?
+
 		{ _field_short_integer, "low ammo threshold" },
 		{ _field_struct, "player interface", &weapon_interface_struct },
 		{ _field_block, "predicted resources", &g_null_block },
 		{ _field_block, "magazines", &magazines_block },
 		{ _field_block, "new triggers", &weapon_triggers_block },
 		{ _field_block, "barrels", &weapon_barrels_block },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		FIELD_EXPLANATION("scaleshot", nullptr, FIELD_FLAG_NONE, "Allows the weapon to scale up and fire different projectiles based upon how many hits you get etc."),
 		{ _field_block, "scaleshot parameters", &weaponScaleshotStruct_block },
+
 		{ _field_real, "runtime weapon power on velocity", FIELD_FLAG_UNKNOWN0 },
 		{ _field_real, "runtime weapon power off velocity", FIELD_FLAG_UNKNOWN0 },
 		{ _field_useless_pad, "" },
@@ -128,22 +182,43 @@ namespace macaque
 		{ _field_tag_reference, "age effect", &global_effect_reference },
 		{ _field_tag_reference, "aged weapon", &global_weapon_reference },
 		{ _field_tag_reference, "aged material effects", &global_material_effects_reference },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_real, "per kill or hit aging amount", "aging applied for 'weapon ages when damage is inflicted' or 'weapon ages with each kill' flags" },
+
 		{ _field_real, "external aging amount" },
 		{ _field_real, "campaign external aging amount" },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_real, "external heat amount" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_real_fraction, "age recovered per second", "the amount of age the weapon recovers per second", nullptr, "[0,1]" },
 		{ _field_tag_reference, "age fully recovered (sound or effect)", "the sound or effect played when the weapon's age reaches fully recovered", &weapon_block_struct_ready_effect_reference },
+
 		{ _field_real_vector_3d, "first person weapon offset" },
+
+		{ _field_legacy, _field_version_platform_include, _platform_type_pc, 3 },
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_halo3, 2 },
+		{ _field_legacy, _field_version_not_equal, _engine_type_groundhog, 1 },
+		{ _field_legacy, _field_real_vector_3d, "centered first person weapon offset" }, // Added in mcc duh
+
 		{ _field_real_vector_2d, "first person scope size" },
 		{ _field_real_bounds, "support third person camera range", "range in degrees. 0 is straight, -90 is down, 90 is up", "degrees" },
 		{ _field_real, "weapon zoom time", "seconds" },
 		{ _field_real, "weapon ready-for-use time", "seconds" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 3 },
 		{ _field_real, "weapon ready 1st person animation playback scale", "e.g. - 2.0 makes playspeed twice as fast" },
 		{ _field_real, "tether transition to linked time", "begins when tethered projectile is LNKED", "seconds" },
 		{ _field_real, "tether transition from linked time", "begins when tethered projectile becomes non-LNKED", "seconds" },
+
 		{ _field_string_id, "unit stow anchor name" },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_block, "screen effects", &weapon_screen_effect_block },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 12 },
 		{ _field_tag_reference, "Player sound bank", "High quality player sound bank to be prefetched. Can be empty.", &global_soundbank_reference },
 		{ _field_string_id, "Player EQ preset name", "Name of the EQ shareset in WWise to apply when this weapon is active" },
 		{ _field_long_integer, "Player EQ preset hash", FIELD_FLAG_UNKNOWN0 },
@@ -166,22 +241,31 @@ namespace macaque
 		ITEM_TAG,
 		weapon_block );
 
-	#define MELEE_DAMAGE_PARAMETERS_BLOCK_ID { 0xB9EBA02E, 0xE895A76C, 0xAB8BEA74, 0x409CC1A5 }
-	TAG_BLOCK(
-		melee_damage_parameters_block,
-		"melee_damage_parameters_block",
-		k_melee_damage_class_count,
-		"s_melee_damage_parameters",
-		SET_UNKNOWN0 | SET_UNKNOWN5 | SET_DELETE_RECURSIVELY | SET_POSTPROCESS_RECURSIVELY | SET_HAS_LEVEL_SPECIFIC_FIELDS,
+	// Upgrades: this is terrible but I have no idea how we can use a tag block as a struct in the new system -Ak
+
+	#define MELEE_DAMAGE_PARAMETERS_OLD_STRUCT_ID { 0xB9EBA02E, 0xE895A76C, 0xAB8BEA74, 0x409CC1A4 }
+	TAG_STRUCT(
+		melee_damage_parameters_old_struct,
+		"melee_damage_parameters_old_struct",
+		"s_melee_damage_parameters_old",
+		SET_IS_MEMCPYABLE | SET_CAN_MEMSET_TO_INITIALIZE,
 		TAG_MEMORY_ATTRIBUTES(MEMORY_ALLOCATION_DEFAULT, TAG_MEMORY_USAGE_READ_ONLY),
-		MELEE_DAMAGE_PARAMETERS_BLOCK_ID)
+		MELEE_DAMAGE_PARAMETERS_OLD_STRUCT_ID)
 	{
 		FIELD_EXPLANATION("melee damage parameters", nullptr, FIELD_FLAG_NONE, "damage pyramid angles: defines the frustum from the camera that the melee-attack uses to find targets\ndamage pyramid depth: how far the melee attack searches for a target"),
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_halo3odst, 2 },
+		{ _field_legacy, _field_tag_reference, "player melee damage", &global_damage_reference }, // source: assembly
+		{ _field_legacy, _field_tag_reference, "player melee response", &global_damage_reference }, // source: assembly
+
 		{ _field_real_euler_angles_2d, "damage pyramid angles" },
 		{ _field_real, "damage pyramid depth", "0 defaults to 0.8f", "wu" },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach, 3 },
 		{ _field_real, "maximum lunge range", "0 defaults to 1.22f", "wu" },
 		{ _field_real, "damage lunge explosive depth", "the distance out from the pyramid center to spawn explosive effects.  This value will be clamped to the damage pyramid depth. 0 defaults to the damage pyramid depth", "wu" },
 		{ _field_real, "runtime damage lunge explosive fraction", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY },
+
 		{ _field_tag_reference, "melee damage", &global_damage_reference },
 		{ _field_tag_reference, "melee response", &global_damage_effect_or_response_definition_reference },
 		{ _field_tag_reference, "lunge melee damage", "this is only important for the energy sword", &global_damage_reference },
@@ -193,6 +277,52 @@ namespace macaque
 		{ _field_tag_reference, "clang melee against melee weapon damage", "e.g. used by AR to damage sword guy when clanging sword attack", &global_damage_reference },
 		{ _field_tag_reference, "clang melee against melee weapon damage response", "e.g. used by AR to damage sword guy when clanging sword attack", &global_damage_effect_or_response_definition_reference },
 		{ _field_tag_reference, "lunge melee explosive damage", &global_effect_reference },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_halo3odst, 1 },
+		{ _field_legacy, _field_tag_reference, "lunge melee explosive response", &global_effect_reference }, // source: assembly
+
+		{ _field_terminator }
+	};
+
+	#define MELEE_DAMAGE_PARAMETERS_BLOCK_ID { 0xB9EBA02E, 0xE895A76C, 0xAB8BEA74, 0x409CC1A5 }
+	TAG_BLOCK(
+		melee_damage_parameters_block,
+		"melee_damage_parameters_block",
+		k_melee_damage_class_count,
+		"s_melee_damage_parameters",
+		SET_UNKNOWN0 | SET_UNKNOWN5 | SET_DELETE_RECURSIVELY | SET_POSTPROCESS_RECURSIVELY | SET_HAS_LEVEL_SPECIFIC_FIELDS,
+		TAG_MEMORY_ATTRIBUTES(MEMORY_ALLOCATION_DEFAULT, TAG_MEMORY_USAGE_READ_ONLY),
+		MELEE_DAMAGE_PARAMETERS_BLOCK_ID)
+	{
+		FIELD_EXPLANATION("melee damage parameters", nullptr, FIELD_FLAG_NONE, "damage pyramid angles: defines the frustum from the camera that the melee-attack uses to find targets\ndamage pyramid depth: how far the melee attack searches for a target"),
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_halo3odst, 2 },
+		{ _field_legacy, _field_tag_reference, "player melee damage", &global_damage_reference }, // source: assembly
+		{ _field_legacy, _field_tag_reference, "player melee response", &global_damage_reference }, // source: assembly
+
+		{ _field_real_euler_angles_2d, "damage pyramid angles" },
+		{ _field_real, "damage pyramid depth", "0 defaults to 0.8f", "wu" },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach, 3 },
+		{ _field_real, "maximum lunge range", "0 defaults to 1.22f", "wu" },
+		{ _field_real, "damage lunge explosive depth", "the distance out from the pyramid center to spawn explosive effects.  This value will be clamped to the damage pyramid depth. 0 defaults to the damage pyramid depth", "wu" },
+		{ _field_real, "runtime damage lunge explosive fraction", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY },
+
+		{ _field_tag_reference, "melee damage", &global_damage_reference },
+		{ _field_tag_reference, "melee response", &global_damage_effect_or_response_definition_reference },
+		{ _field_tag_reference, "lunge melee damage", "this is only important for the energy sword", &global_damage_reference },
+		{ _field_tag_reference, "lunge melee response", "this is only important for the energy sword", &global_damage_effect_or_response_definition_reference },
+		{ _field_tag_reference, "empty melee damage", "this is only important for the energy sword", &global_damage_reference },
+		{ _field_tag_reference, "empty melee response", "this is only important for the energy sword", &global_damage_effect_or_response_definition_reference },
+		{ _field_tag_reference, "clang melee damage", "this is only important for the energy sword", &global_damage_reference },
+		{ _field_tag_reference, "clang melee response", "this is only important for the energy sword", &global_damage_effect_or_response_definition_reference },
+		{ _field_tag_reference, "clang melee against melee weapon damage", "e.g. used by AR to damage sword guy when clanging sword attack", &global_damage_reference },
+		{ _field_tag_reference, "clang melee against melee weapon damage response", "e.g. used by AR to damage sword guy when clanging sword attack", &global_damage_effect_or_response_definition_reference },
+		{ _field_tag_reference, "lunge melee explosive damage", &global_effect_reference },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_halo3odst, 1 },
+		{ _field_legacy, _field_tag_reference, "lunge melee explosive response", &global_effect_reference }, // source: assembly
+
 		{ _field_terminator }
 	};
 
@@ -261,6 +391,8 @@ namespace macaque
 	{
 		{ _field_tag_reference, "first person model", &render_model_reference$10 },
 		{ _field_tag_reference, "first person animations", &model_animation_graph_reference$4 },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_real, "first person fov scale", "the multiplier by the standard first person FOV to use when this weapon is held" },
 		{ _field_real, "first person dof distance", "the distance to apply depth of field to the weapon" },
 		{ _field_terminator }
@@ -282,8 +414,11 @@ namespace macaque
 		{ _field_short_integer, "rounds total maximum" },
 		{ _field_short_integer, "rounds loaded maximum" },
 		{ _field_short_integer, "runtime rounds inventory maximum" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_short_integer, "Ammopack rounds total initial", "AmmoPack armormod - alternate total_initial value due to AmmoPack" },
 		{ _field_short_integer, "Ammopack rounds total maximum", "AmmoPack armormod - alternate total_maximum value due to armor mod AmmoPack" },
+
 		FIELD_PAD("pad", nullptr, FIELD_FLAG_NONE, 2),
 		{ _field_real, "reload dialogue time", "the length of time we wait before saying the reload dialogue", "seconds" },
 		{ _field_short_integer, "rounds reloaded" },
@@ -336,8 +471,16 @@ namespace macaque
 		{ _field_useless_pad, "" },
 		{ _field_struct, "autofire", &weapon_trigger_autofire_struct },
 		{ _field_struct, "charging", &weapon_trigger_charging_struct },
+
+		{ _field_legacy, _field_version_less, _engine_type_haloreach, 3 }, // Cheers camden, ya mad lad
+		{ _field_legacy, _field_real, "lock on hold time" },
+		{ _field_legacy, _field_real, "lock on acquire time" },
+		{ _field_legacy, _field_real, "lock on grace period" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_tag_reference, "double latch projectile releasable effect", "created once player is able to release the tethered projectile", &global_effect_reference },
 		{ _field_tag_reference, "double latch projectile released effect", "created when player releases the tethered projectile", &global_effect_reference },
+
 		{ _field_terminator }
 	};
 
@@ -361,21 +504,35 @@ namespace macaque
 		{ _field_short_integer, "rounds between tracers", "the number of non-tracer rounds fired between tracers" },
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_marker),
 		{ _field_string_id, "optional barrel marker name" },
-		{ _field_enum, "firing noise", "how loud this weapon appears to the AI", &ai_sound_volume_enum },
-		FIELD_EXPLANATION("prediction properties", nullptr, FIELD_FLAG_NONE, "what the behavior of this barrel is in a predicted network game"),
-		{ _field_enum, "prediction type", &barrel_prediction_type_enum },
-		{ _field_real, "event_synchronized_projectiles_per_second", "Valid only for barrels set to prediction type \"continuous\". Controls how many projectiles per second can be individually synchronized (use debug_projectiles to diagnose)." },
-		{ _field_real, "maximum_barrel_error_for_event_synchronization", "Valid only for barrels set to prediction type \"continuous\". If the barrel's current error level is over this value (zero to one scale), we will not consider synchronizing projectiles with individual events (use debug_projectiles to diagnose)." },
+
+		{ _field_legacy, _field_version_less, _engine_type_haloreach, 3 },
+		{ _field_legacy, _field_explanation, "prediction properties", "what the behavior of this barrel is in a predicted network game" },
+		{ _field_legacy, _field_enum, "prediction type", &barrel_prediction_type_enum },
+		{ _field_legacy, _field_enum, "firing noise#how loud this weapon appears to the AI", &ai_sound_volume_enum },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach, 5 },
+		{ _field_legacy, _field_enum, "firing noise#how loud this weapon appears to the AI", &ai_sound_volume_enum },
+		{ _field_legacy, _field_explanation, "prediction properties", "what the behavior of this barrel is in a predicted network game" },
+		{ _field_legacy, _field_enum, "prediction type", &barrel_prediction_type_enum },
+		{ _field_legacy, _field_real, "event_synchronized_projectiles_per_second#Valid only for barrels set to prediction type \"continuous\". Controls how many projectiles per second can be individually synchronized (use debug_projectiles to diagnose)." },
+		{ _field_legacy, _field_real, "maximum_barrel_error_for_event_synchronization#Valid only for barrels set to prediction type \"continuous\". If the barrel\'s current error level is over this value (zero to one scale), we will not consider synchronizing projectiles with individual events (use debug_projectiles to diagnose)." },
+
 		FIELD_EXPLANATION("firing error", nullptr, FIELD_FLAG_NONE, "full error look pitch rate controlls how fast you can turn \nwith full error, yaw is implied from pitch. 0==130.\nfor reference, profile sensitivities are set to:\n1: 40\n3: 60\n9: 130\n"),
 		{ _field_struct, "firing error", &weapon_barrel_firing_error_struct },
 		FIELD_EXPLANATION("projectile", nullptr, FIELD_FLAG_NONE, ""),
 		{ _field_enum, "distribution function", &weapon_barrel_distribution_functions },
 		{ _field_short_integer, "projectiles per shot" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_block, "custom vectors", "Custom vectors must be set in distribution function above", &projectileDistributionCustomVector_block },
+
 		{ _field_real, "distribution angle", "used by distribution function 'horizontal fan' above", "degrees" },
 		{ _field_angle, "minimum error", "projectile direction is randomly selected between this and max_error_angle below", "degrees" },
 		{ _field_angle_bounds, "error angle", "current barrel_error is linearly interpolated between these to generate max_error_angle", "degrees (max_error_angle)" },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_struct, "accuracy penalties", &weapon_barrel_projectile_accuracy_penalty_struct },
+
 		{ _field_block, "first person offset", &weapon_barrel_first_person_offset_block },
 		{ _field_char_enum, "damage effect reporting type", &global_damage_reporting_enum_definition },
 		FIELD_PAD("DGSXQ", nullptr, FIELD_FLAG_NONE, 3),
@@ -388,15 +545,38 @@ namespace macaque
 		{ _field_real, "ejection port recovery time", "the amount of time (in seconds) it takes for the ejection port to transition from 1.0 (open) to 0.0 (closed) after a shot has been fired" },
 		{ _field_real, "illumination recovery time", "the amount of time (in seconds) it takes the illumination function to transition from 1.0 (bright) to 0.0 (dark) after a shot has been fired" },
 		{ _field_real_fraction, "heat generated per round", "the amount of heat generated each time the barrel fires. Unlike the name suggests, this amount of heat is NOT applied per projectile created.", nullptr, "[0,1]" },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_string_id, "heat generated per round function&heat generated per round", "function value sets the amount of heat to add to the weapon each tick the barrel is firing" },
+
 		{ _field_real_fraction, "age generated per round", "the amount the weapon ages each time the trigger is fired", nullptr, "[0,1]" },
 		{ _field_real_fraction, "CAMPAIGN age generated per round", "the amount the weapon ages each time the trigger is fired", nullptr, "[0,1]" },
 		{ _field_real, "overload time", "the next trigger fires this often while holding down this trigger", "seconds" },
+
+		{ _field_legacy, _field_version_platform_include, _platform_type_pc, 9 },
+		{ _field_legacy, _field_version_greater, _engine_type_halo4, 8 }, //pulled from assembly, probs exists in h2ek definitions(?)
+		{ _field_legacy, _field_explanation, "angle change (recoil)" },
+		{ _field_legacy, _field_real_bounds, "angle change per shot" }, // angle change per shot#angle change per shot of the weapon during firing
+		{ _field_legacy, _field_real, "angle change acceleration time" }, // acceleration time:seconds#the continuous firing time it takes for the weapon to achieve its final angle change per shot
+		{ _field_legacy, _field_real, "angle change deceleration time" }, // deceleration time:seconds#the continuous idle time it takes for the weapon to return to its initial angle change per shot
+		{ _field_legacy, _field_enum, "angle change function", &weapon_barrel_angle_change_functions }, // angle change function#function used to scale between initial and final angle change per shot
+		{ _field_legacy, _field_pad, "YZHBVKFFY", 2 },
+		{ _field_legacy, _field_real, "runtime angle change acceleration rate" }, // func data
+		{ _field_legacy, _field_real, "runtime angle change deceleration rate" }, // func data
+
 		{ _field_real, "runtime illumination recovery rate", FIELD_FLAG_UNKNOWN0 },
 		{ _field_real, "runtime ejection port recovery rate", FIELD_FLAG_UNKNOWN0 },
 		{ _field_real, "runtime rate of fire acceleration rate", FIELD_FLAG_UNKNOWN0 },
 		{ _field_real, "runtime rate of fire deceleration rate", FIELD_FLAG_UNKNOWN0 },
+
+		{ _field_legacy, _field_version_less, _engine_type_haloreach },
+		{ _field_legacy, _field_real, "runtime error acceleration rate!" },
+
 		{ _field_real, "runtime error deceleration rate", FIELD_FLAG_UNKNOWN0 },
+
+		{ _field_legacy, _field_version_equal, _engine_type_groundhog },
+		{ _field_legacy, _field_real, "runtime dual error deceleration rate!" },
+
 		{ _field_block, "firing effects", "firing effects determine what happens when this trigger is fired", &barrel_firing_effect_block },
 		{ _field_terminator }
 	};
@@ -457,17 +637,26 @@ namespace macaque
 		{ _field_short_integer, "shot count lower bound", "the minimum number of times this firing effect will be used, once it has been chosen" },
 		{ _field_short_integer, "shot count upper bound", "the maximum number of times this firing effect will be used, once it has been chosen" },
 		{ _field_tag_reference, "firing effect", "this effect is used when the weapon is loaded and fired normally", FIELD_FLAG_INDEX, &weapon_block_struct_ready_effect_reference },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_tag_reference, "critical effect", "this effect is used when the weapon is loaded and will do critical damage", FIELD_FLAG_INDEX, &weapon_block_struct_ready_effect_reference },
+
 		{ _field_tag_reference, "misfire effect", "this effect is used when the weapon is loaded but fired while overheated", &weapon_block_struct_ready_effect_reference },
 		{ _field_tag_reference, "empty effect", "this effect is used when the weapon is not loaded", &weapon_block_struct_ready_effect_reference },
 		{ _field_tag_reference, "optional secondary firing effect", "this effect is used when the weapon is not loaded", &weapon_block_struct_ready_effect_reference },
 		{ _field_tag_reference, "firing damage", "this effect is used when the weapon is loaded and fired normally", &global_damage_effect_or_response_definition_reference },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_tag_reference, "critical damage", "this effect is used when the weapon is loaded and will do critical damage", FIELD_FLAG_INDEX, &weapon_block_struct_ready_effect_reference },
+
 		{ _field_tag_reference, "misfire damage", "this effect is used when the weapon is loaded but fired while overheated", &global_damage_effect_or_response_definition_reference },
 		{ _field_tag_reference, "empty damage", "this effect is used when the weapon is not loaded", &global_damage_effect_or_response_definition_reference },
 		{ _field_tag_reference, "optional secondary firing damage", "this effect is used when the weapon is loaded and fired normally", &global_damage_effect_or_response_definition_reference },
 		{ _field_tag_reference, "firing rider damage", "this effect is used when the weapon is loaded and fired normally", &global_damage_effect_or_response_definition_reference },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_tag_reference, "critical rider damage", "this effect is used when the weapon is loaded and will do critical damage", FIELD_FLAG_INDEX, &weapon_block_struct_ready_effect_reference },
+
 		{ _field_tag_reference, "misfire rider damage", "this effect is used when the weapon is loaded but fired while overheated", &global_damage_effect_or_response_definition_reference },
 		{ _field_tag_reference, "empty rider damage", "this effect is used when the weapon is not loaded", &global_damage_effect_or_response_definition_reference },
 		{ _field_tag_reference, "optional secondary firing rider damage", "this effect is used when the weapon is loaded and fired normally", &global_damage_effect_or_response_definition_reference },
@@ -585,18 +774,29 @@ namespace macaque
 		TAG_MEMORY_ATTRIBUTES(MEMORY_ALLOCATION_DEFAULT, TAG_MEMORY_USAGE_READ_ONLY),
 		AIM_ASSIST_STRUCT_ID)
 	{
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2},
 		{ _field_real, "autoaim stick time", "the number of seconds that the crosshair needs to be on target before the larger autoaim stick kicks in", "seconds", FIELD_FLAG_UNKNOWN0 },
 		{ _field_angle, "autoaim stick angle", "the maximum angle that autoaim works to 'stick' a target.  set to zero to use default behavior.", "degrees", FIELD_FLAG_UNKNOWN0 },
+
 		{ _field_angle, "autoaim angle", "the maximum angle that autoaim works at full strength", "degrees", FIELD_FLAG_UNKNOWN0 },
 		{ _field_real, "autoaim range", "the maximum distance that autoaim works at full strength", "world units", FIELD_FLAG_UNKNOWN0 },
 		{ _field_real, "autoaim falloff range", "at what point the autoaim starts falling off", "world units", FIELD_FLAG_UNKNOWN0 },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_real, "autoaim near falloff range", "at what point the autoaim reaches full power", "world units", FIELD_FLAG_UNKNOWN0 },
+
 		{ _field_angle, "magnetism angle", "the maximum angle that magnetism works at full strength", "degrees", FIELD_FLAG_UNKNOWN0 },
 		{ _field_real, "magnetism range", "the maximum distance that magnetism works at full strength", "world units", FIELD_FLAG_UNKNOWN0 },
 		{ _field_real, "magnetism falloff range", "at what point magnetism starts falling off", "world units", FIELD_FLAG_UNKNOWN0 },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_real, "magnetism near falloff range", "at what point magnetism reaches full power", "world units", FIELD_FLAG_UNKNOWN0 },
+
 		{ _field_angle, "deviation angle", "the maximum angle that a projectile is allowed to deviate from the gun barrel due to autoaim OR network lead vector reconstruction", "degrees", FIELD_FLAG_UNKNOWN0 },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		FIELD_PAD("ZHV", nullptr, FIELD_FLAG_NONE, 4),
+
 		FIELD_PAD("CVYGPMLMX", nullptr, FIELD_FLAG_NONE, 16),
 		FIELD_PAD("UQXKLVAXI", nullptr, FIELD_FLAG_NONE, 4),
 		{ _field_terminator }
@@ -631,6 +831,8 @@ namespace macaque
 		{ _field_struct, "shared interface", &weapon_shared_interface_struct },
 		{ _field_block, "first person", &weapon_first_person_interface_block },
 		{ _field_tag_reference, "hud screen reference", &Tag::Reference<struct CuiScreenDefinition>::s_defaultDefinition },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_tag_reference, "alternate hud screen reference", "the parent of the weapon can indicate that this hud should be used instead of the default", &Tag::Reference<struct CuiScreenDefinition>::s_defaultDefinition },
 		{ _field_terminator }
 	};
@@ -658,17 +860,26 @@ namespace macaque
 		WEAPON_BARREL_FIRING_PARAMETERS_STRUCT_ID)
 	{
 		{ _field_real_bounds, "rounds per second", "the number of firing effects created per second" },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_string_id, "rate of fire acceleration", "function value sets the current rate of fire when the barrel is firing" },
+
 		{ _field_real, "acceleration time", "the continuous firing time it takes for the weapon to achieve its final rounds per second", "seconds" },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_string_id, "rate of fire deceleration", "function value sets the current rate of fire when the barrel is not firing" },
+
 		{ _field_real, "deceleration time", "the continuous idle time it takes for the weapon to return from its final rounds per second to its initial", "seconds" },
 		{ _field_real, "barrel spin scale", "scale the barrel spin speed by this amount" },
 		{ _field_real_fraction, "blurred rate of fire", "a percentage between 0 and 1 which controls how soon in its firing animation the weapon blurs" },
 		{ _field_short_bounds, "shots per fire", "allows designer caps to the shots you can fire from one firing action" },
 		{ _field_real, "fire recovery time", "how long after a set of shots it takes before the barrel can fire again", "seconds" },
 		{ _field_real_fraction, "soft recovery fraction", "how much of the recovery allows shots to be queued" },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach, 2 },
 		{ _field_real, "melee  fire recovery time", "how long after a set of shots it takes before the weapon can melee", "seconds" },
 		{ _field_real_fraction, "melee soft recovery fraction", "how much of the melee recovery allows melee to be queued" },
+
 		{ _field_terminator }
 	};
 
@@ -681,11 +892,32 @@ namespace macaque
 		TAG_MEMORY_ATTRIBUTES(MEMORY_ALLOCATION_DEFAULT, TAG_MEMORY_USAGE_READ_ONLY),
 		WEAPON_BARREL_FIRING_ERROR_STRUCT_ID)
 	{
+		{ _field_legacy, _field_version_less, _engine_type_haloreach },
+		{ _field_real, "acceleration time", "the continuous firing time it takes for the weapon to achieve its final error", "seconds" }, // Upgraded
+
 		{ _field_real, "deceleration time", "the continuous idle time it would take for a barrel_error of 1.0 to return to its minimum value.\nMinimum value is usually 0.0 but sprinting can override this. See\n'globals@Player information.momentum and sprinting.min weapon error'", "seconds" },
 		{ _field_real_bounds, "damage error", "the range of angles (in degrees) that a damaged weapon will skew fire" },
 		{ _field_angle, "min error look pitch rate", "yaw rate is doubled" },
 		{ _field_angle, "full error look pitch rate", "yaw rate is doubled" },
 		{ _field_real, "look pitch error power", "use to soften or sharpen the rate ding" },
+
+		{ _field_legacy, _field_version_equal, _engine_type_groundhog },
+		{ _field_legacy, _field_explanation, "dual weapon error" },
+
+		{ _field_legacy, _field_version_less, _engine_type_haloreach },
+		{ _field_real, "acceleration time", "the continuous firing time it takes for the weapon to achieve its final error", "seconds" }, // Upgraded
+
+		{ _field_legacy, _field_version_equal, _engine_type_groundhog },
+		{ _field_real, "deceleration time", "the continuous idle time it takes for the weapon to return to its initial error", "seconds" }, // Upgraded
+
+		{ _field_legacy, _field_version_less, _engine_type_haloreach },
+		{ _field_legacy, _field_pad, "IIJ", 8 },
+
+		{ _field_legacy, _field_version_equal, _engine_type_groundhog, 3 },
+		{ _field_angle, "minimum error" }, // Upgraded
+		{ _field_angle_bounds, "error angle" }, // Upgraded
+		{ _field_real_fraction, "dual wield damage scale" }, // Upgraded
+
 		{ _field_terminator }
 	};
 
@@ -773,17 +1005,33 @@ namespace macaque
 		FIELD_EXPLANATION("CHARGING", nullptr, FIELD_FLAG_NONE, ""),
 		{ _field_real, "charging time", "the amount of time it takes for this trigger to become fully charged", "seconds" },
 		{ _field_real, "charged time", "the amount of time this trigger can be charged before becoming overcharged", "seconds" },
+
+		{ _field_legacy, _field_version_less, _engine_type_haloreach, 2 },
+		{ _field_enum, "overcharged action", &weapon_trigger_overcharged_actions },
+		{ _field_word_flags, "flags", &weapon_trigger_charging_flags },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach, 2 },
 		{ _field_char_enum, "overcharged action", &weapon_trigger_overcharged_actions },
 		{ _field_byte_flags, "flags", &weapon_trigger_charging_flags },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_short_integer, "cancelled trigger throw", "96 was the constant in code for the pp" },
+
 		{ _field_real, "charged illumination", "the amount of illumination given off when the weapon is fully charged", nullptr, "[0,1]" },
+
+		{ _field_legacy, _field_version_less, _engine_type_haloreach },
+		{ _field_real, "spew time" },
+
 		{ _field_tag_reference, "charging effect", "the charging effect is created once when the trigger begins to charge", &weapon_block_struct_ready_effect_reference },
 		{ _field_tag_reference, "charging damage effect", "the charging effect is created once when the trigger begins to charge", &global_damage_effect_or_response_definition_reference },
 		{ _field_tag_reference, "charging continuous damage response", "plays every tick you're charging or charged, scaled to charging fraction", &global_damage_response_definition_reference },
 		{ _field_real, "charged drain rate", "how much battery to drain per second when charged" },
 		{ _field_tag_reference, "discharge effect", "the discharging effect is created once when the trigger releases its charge", &weapon_block_struct_ready_effect_reference },
 		{ _field_tag_reference, "discharge damage effect", "the discharging effect is created once when the trigger releases its charge", &global_damage_effect_or_response_definition_reference },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach }, //Versioned for H3
 		{ _field_block, "fire fractions", &weapon_trigger_charging_fire_fraction_block },
+
 		{ _field_terminator }
 	};
 

@@ -11,6 +11,7 @@ namespace macaque
 	extern s_tag_block_definition weapon_block;
 	extern s_tag_struct_definition weapon; // weapon_block
 
+	extern s_tag_struct_definition melee_damage_parameters_old_struct; // Special case, field becomes a block in halo 4 onwards
 
 	extern s_tag_block_definition melee_damage_parameters_block;
 	extern s_tag_struct_definition melee_damage_parameters_block_struct_definition; // melee_damage_parameters_block
