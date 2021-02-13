@@ -59,7 +59,10 @@ namespace macaque
 		MEGALO_STRING_ID_TABLE_STRUCT_DEFINITION_ID)
 	{
 		{ _field_block, "megalo string_ids", &megalo_string_id_block },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_block, "megalo string_ids sprite mapping", &megalo_string_id_to_sprite_index_block },
+
 		{ _field_terminator }
 	};
 
