@@ -892,7 +892,10 @@ namespace macaque
 		{ _field_block, "stiff spring constraints", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY, &stiff_spring_constraints_block },
 		{ _field_block, "prismatic constraints", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY, &prismatic_constraints_block },
 		{ _field_block, "phantoms", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY, &phantoms_block },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_block, "RigidBody Serialized Shapes", FIELD_FLAG_READ_ONLY, &RigidBodySerializedShapesBlock_block },
+
 		{ _field_terminator }
 	};
 
