@@ -31,7 +31,10 @@ namespace macaque
 		CUSTOMIZED_MODEL_SELECTION_BLOCK_ID)
 	{
 		{ _field_string_id, "selection name", FIELD_FLAG_INDEX },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_string_id, "app name", "Which player-stats modifier should be activated when this item is equipped" },
+
 		{ _field_block, "customized bits", &customized_model_player_bits_block },
 		{ _field_terminator }
 	};
