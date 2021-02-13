@@ -68,8 +68,11 @@ namespace macaque
 		{ _field_word_flags, "flags", &particle_movement_flags },
 		{ _field_char_integer, "collision controller index", FIELD_FLAG_UNKNOWN0 },
 		{ _field_char_integer, "turbulence controller index", FIELD_FLAG_UNKNOWN0 },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_char_integer, "global force controller index", FIELD_FLAG_UNKNOWN0 },
 		FIELD_PAD("pphys", nullptr, FIELD_FLAG_NONE, 3),
+
 		{ _field_block, "movements", &particle_controller_block },
 		{ _field_tag_reference, "turbulence texture", &global_bitmap_reference },
 		{ _field_terminator }
@@ -88,8 +91,11 @@ namespace macaque
 		{ _field_word_flags, "flags", &particle_movement_flags },
 		{ _field_char_integer, "collision controller index", FIELD_FLAG_UNKNOWN0 },
 		{ _field_char_integer, "turbulence controller index", FIELD_FLAG_UNKNOWN0 },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_char_integer, "global force controller index", FIELD_FLAG_UNKNOWN0 },
 		FIELD_PAD("pphys", nullptr, FIELD_FLAG_NONE, 3),
+
 		{ _field_block, "movements", &particle_controller_block },
 		{ _field_tag_reference, "turbulence texture", &global_bitmap_reference },
 		{ _field_terminator }
@@ -109,6 +115,9 @@ namespace macaque
 		"turbulence",
 		"global force",
 		"disable swarm collision"
+		//{ _field_legacy, _field_version_platform_include, _platform_type_pc, 2 },
+		//{ _field_legacy, _field_version_greater_or_equal, _engine_type_halo4, 1 },
+		//"unknown bit 13"
 	};
 	STRING_LIST(particle_movement_flags, particle_movement_flags_strings, _countof(particle_movement_flags_strings));
 
