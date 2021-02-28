@@ -68,7 +68,10 @@ namespace macaque
 	{
 		{ _field_long_flags, "ai flags", &ai_properties_flags },
 		{ _field_string_id, "ai type name", "used for combat dialogue, etc." },
+
+		{ _field_legacy, _field_version_not_equal, _engine_type_halo3odst },
 		{ _field_string_id, "interaction name", "if you checked the consider for interaction flag, type what interaction the AI should do with this object (NYI - you can use any)" },
+
 		{ _field_enum, "ai size", &ai_size_enum },
 		{ _field_enum, "leap jump speed", &global_ai_jump_height_enum },
 		{ _field_terminator }
@@ -89,13 +92,19 @@ namespace macaque
 		{ _field_string_id, "import name", "if you leave this field blank then you can set this function's input value with the hs_function object_set_function_variable" },
 		{ _field_string_id, "export name" },
 		{ _field_string_id, "turn off with", "if the specified function is off, so is this function" },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_string_id, "ranged interpolation name", "if you have the ranged button checked" },
+
 		{ _field_real, "min value", "function must exceed this value (after mapping) to be active 0. means do nothing" },
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_default),
 		{ _field_struct, "default function", &mapping_function },
 		{ _field_string_id, "scale by" },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach, 2 },
 		{ _field_block, "interpolation", &object_function_interpolation_block },
 		{ _field_long_block_index, "runtime interpolator index", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY, &object_runtime_interpolator_functions_block },
+
 		{ _field_terminator }
 	};
 
@@ -164,6 +173,13 @@ namespace macaque
 		{ _field_terminator }
 	};
 
+	STRINGS(global_object_attachment_flags)
+	{
+		"gameplay vision mode",
+		"theater vision mode"
+	};
+	STRING_LIST(global_object_attachment_flags, global_object_attachment_flags_strings, _countof(global_object_attachment_flags_strings));
+
 	#define GLOBAL_OBJECT_ATTACHMENT_BLOCK_ID { 0x11097257, 0x4775429C, 0xA775D933, 0xEE75453F }
 	TAG_BLOCK(
 		global_object_attachment_block,
@@ -174,6 +190,9 @@ namespace macaque
 		TAG_MEMORY_ATTRIBUTES(MEMORY_ALLOCATION_DEFAULT, TAG_MEMORY_USAGE_READ_ONLY),
 		GLOBAL_OBJECT_ATTACHMENT_BLOCK_ID)
 	{
+		{ _field_legacy, _field_version_equal, _engine_type_halo3odst },
+		{ _field_legacy, _field_long_flags, "atlas flags", &global_object_attachment_flags },
+
 		{ _field_tag_reference, "type", FIELD_FLAG_INDEX, &global_object_attachment_block_type_reference },
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_marker),
 		{ _field_old_string_id, "marker" },
@@ -263,26 +282,68 @@ namespace macaque
 		MULTIPLAYER_OBJECT_BLOCK_ID)
 	{
 		FIELD_EXPLANATION("GAME ENGINE INCLUSION", nullptr, FIELD_FLAG_NONE, "Set which game engines you desire this object to appear in"),
+
+		{ _field_legacy, _field_version_less, _engine_type_haloreach },
+		{ _field_word_flags, "game engine flags", &global_game_engine_type_flags },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_byte_flags, "game engine flags", &global_game_engine_type_flags },
+
 		FIELD_EXPLANATION("TYPE AND FLAGS", nullptr, FIELD_FLAG_NONE, "Type pertains to how you want the game engine to handle this object\nCertain flags applicable only to certain object types, should be self evident"),
 		{ _field_char_enum, "type", &multiplayer_object_type },
 		{ _field_byte_flags, "teleporter passability", nullptr, "used only for teleporters", &teleporter_passability_flags },
+
+		{ _field_legacy, _field_version_less, _engine_type_haloreach },
+		{ _field_legacy, _field_word_flags, "flags", &multiplayer_object_flags },
+
+		{ _field_legacy, _field_version_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_pad, "pad_shape", 1 },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_char_enum, "spawn timer type", &multiplayer_object_spawn_timer_types },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach, 5 },
 		FIELD_EXPLANATION("GOAL & RESPAWN ZONE OBJECT BOUNDARY", nullptr, FIELD_FLAG_NONE, "These fields are only used for goal area objects with boundaries, and for respawn zones"),
 		{ _field_real, "boundary width/radius" },
 		{ _field_real, "boundary box length" },
 		{ _field_real, "boundary +height" },
 		{ _field_real, "boundary -height" },
+
 		{ _field_char_enum, "boundary shape", &multiplayer_object_boundary_shape },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_char_enum, "spawn timer type", &multiplayer_object_spawn_timer_types }, // moved after reach
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		FIELD_PAD("pad_shape", nullptr, FIELD_FLAG_NONE, 3),
+
 		FIELD_EXPLANATION("SPAWNING DATA", nullptr, FIELD_FLAG_NONE, "These fields are used for default spawning times and remapping"),
 		{ _field_short_integer, "default spawn time", nullptr, "seconds" },
 		{ _field_short_integer, "default abandonment time", nullptr, "seconds" },
+
+		{ _field_legacy, _field_version_less, _engine_type_haloreach, 5 },
+		{ _field_legacy, _field_explanation, "GOAL & RESPAWN ZONE OBJECT BOUNDARY", "These fields are only used for goal area objects with boundaries, and for respawn zones" },
+		{ _field_legacy, _field_real, "boundary width/radius" },
+		{ _field_legacy, _field_real, "boundary box length" },
+		{ _field_legacy, _field_real, "boundary +height" },
+		{ _field_legacy, _field_real, "boundary -height" },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_word_flags, "flags", &multiplayer_object_flags },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		FIELD_PAD("pad1", nullptr, FIELD_FLAG_NONE, 2),
+
 		FIELD_EXPLANATION("RESPAWN ZONE DATA", nullptr, FIELD_FLAG_NONE, "These are respawn zone weights, used only for respawn zones"),
 		{ _field_real, "normal weight", nullptr, "aka natural weight" },
+
+		{ _field_legacy, _field_version_less, _engine_type_haloreach, 2 },
+		{ _field_legacy, _field_real, "unknown weight" },
+		{ _field_legacy, _field_real, "unknown weight" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_block, "falloff function", "Multiplier applied to weight (domain is center to radius, range should be 0 to 1).", &spawn_influence_weight_falloff_function_block },
+
 		FIELD_EXPLANATION("MARKER DATA", nullptr, FIELD_FLAG_NONE, "These fields are only used for defining certain, special markers to use for positional locations if the default position (object origin) is not sufficient"),
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_marker),
 		{ _field_string_id, "boundary center marker" },
@@ -415,13 +476,13 @@ namespace macaque
 		{ _field_block, "change colors", &object_change_colors_block },
 		{ _field_block, "predicted resources", FIELD_FLAG_READ_ONLY, &g_null_block },
 		{ _field_block, "multiplayer object", &multiplayer_object_block },
-		{ _field_tag_reference, "simulation_interpolation", "Set to a specific interpolation definition, or leave blank to inherit the default for the object type (there are defaults for bipeds, vehicles, and crates in multiplayer_globals).  To disable interpolation on a particular object whose type has interpolation by default, set this reference to the special disable_interpolation.simulation_interpolation tag.", &global_simulation_interpolation_reference },
 
 		{ _field_legacy, _field_version_greater_or_equal, {_engine_type_haloreach}, 2 },
+		{ _field_tag_reference, "simulation_interpolation", "Set to a specific interpolation definition, or leave blank to inherit the default for the object type (there are defaults for bipeds, vehicles, and crates in multiplayer_globals).  To disable interpolation on a particular object whose type has interpolation by default, set this reference to the special disable_interpolation.simulation_interpolation tag.", &global_simulation_interpolation_reference },
 		{ _field_block, "spawn effects", &object_spawn_effects_block },
-		{ _field_block, "model dissolve data", &modelDissolveDataBlock_block },
 
 		{ _field_legacy, _field_version_greater, {_engine_type_haloreach}, 7 },
+		{ _field_block, "model dissolve data", &modelDissolveDataBlock_block },
 		{ _field_struct, "script data", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY, &hs_script_data_struct },
 		{ _field_block, "script tagalongs", &hs_references_block },
 		{ _field_block, "scripted dependencies", &hs_references_block },

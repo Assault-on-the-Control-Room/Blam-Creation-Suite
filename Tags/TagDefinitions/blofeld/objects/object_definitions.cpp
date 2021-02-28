@@ -313,6 +313,7 @@ namespace blofeld
 
 		{ _field_legacy, _field_version_greater, {_engine_type_haloreach} },
 		{ _field_legacy, _field_real, "self-destruct time:seconds#if non-zero, any instances of this object will destroy themselves after this many seconds." },
+
 		{ _field_legacy, _field_block, "ai properties", &object_ai_properties_block_block },
 		{ _field_legacy, _field_block, "functions", &object_function_block_block },
 		
@@ -321,6 +322,7 @@ namespace blofeld
 
 		{ _field_legacy, _field_version_greater, {_engine_type_haloreach} },
 		{ _field_legacy, _field_block, "function switches", &objectFunctionSwitchBlock_block },
+
 		{ _field_legacy, _field_short_integer, "hud text message index" },
 		{ _field_legacy, _field_word_flags, "secondary flags", &object_definition_secondary_flags },
 		{ _field_legacy, _field_block, "attachments", &global_object_attachment_block_block },
@@ -328,6 +330,7 @@ namespace blofeld
 		{ _field_legacy, _field_version_greater_or_equal, {_engine_type_haloreach}, 2 },
 		{ _field_legacy, _field_block, "hull surfaces", &water_physics_hull_surface_definition_block_block },
 		{ _field_legacy, _field_block, "jetwash", &jetwash_definition_block_block },
+
 		{ _field_legacy, _field_block, "widgets", &object_widget_block_block },
 		{ _field_legacy, _field_block, "change colors", &object_change_colors_block },
 		{ _field_legacy, _field_block, "predicted resources*", &g_null_block_block },
