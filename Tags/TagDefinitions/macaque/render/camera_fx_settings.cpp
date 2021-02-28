@@ -23,7 +23,10 @@ namespace macaque
 		{ _field_struct, "auto_exposure_sensitivity", &camera_fx_exposure_sensitivity_struct },
 		{ _field_struct, "bloom_highlight", MAKE_OLD_NAMES("bloom_point"), &camera_fx_bloom_highlight_struct },
 		{ _field_struct, "bloom_inherent", &camera_fx_bloom_inherent_struct },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_struct, "bloom_self_illum", &camera_fx_bloom_self_illum_struct },
+
 		{ _field_struct, "bloom_intensity", &camera_fx_bloom_intensity_struct },
 		{ _field_struct, "bloom_large_color", &camera_fx_bloom_large_color_struct },
 		{ _field_struct, "bloom_medium_color", &camera_fx_bloom_medium_color_struct },
@@ -34,8 +37,11 @@ namespace macaque
 		{ _field_struct, "bling_count", FIELD_FLAG_UNKNOWN0, &camera_fx_bling_count_struct },
 		{ _field_struct, "self_illum_preferred", &camera_fx_self_illum_preferred_struct },
 		{ _field_struct, "self_illum_scale", &camera_fx_self_illum_scale_struct },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_struct, "color_grading", &camera_fx_color_grading_struct },
 		{ _field_struct, "filmic_tone_curve", &camera_fx_filmic_tone_curve_struct },
+
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_unknown_end),
 		{ _field_terminator }
 	};
