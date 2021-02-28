@@ -38,15 +38,13 @@ namespace macaque
 		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_long_flags, "should apply trait", &player_traits_vitality_float_flags },
 
-		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 8 },
-		FIELD_EXPLANATION("damage resistance", nullptr, FIELD_FLAG_NONE, nullptr),
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 6 },
 		{ _field_legacy, _field_char_enum, "damage resistance", &player_trait_damage_resistance_enum },
 		{ _field_legacy, _field_char_enum, "body multiplier", &player_trait_body_multiplier_enum },
 		{ _field_legacy, _field_char_enum, "body recharge rate", &player_trait_shield_recharge_rate_enum },
 		{ _field_legacy, _field_char_enum, "shield multiplier", &player_trait_shield_multiplier_enum },
 		{ _field_legacy, _field_char_enum, "shield recharge rate", &player_trait_shield_recharge_rate_enum },
 		{ _field_legacy, _field_char_enum, "shield recharge rate 2", &player_trait_shield_recharge_rate_enum }, // #TODO: Could be shield stun duration? Some research is required.
-		{ _field_legacy, _field_char_enum, "shield vampirism", &player_trait_shield_vampirism_enum },
 		
 		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 14 },
 		FIELD_EXPLANATION("damage resistance", nullptr, FIELD_FLAG_NONE, "Any damage taken is divided by this number.  If you put -1, that means \"invulnerable\"."),
@@ -63,6 +61,9 @@ namespace macaque
 		{ _field_real, "wheelman armor vehicle recharge time modifier" },
 		{ _field_real, "wheelman armor vehicle emp disabled time modifier" },
 		{ _field_real, "fall damage multiplier" },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_char_enum, "shield vampirism", &player_trait_shield_vampirism_enum },
 		
 		{ _field_char_enum, "headshot immunity", &player_trait_bool_enum },
 		{ _field_char_enum, "assassination immunity", &player_trait_bool_enum },
