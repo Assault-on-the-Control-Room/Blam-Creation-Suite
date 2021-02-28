@@ -9,6 +9,8 @@ namespace macaque
 	constexpr unsigned long UNIT_TAG = 'unit';
 	extern s_tag_group unit_group; // unit_block
 
+	extern s_tag_block_definition hud_screen_reference_block_block;
+	extern s_tag_struct_definition hud_screen_reference_block_block_struct;
 
 	extern s_tag_block_definition unit_block;
 	extern s_tag_block_definition unit_screen_effect_block;
@@ -36,6 +38,10 @@ namespace macaque
 
 	extern s_tag_struct_definition unit_struct_definition; // tag group
 	extern s_tag_struct_definition unit_camera_struct;
+
+	extern s_tag_block_definition halo3_unit_camera_struct_unknown_block; // unkknown
+	extern s_tag_struct_definition halo3_unit_camera_struct_unknown_block_struct; // unknown
+
 	extern s_tag_struct_definition unit_camera_acceleration_displacement_function_struct;
 	extern s_tag_struct_definition unit_additional_node_names_struct;
 	extern s_tag_struct_definition unit_boarding_melee_struct;

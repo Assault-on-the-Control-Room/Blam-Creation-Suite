@@ -45,6 +45,8 @@ namespace macaque
 		UNIT_CAMERA_TRACK_BLOCK_ID)
 	{
 		{ _field_tag_reference, "track", &global_camera_track_reference },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_tag_reference, "screen effect", &global_area_screen_effect_reference },
 		{ _field_terminator }
 	};
@@ -147,7 +149,11 @@ namespace macaque
 		UNIT_WEAPON_BLOCK_STRUCT_ID)
 	{
 		{ _field_tag_reference, "weapon", FIELD_FLAG_INDEX, &weapon_reference },
+
+		{ _field_legacy, _field_version_greater, _engine_type_halo3 },
 		{ _field_string_id, "variant name" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 32 },
 		{ _field_long_enum, "position", &initial_weapon_position },
 		{ _field_real, "maximum firing cone angle", "must be greater than zero for turret to fire", "degrees" },
 		{ _field_real, "minimum retarget time", "minimum time before autoturret will change targets", "seconds" },
@@ -180,6 +186,7 @@ namespace macaque
 		{ _field_string_id, "alert mode effect secondary scale" },
 		{ _field_block, "sentry properties", &SentryPropertiesBlock_block },
 		{ _field_real, "target camouflage threshold", "0 - 1 : target when players camo level falls below this threshold, full camo = 1" },
+
 		{ _field_terminator }
 	};
 
@@ -212,6 +219,14 @@ namespace macaque
 		{ _field_terminator }
 	};
 
+	TAG_REFERENCE(hud_screen_reference, CUI_SCREEN_TAG);
+
+	V5_TAG_BLOCK(hud_screen_reference_block, 65536)
+	{
+		{ _field_legacy, _field_tag_reference, "hud screen reference", &hud_screen_reference },
+		{ _field_legacy, _field_terminator }
+	};
+
 	#define UNIT_SEAT_BLOCK_ID { 0x0503B218, 0xDE414AF3, 0xAED6B5FD, 0xC83836D9 }
 	TAG_BLOCK(
 		unit_seat_block,
@@ -224,15 +239,21 @@ namespace macaque
 		UNIT_SEAT_BLOCK_ID)
 	{
 		{ _field_long_flags, "flags", &unit_seat_flags },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_long_flags, "secondary flags", &unit_seat_secondary_flags },
+
 		{ _field_old_string_id, "label", FIELD_FLAG_INDEX },
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_marker),
 		{ _field_old_string_id, "marker name" },
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_marker),
 		{ _field_string_id, "entry marker(s) name" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 3 },
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_marker),
 		{ _field_string_id, "ui marker name" },
 		{ _field_string_id, "ui navpoint name" },
+
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_marker),
 		{ _field_string_id, "boarding grenade marker" },
 		{ _field_string_id, "boarding grenade string" },
@@ -242,11 +263,23 @@ namespace macaque
 		{ _field_useless_pad, "" },
 		{ _field_real, "turnover time", "how much time it takes to evict a rider from a flipped vehicle", "seconds" },
 		FIELD_EXPLANATION("seat acceleration spring", nullptr, FIELD_FLAG_NONE, ""),
+
+		// Reach and above live in a new seperate tag group, see physics/spring_acceleration_definitions.cpp
+		{ _field_legacy, _field_version_less, _engine_type_haloreach, 3 },
+		{ _field_legacy, _field_real_vector_3d, "acceleration range:world units" },
+		{ _field_legacy, _field_real, "acceleration action scale#0 defaults to 1, scale the acceleration the object itself applies on this system." },
+		{ _field_legacy, _field_real, "acceleration attach scale#0 defaults to 1, scale the acceleration the object itself applies on this system." },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_tag_reference, "seat acceleration", &spring_acceleration_reference },
+
 		{ _field_real, "AI scariness" },
 		{ _field_enum, "ai seat type", &global_ai_seat_type_enum },
 		{ _field_short_block_index, "boarding seat", &unit_seat_block },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_block, "additional boarding seats", "additional seats to eject", &boarding_seat_block },
+
 		{ _field_real_fraction, "listener interpolation factor", "how far to interpolate listener position from camera to occupant's head" },
 		FIELD_EXPLANATION("speed dependant turn rates", nullptr, FIELD_FLAG_NONE, "when the unit velocity is 0, the yaw/pitch rates are the left values\nat [max speed reference], the yaw/pitch rates are the right values.\nthe max speed reference is what the code uses to generate a clamped speed from 0..1\nthe exponent controls how midrange speeds are interpreted.\nIOW: As velocity exceeds \'min speed\' and approaches \'max speed\', turn rates are scaled from low --> high"),
 		{ _field_real_bounds, "yaw rate bounds", nullptr, "degrees per second" },
@@ -258,13 +291,22 @@ namespace macaque
 		{ _field_useless_pad, "" },
 		FIELD_EXPLANATION("camera fields", nullptr, FIELD_FLAG_NONE, ""),
 		{ _field_struct, "unit camera", &unit_camera_struct },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_block, "hud screen references", &hud_screen_reference_block_block },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_tag_reference, "hud screen reference", &Tag::Reference<struct CuiScreenDefinition>::s_defaultDefinition },
+
 		{ _field_string_id, "enter seat string" },
 		{ _field_useless_pad, "" },
 		{ _field_angle, "yaw minimum" },
 		{ _field_angle, "yaw maximum" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_angle, "yaw minimum for AI operator", "only applies when an NPC is considering using this seat" },
 		{ _field_angle, "yaw maximum for AI operator", "only applies when an NPC is considering using this seat" },
+
 		{ _field_tag_reference, "built-in gunner", &character_reference },
 		{ _field_useless_pad, "" },
 		FIELD_EXPLANATION("entry fields", nullptr, FIELD_FLAG_NONE, "note: the entry radius shouldn\'t exceed 3 world units, \nas that is as far as the player will search for a vehicle\nto enter."),
@@ -273,17 +315,23 @@ namespace macaque
 		{ _field_angle, "entry marker facing angle", "angle from unit facing the marker must be" },
 		{ _field_real, "maximum relative velocity" },
 		{ _field_useless_pad, "" },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach, 5 },
 		{ _field_real, "open time", nullptr, "seconds" },
 		{ _field_real, "close time", nullptr, "seconds" },
 		{ _field_string_id, "open function name", "creates an object function with this name that you can use to query the open state of this seat" },
 		{ _field_string_id, "opening function name", "goes from 0 to 1 over the course of opening and stays at 1 while open.  Drops to 0 immediately when closing starts" },
 		{ _field_string_id, "closing function name", "goes from 0 to 1 over the course of closing and stays at 1 while closed.  Drops to 0 immediately when opening starts" },
+
 		{ _field_string_id, "invisible seat region" },
 		{ _field_long_integer, "runtime invisible seat region index", FIELD_FLAG_READ_ONLY },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 4 },
 		FIELD_EXPLANATION("seat death grab crate", nullptr, FIELD_FLAG_NONE, "If this unit dies while this seat is occupied, the occupant will be handed an instance of this crate for throwing purposes."),
 		{ _field_tag_reference, "seat death grab crate", &crate_reference$2 },
 		{ _field_string_id, "Seat Selection String" },
 		{ _field_real, "bailout velocity", "if exiting in bailout fashion, how much velocity to add in the entry_marker's forward direction", "wu/s" },
+
 		{ _field_terminator }
 	};
 
@@ -380,12 +428,13 @@ namespace macaque
 		{ _field_real, "defensive screen duration", "The duration of the defensive function\n0 defaults to 2.0", "seconds" },
 		{ _field_real_fraction, "defensive screen scrub fallback fraction", "When receiving multiple pings, this is the min percentage of the defensive screen scrub value will fallback to.", nullptr, "[0,1]" },
 
-		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_field_group_end),
-
 		{ _field_legacy, _field_version_less, _engine_type_haloreach },
 		{ _field_legacy, _field_real, "distance of evade anim:world units#this must be set to tell the AI how far it should expect our evade animation to move us" },
-		
+
+		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_field_group_end),
 		{ _field_real, "distance of dive anim", "this must be set to tell the AI how far it should expect our dive animation to move us", "world units" },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_real_fraction, "terminal velocity fall ratio", "ratio of airborne_arc animation to switch off falling overlay" },
 
 		FIELD_CUSTOM("stun", nullptr, FIELD_FLAG_NONE, _field_id_field_group_begin),
@@ -398,16 +447,14 @@ namespace macaque
 		{ _field_real, "maximum stun time", "no stunning damage will last for longer than this", "seconds" },
 		
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_field_group_end),
-		
 		{ _field_real, "feign death chance", nullptr, nullptr, "[0,1]" },
 		{ _field_real, "feign repeat chance", nullptr, nullptr, "[0,1]" },
 		{ _field_tag_reference, "spawned turret character", "automatically created character when this unit is driven", &character_reference },
 		{ _field_short_bounds, "spawned actor count", "number of actors which we spawn" },
 		{ _field_real, "spawned velocity", "velocity at which we throw spawned actors" },
-		
 		FIELD_CUSTOM("aiming/looking", nullptr, FIELD_FLAG_NONE, _field_id_field_group_begin),
 
-		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach, 1 },
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_string_id, "target aiming pivot marker name", "set this to have your weapon barrel point at its calcualed target instead of matching the aiming of the unit controlling it.  This marker should be along the barrel at point that doesn't move when the barrel pitches up and down." },
 
 		{ _field_angle, "aiming velocity maximum", nullptr, "degrees per second" },
@@ -417,7 +464,7 @@ namespace macaque
 		{ _field_angle, "looking acceleration maximum", nullptr, "degrees per second squared" },
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_field_group_end),
 
-		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach, 1 },
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_real, "object velocity maximum", "Debug value for object velocity that corresponds to a blend screen weight of 1, 0 defaults to 5.0", "world units per second", FIELD_FLAG_UNKNOWN0 },
 
 		{ _field_string_id, "right_hand_node", "where the primary weapon is attached" },
@@ -431,12 +478,11 @@ namespace macaque
 		FIELD_CUSTOM("melee damage", nullptr, FIELD_FLAG_NONE, _field_id_field_group_begin),
 		{ _field_tag_reference, "melee damage", &global_damage_reference },
 
-		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 1 },
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_tag_reference, "native melee override", "when set, characters will melee with these settings rather than their actual held weapon. (for characters that melee with an off hand)", &weapon_reference },
 
 		{ _field_struct, "your momma", &unit_boarding_melee_struct },
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_field_group_end),
-		
 		{ _field_enum, "motion sensor blip size", &global_chud_blip_type_definition },
 		{ _field_enum, "item owner size", &unit_item_owner_size_enum },
 
@@ -449,9 +495,10 @@ namespace macaque
 		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
 		{ _field_legacy, _field_block, "HUD Interfaces", &unit_hud_interfaces_block_block },
 		
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_block, "Hud audio cues", &hud_unit_sound_block },
+
 		{ _field_block, "dialogue variants", &dialogue_variant_block },
-		
 		FIELD_CUSTOM("standard grenade throw", nullptr, FIELD_FLAG_NONE, _field_id_field_group_begin),
 
 		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach, 3 },
@@ -470,6 +517,7 @@ namespace macaque
 		{ _field_real, "grenade velocity (sprinting)", nullptr, "world units per second" },
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_field_group_end),
 		
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 6 },
 		FIELD_CUSTOM("primary weapon toss", nullptr, FIELD_FLAG_NONE, _field_id_field_group_begin),
 		{ _field_real, "weapon angle", nullptr, "degrees" },
 		{ _field_real, "weapon angle max elevation", nullptr, "degrees" },
@@ -482,12 +530,12 @@ namespace macaque
 		{ _field_block, "powered seats", &powered_seat_block },
 		{ _field_block, "weapons", &unit_weapon_block },
 
-		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach, 1 },
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_block, "target tracking", &global_target_tracking_parameters_block },
 		
 		{ _field_block, "seats", &unit_seat_block },
 
-		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach, 4 },
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach, 4 }, // custom fields are factored into the versioning
 		FIELD_CUSTOM("open/close", nullptr, FIELD_FLAG_NONE, _field_id_field_group_begin),
 		{ _field_real, "opening time", "how long the unit takes to open when the hs_function unit_open is called\nThe current open state can be retrieved from the object function unit_open", "s" },
 		{ _field_real, "closing time", "you don't have to go home, but you can't stay here", "s" },
@@ -501,11 +549,9 @@ namespace macaque
 		
 		{ _field_tag_reference, "emp disabled effect", &global_effect_reference },
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_field_group_end),
-		
 		FIELD_CUSTOM("Boost", nullptr, FIELD_FLAG_NONE, _field_id_field_group_begin),
 		{ _field_struct, "boost", &unit_boost_struct },
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_field_group_end),
-		
 		FIELD_EXPLANATION("Lipsync", nullptr, FIELD_FLAG_NONE, ""),
 		{ _field_struct, "lipsync", &unit_lipsync_scales_struct },
 		FIELD_EXPLANATION("Exit and Detach", nullptr, FIELD_FLAG_NONE, ""),
@@ -521,7 +567,7 @@ namespace macaque
 
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_field_group_end), // end unit group
 
-		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 1 },
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_real_fraction, "iron sight weapon dampening", "when using iron sights, how much to scale the weapon overlays to steady the gun (0 = rock steady, 1= no dampening)", "(0-1)" },
 
 		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 3 },
@@ -547,12 +593,21 @@ namespace macaque
 		FIELD_PAD("doh", nullptr, FIELD_FLAG_NONE, 2),
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_marker),
 		{ _field_old_string_id, "camera marker name" },
+
+		{ _field_legacy, _field_version_less, _engine_type_haloreach },
+		{ _field_legacy, _field_old_string_id, "camera submerged marker name" },
+
 		{ _field_angle, "pitch auto-level" },
 		{ _field_angle_bounds, "pitch range" },
 		{ _field_block, "camera tracks", &unit_camera_track_block },
 		{ _field_angle, "pitch minimum spring" },
 		{ _field_angle, "pitch mmaximum spring" },
 		{ _field_angle, "spring velocity" },
+
+		{ _field_legacy, _field_version_less, _engine_type_haloreach, 1 },
+		{ _field_legacy, _field_block, "unknown@", &halo3_unit_camera_struct_unknown_block }, // #TODO: Research
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach, 8 },
 		{ _field_angle, "look acceleration", "if non-zero, limits the change in look velocity per second while the user is pushing the look stick in the current direction of looking", "deg/s/s" },
 		{ _field_angle, "look deceleration", "if non-zero, limits the change in look velocity per second while the user is not pushing the look stick or changing directions", "deg/s/s" },
 		{ _field_real_fraction, "look acc smoothing fraction", "if non-zero, when the desired velocity change is less than this fraction of the acceleration, starts interpolating the maximum acceleration towards zero.\nYou can think of this as a time in seconds where if the velocity would reach its target in this amount of time or less, it will start taking longer." },
@@ -561,8 +616,14 @@ namespace macaque
 		{ _field_block, "camera acceleration", &unit_camera_acceleration_displacement_block },
 		{ _field_block, "move stick overrides", &gamepad_stick_info_block },
 		{ _field_block, "look stick overrides", &gamepad_stick_info_block },
+
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_field_group_end),
 		{ _field_terminator }
+	};
+
+	V5_TAG_BLOCK(halo3_unit_camera_struct_unknown, 0x10000u)
+	{
+		{ _field_legacy, _field_terminator }
 	};
 
 	#define UNIT_CAMERA_ACCELERATION_DISPLACEMENT_FUNCTION_STRUCT_ID { 0x22A7A324, 0xB17C4B45, 0xBBF37B84, 0xD2BD1E36 }
@@ -596,9 +657,17 @@ namespace macaque
 	{
 		{ _field_string_id, "preferred_gun_node", "if found, use this gun marker" },
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_marker),
+
+		{ _field_legacy, _field_version_equal, _engine_type_groundhog },
+		{ _field_legacy, _field_string_id, "preferred_dual_gun_node" },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_string_id, "preferred_grenade_marker", "if found, use this marker to attach live grenades to" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		FIELD_EXPLANATION("Weapon Specific Markers", nullptr, FIELD_FLAG_NONE, "These will override the righthand/lefthand nodes when the weapon matches the one used by the unit"),
 		{ _field_block, "weapon specific markers", &WeaponSpecificMarkersBlock_block },
+
 		{ _field_terminator }
 	};
 
@@ -618,8 +687,17 @@ namespace macaque
 		{ _field_tag_reference, "landing melee damage", &global_damage_reference },
 		{ _field_tag_reference, "flurry melee damage", &global_damage_reference },
 		{ _field_tag_reference, "obstacle smash damage", &global_damage_reference },
+
+		{ _field_legacy, _field_version_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_tag_reference, "shield pop melee damage", &global_damage_reference },
+
+		{ _field_legacy, _field_version_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_tag_reference, "assassination damage", &global_damage_reference },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_tag_reference, "assassination primary damage", &global_damage_reference },
 		{ _field_tag_reference, "assassination ragdoll damage", MAKE_OLD_NAMES("assassination damage"), &global_damage_reference },
+
 		{ _field_terminator }
 	};
 
@@ -634,16 +712,32 @@ namespace macaque
 		UNIT_BOOST_STRUCT_ID)
 	{
 		{ _field_tag_reference, "boost collision damage", &collision_damage_reference$2 },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_long_flags, "flags", &boost_flags },
+
 		{ _field_real, "boost peak power" },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach, 3 },
 		{ _field_real, "boost rise time", "if the trigger is fully down, takes this long to reach peak power", "s" },
 		{ _field_real, "boost fall time", "if the trigger is let go (or peak time expires), takes this long to reach 0 power", "s" },
 		{ _field_real, "boost power per second", "1, means you burn all your power in one sec.  .1 means you can boost for 10 seconds." },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_real, "boost low warning threshold" },
+
+		{ _field_legacy, _field_version_less, _engine_type_haloreach, 4 }, // want sure if/how to fit these against new definition
+		{ _field_legacy, _field_real, "boost peak power" },	// assembly
+		{ _field_legacy, _field_real, "boost rise power" },	// assembly
+		{ _field_legacy, _field_real, "boost peak time" },		// assembly
+		{ _field_legacy, _field_real, "boost fall power" },	// assembly
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach, 4 },
 		{ _field_real, "recharge rate", "1 means you recharge fully in 1 second.  .1 means you rechage fully in 10 seconds" },
 		{ _field_real, "recharge delay", "how long do you have to be off the tirgger for before boost starts recharging", "s" },
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_default),
 		{ _field_struct, "trigger to boost", &mapping_function },
+
 		{ _field_terminator }
 	};
 

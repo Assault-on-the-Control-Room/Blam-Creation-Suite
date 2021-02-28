@@ -434,13 +434,13 @@ namespace blofeld
 		{ _field_legacy, _field_block, "target tracking", &global_target_tracking_parameters_block_block },
 
 		{ _field_legacy, _field_block, "seats", &unit_seat_block_block },
+		
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach, 4 },
 		{ _field_legacy, _field_custom, "open/close" },
-
-		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach, 2 },
 		{ _field_legacy, _field_real, "opening time:s#how long the unit takes to open when the hs_function unit_open is called\nThe current open state can be retrieved from the object function unit_open" },
 		{ _field_legacy, _field_real, "closing time:s#you don\'t have to go home, but you can\'t stay here" },
-
 		{ _field_legacy, _field_custom },
+
 		{ _field_legacy, _field_custom, "EMP Disabling" },
 		{ _field_legacy, _field_real, "emp disabled time:seconds" },
 
@@ -457,15 +457,20 @@ namespace blofeld
 		{ _field_legacy, _field_explanation, "Exit and Detach", "" },
 		{ _field_legacy, _field_tag_reference, "exit and detach damage", &global_damage_reference },
 		{ _field_legacy, _field_tag_reference, "exit and detach weapon", &global_weapon_reference },
-		{ _field_legacy, _field_explanation, "Experience", "" },
 
-		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 9 },
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 5 },
+		{ _field_legacy, _field_explanation, "Experience", "" },
 		{ _field_legacy, _field_short_integer, "experience for kill" },
 		{ _field_legacy, _field_short_integer, "experience for assist" },
 		{ _field_legacy, _field_tag_reference, "hero assist equipment#this is where you stick an equipment that the biped will always have, to implement the bizarrely named hero assist", &global_equipment_reference },
 		{ _field_legacy, _field_real, "bailout threshold:wu/s#the speed above which units will bail out of a vehicle instead of just exiting" },
-		{ _field_legacy, _field_custom },
+
+		{ _field_legacy, _field_custom },  // end unit group
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_legacy, _field_real_fraction, "iron sight weapon dampening:(0-1)#when using iron sights, how much to scale the weapon overlays to steady the gun (0 = rock steady, 1= no dampening)" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 3 },
 		{ _field_legacy, _field_custom, "Birthing" },
 		{ _field_legacy, _field_struct, "birth", &unit_birth_struct_struct_definition },
 		{ _field_legacy, _field_custom },
