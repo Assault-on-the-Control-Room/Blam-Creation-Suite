@@ -27,11 +27,23 @@ namespace macaque
 		{ _field_enum, "environment", &effect_environments },
 		{ _field_enum, "disposition", &effect_dispositions },
 		{ _field_enum, "camera mode", &effect_camera_modes },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_char_enum, "game mode", &effectPartGameModeDefinition },
 		FIELD_PAD("pad0", nullptr, FIELD_FLAG_NONE, 1),
+
 		{ _field_short_integer, "sort bias", "use values between -10 and 10 to move closer and farther from camera (positive is closer)" },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 4 },
+		{ _field_legacy, _field_word_flags, "flags", &particle_system_flags },
+		{ _field_legacy, _field_short_integer, "unknown" },
+		{ _field_legacy, _field_short_integer, "unknown" },
+		{ _field_legacy, _field_real, "unknown" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_long_flags, "flags", &particle_system_flags },
 		{ _field_real_bounds, "percent velocity to inherit", "flag must be checked above" },
+
 		{ _field_real, "size scale", "multiplied by all \"size\" related fields, like scale, velocity, acceleration" },
 		{ _field_real, "camera offset", "the particle is pushed away from the camera this distance (can be negative)", "world units" },
 		FIELD_CUSTOM("Estimate overdraw threshold", nullptr, FIELD_FLAG_NONE, _field_id_particle_estimate_overdraw_unknown),
@@ -41,12 +53,19 @@ namespace macaque
 		{ _field_real, "near fade override", "distance in front of camera where fade is complete", "world units" },
 		{ _field_real, "far fade range", "distance before cutoff over which particles fade", "world units" },
 		{ _field_real, "far fade cutoff", "distance from camera where fade is complete", "world units" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 3 },
 		{ _field_real, "LOD in distance" },
 		{ _field_real, "LOD feather in delta", "minimum is 0.0001" },
 		{ _field_real, "inverse LOD feather in", FIELD_FLAG_UNKNOWN0 },
+
 		{ _field_real, "LOD out distance", "defaults to 20.0" },
 		{ _field_real, "LOD feather out delta", "0 defaults to 5.0, minimum is 0.0001" },
 		{ _field_real, "inverse LOD feather out", FIELD_FLAG_UNKNOWN0 },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_real, "unknown" },
+
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_unknown_end),
 		{ _field_block, "emitters", &particle_system_emitter_definition_block },
 		{ _field_real, "runtime max lifespan", FIELD_FLAG_UNKNOWN0 },
@@ -83,6 +102,11 @@ namespace macaque
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_unknown_end),
 		{ _field_struct, "translational offset", "XYZ controls that offset the emitter's origin from the original location", "world units", &particle_property_real_point3d_struct_new },
 		{ _field_struct, "relative direction", "yaw/pitch that changes the initial rotation of the emitter", &particle_property_real_euler_angles2d_struct_new },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 2 },
+		{ _field_legacy, _field_long_integer, "unknown@" },
+		{ _field_legacy, _field_long_integer, "unknown@" },
+
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_unknown_begin),
 		{ _field_struct, "emission radius", "defines the size of the emitter", "world units", &particle_property_scalar_struct_new },
 		{ _field_struct, "emission angle", "determines the angle at which particles are emitted", "degrees", &particle_property_scalar_struct_new },
@@ -93,6 +117,7 @@ namespace macaque
 		{ _field_struct, "particle max count", "max number of particles allowed to exist at one time", "0=unlimited", &particle_property_scalar_struct_new },
 		{ _field_struct, "particle emission rate", "number of particles that are spawned every second from the emitters", "particles per second", &particle_property_scalar_struct_new },
 		{ _field_struct, "particle emission per distance", "number of particles that are spawned every world unit of motion from the emitters", "particles per world unit", &particle_property_scalar_struct_new },
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach }, // #TODO: Which one of these properties was removed?
 		{ _field_struct, "particle lifespan", "the number of seconds a particle will live after emission", "seconds", &particle_property_scalar_struct_new },
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_field_group_end),
 		FIELD_CUSTOM("PARTICLE MOTION", nullptr, FIELD_FLAG_NONE, _field_id_field_group_begin),
@@ -100,8 +125,11 @@ namespace macaque
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_hidd_begin),
 		{ _field_struct, "particle movement", &particle_physics_struct },
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_hidd_end),
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_block, "particle attractor/repulsor", &emitterGlobalForceBlock_block },
 		{ _field_block, "particle clip sphere", &emitterClipSphereBlock_block },
+
 		{ _field_struct, "particle self-acceleration", nullptr, "world units per second per second", &particle_property_real_vector3d_struct_new },
 		{ _field_struct, "particle initial velocity", nullptr, "world units per second", MAKE_OLD_NAMES("particle velocity"), &particle_property_scalar_struct_new },
 		{ _field_struct, "particle rotation", nullptr, ".25=90°, .5=180°, 1=360° ... adds to physics", &particle_property_scalar_struct_new },
@@ -110,12 +138,18 @@ namespace macaque
 		FIELD_CUSTOM("PARTICLE APPEARANCE", nullptr, FIELD_FLAG_NONE, _field_id_field_group_begin),
 		{ _field_struct, "particle size", nullptr, "world units", &particle_property_scalar_struct_new },
 		{ _field_struct, "particle scale", nullptr, "multiple of size", &particle_property_scalar_struct_new },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_struct, "particle scale x", nullptr, "multiple of size", &particle_property_scalar_struct_new },
 		{ _field_struct, "particle scale y", nullptr, "multiple of size", &particle_property_scalar_struct_new },
+
 		{ _field_struct, "particle tint", "controls the overall tint of the particle", "RGB", &particle_property_color_struct_new },
 		{ _field_struct, "particle alpha", &particle_property_scalar_struct_new },
 		{ _field_struct, "particle alpha black point", nullptr, "0=normal, 1=clamped", &particle_property_scalar_struct_new },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_struct, "particle alpha white point", nullptr, "1=normal, 0=clamped", &particle_property_scalar_struct_new },
+
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_field_group_end),
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_unknown_end),
 		{ _field_long_integer, "runtime m_constant_per_particle_properties", FIELD_FLAG_UNKNOWN0 },
