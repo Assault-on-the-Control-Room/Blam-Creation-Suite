@@ -302,9 +302,9 @@ namespace blofeld
 		{ _field_legacy, _field_real, "turn and run distance from target:wus#Actor will face away from his target and run to his destination if his target at a larger distance than this" },
 		{ _field_legacy, _field_real, "turn and run distance to destination:wus#Firing point must be at least this distance away from the actor for him to consider turning and running to it" },
 		{ _field_legacy, _field_real, "follow unit buffer distance:wus#When following a unit, such as the player, this is the additional buffer outside of the task follow radius that we are allowed to position ourselves before full firing position avoidance kicks in" },
-		{ _field_legacy, _field_custom, "Phasing" },
 
-		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 13 },
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 14 },
+		{ _field_legacy, _field_custom, "Phasing" },
 		{ _field_legacy, _field_real, "phase chance" },
 		{ _field_legacy, _field_real, "phase delay seconds#don\'t attempt again before given time since last phase" },
 		{ _field_legacy, _field_custom },
