@@ -70,7 +70,6 @@ namespace blofeld
 
 		{ _field_legacy, _field_long_integer, "exponent bias" },
 		{ _field_legacy, _field_long_integer, "xenon d3d format*" },
-
 		{ _field_legacy, _field_terminator }
 	};
 

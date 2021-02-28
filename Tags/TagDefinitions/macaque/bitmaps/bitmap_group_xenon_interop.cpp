@@ -23,7 +23,10 @@ namespace macaque
 		RENDER_TEXTURE_INTERLEAVED_INTEROP_DEFINITION_STRUCT_ID)
 	{
 		{ _field_data, "pixel data", FIELD_FLAG_READ_ONLY },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_halo4 },
 		{ _field_data, "medium res data", FIELD_FLAG_READ_ONLY },
+
 		{ _field_array, "interleaved textures", &render_interleaved_texture_array_definition_array },
 		{ _field_terminator }
 	};
@@ -42,11 +45,17 @@ namespace macaque
 		{ _field_char_integer, "depth", FIELD_FLAG_READ_ONLY },
 		{ _field_char_integer, "total mipmap count", FIELD_FLAG_READ_ONLY },
 		{ _field_char_enum, "type", FIELD_FLAG_READ_ONLY, &bitmap_types },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_halo4 },
 		{ _field_char_integer, "pad1_1" },
+
 		{ _field_char_enum, "is high res bitmap", &boolean_enum_definition },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_halo4, 3 },
 		{ _field_char_enum, "is medium res bitmap", &boolean_enum_definition },
 		{ _field_char_enum, "pad2_1", &boolean_enum_definition },
 		{ _field_char_enum, "pad2_2", &boolean_enum_definition },
+
 		{ _field_long_integer, "exponent bias" },
 		{ _field_long_integer, "xenon d3d format", FIELD_FLAG_READ_ONLY },
 		{ _field_terminator }
@@ -62,20 +71,34 @@ namespace macaque
 		RENDER_TEXTURE_INTEROP_DEFINITION_STRUCT_ID)
 	{
 		{ _field_data, "pixel data", FIELD_FLAG_READ_ONLY },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_halo4 },
 		{ _field_data, "medium res data", FIELD_FLAG_READ_ONLY },
+
 		{ _field_data, "high res data", FIELD_FLAG_READ_ONLY },
 		{ _field_short_integer, "width", FIELD_FLAG_READ_ONLY },
 		{ _field_short_integer, "height", FIELD_FLAG_READ_ONLY },
 		{ _field_char_integer, "depth", FIELD_FLAG_READ_ONLY },
 		{ _field_char_integer, "total mipmap count", FIELD_FLAG_READ_ONLY },
 		{ _field_char_enum, "type", FIELD_FLAG_READ_ONLY, &bitmap_types },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_halo4 },
 		{ _field_char_integer, "pad1_1" },
+
 		{ _field_char_enum, "is high res bitmap", &boolean_enum_definition },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_halo4, 3 },
 		{ _field_char_enum, "is medium res bitmap", &boolean_enum_definition },
 		{ _field_char_enum, "pad2_1", &boolean_enum_definition },
 		{ _field_char_enum, "pad2_2", &boolean_enum_definition },
+
 		{ _field_long_integer, "exponent bias" },
 		{ _field_long_integer, "xenon d3d format", FIELD_FLAG_READ_ONLY },
+
+		{ _field_legacy, _field_version_less, _engine_type_halo4, 2 },
+		{ _field_legacy, _field_long_integer, "unknown" },
+		{ _field_legacy, _field_api_interop, "d3d data" },
+
 		{ _field_terminator }
 	};
 
