@@ -157,10 +157,15 @@ namespace macaque
 		4)
 	{
 		{ _field_struct, "base", &havok_shape_collection_struct_2010_2 },
+
 		{ _field_long_integer, "field pointer skip", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data },
 		{ _field_long_integer, "child shapes size", FIELD_FLAG_READ_ONLY },
 		{ _field_long_integer, "child shapes capacity", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY },
-		FIELD_PAD("nail_in_dick", nullptr, FIELD_FLAG_NONE, 12),
+		FIELD_PAD("nail_in_dick", nullptr, FIELD_FLAG_NONE, 12), // lol
+
+		{ _field_legacy, _field_version_platform_include, _platform_type_pc },
+		FIELD_PAD("8byte alignment", nullptr, FIELD_FLAG_NONE, 4),
+
 		{ _field_real_vector_3d, "aabb half extents", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY },
 		{ _field_real, "havok w aabb half extents", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY },
 		{ _field_real_vector_3d, "aabb center", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY },
