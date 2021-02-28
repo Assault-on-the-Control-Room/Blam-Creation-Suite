@@ -67,15 +67,22 @@ namespace macaque
 		COMBAT_CUE_PAYLOAD_BLOCK_STRUCT_ID)
 	{
 		{ _field_real_point_3d, "position", FIELD_FLAG_UNKNOWN0 },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 4 },
 		{ _field_custom_long_block_index, "packedKeyOffaceref", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_UNKNOWN3 },
 		{ _field_custom_long_block_index, "navMeshUIDOffaceref", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_UNKNOWN3 },
 		{ _field_word_flags, "flags", FIELD_FLAG_UNKNOWN0, &g_firing_position_flags },
 		{ _field_word_flags, "posture flags", FIELD_FLAG_UNKNOWN0, &g_firing_position_posture_flags },
+
 		{ _field_short_block_index, "area", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_INDEX, &areas_block },
 		{ _field_short_integer, "cluster index", FIELD_FLAG_UNKNOWN0 },
 		{ _field_short_integer, "cluster bsp", FIELD_FLAG_READ_ONLY },
 		{ _field_char_integer, "bits and pad", FIELD_FLAG_UNKNOWN0 },
 		FIELD_PAD("PAD1", nullptr, FIELD_FLAG_NONE, 1),
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_long_integer, "unknown" },
+
 		{ _field_real_euler_angles_2d, "normal", FIELD_FLAG_UNKNOWN0 },
 		{ _field_angle, "facing", FIELD_FLAG_UNKNOWN0 },
 		{ _field_long_integer, "lastAbsoluteRejectionGameTime", FIELD_FLAG_UNKNOWN0 },
