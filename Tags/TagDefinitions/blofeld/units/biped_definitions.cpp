@@ -206,11 +206,14 @@ namespace blofeld
 
 		{ _field_legacy, _field_struct, "ground fitting data", &biped_ground_fitting_data_struct_struct_definition },
 
-		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 15 },
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 3 },
 		{ _field_legacy, _field_tag_reference, "death particleize#optional particleization effect definition, if you want this to particleize when it dies", &global_particleize_parameters_reference },
 		{ _field_legacy, _field_real, "movement speed scale" },
 		{ _field_legacy, _field_struct, "movement hip lean", &BipedMovementHipLeaningStruct_struct_definition },
+		
 		{ _field_legacy, _field_custom },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 11 },
 		{ _field_legacy, _field_tag_reference, "Player biped sound bank#Intended for biped vehicles (ie mantis)", &global_soundbank_reference },
 		{ _field_legacy, _field_tag_reference, "RegenField Looping Sound#plays when player is inside a RegenField", &global_looping_sound_reference },
 		{ _field_legacy, _field_tag_reference, "Crouch down sound#plays when player starts crouching", &global_sound_reference },
@@ -328,8 +331,7 @@ namespace blofeld
 		{ _field_legacy, _field_real_fraction, "pivot throttle scale:pivoting slows throttle (0=none, 1= full)" },
 		{ _field_legacy, _field_real_fraction, "pivot offset dampening:react to pivot changes (0=slow, 1= fast)" },
 
-		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 18 },
-
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 17 },
 		{ _field_legacy, _field_real_fraction, "pivot force turn rate:turn no matter what the pivot state is (0=control turn, 1= always turn)" },
 		{ _field_legacy, _field_custom },
 		{ _field_legacy, _field_custom, "Ground fitting pelvis elevation settings" },
@@ -347,6 +349,7 @@ namespace blofeld
 		{ _field_legacy, _field_real, "footlock Scale: (0-1) #how much this biped respects foot lock events" },
 		{ _field_legacy, _field_real, "footlock Min Throttle: (0-1) #throttle at which foot lock should be fully on (footlockScale)" },
 		{ _field_legacy, _field_real, "footlock Max Throttle: (0-1) #throttle at which foot lock should be fully off" },
+
 		{ _field_legacy, _field_custom },
 		{ _field_legacy, _field_terminator }
 	};

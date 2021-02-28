@@ -174,7 +174,6 @@ namespace macaque
 		BIPED_STRUCT_DEFINITION_ID)
 	{
 		{ _field_struct, "unit", &unit_struct_definition },
-		
 		FIELD_CUSTOM("$$$ BIPED $$$", nullptr, FIELD_FLAG_NONE, _field_id_field_group_begin),
 		{ _field_angle, "moving turning speed", nullptr, "degrees per second" },
 		{ _field_long_flags, "flags", &biped_definition_flags },
@@ -211,7 +210,6 @@ namespace macaque
 		
 		{ _field_useless_pad, "" },
 		{ _field_real, "stun duration", "0 is the default.  Bipeds are stunned when damaged by vehicle collisions, also some are when they take emp damage" },
-
 		FIELD_EXPLANATION("camera, collision, and autoaim", nullptr, FIELD_FLAG_NONE, ""),
 		{ _field_real, "standing camera height", nullptr, "world units" },
 
@@ -225,9 +223,8 @@ namespace macaque
 		
 		{ _field_real, "crouch transition time", nullptr, "seconds" },
 
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach, 3 },
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_default),
-
-		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach, 2 },
 		{ _field_struct, "camera height velocity function", &mapping_function },
 		{ _field_block, "camera heights", &biped_camera_height_block },
 		
@@ -407,16 +404,27 @@ namespace macaque
 	{
 		FIELD_CUSTOM("ground fitting", nullptr, FIELD_FLAG_NONE, _field_id_field_group_begin),
 		FIELD_EXPLANATION("ground fitting data", nullptr, FIELD_FLAG_NONE, ""),
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_long_flags, "ground fitting flags", &biped_ground_fitting_flags_definition },
+
 		{ _field_real_fraction, "ground normal dampening", nullptr, "react to slope changes (0=slow, 1= fast)" },
 		{ _field_real, "root offset max scale idle", nullptr, "vertical drop to ground allowed (0=none, 1=full)", MAKE_OLD_NAMES("root offset max scale") },
 		{ _field_real, "root offset max scale moving", nullptr, "vertical drop to ground allowed (0=none, 1=full)" },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_real_fraction, "root offset dampening", nullptr, "react to root changes (0=slow, 1= fast)" },
+
 		{ _field_real_fraction, "following cam scale", nullptr, "root offset effect on following cam (0=none, 1=full)" },
 		{ _field_real_fraction, "root leaning scale", nullptr, "lean into slopes (0=none, 1=full)" },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_real, "stance width scale", nullptr, "scale pill width to use as stance radius" },
+
 		{ _field_angle, "foot roll max", nullptr, "orient to ground slope (degrees)" },
 		{ _field_angle, "foot pitch max", nullptr, "orient to ground slope (degrees)" },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach, 13 },
 		{ _field_real_fraction, "foot normal dampening", nullptr, "(0=slow, 1= fast)" },
 		{ _field_real, "foot fitting test distance" },
 		{ _field_real_fraction, "foot displacement upward dampening", nullptr, "(0=slow, 1= fast)" },
@@ -430,6 +438,11 @@ namespace macaque
 		{ _field_real, "foot turn weight dampening", nullptr, "dampening of fitting value for fit to turn radius(0=none, 1=fast)" },
 		{ _field_real, "foot turn blend on time", nullptr, "time to blend on the foot turn effect (seconds)" },
 		{ _field_real, "foot turn blend off time", nullptr, "time to blend off the foot turn effect (seconds)" },
+
+		{ _field_legacy, _field_version_equal, _engine_type_haloreach, 2 },
+		{ _field_legacy, _field_real, "unknown@" },
+		{ _field_legacy, _field_real, "unknown@" },
+
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_field_group_end),
 		FIELD_CUSTOM("pivot-on-foot", nullptr, FIELD_FLAG_NONE, _field_id_field_group_begin),
 		FIELD_EXPLANATION("pivot-on-foot data", nullptr, FIELD_FLAG_NONE, ""),
@@ -438,6 +451,8 @@ namespace macaque
 		{ _field_real, "pivot stride length scale", nullptr, "leg length * this = stride length" },
 		{ _field_real_fraction, "pivot throttle scale", nullptr, "pivoting slows throttle (0=none, 1= full)" },
 		{ _field_real_fraction, "pivot offset dampening", nullptr, "react to pivot changes (0=slow, 1= fast)" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 17 },
 		{ _field_real_fraction, "pivot force turn rate", nullptr, "turn no matter what the pivot state is (0=control turn, 1= always turn)" },
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_field_group_end),
 		FIELD_CUSTOM("Ground fitting pelvis elevation settings", nullptr, FIELD_FLAG_NONE, _field_id_field_group_begin),
@@ -455,6 +470,7 @@ namespace macaque
 		{ _field_real, "footlock Scale", "how much this biped respects foot lock events", "(0-1) " },
 		{ _field_real, "footlock Min Throttle", "throttle at which foot lock should be fully on (footlockScale)", "(0-1) " },
 		{ _field_real, "footlock Max Throttle", "throttle at which foot lock should be fully off", "(0-1) " },
+
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_field_group_end),
 		{ _field_terminator }
 	};
