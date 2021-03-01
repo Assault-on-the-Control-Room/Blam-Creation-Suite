@@ -6,6 +6,35 @@ namespace blofeld
 
 namespace macaque
 {
+	STRINGS(health_transfers_flags_definition)
+	{
+		"transfer health to damage section",
+		"transfer health to parent",
+		"transfer health to children",
+		"transfer health to seats",
+		"transfer direct health",
+		"transfer aoe exposed damage",
+		"transfer aoe obstructed damage",
+	};
+	STRING_LIST(health_transfers_flags_definition, health_transfers_flags_definition_strings, _countof(health_transfers_flags_definition_strings));
+
+	STRINGS(transfer_function_enum_definition)
+	{
+		"percent",
+		"points",
+		"ceiling",
+	};
+	STRING_LIST(transfer_function_enum_definition, transfer_function_enum_definition_strings, _countof(transfer_function_enum_definition_strings));
+
+	V5_TAG_BLOCK(health_transfers_block, 65536) // assembly #NOTE: where did this information come from?
+	{
+		{ _field_legacy, _field_long_flags, "flags", & health_transfers_flags_definition },
+		{ _field_legacy, _field_real, "transfer amount" },
+		{ _field_legacy, _field_word_flags, "transfer function", &transfer_function_enum_definition },
+		{ _field_legacy, _field_short_integer, "damage section index" },
+		{ _field_legacy, _field_string_id, "seat label" },
+		{ _field_legacy, _field_terminator }
+	};
 
 	#define NEW_GLOBAL_DAMAGE_SECTION_BLOCK_ID { 0xB8F6D2FD, 0xEE1D49A5, 0xA82B01A4, 0xFE09380E }
 	TAG_BLOCK(
@@ -44,6 +73,10 @@ namespace macaque
 		{ _field_string_id, "resurrection restored region name" },
 		{ _field_block, "instant responses", &new_instantaneous_damage_response_block },
 		{ _field_block, "section damage transfers", &damage_transfer_block },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_block, "health transfers", &health_transfers_block_block },
+
 		{ _field_block, "rendering", &damage_section_rendering_paramters_block },
 		{ _field_real, "runtime recharge velocity", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY },
 		{ _field_real, "runtime overcharge velocity", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY },
@@ -93,7 +126,10 @@ namespace macaque
 		NEW_INSTANTANEOUS_DAMAGE_RESPONSE_BLOCK_ID)
 	{
 		{ _field_long_flags, "flags", &newDamageResponseFlagsPart1, _field_id_dumb },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_long_flags, "flags2", &newDamageResponseFlagsPart2, _field_id_dumb },
+
 		{ _field_string_id, "label" },
 		{ _field_real_fraction, "damage threshold", "response fires after crossing this threshold.  1=full health" },
 		{ _field_tag_reference, "transition effect (generic)", MAKE_OLD_NAMES("transition effect"), &global_effect_reference },
@@ -212,9 +248,16 @@ namespace macaque
 		{ _field_block, "nodes", FIELD_FLAG_READ_ONLY, &global_damage_nodes_block },
 		{ _field_short_integer, "runtime shield material type", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY },
 		{ _field_short_integer, "runtime indirect material type", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY },
+
+		{ _field_legacy, _field_version_less, _engine_type_haloreach, 2 },
+		{ _field_legacy, _field_real, "@unknown" },
+		{ _field_legacy, _field_real, "@unknown" },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach, 3 },
 		{ _field_real, "runtime shield recharge velocity", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY },
 		{ _field_real, "runtime overcharge velocity", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY },
 		{ _field_real, "runtime health recharge velocity", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY },
+
 		{ _field_block, "damage seats", &damage_seat_info_block },
 		{ _field_block, "damage constraints", &damage_constraint_info_block },
 		FIELD_EXPLANATION("overshield", nullptr, FIELD_FLAG_NONE, ""),
@@ -264,10 +307,16 @@ namespace macaque
 		{ _field_string_id, "constraint/group name" },
 		FIELD_EXPLANATION("Damage response flags", nullptr, FIELD_FLAG_NONE, "* kills object: when the response fires the object dies regardless of its current health\n* inhibits <x>: from halo 1 - disallows basic behaviors for a unit\n* forces drop weapon: from halo 1 - makes the unit drop its current weapon\n* kills weapon <x> trigger: destroys the <x> trigger on the unit\'s current weapon\n* destroys object: when the response fires the object is destroyed"),
 		{ _field_long_flags, "flags", &damage_response_set1, _field_id_dumb },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_long_flags, "flags2", &damage_response_set2, _field_id_dumb },
+
 		{ _field_real_fraction, "damage threshold", "response fires after crossing this threshold.  1=full health" },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach, 2 },
 		{ _field_long_flags, "body threshold flags", &damage_response_body_threshold_flags_definition },
 		{ _field_real, "body damage threshold", "response fires after object body damage crosses this threshold, numbers can be negative.  You need to set the flag \"body threshold active\" for this number to be used. 1=full health" },
+
 		{ _field_tag_reference, "transition effect (generic)", MAKE_OLD_NAMES("transition effect"), &global_effect_reference },
 		{ _field_tag_reference, "transition effect (specific)", &global_effect_reference },
 		{ _field_struct, "damage effect", &instantaneous_response_damage_effect_struct },
@@ -286,7 +335,10 @@ namespace macaque
 		{ _field_real, "response delay", "in seconds" },
 		{ _field_tag_reference, "delay effect", &global_effect_reference },
 		{ _field_string_id, "delay effect marker name" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_real, "response delay premature damage threshold" },
+
 		FIELD_EXPLANATION("seat ejaculation", nullptr, FIELD_FLAG_NONE, ""),
 		{ _field_string_id, "ejecting seat label" },
 		FIELD_EXPLANATION("skip fraction", nullptr, FIELD_FLAG_NONE, "0.0 always fires, 1.0 never fires"),
@@ -435,8 +487,11 @@ namespace macaque
 		{ _field_real, "minimum stun damage", "the minimum damage required to stun this object's shields" },
 		{ _field_real, "stun time", "the length of time the shields stay stunned (do not recharge) after taking damage", "seconds" },
 		{ _field_real, "recharge time", "the length of time it would take for the shields to fully recharge after being completely depleted", "seconds" },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach, 2 },
 		{ _field_real, "shield overcharge fraction", "fraction to which shields will automatically overcharge, values <= 1.0 are ignored" },
 		{ _field_real, "shield overcharge time", "time it takes to reach full \"shield overcharge fraction\"" },
+
 		{ _field_real, "shield damaged threshold" },
 		{ _field_tag_reference, "shield damaged effect", &global_effect_reference },
 		{ _field_tag_reference, "shield depleted effect", &global_effect_reference },

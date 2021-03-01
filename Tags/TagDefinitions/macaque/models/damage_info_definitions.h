@@ -5,6 +5,7 @@ namespace blofeld
 
 namespace macaque
 {
+	extern s_tag_struct_definition health_transfers_block_block_struct;
 
 	extern s_tag_block_definition new_global_damage_section_block;
 	extern s_tag_struct_definition new_global_damage_section_block_struct_definition; // new_global_damage_section_block
