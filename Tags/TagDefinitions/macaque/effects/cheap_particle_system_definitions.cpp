@@ -49,13 +49,22 @@ namespace macaque
 		{ _field_real, "drag" },
 		{ _field_real, "gravity" },
 		{ _field_real, "turbulence" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_long_block_index, "turbulence type", "the type of turbulence this particle will experience", &cheapParticleTurbulenceTypeBlock_block },
+
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_field_group_end),
 		FIELD_CUSTOM("collision", nullptr, FIELD_FLAG_NONE, _field_id_field_group_begin),
 		{ _field_real, "depth_range", "depth range over which the particle will collide" },
 		{ _field_real, "elasticity", "energy remaining after collision bounce" },
 		{ _field_real, "death", "percentage change [0-1] that the particle will die on collision" },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_long_integer, "unknown@" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_long_block_index, "change type", "the type this particle will change into on collision", &cheap_particle_type_block },
+
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_field_group_end),
 		FIELD_CUSTOM("render", nullptr, FIELD_FLAG_NONE, _field_id_field_group_begin),
 		{ _field_long_enum, "orientation", &cheap_particle_type_orientation },
@@ -173,10 +182,25 @@ namespace macaque
 		{ _field_block, "types", &cheap_particle_type_block },
 		{ _field_block, "textures", &cheap_particle_bitmap_reference_block },
 		{ _field_tag_reference, "random", nullptr, "texture used to generate random values per particle", &bitmap_reference$5 },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_tag_reference, "turbulenceTexture!", &bitmap_reference$5 },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_block, "turbulence types", &cheapParticleTurbulenceTypeBlock_block },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 4 },
+		{ _field_legacy, _field_real, "unknown" },
+		{ _field_legacy, _field_real, "unknown" },
+		{ _field_legacy, _field_real, "unknown" },
+		{ _field_legacy, _field_real, "unknown" },
+
 		{ _field_tag_reference, "type_texture", FIELD_FLAG_UNKNOWN0, &bitmap_reference$5 },
 		{ _field_tag_reference, "render_texture", FIELD_FLAG_UNKNOWN0, &bitmap_reference$5 },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_tag_reference, "turbulenceTexture", FIELD_FLAG_UNKNOWN0, &bitmap_reference$5 },
+
 		{ _field_terminator }
 	};
 
