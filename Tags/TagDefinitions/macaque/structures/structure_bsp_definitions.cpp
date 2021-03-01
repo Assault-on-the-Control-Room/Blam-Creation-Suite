@@ -894,7 +894,10 @@ namespace macaque
 		{ _field_word_flags, "flags", &structure_instance_group_flags },
 		{ _field_real, "maximum imposter distance", FIELD_FLAG_READ_ONLY },
 		{ _field_real, "minimum centrifugal distance from group center", FIELD_FLAG_READ_ONLY },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_real, "minimum imposter distance squared", FIELD_FLAG_READ_ONLY },
+
 		{ _field_block, "instance indices", &index_list_block },
 		{ _field_terminator }
 	};
