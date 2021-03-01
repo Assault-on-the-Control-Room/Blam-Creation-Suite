@@ -41,7 +41,11 @@ namespace blofeld
 		{ _field_legacy, _field_struct, "place on", &ai_spawn_conditions_struct_struct_definition },
 		{ _field_legacy, _field_string_id, "name^" },
 		{ _field_legacy, _field_real_point_3d, "position" },
-		{ _field_legacy, _field_struct, "scenario_bsp_nav", &scenario_bsp_nav_struct_definition }, // #CUSTOM
+		
+		//{ _field_legacy, _field_struct, "scenario_bsp_nav", &scenario_bsp_nav_struct_definition }, // #CUSTOM
+		{ _field_custom_long_block_index, "packedKeyOffaceref" },
+		{ _field_custom_long_block_index, "navMeshUIDOffaceref" },
+
 		{ _field_legacy, _field_real_euler_angles_2d, "facing (yaw, pitch):degrees" },
 		{ _field_legacy, _field_real, "roll" },
 		{ _field_legacy, _field_string_id, "formation" },
@@ -69,7 +73,11 @@ namespace blofeld
 		{ _field_legacy, _field_custom_short_block_index, "cell" },
 		{ _field_legacy, _field_pad, "post-cell-index-pad", 2 },
 		{ _field_legacy, _field_real_point_3d, "position" },
-		{ _field_legacy, _field_struct, "scenario_bsp_nav", &scenario_bsp_nav_struct_definition }, // #CUSTOM
+		
+		//{ _field_legacy, _field_struct, "scenario_bsp_nav", &scenario_bsp_nav_struct_definition }, // #CUSTOM
+		{ _field_custom_long_block_index, "packedKeyOffaceref" },
+		{ _field_custom_long_block_index, "navMeshUIDOffaceref" },
+		
 		{ _field_legacy, _field_real_euler_angles_2d, "facing (yaw, pitch):degrees" },
 		{ _field_legacy, _field_real, "roll" },
 		{ _field_legacy, _field_word_flags, "flags", &starting_location_flags },

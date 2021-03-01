@@ -106,8 +106,11 @@ namespace macaque
 		{ _field_custom_short_block_index, "point set" },
 		{ _field_enum, "patrol mode", &patrol_mode_enum },
 		{ _field_block, "points", &patrol_point_block },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_byte_flags, "flags", &spawn_formation_flags },
 		FIELD_PAD("post-flags-pad", nullptr, FIELD_FLAG_NONE, 3),
+
 		{ _field_terminator }
 	};
 
@@ -180,8 +183,11 @@ namespace macaque
 		{ _field_custom_short_block_index, "point set" },
 		{ _field_enum, "patrol mode", &patrol_mode_enum },
 		{ _field_block, "points", &patrol_point_block },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_short_block_index, "vehicle body", &scenario_vehicle_block },
 		FIELD_PAD("post-vehicle_index-pad", nullptr, FIELD_FLAG_NONE, 2),
+
 		{ _field_terminator }
 	};
 
