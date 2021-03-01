@@ -178,9 +178,9 @@ namespace blofeld
 		{ _field_legacy, _field_custom, "decorator info" },
 		{ _field_legacy, _field_block, "decorator sets*", &runtime_decorator_set_block_block },
 		{ _field_legacy, _field_struct, "decorator instance buffer!*", &global_render_geometry_struct_struct_definition },
-
-		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach, 6 },
 		{ _field_legacy, _field_custom },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach, 5 },
 		{ _field_legacy, _field_custom, "decals info" },
 		{ _field_legacy, _field_block, "preplaced decal sets*", &bsp_preplaced_decal_set_reference_block_block },
 		{ _field_legacy, _field_block, "preplaced decals*", &bsp_preplaced_decal_reference_block_block },
@@ -204,7 +204,6 @@ namespace blofeld
 		{ _field_legacy, _field_block, "unknown@", &g_null_block_block },
 
 		{ _field_legacy, _field_struct, "render geometry*", &global_render_geometry_struct_struct_definition },
-
 		{ _field_legacy, _field_block, "widget references", &widget_reference_block_block },
 
 		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
@@ -532,7 +531,7 @@ namespace blofeld
 			If flags got bigger than 16bits, padding would be added and there
 			is a 32bits flags inside of manualBspFlagsReferences
 		*/
-		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 2 },
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 1 },
 		{ _field_legacy, _field_short_integer, "flags" }, 
 
 		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
