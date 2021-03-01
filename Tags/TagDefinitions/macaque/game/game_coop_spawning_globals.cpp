@@ -49,7 +49,10 @@ namespace macaque
 		{ _field_long_enum, "enemy nearby", "There is an enemy within the cylinder around the spawn target", &safety_check_mode_enum },
 		{ _field_long_enum, "projectiles", "There are dangerous projectiles in the area", &safety_check_mode_enum },
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_field_group_end),
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_real, "failover to influence spawning time", "number of seconds before influence spawning will be used (<= 0 is disabled)" },
+
 		{ _field_terminator }
 	};
 
