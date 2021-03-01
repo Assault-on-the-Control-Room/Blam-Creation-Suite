@@ -161,6 +161,12 @@ namespace macaque
 		TAG_MEMORY_ATTRIBUTES(MEMORY_ALLOCATION_NODE, TAG_MEMORY_USAGE_READ_ONLY),
 		GLOBAL_STRUCTURE_PHYSICS_STRUCT_ID)
 	{
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 4 },
+		{ _field_legacy, _field_block, "collision mopp code block!*", &mopp_code_definition_block },
+		{ _field_legacy, _field_real, "unknown@" },
+		{ _field_legacy, _field_real_point_3d, "collision world bounds min" },
+		{ _field_legacy, _field_real_point_3d, "collision world bounds max" },
+
 		{ _field_block, "breakable surfaces mopp code block", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY, &mopp_code_definition_block },
 		{ _field_block, "breakable surfaace key table", &breakable_surface_key_table_block },
 		{ _field_terminator }
