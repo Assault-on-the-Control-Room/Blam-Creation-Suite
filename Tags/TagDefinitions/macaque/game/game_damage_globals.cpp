@@ -66,7 +66,10 @@ namespace macaque
 		{ _field_tag_reference, "soft landing damage", &global_damage_reference },
 		{ _field_tag_reference, "hard landing damage", &global_damage_reference },
 		{ _field_tag_reference, "hs damage", &global_damage_reference },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_tag_reference, "hs fire damage", &global_damage_reference },
+
 		{ _field_real, "terminal velocity", "you die if you fall faster than this (non-multiplayer only)", "wu/s" },
 		{ _field_tag_reference, "terminal velocity damage", MAKE_OLD_NAMES("distance damage"), &global_damage_reference },
 		{ _field_tag_reference, "default damage response", "fall back if none is specified in damage effect tags", MAKE_OLD_NAMES("damage response"), &global_damage_response_definition_reference },
