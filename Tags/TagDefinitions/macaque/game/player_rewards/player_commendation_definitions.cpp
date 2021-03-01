@@ -88,6 +88,31 @@ namespace macaque
 	{
 		{ _field_string_id, "name", FIELD_FLAG_INDEX },
 		{ _field_string_id, "description" },
+
+		{ _field_legacy, _field_version_equal, _engine_type_haloreach, 21 }, // #TODO: Research these fields. Based on assembly's plugins for now ew.
+		{ _field_legacy, _field_long_integer, "credits earned before silver" },
+		{ _field_legacy, _field_long_integer, "credits earned after silver" },
+		{ _field_legacy, _field_short_integer, "unknown@" },
+		{ _field_legacy, _field_char_integer, "sprite index" },
+		{ _field_legacy, _field_char_integer, "unknown@" },
+		{ _field_legacy, _field_short_integer, "count required for iron" },
+		{ _field_legacy, _field_short_integer, "count required for bronze" },
+		{ _field_legacy, _field_short_integer, "count required for silver" },
+		{ _field_legacy, _field_short_integer, "count required for gold" },
+		{ _field_legacy, _field_short_integer, "count required for onyx" },
+		{ _field_legacy, _field_short_integer, "count required for MAX" },
+		{ _field_legacy, _field_long_integer, "unknown@" },
+		{ _field_legacy, _field_short_integer, "credits awarded for iron" },
+		{ _field_legacy, _field_short_integer, "credits awarded for bronze" },
+		{ _field_legacy, _field_short_integer, "credits awarded for silver" },
+		{ _field_legacy, _field_short_integer, "credits awarded for gold" },
+		{ _field_legacy, _field_short_integer, "credits awarded for onyx" },
+		{ _field_legacy, _field_short_integer, "credits awarded for MAX" },
+		{ _field_legacy, _field_short_integer, "unknown@" },
+		{ _field_legacy, _field_char_enum, "category", &commendationCategoryReachEnum },
+		{ _field_legacy, _field_pad, "pad", 1 },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 12 },
 		{ _field_byte_flags, "flags", &commendationFlags },
 		FIELD_PAD("CB_PAD0", nullptr, FIELD_FLAG_NONE, 3),
 		{ _field_char_enum, "category", &commendationCategoryEnum },
@@ -100,6 +125,7 @@ namespace macaque
 		{ _field_struct, "prerequisites", &PurchasePrerequisitesUnifiedDefinitionBlock },
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_field_group_end),
 		{ _field_block, "levels", &commendationLevelBlock_block },
+
 		{ _field_terminator }
 	};
 
@@ -143,11 +169,42 @@ namespace macaque
 		TAG_MEMORY_ATTRIBUTES(MEMORY_ALLOCATION_NODE, TAG_MEMORY_USAGE_READ_ONLY),
 		COMMENDATION_GLOBALS_DEFINITION_STRUCT_DEFINITION_ID)
 	{
-		{ _field_tag_reference, "commendation aggregators", &Tag::Reference<struct CommendationAggregatorList>::s_defaultDefinition },
+		{ _field_tag_reference, "commendation aggregators", & Tag::Reference<struct CommendationAggregatorList>::s_defaultDefinition },
+
+		{ _field_legacy, _field_version_equal, _engine_type_haloreach, 26 },
+		{ _field_legacy, _field_char_integer, "unknown@" },
+		{ _field_legacy, _field_char_integer, "unknown@" },
+		{ _field_legacy, _field_char_integer, "unknown@" },
+		{ _field_legacy, _field_char_integer, "unknown@" },
+		{ _field_legacy, _field_short_integer, "unknown@" },
+		{ _field_legacy, _field_short_integer, "unknown@" },
+		{ _field_legacy, _field_custom },
+		{ _field_legacy, _field_real_argb_color, "color 1" },
+		{ _field_legacy, _field_custom },
+		{ _field_legacy, _field_real_argb_color, "color 2" },
+		{ _field_legacy, _field_custom },
+		{ _field_legacy, _field_real_argb_color, "color 3" },
+		{ _field_legacy, _field_custom },
+		{ _field_legacy, _field_real_argb_color, "color 4" },
+		{ _field_legacy, _field_custom },
+		{ _field_legacy, _field_real_argb_color, "unranked" },
+		{ _field_legacy, _field_custom },
+		{ _field_legacy, _field_real_argb_color, "iron" },
+		{ _field_legacy, _field_custom },
+		{ _field_legacy, _field_real_argb_color, "bronze" },
+		{ _field_legacy, _field_custom },
+		{ _field_legacy, _field_real_argb_color, "silver" },
+		{ _field_legacy, _field_custom },
+		{ _field_legacy, _field_real_argb_color, "gold" },
+		{ _field_legacy, _field_custom },
+		{ _field_legacy, _field_real_argb_color, "onyx" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 4 },
 		{ _field_tag_reference, "medal aggregators", &Tag::Reference<struct MedalCommendationAggregatorList>::s_defaultDefinition },
 		{ _field_tag_reference, "commendation text", &global_multilingual_unicode_string_list_reference },
 		{ _field_short_integer, "progress display time", nullptr, "seconds", MAKE_OLD_NAMES("progression display time") },
 		{ _field_short_integer, "complete display time", nullptr, "seconds", MAKE_OLD_NAMES("callout display time") },
+
 		{ _field_block, "commendations", &commendationBlock_block },
 		{ _field_terminator }
 	};
