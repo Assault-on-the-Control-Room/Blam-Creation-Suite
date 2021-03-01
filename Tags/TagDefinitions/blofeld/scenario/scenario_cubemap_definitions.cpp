@@ -32,9 +32,8 @@ namespace blofeld
 		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 1 },
 		{ _field_legacy, _field_pad, "post-cubemap-resolution-pad", 2 },
 
-		{ _field_legacy, _field_explanation, "bsps it could belong to", "empty masks mean automatic selection." }, 
-		
-		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 1 },
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
+		{ _field_legacy, _field_explanation, "bsps it could belong to", "empty masks mean automatic selection." },
 		{ _field_legacy, _field_struct, "manual bsp flags", &manualBspFlagsReferences_struct_definition },
 
 		{ _field_legacy, _field_block, "reference points", &cubemap_reference_points_block_block },

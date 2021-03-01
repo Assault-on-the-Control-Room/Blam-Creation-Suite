@@ -31,6 +31,27 @@ namespace macaque
 		TAG_MEMORY_ATTRIBUTES(MEMORY_ALLOCATION_NODE, TAG_MEMORY_USAGE_READ_ONLY),
 		STRUCTURE_LIGHTING_GENERIC_LIGHT_DEFINITION_BLOCK_ID)
 	{
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 18 },
+		{ _field_legacy, _field_long_integer, "unknown" },
+		{ _field_legacy, _field_long_enum, "light type:#geometry shape of light.", &midnight_light_type_enum_definition },
+		{ _field_legacy, _field_real_rgb_color, "light color" },
+		{ _field_legacy, _field_real, "light intensity" },
+		{ _field_legacy, _field_angle, "inner cone angle:[0-160 degrees]#inner hotspot attenuation end." },
+		{ _field_legacy, _field_angle, "outer cone end:[0-160 degrees]#angle size of spotlight." },
+		{ _field_legacy, _field_real, "unknown" },
+		{ _field_legacy, _field_real, "unknown" },
+		{ _field_legacy, _field_real, "unknown" },
+		{ _field_legacy, _field_real, "unknown" },
+		{ _field_legacy, _field_real, "unknown" },
+		{ _field_legacy, _field_real, "unknown" },
+		{ _field_legacy, _field_real, "unknown" },
+		{ _field_legacy, _field_real, "unknown" },
+		{ _field_legacy, _field_real, "unknown" },
+		{ _field_legacy, _field_real, "unknown" },
+		{ _field_legacy, _field_real, "unknown" },
+		{ _field_legacy, _field_real, "unknown" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 13 },
 		{ _field_int64_integer, "Definition Identifier", FIELD_FLAG_UNKNOWN0 },
 		{ _field_struct, "Midnight_Light_Parameters", &midnight_light_struct },
 		{ _field_long_integer, "Source File Identifier", FIELD_FLAG_UNKNOWN0 },
@@ -47,6 +68,10 @@ namespace macaque
 		{ _field_terminator }
 	};
 
+	TAG_REFERENCE(structure_lighting_generic_light_instance_unknown_reference0);
+	TAG_REFERENCE(structure_lighting_generic_light_instance_unknown_reference1);
+	TAG_REFERENCE(structure_lighting_generic_light_instance_unknown_reference3);
+
 	#define STRUCTURE_LIGHTING_GENERIC_LIGHT_INSTANCE_BLOCK_ID { 0x09005BBF, 0x4E134B68, 0x9B53BFCC, 0x6CC50117 }
 	TAG_BLOCK(
 		structure_lighting_generic_light_instance_block,
@@ -57,20 +82,62 @@ namespace macaque
 		TAG_MEMORY_ATTRIBUTES(MEMORY_ALLOCATION_DEFAULT, TAG_MEMORY_USAGE_READ_ONLY),
 		STRUCTURE_LIGHTING_GENERIC_LIGHT_INSTANCE_BLOCK_ID)
 	{
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 5 },
 		{ _field_int64_integer, "Light Definition ID", FIELD_FLAG_UNKNOWN0 },
 		{ _field_int64_integer, "Light Instance ID", FIELD_FLAG_UNKNOWN0 },
 		{ _field_long_integer, "Light Definition Index", FIELD_FLAG_UNKNOWN0 },
 		{ _field_long_integer, "Maya Source Hash", FIELD_FLAG_UNKNOWN0 },
 		{ _field_tag_reference, "runtime definition", FIELD_FLAG_UNKNOWN0, &Tag::Reference<struct dynamic_light_definition>::s_defaultDefinition },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 1 },
+		{ _field_legacy, _field_long_integer, "unknown" },
+
 		{ _field_long_enum, "light mode", &structure_lighting_light_mode_enum },
 		{ _field_real_point_3d, "origin" },
 		{ _field_real_vector_3d, "forward" },
 		{ _field_real_vector_3d, "up" },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 4 },
+		{ _field_legacy, _field_long_integer, "unknown" },
+		{ _field_legacy, _field_real, "unknown" },
+		{ _field_legacy, _field_real, "unknown" },
+		{ _field_legacy, _field_real, "unknown" },
+
 		{ _field_real, "fade out distance" },
 		{ _field_real, "fade start distance" },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 4 },
+		{ _field_legacy, _field_tag_reference, "unknown", &structure_lighting_generic_light_instance_unknown_reference0 },
+		{ _field_legacy, _field_tag_reference, "unknown", &structure_lighting_generic_light_instance_unknown_reference1 },
+		{ _field_legacy, _field_tag_reference, "gel map", &global_bitmap_reference },
+		{ _field_legacy, _field_tag_reference, "unknown", &structure_lighting_generic_light_instance_unknown_reference3 },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_long_integer, "Shadow Geometry Checksum" },
 		FIELD_PAD("pdd", nullptr, FIELD_FLAG_NONE, 4),
+
 		{ _field_terminator }
+	};
+
+	V5_TAG_BLOCK(scenario_structure_lighting_info_unknown_block0, 65536)
+	{
+		{ _field_legacy, _field_real, "unknown" },
+		{ _field_legacy, _field_real_rgb_color, "unknown" },
+		{ _field_legacy, _field_real, "unknown" },
+		{ _field_legacy, _field_real, "unknown" },
+		{ _field_legacy, _field_long_integer, "unknown" },
+		{ _field_legacy, _field_real, "unknown" },
+		{ _field_legacy, _field_real, "unknown" },
+		{ _field_legacy, _field_real, "unknown" },
+		{ _field_legacy, _field_terminator }
+	};
+
+	V5_TAG_BLOCK(scenario_structure_lighting_info_unknown_block1, 65536)
+	{
+		{ _field_legacy, _field_string_id, "name" },
+		{ _field_legacy, _field_long_integer, "unknown" },
+		{ _field_legacy, _field_real, "unknown" },
+		{ _field_legacy, _field_terminator }
 	};
 
 	#define SCREEN_SPACE_LIGHT_SHADER_OVERRIDE_BLOCK_ID { 0xC1084686, 0x18CA4C2E, 0x9EA0ADF9, 0xC22C29DF }
@@ -126,9 +193,22 @@ namespace macaque
 		{ _field_long_integer, "import info checksum" },
 		{ _field_block, "generic light definitions", &structure_lighting_generic_light_definition_block },
 		{ _field_block, "generic light instances", &structure_lighting_generic_light_instance_block },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 8 },
+		{ _field_legacy, _field_real, "unknown@" },
+		{ _field_legacy, _field_real, "unknown@" },
+		{ _field_legacy, _field_real, "unknown@" },
+		{ _field_legacy, _field_real, "unknown@" },
+		{ _field_legacy, _field_real, "unknown@" },
+		{ _field_legacy, _field_real, "unknown@" },
+		{ _field_legacy, _field_block, "unknown", &scenario_structure_lighting_info_unknown_block0_block },
+		{ _field_legacy, _field_block, "unknown", &scenario_structure_lighting_info_unknown_block1_block },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 3 },
 		{ _field_block, "screen space light shader override", &screen_space_light_shader_override_block },
 		{ _field_block, "cinematic light instances", &structureLightingCinematicLightInstanceBlock_block, _field_id_slap },
 		{ _field_struct, "Sun Intensity Multiplier", &light_scalar_function_struct },
+
 		{ _field_terminator }
 	};
 

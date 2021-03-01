@@ -52,9 +52,17 @@ namespace macaque
 		{ _field_string_id, "name" },
 		{ _field_real_point_3d, "cubemap position" },
 		{ _field_enum, "cubemap resolution", &cubemap_resolution_enum },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 1 },
+		{ _field_legacy, _field_short_integer, "unknown" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 1 },
 		FIELD_PAD("post-cubemap-resolution-pad", nullptr, FIELD_FLAG_NONE, 2),
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		FIELD_EXPLANATION("bsps it could belong to", nullptr, FIELD_FLAG_NONE, "empty masks mean automatic selection."),
 		{ _field_struct, "manual bsp flags", &manualBspFlagsReferences },
+
 		{ _field_block, "reference points", &cubemap_reference_points_block },
 		{ _field_terminator }
 	};
