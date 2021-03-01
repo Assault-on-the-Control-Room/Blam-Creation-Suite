@@ -207,12 +207,21 @@ namespace macaque
 		FIELD_PAD("RELFLFLLE", nullptr, FIELD_FLAG_NONE, 2),
 		{ _field_real_point_3d, "default translation", FIELD_FLAG_READ_ONLY },
 		{ _field_real_quaternion, "default rotation", FIELD_FLAG_READ_ONLY },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_real, "scale", FIELD_FLAG_READ_ONLY },	// yes its read only, dont question it dumdum
+
 		{ _field_real_vector_3d, "inverse forward", FIELD_FLAG_READ_ONLY },
 		{ _field_real_vector_3d, "inverse left", FIELD_FLAG_READ_ONLY },
 		{ _field_real_vector_3d, "inverse up", FIELD_FLAG_READ_ONLY },
 		{ _field_real_point_3d, "inverse position", FIELD_FLAG_READ_ONLY },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_real, "inverse scale", FIELD_FLAG_READ_ONLY },
+
 		{ _field_real, "distance from parent", FIELD_FLAG_READ_ONLY },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 9 },
 		FIELD_CUSTOM("Procedural Joint", nullptr, FIELD_FLAG_NONE, _field_id_field_group_begin),
 		{ _field_char_enum, "procedure", &procedure_enum_definition },
 		{ _field_char_enum, "procedure axis", &procedure_axis_enum_definition },
@@ -222,6 +231,7 @@ namespace macaque
 		{ _field_real, "procedure var 1" },
 		{ _field_real, "procedure var 2" },
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_field_group_end),
+
 		{ _field_terminator }
 	};
 
