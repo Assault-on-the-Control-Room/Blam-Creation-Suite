@@ -79,8 +79,9 @@ namespace blofeld
 		{ _field_legacy, _field_real, "unknown" },
 		{ _field_legacy, _field_real, "unknown" },
 
-		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 3 },
 		{ _field_legacy, _field_custom },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_legacy, _field_block, "Authored Light Probe", &authored_light_probe_block },
 		{ _field_legacy, _field_block, "Cortana Lighting", &hologramLightingBlock_block },
 

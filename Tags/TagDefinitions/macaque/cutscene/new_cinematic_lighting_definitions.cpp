@@ -41,6 +41,21 @@ namespace macaque
 		{ _field_terminator }
 	};
 
+	V5_TAG_BLOCK(cinematic_sh_light_block, 16)
+	{
+		{ _field_legacy, _field_long_flags, "Flags", & cinematic_dynamic_light_flags },
+		{ _field_legacy, _field_custom, "Dynamic Light" },
+		{ _field_legacy, _field_custom, "Direction" },
+		{ _field_legacy, _field_real, "Direction" },
+		{ _field_legacy, _field_custom, "Front-Back" },
+		{ _field_legacy, _field_real, "Front-Back" },
+		{ _field_legacy, _field_real, "intensity" },
+		{ _field_legacy, _field_real_rgb_color, "color" },
+		{ _field_legacy, _field_real, "diffusion" },
+
+		{ _field_legacy, _field_terminator }
+	};
+
 	#define NEW_CINEMATIC_LIGHTING_STRUCT_DEFINITION_ID { 0x6E8A26A1, 0xE0954B7C, 0xA1044895, 0x5B59B00D }
 	TAG_STRUCT(
 		new_cinematic_lighting_struct_definition,
@@ -51,9 +66,13 @@ namespace macaque
 		TAG_MEMORY_ATTRIBUTES(MEMORY_ALLOCATION_NODE, TAG_MEMORY_USAGE_READ_ONLY),
 		NEW_CINEMATIC_LIGHTING_STRUCT_DEFINITION_ID)
 	{
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach, 38 },
 		FIELD_CUSTOM("Cinematic Lighting", nullptr, FIELD_FLAG_NONE, _field_id_field_group_begin),
 		FIELD_CUSTOM("Cinema Lighting", nullptr, FIELD_FLAG_NONE, _field_id_cinematic_version),
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_long_integer, "version", FIELD_FLAG_UNKNOWN0 },
+
 		FIELD_CUSTOM("Direction&Direction(D)", nullptr, FIELD_FLAG_NONE, _field_id_slider_editor),
 		{ _field_real, "Direction&Direction(D)", _field_id_slider_editor },
 		FIELD_CUSTOM("Front-Back&Front-Back(D)", nullptr, FIELD_FLAG_NONE, _field_id_slider_editor),
@@ -73,15 +92,35 @@ namespace macaque
 		{ _field_real_rgb_color, "Direct color" },
 		FIELD_CUSTOM("Direct intensity", nullptr, FIELD_FLAG_NONE, _field_id_slider_editor),
 		{ _field_real, "Direct intensity", _field_id_slider_editor },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_real, "unknown" },
+
 		{ _field_real_rgb_color, "Indirect color" },
 		FIELD_CUSTOM("Indirect intensity", nullptr, FIELD_FLAG_NONE, _field_id_slider_editor),
 		{ _field_real, "Indirect intensity", _field_id_slider_editor },
 		FIELD_CUSTOM("Interpolation", nullptr, FIELD_FLAG_NONE, _field_id_slider_editor),
 		{ _field_real, "Interpolation", _field_id_slider_editor },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 3 },
+		{ _field_legacy, _field_real, "unknown" },
+		{ _field_legacy, _field_real, "unknown" },
+		{ _field_legacy, _field_real, "unknown" },
+
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_field_group_end),
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_block, "Authored Light Probe", &authored_light_probe_block },
 		{ _field_block, "Cortana Lighting", &hologramLightingBlock_block },
+
+		{ _field_legacy, _field_version_less, _engine_type_haloreach, 1 },
+		{ _field_legacy, _field_block, "sh lights!", &cinematic_sh_light_block_block },
+
 		{ _field_block, "dynamic lights", FIELD_FLAG_UNKNOWN0, &cinematic_dynamic_light_block },
+
+		{ _field_legacy, _field_version_less, _engine_type_haloreach },
+		{ _field_legacy, _field_real, "sampled lighting scale" },
+
 		{ _field_terminator }
 	};
 

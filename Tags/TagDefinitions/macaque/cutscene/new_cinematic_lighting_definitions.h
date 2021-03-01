@@ -9,6 +9,7 @@ namespace macaque
 	constexpr unsigned long NEW_CINEMATIC_LIGHTING_TAG = 'nclt';
 	extern s_tag_group new_cinematic_lighting_group; // new_cinematic_lighting_block
 
+	extern s_tag_struct_definition cinematic_sh_light_block_block_struct;
 
 	extern s_tag_block_definition new_cinematic_lighting_block;
 	extern s_tag_block_definition cinematic_dynamic_light_block;
