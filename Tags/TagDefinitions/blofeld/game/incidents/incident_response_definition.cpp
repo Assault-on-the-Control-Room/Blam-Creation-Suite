@@ -32,12 +32,12 @@ namespace blofeld
 		{ _field_legacy, _field_struct, "allowed game modes", &game_mode_flags_struct_struct_definition },
 		{ _field_legacy, _field_custom },
 
-		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 3 },
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 4 },
 		{ _field_legacy, _field_custom, "allowed campaign and firefight" },
 		{ _field_legacy, _field_string_id, "allowed level name#Can only be triggered on this level." },
 		{ _field_legacy, _field_long_flags, "required skulls#These skulls must be enabled to trigger.", &skull_flags_definition },
-
 		{ _field_legacy, _field_custom },
+
 		{ _field_legacy, _field_long_integer, "heat award" },
 		{ _field_legacy, _field_string_id, "game engine event" },
 		{ _field_legacy, _field_string_id, "medal" },
