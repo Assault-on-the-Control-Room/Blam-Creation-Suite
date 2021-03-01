@@ -1743,8 +1743,10 @@ namespace macaque
 		{ _field_block, "scenario attached lens flares", &scenarioAttachedLensFlaresBlock_block },
 		{ _field_block, "scenario attached light cones", &scenarioAttachedLightConesBlock_block },
 
-		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
 		{ _field_block, "map variant palettes", &map_variant_palette_block },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_block, "legacy map variant palette info", &map_variant_legacy_palette_info_block_block },
 
 		{ _field_tag_reference, "multiplayer object types", &global_multiplayer_object_type_list_reference },
 		{ _field_char_enum, "multiplayer map size", &multiplayer_map_size_enum },
