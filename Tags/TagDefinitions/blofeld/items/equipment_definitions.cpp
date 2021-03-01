@@ -543,7 +543,7 @@ namespace blofeld
 		{ _field_legacy, _field_block, "moition tracker noise", &equipmentAbilityTypeMotionTrackerNoiseBlock_block },
 
 		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
-		{ _field_legacy, _field_block, "unknown@", &unknown_equipment_ability_block },
+		{ _field_legacy, _field_block, "unknown@", &g_null_block_block },
 
 		{ _field_legacy, _field_block, "invincibility mode", &equipmentAbilityTypeInvincibilityBlock_block },
 		{ _field_legacy, _field_block, "tree of life", &equipmentAbilityTypeTreeOfLifeBlock_block },
