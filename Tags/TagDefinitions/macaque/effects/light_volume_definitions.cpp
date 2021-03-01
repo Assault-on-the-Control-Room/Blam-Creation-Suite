@@ -33,10 +33,17 @@ namespace macaque
 	{
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_unknown_begin),
 		{ _field_string_id, "light_volume name", FIELD_FLAG_INDEX },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 2 },
+		{ _field_legacy, _field_explanation, "Render Method" },
+		{ _field_legacy, _field_struct, "render method", &render_method_struct_definition_struct_definition },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 4 },
 		FIELD_CUSTOM("material", nullptr, FIELD_FLAG_NONE, _field_id_shader_template),
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_hidd_begin),
 		{ _field_struct, "actual material?", &material_struct },
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_hidd_end),
+
 		{ _field_word_flags, "appearance flags", &light_volume_appearance_flags },
 		FIELD_PAD("SONGWEOINGEW", nullptr, FIELD_FLAG_NONE, 2),
 		{ _field_real, "brightness ratio", "avg. brightness head-on/side-view" },
