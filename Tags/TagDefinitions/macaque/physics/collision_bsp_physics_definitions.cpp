@@ -47,8 +47,8 @@ namespace macaque
 		{ _field_legacy, _field_version_platform_include, _platform_type_pc },
 		{ _field_legacy, _field_pad, "8byte alignment", 4 },
 
-		{ _field_long_integer, "collision bsp reference pointer0", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data },
-		{ _field_long_integer, "collision bsp reference pointer1", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data },
+		{ _field_pointer, "collision bsp reference pointer0", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data },
+		{ _field_pointer, "collision bsp reference pointer1", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data },
 		{ _field_char_integer, "structure_bsp_index", FIELD_FLAG_UNKNOWN0 },
 		{ _field_char_integer, "collision geometry shape type", FIELD_FLAG_UNKNOWN0 },
 		{ _field_short_integer, "instance index", FIELD_FLAG_UNKNOWN0 },
@@ -80,8 +80,8 @@ namespace macaque
 		{ _field_legacy, _field_pad, "8byte alignment", 4 },
 
 		// hkMoppBvTreeShapeBase
-		{ _field_long_integer, "mopp code pointer", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data },
-		{ _field_long_integer, "mopp data skip", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data },
+		{ _field_pointer, "mopp code pointer", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data },
+		{ _field_pointer, "mopp data skip", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data },
 		{ _field_long_integer, "mopp data size", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_UNKNOWN3 },
 
 		{ _field_legacy, _field_version_platform_include, _platform_type_pc },
@@ -91,8 +91,8 @@ namespace macaque
 		{ _field_real, "havok w code info copy", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY },
 
 		// hkpSingleShapeContainer
-		{ _field_long_integer, "child shape vtable", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data },
-		{ _field_long_integer, "child shape pointer", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data },
+		{ _field_pointer, "child shape vtable", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data },
+		{ _field_pointer, "child shape pointer", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data },
 		{ _field_long_integer, "child size", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_UNKNOWN3 },
 
 		{ _field_legacy, _field_version_platform_include, _platform_type_pc },
