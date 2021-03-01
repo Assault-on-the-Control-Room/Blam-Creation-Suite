@@ -9,6 +9,7 @@ namespace macaque
 	constexpr unsigned long COOKIE_PURCHASE_GLOBALS_TAG = 'cpgd';
 	extern s_tag_group cookie_purchase_globals_group; // cookie_purchase_globals_block
 
+	extern s_tag_struct_definition purchase_player_appearance_effect_firefight_voice_block_block_struct;
 
 	extern s_tag_block_definition cookie_purchase_globals_block;
 	extern s_tag_block_definition CookiePurchaseAppearanceDefinitionBlock_block;

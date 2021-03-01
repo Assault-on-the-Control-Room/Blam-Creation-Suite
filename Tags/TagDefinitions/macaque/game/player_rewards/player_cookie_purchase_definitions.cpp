@@ -33,20 +33,33 @@ namespace macaque
 		{ _field_string_id, "purchase id" },
 		{ _field_string_id, "display name", FIELD_FLAG_INDEX },
 		{ _field_string_id, "display description" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_string_id, "Exit Experience Aggregate Group Name" },
+
 		{ _field_byte_flags, "flags", &cookie_purchase_flags },
 		FIELD_PAD("pad1", nullptr, FIELD_FLAG_NONE, 3),
 		{ _field_tag_reference, "display bitmap", &global_bitmap_reference },
 		{ _field_long_integer, "sprite index" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_tag_reference, "detail display bitmap", &global_bitmap_reference },
+
 		{ _field_long_integer, "cookie cost" },
+
+		{ _field_legacy, _field_version_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_struct, "purchase player appearance", &PurchasePlayerAppearanceStruct_struct_definition }, // moved
+
 		FIELD_CUSTOM("Prerequisites for visibility", nullptr, FIELD_FLAG_NONE, _field_id_field_group_begin),
 		{ _field_struct, "visible prerequisites", &PurchasePrerequisitesUnifiedDefinitionBlock },
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_field_group_end),
 		FIELD_CUSTOM("Prerequisites for purchasability", nullptr, FIELD_FLAG_NONE, _field_id_field_group_begin),
 		{ _field_struct, "purchasable prerequisites", &PurchasePrerequisitesUnifiedDefinitionBlock },
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_field_group_end),
-		{ _field_struct, "purchase player appearance", &PurchasePlayerAppearanceStruct },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
+		{ _field_struct, "purchase player appearance", &PurchasePlayerAppearanceStruct }, // moved
+
 		{ _field_terminator }
 	};
 
@@ -426,8 +439,13 @@ namespace macaque
 		{ _field_block, "Left shoulder purchasable appearance families", &CookiePurchaseFamilyAppearanceDefinitionBlock_block },
 		{ _field_block, "Right shoulder purchasable appearance families", &CookiePurchaseFamilyAppearanceDefinitionBlock_block },
 		{ _field_block, "Chest purchasable appearance families", &CookiePurchaseFamilyAppearanceDefinitionBlock_block },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_block, "Legs purchasable appearance families", &CookiePurchaseFamilyAppearanceDefinitionBlock_block },
+
 		{ _field_block, "Arms purchasable appearance families", &CookiePurchaseFamilyAppearanceDefinitionBlock_block },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 7 },
 		{ _field_block, "App 1 loadout families", &CookiePurchaseFamilyLoadoutDefinitionBlock_block },
 		{ _field_block, "App 2 loadout families", &CookiePurchaseFamilyLoadoutDefinitionBlock_block },
 		{ _field_block, "Primary weapon loadout families", &CookiePurchaseFamilyLoadoutDefinitionBlock_block },
@@ -435,19 +453,36 @@ namespace macaque
 		{ _field_block, "Grenade purchasable loadout families", &CookiePurchaseFamilyLoadoutDefinitionBlock_block },
 		{ _field_block, "Equipment purchasable loadout families", &CookiePurchaseFamilyLoadoutDefinitionBlock_block },
 		{ _field_block, "Slot purchasable loadout families", &CookiePurchaseFamilyLoadoutDefinitionBlock_block },
+
+		{ _field_legacy, _field_version_equal, _engine_type_haloreach },
+		{ _field_block, "Legs purchasable appearance families", &CookiePurchaseFamilyAppearanceDefinitionBlock_block },
+
 		{ _field_block, "Visor tint purchasable appearance families", &CookiePurchaseFamilyAppearanceDefinitionBlock_block },
+
+		{ _field_legacy, _field_version_equal, _engine_type_haloreach, 2 },
+		{ _field_legacy, _field_block, "Knee guard purchasable appearance families", &CookiePurchaseFamilyAppearanceDefinitionBlock_block },
+		{ _field_legacy, _field_block, "Armor effect purchasable appearance families", &CookiePurchaseFamilyAppearanceDefinitionBlock_block },
+
 		{ _field_block, "Elite armor purchasable appearance families", &CookiePurchaseFamilyAppearanceDefinitionBlock_block },
 		{ _field_block, "Primary emblem purchasable appearance families", &CookiePurchaseFamilyAppearanceDefinitionBlock_block },
 		{ _field_block, "Secondary emblem purchasable appearance families", &CookiePurchaseFamilyAppearanceDefinitionBlock_block },
+
+		{ _field_legacy, _field_version_equal, _engine_type_haloreach, 2 },
+		{ _field_legacy, _field_block, "Firefight voice purchasable appearance families", &CookiePurchaseFamilyAppearanceDefinitionBlock_block },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 3 },
 		{ _field_block, "Ordnance slot purchasable families", &CookiePurchaseFamilyOrdnanceDefinitionBlock_block },
 		{ _field_block, "Ordnance purchasable families", &CookiePurchaseFamilyOrdnanceDefinitionBlock_block },
 		{ _field_block, "Portrait pose purchasable families", &CookiePurchaseFamilyAppearanceDefinitionBlock_block },
+
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_field_group_end),
 		FIELD_CUSTOM("Appearance Items", nullptr, FIELD_FLAG_NONE, _field_id_field_group_begin),
 		{ _field_block, "purchasable appearance items", &CookiePurchaseAppearanceDefinitionBlock_block },
 		{ _field_block, "DLC appearance unlockables", &CookiePurchaseExternalUnlockableBlockAppearanceDefinition_block },
 		{ _field_block, "Waypoint appearance unlockables", &CookiePurchaseExternalUnlockableBlockAppearanceDefinition_block },
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_field_group_end),
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 9 },
 		FIELD_CUSTOM("Loadout Items", nullptr, FIELD_FLAG_NONE, _field_id_field_group_begin),
 		{ _field_block, "purchasable loadout items", &CookiePurchaseLoadoutDefinitionBlock_block },
 		{ _field_block, "DLC loadout unlockables", &CookiePurchaseExternalUnlockableBlockLoadoutDefinition_block },
@@ -457,6 +492,7 @@ namespace macaque
 		{ _field_block, "purchasable ordnance items", &CookiePurchaseOrdnanceDefinitionBlock_block },
 		{ _field_block, "DLC ordnance unlockables", &CookiePurchaseExternalUnlockableBlockOrdnanceDefinition_block },
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_field_group_end),
+
 		{ _field_terminator }
 	};
 
@@ -490,6 +526,12 @@ namespace macaque
 		{ _field_terminator }
 	};
 
+	V5_TAG_BLOCK(purchase_player_appearance_effect_firefight_voice_block, 65536)
+	{
+		{ _field_legacy, _field_string_id, "voice name^" },
+		{ _field_legacy, _field_terminator }
+	};
+
 	#define PURCHASEPLAYERAPPEARANCESTRUCT_ID { 0xC34CFE9C, 0x283240B7, 0x83483A7B, 0xBBFE2AB4 }
 	TAG_STRUCT(
 		PurchasePlayerAppearanceStruct,
@@ -503,7 +545,13 @@ namespace macaque
 		{ _field_block, "armor effects permutations", &purchase_player_appearance_effect_non_model_permutation_block },
 		{ _field_block, "visor tints", &purchase_player_appearance_effect_visor_tint_block },
 		{ _field_block, "emblem indices", &purchase_player_appearance_effect_emblem_index_block },
+
+		{ _field_legacy, _field_version_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_block, "firefight voices", &purchase_player_appearance_effect_firefight_voice_block_block },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_block, "portrait poses", &PurchasePlayerAppearancePoseBlock_block },
+
 		{ _field_terminator }
 	};
 

@@ -113,8 +113,7 @@ namespace blofeld
 
 		{ _field_legacy, _field_long_integer, "cookie cost" },
 
-		{ _field_legacy, _field_version_equal, _engine_type_haloreach, 2 },
-		{ _field_legacy, _field_custom },
+		{ _field_legacy, _field_version_equal, _engine_type_haloreach },
 		{ _field_legacy, _field_struct, "purchase player appearance", &PurchasePlayerAppearanceStruct_struct_definition }, // moved
 
 		{ _field_legacy, _field_custom, "Prerequisites for visibility" },
@@ -122,9 +121,9 @@ namespace blofeld
 		{ _field_legacy, _field_custom },
 		{ _field_legacy, _field_custom, "Prerequisites for purchasability" },
 		{ _field_legacy, _field_struct, "purchasable prerequisites", &PurchasePrerequisitesUnifiedDefinitionBlock_struct_definition },
-
-		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_legacy, _field_custom },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_legacy, _field_struct, "purchase player appearance", &PurchasePlayerAppearanceStruct_struct_definition }, // moved
 
 		{ _field_legacy, _field_terminator }
@@ -284,9 +283,9 @@ namespace blofeld
 		{ _field_legacy, _field_block, "purchasable appearance items", &CookiePurchaseAppearanceDefinitionBlock_block },
 		{ _field_legacy, _field_block, "DLC appearance unlockables", &CookiePurchaseExternalUnlockableBlockAppearanceDefinition_block },
 		{ _field_legacy, _field_block, "Waypoint appearance unlockables", &CookiePurchaseExternalUnlockableBlockAppearanceDefinition_block },
-
-		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 10 },
 		{ _field_legacy, _field_custom },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 9 },
 		{ _field_legacy, _field_custom, "Loadout Items" },
 		{ _field_legacy, _field_block, "purchasable loadout items", &CookiePurchaseLoadoutDefinitionBlock_block },
 		{ _field_legacy, _field_block, "DLC loadout unlockables", &CookiePurchaseExternalUnlockableBlockLoadoutDefinition_block },
@@ -296,6 +295,7 @@ namespace blofeld
 		{ _field_legacy, _field_block, "purchasable ordnance items", &CookiePurchaseOrdnanceDefinitionBlock_block },
 		{ _field_legacy, _field_block, "DLC ordnance unlockables", &CookiePurchaseExternalUnlockableBlockOrdnanceDefinition_block },
 		{ _field_legacy, _field_custom },
+
 		{ _field_legacy, _field_terminator }
 	};
 
@@ -311,6 +311,7 @@ namespace blofeld
 
 		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_legacy, _field_block, "portrait poses", &PurchasePlayerAppearancePoseBlock_block },
+
 		{ _field_legacy, _field_terminator }
 	};
 
