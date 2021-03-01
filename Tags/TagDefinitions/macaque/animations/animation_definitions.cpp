@@ -406,14 +406,14 @@ namespace macaque
 		TAG_MEMORY_ATTRIBUTES(MEMORY_ALLOCATION_NODE, TAG_MEMORY_USAGE_READ_ONLY),
 		SHARED_MODEL_ANIMATION_BLOCK_ID)
 	{
-		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 2 },
-		{ _field_legacy, _field_pad, "pad", 1 },
-		{ _field_short_integer, "frame count", FIELD_FLAG_READ_ONLY },
-
 		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_short_integer, "frame count", FIELD_FLAG_READ_ONLY },
 
 		{ _field_byte_integer, "node count", FIELD_FLAG_READ_ONLY },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 2 },
+		{ _field_legacy, _field_pad, "pad", 1 },
+		{ _field_legacy, _field_short_integer, "frame count*" },
 
 		{ _field_char_enum, "animation type", FIELD_FLAG_READ_ONLY, &animation_type_enum },
 		{ _field_char_enum, "frame info type", FIELD_FLAG_READ_ONLY, &frame_info_type_enum },
