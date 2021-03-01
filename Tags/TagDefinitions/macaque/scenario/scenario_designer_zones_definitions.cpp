@@ -18,7 +18,13 @@ namespace macaque
 		SCENARIO_DESIGNER_ZONE_BLOCK_ID)
 	{
 		{ _field_string_id, "name", FIELD_FLAG_INDEX },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 1 },
+		{ _field_legacy, _field_long_integer, "unknown" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 1 },
 		{ _field_block, "references", FIELD_FLAG_READ_ONLY, &scenarioDesignerZoneTagReferenceBlock_block },
+
 		FIELD_CUSTOM("biped", nullptr, FIELD_FLAG_NONE, _field_id_block_index_flags),
 		{ _field_block, "biped", &biped_block_index_flags_block },
 		FIELD_CUSTOM("vehicle", nullptr, FIELD_FLAG_NONE, _field_id_block_index_flags),
@@ -35,8 +41,11 @@ namespace macaque
 		{ _field_block, "terminal", &terminal_block_index_flags_block },
 		FIELD_CUSTOM("control", nullptr, FIELD_FLAG_NONE, _field_id_block_index_flags),
 		{ _field_block, "control", &control_block_index_flags_block },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		FIELD_CUSTOM("dispenser", nullptr, FIELD_FLAG_NONE, _field_id_block_index_flags),
 		{ _field_block, "dispenser", &dispenser_block_index_flags_block },
+
 		FIELD_CUSTOM("sound_scenery", nullptr, FIELD_FLAG_NONE, _field_id_block_index_flags),
 		{ _field_block, "sound_scenery", &sound_scenery_block_index_flags_block },
 		FIELD_CUSTOM("crate", nullptr, FIELD_FLAG_NONE, _field_id_block_index_flags),
@@ -51,11 +60,14 @@ namespace macaque
 		{ _field_block, "character", &character_block_index_flags_block },
 		FIELD_CUSTOM("spawner", nullptr, FIELD_FLAG_NONE, _field_id_block_index_flags),
 		{ _field_block, "spawner", &spawner_block_index_flags_block },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 5 },
 		FIELD_CUSTOM("budget_reference", nullptr, FIELD_FLAG_NONE, _field_id_block_index_flags),
 		{ _field_block, "budget_reference", &budget_reference_block_index_flags_block },
 		FIELD_CUSTOM("bink", nullptr, FIELD_FLAG_NONE, _field_id_block_index_flags),
 		{ _field_block, "bink", &bink_block_index_flags_block },
 		{ _field_block, "resource dependencies", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY, &scenarioDesignerResourceDependenciesBlock_block },
+
 		{ _field_terminator }
 	};
 
