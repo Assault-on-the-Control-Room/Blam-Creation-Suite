@@ -31,12 +31,22 @@ namespace macaque
 		CHEAP_LIGHT_STRUCT_DEFINITION_ID)
 	{
 		FIELD_EXPLANATION("Cheap Lights", nullptr, FIELD_FLAG_NONE, "These are the cheapest light possible. They are spherical, have a color with an intensity and a radius - and that\'s it. They should be small: 0.5 or smaller if you can get close to them. That\'s why they are so cheap."),
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_char_enum, "function input", &cheapLightFunctionInputEnum },
 		FIELD_PAD("clblah", nullptr, FIELD_FLAG_NONE, 3),
+
 		FIELD_EXPLANATION("COLOR", nullptr, FIELD_FLAG_NONE, "color and intensity of the light"),
 		{ _field_struct, "color", &light_color_function_struct },
 		{ _field_struct, "intensity", &light_scalar_function_struct },
 		FIELD_EXPLANATION("SIZE", nullptr, FIELD_FLAG_NONE, "radius of the spherical light"),
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 3 },
+		{ _field_legacy, _field_struct, "radius", &light_scalar_function_struct_struct_definition },
+		{ _field_real, "Falloff Begin Ratio", "Ratio of falloff start to falloff end", nullptr, "[0-1]" },
+		{ _field_real, "near fade distance", nullptr, "world units", MAKE_OLD_NAMES("closeup fading distance") }, // #TODO: unconfirmed
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 5 },
 		{ _field_struct, "Falloff End", MAKE_OLD_NAMES("radius"), &light_scalar_function_struct },
 		{ _field_real, "Falloff Begin Ratio", "Ratio of falloff start to falloff end", nullptr, "[0-1]" },
 		{ _field_real, "near fade distance", nullptr, "world units", MAKE_OLD_NAMES("closeup fading distance") },
