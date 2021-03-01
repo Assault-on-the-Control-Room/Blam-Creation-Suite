@@ -8,7 +8,10 @@ namespace blofeld
 	{
 		{ _field_legacy, _field_explanation, "CONTROLS~", "Ctrl-N: Creates a new area and assigns it to the current selection of firing points." },
 		{ _field_legacy, _field_real_point_3d, "position (local)" },
-		{ _field_legacy, _field_struct, "scenario_bsp_nav", &scenario_bsp_nav_struct_definition }, // #CUSTOM
+		//{ _field_legacy, _field_struct, "scenario_bsp_nav", &scenario_bsp_nav_struct_definition }, // #CUSTOM
+		{ _field_custom_long_block_index, "packedKeyOffaceref" },
+		{ _field_custom_long_block_index, "navMeshUIDOffaceref" },
+
 		{ _field_legacy, _field_word_flags, "flags*", &g_firing_position_flags },
 		{ _field_legacy, _field_word_flags, "posture flags", &g_firing_position_posture_flags },
 		{ _field_legacy, _field_short_block_index, "area^" },
