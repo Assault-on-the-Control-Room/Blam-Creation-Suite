@@ -94,13 +94,42 @@ namespace macaque
 		{ _field_real, "direction max vel" },
 		{ _field_real, "orbit acc", "negative values spin the opposite direction from positive ones" },
 		{ _field_real, "orbit max vel" },
+
+		{ _field_legacy, _field_version_platform_include, _platform_type_pc },
+		FIELD_PAD("TF", nullptr, FIELD_FLAG_NONE, 20),
+
+		{ _field_legacy, _field_version_platform_exclude, _platform_type_pc },
 		FIELD_PAD("TF", nullptr, FIELD_FLAG_NONE, 28),
+
 		FIELD_EXPLANATION("Angular Motion", nullptr, FIELD_FLAG_NONE, "0 - means do nothing\nALIGNMENT: algin objects in the phantom with the marker\nSPIN: spin the object about the marker axis"),
 		{ _field_real, "alignment hookes law e", "0 if you don't want this to behave like spring.  1 is a good starting point if you do." },
 		{ _field_real, "alignment acc" },
 		{ _field_real, "alignment max vel" },
 		FIELD_PAD("TYXJL", nullptr, FIELD_FLAG_NONE, 8),
+
 		{ _field_terminator }
+	};
+
+	V5_TAG_STRUCT(havok_shape_struct_2010_2)
+	{
+		// hkBaseObject
+		{ _field_legacy, _field_pointer, "field pointer skip!~" },
+
+			// hkReferencedObject
+		{ _field_legacy, _field_short_integer, "size*~!" },
+		{ _field_legacy, _field_short_integer, "count*~!" },
+
+		{ _field_legacy, _field_version_platform_include, _platform_type_pc },
+		{ _field_legacy, _field_pad, "hkReferencedObject 8byte alignment", 4 },
+
+			// hkpShape
+		{ _field_legacy, _field_pointer, "user data*~!" }, // TYPE_ULONG
+		{ _field_legacy, _field_long_integer, "type*~!" },
+
+		{ _field_legacy, _field_version_platform_include, _platform_type_pc },
+		{ _field_legacy, _field_pad, "hkpShape 8byte alignment", 4 },
+
+		{ _field_legacy, _field_terminator }
 	};
 
 	#define PHANTOMS_BLOCK_STRUCT_ID { 0x9825B672, 0xFCDE4371, 0xA3E1D01A, 0xC83E8BD0 }
@@ -113,11 +142,26 @@ namespace macaque
 		TAG_MEMORY_ATTRIBUTES(MEMORY_ALLOCATION_DEFAULT, TAG_MEMORY_USAGE_WRITEABLE | TAG_MEMORY_USAGE_NON_ALIASED),
 		PHANTOMS_BLOCK_STRUCT_ID)
 	{
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_struct, "bv shape", &havok_shape_struct_2010_2 },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_struct, "bv shape", &havok_shape_struct },
+
 		{ _field_struct, "havok shape reference struct1", &havok_shape_reference_struct },
-		{ _field_long_integer, "field pointer skip", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data },
-		{ _field_long_integer, "child shape pointer", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_long_integer, "unknown" }, // likely "child size"
+
+		{ _field_pointer, "field pointer skip", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data },
+		{ _field_pointer, "child shape pointer", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_struct, "phantom shape", &havok_shape_struct_2010_2 },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_struct, "phantom shape", &havok_shape_struct },
+
 		{ _field_terminator }
 	};
 
@@ -158,7 +202,7 @@ namespace macaque
 	{
 		{ _field_struct, "base", &havok_shape_collection_struct_2010_2 },
 
-		{ _field_long_integer, "field pointer skip", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data },
+		{ _field_pointer, "field pointer skip", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data },
 		{ _field_long_integer, "child shapes size", FIELD_FLAG_READ_ONLY },
 		{ _field_long_integer, "child shapes capacity", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY },
 		FIELD_PAD("nail_in_dick", nullptr, FIELD_FLAG_NONE, 12), // lol
@@ -413,7 +457,13 @@ namespace macaque
 		{ _field_real, "water physics y1", "y1 value of the water physics aabb" },
 		{ _field_real, "water physics z0", "z0 value of the water physics aabb" },
 		{ _field_real, "water physics z1", "z1 value of the water physics aabb" },
-		{ _field_long_integer, "Runtime Shape Pointer", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
+		{ _field_pointer, "Runtime Shape Pointer", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_pad, "padding", 4 },
+
 		{ _field_real_vector_3d, "center of mass", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY },
 		{ _field_real, "havok w center of mass", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY },
 		{ _field_real_vector_3d, "intertia tensor x", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY },
@@ -423,7 +473,15 @@ namespace macaque
 		{ _field_real_vector_3d, "intertia tensor z", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY },
 		{ _field_real, "havok w intertia tensor z", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY },
 		{ _field_long_integer, "runtime havok group mask ", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_pad, "padding", 4 },
+
 		{ _field_struct, "shape reference", &havok_shape_reference_struct },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_long_integer, "unknown" }, // likely "child size"
+
 		{ _field_real, "mass", nullptr, "kg", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY },
 		{ _field_real, "bounding sphere pad", "the bounding sphere for this rigid body will be outset by this much" },
 		{ _field_char_enum, "collision quality override type", &rigid_body_collision_quality_enum },
@@ -432,6 +490,10 @@ namespace macaque
 		FIELD_EXPLANATION("Stupid mass override", nullptr, FIELD_FLAG_NONE, "If you want to override what the calculated mass distribution or artist set mass is, this is where you do it. Also, this will show up as n/100 in the game debugger. Awesome."),
 		{ _field_real, "Mass body override" },
 		FIELD_PAD("pad4", nullptr, FIELD_FLAG_NONE, 8),
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_pad, "unknown", 8 }, // assumed
+
 		{ _field_terminator }
 	};
 
@@ -505,7 +567,7 @@ namespace macaque
 	{
 		{ _field_struct, "base", &havok_primitive_struct },
 		{ _field_long_integer, "version", FIELD_FLAG_READ_ONLY },
-		{ _field_long_integer, "Runtime Deserialized Shape Pointer", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data },
+		{ _field_pointer, "Runtime Deserialized Shape Pointer", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data },
 		{ _field_data, "Serialized Havok Data", FIELD_FLAG_READ_ONLY },
 		{ _field_data, "Serialized Havok Data Any Temp", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY },
 		{ _field_terminator }
@@ -543,10 +605,14 @@ namespace macaque
 	{
 		{ _field_struct, "base", &havok_primitive_struct },
 		{ _field_struct, "box shape", &havok_convex_shape_struct },
+
+		{ _field_legacy, _field_version_platform_exclude, _platform_type_pc },
 		FIELD_PAD("algn3473", nullptr, FIELD_FLAG_NONE, 12),
+
 		{ _field_real_vector_3d, "half extents", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY },
 		{ _field_real, "havok w half extents", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY },
 		{ _field_struct, "convex transform shape", &havok_convex_transform_shape_struct },
+
 		{ _field_terminator }
 	};
 
@@ -591,22 +657,47 @@ namespace macaque
 	{
 		{ _field_struct, "base", &havok_primitive_struct },
 		{ _field_struct, "polyhedron shape", &havok_convex_shape_struct },
+
+		{ _field_legacy, _field_version_platform_exclude, _platform_type_pc },
 		FIELD_PAD("algn743", nullptr, FIELD_FLAG_NONE, 12),
+
+		// aabbHalfExtents
 		{ _field_real_vector_3d, "aabb half extents", FIELD_FLAG_READ_ONLY },
 		{ _field_real, "havok w aabb half extents", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY },
+		// aabbCenter
 		{ _field_real_vector_3d, "aabb center", FIELD_FLAG_READ_ONLY },
 		{ _field_real, "havok w aabb center", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY },
-		{ _field_long_integer, "field pointer skip", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data },
+		// rotatedVertices
+		{ _field_pointer, "field pointer skip", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data },
 		{ _field_long_integer, "four vectors size", FIELD_FLAG_READ_ONLY },
 		{ _field_long_integer, "four vectors capacity", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY },
+		// numVertices
 		{ _field_long_integer, "num vertices", FIELD_FLAG_READ_ONLY },
+
+		{ _field_legacy, _field_version_platform_include, _platform_type_pc },
+		{ _field_legacy, _field_pad, "hkReferencedObject 8byte alignment", 4 },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		// convexPiece
+		{ _field_legacy, _field_pointer, "convex piece pointer skip!~" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
+		// useSpuBuffer
 		{ _field_char_integer, "m_useSpuBuffer", FIELD_FLAG_READ_ONLY },
 		FIELD_PAD("algn434", nullptr, FIELD_FLAG_NONE, 3),
-		{ _field_long_integer, "another field pointer skip", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data },
+
+		// hkArray planeEquations
+		{ _field_pointer, "another field pointer skip", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data },
 		{ _field_long_integer, "plane equations size", FIELD_FLAG_READ_ONLY },
 		{ _field_long_integer, "plane equations capacity", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY },
-		{ _field_long_integer, "connectivity", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY | FIELD_FLAG_POINTER, _field_id_zero_data },
+		{ _field_pointer, "connectivity", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY | FIELD_FLAG_POINTER, _field_id_zero_data },
+
+		{ _field_legacy, _field_version_platform_include, _platform_type_pc },
+		FIELD_PAD("SAMTRA", nullptr, FIELD_FLAG_NONE, 8),
+
+		{ _field_legacy, _field_version_platform_exclude, _platform_type_pc },
 		FIELD_PAD("SAMTRA", nullptr, FIELD_FLAG_NONE, 12),
+
 		{ _field_terminator }
 	};
 
@@ -682,17 +773,36 @@ namespace macaque
 		{ _field_struct, "base", &havok_shape_struct },
 		FIELD_PAD("m_bvTreeType", nullptr, FIELD_FLAG_NONE, 1),
 		FIELD_PAD("3 other bytes", nullptr, FIELD_FLAG_NONE, 3),
-		{ _field_long_integer, "mopp code pointer", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data },
-		{ _field_long_integer, "mopp data skip", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data },
+
+		{ _field_legacy, _field_version_platform_include, _platform_type_pc },
+		{ _field_legacy, _field_pad, "8byte alignment", 4 },
+
+		// hkMoppBvTreeShapeBase
+		{ _field_pointer, "mopp code pointer", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data },
+		{ _field_pointer, "mopp data skip", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data },
 		{ _field_long_integer, "mopp data size", FIELD_FLAG_UNKNOWN3 },
+
+		{ _field_legacy, _field_version_platform_include, _platform_type_pc },
+		{ _field_legacy, _field_pad, "8byte alignment", 4 },
+
 		{ _field_real_vector_3d, "m_codeInfoCopy", FIELD_FLAG_READ_ONLY },
 		{ _field_real, "havok w m_codeInfoCopy", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY },
-		{ _field_long_integer, "child shape vtable", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data },
+
+		// hkpSingleShapeContainer
+		{ _field_pointer, "child shape vtable", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data },
 		{ _field_struct, "childShapePointer", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_UNKNOWN3, &havok_shape_reference_struct },
 		{ _field_long_integer, "child size", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_UNKNOWN3 },
+
+		{ _field_legacy, _field_version_platform_include, _platform_type_pc },
+		{ _field_legacy, _field_pad, "8byte alignment", 4 },
+
 		FIELD_PAD("mopp alignment", nullptr, FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY | FIELD_FLAG_UNKNOWN3, 4),
 		{ _field_real, "scale", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY },
 		FIELD_PAD("final alignment", nullptr, FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY | FIELD_FLAG_UNKNOWN3, 12),
+
+		{ _field_legacy, _field_version_platform_include, _platform_type_pc },
+		{ _field_legacy, _field_pad, "16 byte align pad", 8 },
+
 		{ _field_terminator }
 	};
 
@@ -1064,7 +1174,7 @@ namespace macaque
 		HAVOK_CONVEX_TRANSFORM_SHAPE_STRUCT_ID)
 	{
 		{ _field_struct, "convex", &havok_convex_shape_struct },
-		{ _field_long_integer, "field pointer skip", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data },
+		{ _field_pointer, "field pointer skip", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data },
 		{ _field_struct, "havok shape reference struct", &havok_shape_reference_struct },
 		{ _field_long_integer, "child shape size" },
 		{ _field_real_vector_3d, "rotation i", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY },

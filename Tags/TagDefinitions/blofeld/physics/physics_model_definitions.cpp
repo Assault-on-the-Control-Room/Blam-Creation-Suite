@@ -685,6 +685,8 @@ namespace blofeld
 		{ _field_legacy, _field_terminator }
 	};
 
+	// gamecheat13 is a cunt. VERY SPECIFIC. NOT 10, or 12 or 14.
+
 	V5_TAG_STRUCT(havok_shape_struct_2010_2)
 	{
 		// hkBaseObject
