@@ -244,10 +244,13 @@ namespace macaque
 		ANIMATION_DEFINITION_ID)
 	{
 		{ _field_string_id, "name", FIELD_FLAG_INDEX },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 4 },
 		{ _field_real, "time base offset" },
 		{ _field_real, "time exponential offset" },
 		{ _field_char_enum, "animation input", &animationInputType },
 		FIELD_PAD("pad0", nullptr, FIELD_FLAG_NONE, 3),
+
 		{ _field_block, "components", &animation_component_definition_block },
 		{ _field_terminator }
 	};
@@ -571,9 +574,15 @@ namespace macaque
 		TAG_MEMORY_ATTRIBUTES(MEMORY_ALLOCATION_NODE, TAG_MEMORY_USAGE_READ_ONLY),
 		CUI_SCREEN_STRUCT_DEFINITION_ID)
 	{
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 2 },
+		{ _field_legacy, _field_tag_reference, "string list", &global_multilingual_unicode_string_list_reference },
+		{ _field_struct, "system", &cui_system },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 3 },
 		{ _field_block, "string references", &string_file_references_block },
 		{ _field_tag_reference, "logic", &cui_logic_reference },
 		{ _field_struct, "system", &cui_system },
+
 		{ _field_terminator }
 	};
 
@@ -608,7 +617,10 @@ namespace macaque
 		{ _field_block, "binding conversion long comparisons", &binding_conversion_long_comparison_block_definition_block },
 		{ _field_block, "static data tables", &static_data_table_block },
 		{ _field_block, "expressions", &expression_block },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_block, "encapsulated properties", &encapsulatedProperties_block },
+
 		{ _field_terminator }
 	};
 
@@ -624,7 +636,10 @@ namespace macaque
 		{ _field_block, "long properties", &property_long_value_block },
 		{ _field_block, "real properties", &property_real_value_block },
 		{ _field_block, "string_id properties", &property_string_id_value_block },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_block, "component ptr properties", &propertyComponentPtrValue_block },
+
 		{ _field_block, "tag reference properties", &property_tag_reference_value_block },
 		{ _field_block, "string properties", &property_text_value_block },
 		{ _field_block, "argb color properties", &property_argb_color_value_block },
