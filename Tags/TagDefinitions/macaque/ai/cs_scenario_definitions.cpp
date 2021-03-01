@@ -18,7 +18,10 @@ namespace macaque
 		CS_SCRIPT_DATA_BLOCK_ID)
 	{
 		{ _field_block, "point sets", &cs_point_set_block },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_block, "animation points", &cs_animation_point_block },
+
 		FIELD_PAD("TPHWNCUR", nullptr, FIELD_FLAG_NONE, 120),
 		{ _field_terminator }
 	};
@@ -36,9 +39,18 @@ namespace macaque
 		{ _field_string, "name", FIELD_FLAG_INDEX },
 		{ _field_block, "points", &cs_point_block },
 		{ _field_short_block_index, "bsp index", &scenario_structure_bsp_reference_block },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_short_block_index, "reference frame" }, // assembly
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		FIELD_PAD("PAD1", nullptr, FIELD_FLAG_NONE, 2),
+
 		{ _field_long_flags, "flags", &point_set_flags },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_long_flags, "traversal flags", &point_set_traversal_flags },
+
 		{ _field_short_block_index, "editor folder", FIELD_FLAG_UNKNOWN0, &g_scenario_editor_folder_block, _field_id_hide },
 		FIELD_PAD("AJDEYNFD", nullptr, FIELD_FLAG_NONE, 2),
 		{ _field_terminator }
@@ -59,6 +71,10 @@ namespace macaque
 		{ _field_real_point_3d, "position" },
 		{ _field_custom_long_block_index, "packedKeyOffaceref", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_UNKNOWN3 },
 		{ _field_custom_long_block_index, "navMeshUIDOffaceref", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_UNKNOWN3 },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 1 },
+		{ _field_legacy, _field_long_block_index, "surface index" }, // assembly
+
 		{ _field_real_euler_angles_2d, "facing direction" },
 		{ _field_terminator }
 	};

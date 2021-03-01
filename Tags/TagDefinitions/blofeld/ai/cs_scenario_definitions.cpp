@@ -9,7 +9,9 @@ namespace blofeld
 		{ _field_legacy, _field_string, "name^" },
 		{ _field_legacy, _field_string_id, "name_id*!" },
 		{ _field_legacy, _field_real_point_3d, "position" },
-		{ _field_legacy, _field_struct, "scenario_bsp_nav", &scenario_bsp_nav_struct_definition }, // #CUSTOM
+		//{ _field_legacy, _field_struct, "scenario_bsp_nav", &scenario_bsp_nav_struct_definition }, // #CUSTOM
+		{ _field_custom_long_block_index, "packedKeyOffaceref" },
+		{ _field_custom_long_block_index, "navMeshUIDOffaceref" },
 
 		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 1 },
 		{ _field_legacy, _field_long_block_index, "surface index" }, // assembly
