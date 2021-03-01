@@ -26,7 +26,10 @@ namespace macaque
 		{ _field_block, "volume avoidance hints", &user_hint_volume_avoidance_block },
 		{ _field_block, "spline hints", &user_hint_spline_block },
 		{ _field_block, "cookie cutters", &user_hint_cookie_cutter_block },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach }, // #NOTE assumed that reach has no navmesh support
 		{ _field_block, "navmesh areas", &user_hint_navmesh_area_block },
+
 		{ _field_block, "giant hints", &user_hint_giant_block },
 		{ _field_block, "flood hints", &user_hint_flood_block },
 		{ _field_terminator }
@@ -90,6 +93,7 @@ namespace macaque
 		TAG_MEMORY_ATTRIBUTES(MEMORY_ALLOCATION_NODE, TAG_MEMORY_USAGE_WRITEABLE),
 		USER_HINT_JUMP_BLOCK_ID)
 	{
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 7 },
 		{ _field_enum, "hint type", &hint_type_enum },
 		{ _field_short_block_index, "Squad group filter", &squad_groups_block },
 		{ _field_block, "hint vertices", FIELD_FLAG_READ_ONLY | FIELD_FLAG_UNKNOWN3, &hint_vertex_block },
@@ -97,6 +101,7 @@ namespace macaque
 		{ _field_short_integer, "hint data 1", FIELD_FLAG_READ_ONLY },
 		{ _field_byte_integer, "hint data 2", FIELD_FLAG_READ_ONLY },
 		{ _field_byte_integer, "pad1", FIELD_FLAG_READ_ONLY },
+
 		{ _field_word_flags, "Flags", &user_hint_geometry_flags },
 		{ _field_short_block_index, "geometry index", FIELD_FLAG_READ_ONLY, &user_hint_parallelogram_block },
 		{ _field_enum, "force jump height", &global_ai_jump_height_enum },
@@ -128,6 +133,7 @@ namespace macaque
 		TAG_MEMORY_ATTRIBUTES(MEMORY_ALLOCATION_NODE, TAG_MEMORY_USAGE_WRITEABLE),
 		USER_HINT_CLIMB_BLOCK_ID)
 	{
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 7 },
 		{ _field_enum, "hint type", &hint_type_enum },
 		{ _field_short_block_index, "Squad group filter", &squad_groups_block },
 		{ _field_block, "hint vertices", FIELD_FLAG_READ_ONLY | FIELD_FLAG_UNKNOWN3, &hint_vertex_block },
@@ -135,6 +141,7 @@ namespace macaque
 		{ _field_short_integer, "hint data 1", FIELD_FLAG_READ_ONLY },
 		{ _field_byte_integer, "hint data 2", FIELD_FLAG_READ_ONLY },
 		{ _field_byte_integer, "pad1", FIELD_FLAG_READ_ONLY },
+
 		{ _field_word_flags, "Flags", &user_hint_geometry_flags },
 		{ _field_short_block_index, "geometry index", FIELD_FLAG_READ_ONLY, &user_hint_line_segment_block },
 		{ _field_enum, "force hoist height", &forced_hoist_height_enum },
@@ -276,13 +283,20 @@ namespace macaque
 		TAG_MEMORY_ATTRIBUTES(MEMORY_ALLOCATION_NODE, TAG_MEMORY_USAGE_WRITEABLE | TAG_MEMORY_USAGE_NON_ALIASED),
 		USER_HINT_COOKIE_CUTTER_BLOCK_STRUCT_ID)
 	{
-		{ _field_long_integer, "hkaiVolume vtable", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data },
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 3 },
+		{ _field_pointer, "hkaiVolume vtable", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data },
 		{ _field_short_integer, "size", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY | FIELD_FLAG_UNKNOWN3 },
 		{ _field_short_integer, "count", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY | FIELD_FLAG_UNKNOWN3 },
+
 		{ _field_block, "points", &user_hint_sector_point_block },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_block, "pointsObjectIds", &hint_object_id_block },
+
 		{ _field_real, "z height" },
 		{ _field_real, "z sink" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 7 },
 		{ _field_enum, "type", &cookie_cutter_type_enum },
 		{ _field_short_integer, "pad", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY },
 		{ _field_long_integer, "runtimeObjectTransformOverrideIndex", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY | FIELD_FLAG_UNKNOWN3 },
@@ -290,6 +304,7 @@ namespace macaque
 		{ _field_char_integer, "pad2", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY },
 		{ _field_char_integer, "pad3", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY },
 		{ _field_char_integer, "pad4", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY },
+
 		{ _field_terminator }
 	};
 
@@ -335,7 +350,7 @@ namespace macaque
 		TAG_MEMORY_ATTRIBUTES(MEMORY_ALLOCATION_NODE, TAG_MEMORY_USAGE_WRITEABLE | TAG_MEMORY_USAGE_NON_ALIASED),
 		USER_HINT_NAVMESH_AREA_BLOCK_STRUCT_ID)
 	{
-		{ _field_long_integer, "hkaiVolume vtable", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data },
+		{ _field_pointer, "hkaiVolume vtable", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data },
 		{ _field_short_integer, "size", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY | FIELD_FLAG_UNKNOWN3 },
 		{ _field_short_integer, "count", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY | FIELD_FLAG_UNKNOWN3 },
 		{ _field_block, "points", &user_hint_sector_point_block },
