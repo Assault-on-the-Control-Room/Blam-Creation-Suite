@@ -107,16 +107,16 @@ namespace blofeld
 		{ _field_legacy, _field_real, "Reference plane height" },
 		{ _field_legacy, _field_custom, "Volume Fog" },
 		{ _field_legacy, _field_struct, "volume fog", &VolumeFogParametersDefinition_struct_definition },
+		{ _field_legacy, _field_custom },
 
 		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 3 },
-		{ _field_legacy, _field_custom },
 		{ _field_legacy, _field_custom, "Light Shafts" },
 		{ _field_legacy, _field_struct, "light shaft", &LightShaftParametersDefinition_struct_definition },
+		{ _field_legacy, _field_custom },
 
-		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 1 },
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
 		{ _field_legacy, _field_real, "unknown@" },
 
-		{ _field_legacy, _field_custom },
 		{ _field_legacy, _field_explanation, "Weather effect", "Effect tag to create nearby raindrops, snowflakes, etc.\nParticle systems from this effect will follow the camera and wrap seamlessly as you turn or move.\n\n" },
 		{ _field_legacy, _field_tag_reference, "Weather effect", &global_effect_reference },
 		{ _field_legacy, _field_terminator }

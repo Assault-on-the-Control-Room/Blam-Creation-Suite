@@ -30,6 +30,10 @@ namespace macaque
 		FIELD_PAD("ABCDEFGH", nullptr, FIELD_FLAG_NONE, 1),
 		FIELD_EXPLANATION("Ambient Fog Parameters", nullptr, FIELD_FLAG_NONE, "All heights are absolute world space height\n"),
 		{ _field_real, "distance bias", "negative means into the screen", "world units" },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_real, "unknown@" },
+
 		FIELD_CUSTOM("Sky Fog", nullptr, FIELD_FLAG_NONE, _field_id_field_group_begin),
 		{ _field_struct, "sky fog", &solo_fog_parameters_struct_definition },
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_field_group_end),
@@ -42,6 +46,8 @@ namespace macaque
 		FIELD_CUSTOM("Fog Light", nullptr, FIELD_FLAG_NONE, _field_id_field_group_begin),
 		{ _field_struct, "fog light", &fog_light_struct_definition },
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_field_group_end),
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 8 },
 		FIELD_EXPLANATION("Patchy Fog Per-Cluster Parameters", nullptr, FIELD_FLAG_NONE, "Sheet density.............Intensity scaling factor applied to all sheets\nFull intensity height.....Height above 0 below which fog should be at full intensity\nHalf intensity height.....Height at which fog should be attenuated to half intensity\nWind......................Direction and intensity of fog motion due to wind\n\n"),
 		{ _field_real, "Sheet density" },
 		{ _field_real_rgb_color, "Color tint" },
@@ -50,13 +56,20 @@ namespace macaque
 		{ _field_real, "Full intensity height" },
 		{ _field_real, "Half intensity height" },
 		{ _field_real_vector_3d, "Wind direction" },
+
 		{ _field_real, "Reference plane height" },
 		FIELD_CUSTOM("Volume Fog", nullptr, FIELD_FLAG_NONE, _field_id_field_group_begin),
 		{ _field_struct, "volume fog", &VolumeFogParametersDefinition },
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_field_group_end),
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 3 },
 		FIELD_CUSTOM("Light Shafts", nullptr, FIELD_FLAG_NONE, _field_id_field_group_begin),
 		{ _field_struct, "light shaft", &LightShaftParametersDefinition },
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_field_group_end),
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_real, "unknown@" },
+
 		FIELD_EXPLANATION("Weather effect", nullptr, FIELD_FLAG_NONE, "Effect tag to create nearby raindrops, snowflakes, etc.\nParticle systems from this effect will follow the camera and wrap seamlessly as you turn or move.\n\n"),
 		{ _field_tag_reference, "Weather effect", &global_effect_reference },
 		{ _field_terminator }
@@ -93,7 +106,10 @@ namespace macaque
 		{ _field_real, "fog falloff end", MAKE_OLD_NAMES("max fog distance") },
 		{ _field_real_rgb_color, "fog color" },
 		{ _field_real, "fog color intensity", "scales color up or down to allow for HDR values" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_block, "Function", &soloFogFunctionBlock_block },
+
 		{ _field_terminator }
 	};
 
