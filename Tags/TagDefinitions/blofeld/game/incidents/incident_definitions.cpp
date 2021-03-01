@@ -209,6 +209,7 @@ namespace blofeld
 		{ _field_legacy, _field_real, "shield recharge threshold:[0,1]" },
 		{ _field_legacy, _field_real, "maximum vengeance time:s" },
 		{ _field_legacy, _field_real, "lifesaver damage threshold:[0,2]" },
+
 		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 8 },
 		{ _field_legacy, _field_real, "avenger dead time:s" },
 		{ _field_legacy, _field_real, "hologram recently used maximum time:s" },

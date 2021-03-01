@@ -17,6 +17,7 @@ namespace macaque
 	constexpr unsigned long SUPPRESSEDINCIDENT_TAG = 'sigd';
 	extern s_tag_group SuppressedIncident_group; // SuppressedIncident_block
 
+	extern s_tag_struct_definition incident_global_properties_incident_definitions_block_struct;
 
 	extern s_tag_block_definition incident_global_properties_definition_block;
 	extern s_tag_block_definition SuppressedIncident_block;
