@@ -30,7 +30,10 @@ namespace macaque
 		{ _field_struct, "run time data", &model_animation_runtime_data_struct },
 		{ _field_block, "additional node data", &additional_node_data_block },
 		{ _field_block, "tag resource groups", &model_animation_tag_resource_group_block },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_struct, "codec data", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY, &animation_codec_data_struct },
+
 		{ _field_terminator }
 	};
 
@@ -60,8 +63,11 @@ namespace macaque
 		{ _field_tag_reference, "sound", FIELD_FLAG_INDEX, &global_sound_reference },
 		{ _field_word_flags, "flags", &key_event_flags_enum },
 		{ _field_word_flags, "internal_flags", FIELD_FLAG_UNKNOWN0, &key_event_internal_flags_enum },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_tag_reference, "model", "optional. only allow this event when used on this model", &model_reference$3 },
 		{ _field_string_id, "variant", "optional. only allow this event when used on this model variant" },
+
 		{ _field_terminator }
 	};
 
@@ -78,8 +84,11 @@ namespace macaque
 		{ _field_tag_reference, "effect", FIELD_FLAG_INDEX, &global_effect_reference },
 		{ _field_word_flags, "flags", &key_event_flags_enum },
 		{ _field_word_flags, "internal_flags", FIELD_FLAG_UNKNOWN0, &key_event_internal_flags_enum },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_tag_reference, "model", "optional. only allow this event when used on this model", &model_reference$3 },
 		{ _field_string_id, "variant", "optional. only allow this event when used on this model variant" },
+
 		{ _field_terminator }
 	};
 
@@ -99,7 +108,10 @@ namespace macaque
 		{ _field_block, "sound events", &animation_sound_event_block_extended_block },
 		{ _field_block, "effect events", &animation_effects_event_block_extended_block },
 		{ _field_block, "dialogue events", &animation_dialogue_event_block_extended_block },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_block, "script events", &animation_script_event_block_extended_block },
+
 		{ _field_terminator }
 	};
 
@@ -373,8 +385,11 @@ namespace macaque
 		{ _field_short_block_index, "next animation", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY, &animation_pool_block },
 		{ _field_word_flags, "production flags", &production_status_flags },
 		{ _field_short_block_index, "composite", FIELD_FLAG_READ_ONLY, &g_compositeTag_block },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		FIELD_EXPLANATION("PCA Group Link", nullptr, FIELD_FLAG_NONE, "If this animation contains PCA blend shape animation,\nprovide the name of the PCA Group to which it belongs.\nThese groups should be present in the PCA Groups block."),
 		{ _field_string_id, "pca group name" },
+
 		FIELD_EXPLANATION("Shared Animation Data", nullptr, FIELD_FLAG_NONE, "data which may be shared by one or more animations"),
 		{ _field_struct, "shared animation reference", FIELD_FLAG_UNKNOWN0, &shared_animation_reference_block },
 		{ _field_block, "shared animation data", &shared_model_animation_block },
@@ -391,22 +406,48 @@ namespace macaque
 		TAG_MEMORY_ATTRIBUTES(MEMORY_ALLOCATION_NODE, TAG_MEMORY_USAGE_READ_ONLY),
 		SHARED_MODEL_ANIMATION_BLOCK_ID)
 	{
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 2 },
+		{ _field_legacy, _field_pad, "pad", 1 },
 		{ _field_short_integer, "frame count", FIELD_FLAG_READ_ONLY },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
+		{ _field_short_integer, "frame count", FIELD_FLAG_READ_ONLY },
+
 		{ _field_byte_integer, "node count", FIELD_FLAG_READ_ONLY },
+
 		{ _field_char_enum, "animation type", FIELD_FLAG_READ_ONLY, &animation_type_enum },
 		{ _field_char_enum, "frame info type", FIELD_FLAG_READ_ONLY, &frame_info_type_enum },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_char_enum, "desired frame info type", FIELD_FLAG_READ_ONLY, &frame_info_type_enum },
+
 		{ _field_char_enum, "desired compression", &compression_settings },
 		{ _field_char_enum, "current compression", FIELD_FLAG_READ_ONLY, &compression_settings },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_word_flags, "production flags", &production_status_flags },
+
 		{ _field_word_flags, "internal flags", FIELD_FLAG_READ_ONLY, &internal_animation_flags },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_short_integer, "compressor_version", FIELD_FLAG_READ_ONLY },
+
 		{ _field_long_integer, "uid", FIELD_FLAG_READ_ONLY },
 		{ _field_string_id, "shared id", FIELD_FLAG_READ_ONLY },
 		{ _field_long_integer, "node list checksum", FIELD_FLAG_READ_ONLY },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 3 },
+		{ _field_legacy, _field_long_integer, "production checksum" }, // unknown
+		{ _field_legacy, _field_short_integer, "unknown" },
+		{ _field_legacy, _field_short_integer, "unknown" },
+
 		{ _field_short_integer, "resource_group", FIELD_FLAG_READ_ONLY },
 		{ _field_short_integer, "resource_group_member", FIELD_FLAG_READ_ONLY },
 		{ _field_real_vector_3d, "heading", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_real, "heading angle", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY },
+
 		{ _field_real, "average translation magnitude", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY },
 		{ _field_real, "average pivot yaw", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY },
 		FIELD_EXPLANATION("a", nullptr, FIELD_FLAG_UNKNOWN0, "IMPORTANT NOTES ABOUT FRAME EVENTS\n1) The following four fields (hidden except in expert mode) are legacy Halo3-style tag blocks.\n2) New frame events (attached to animations in Maya) will automagically be exported to\n   the frame_event_list any time a model sidecar is imported with the tool import command.\n3) Do not add new frame events, fx events, audio events, or dialog events here.  Instead,\n   please use the frame_event_list tag referenced in \'imported events\' (it\'s right above the\n   \'animations\' tag block).\n4) The only time you should be editing the following hidden fields is to remove legacy\n   frame events that have been replaced by events generated in Maya.\n"),
@@ -414,7 +455,10 @@ namespace macaque
 		{ _field_block, "sound events", "Legacy field - please edit in new frame event tag below", &animation_sound_event_block },
 		{ _field_block, "effect events", "Legacy field - please edit in new frame event tag below", &animation_effect_event_block },
 		{ _field_block, "dialogue events", "Legacy field - please edit in new frame event tag below", &animation_dialogue_event_block },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_block, "script events", "Legacy field - please edit in new frame event tag below", &animation_script_event_block },
+
 		FIELD_EXPLANATION("b", nullptr, FIELD_FLAG_UNKNOWN0, ""),
 		{ _field_block, "object-space parent nodes", &object_space_node_data_block },
 		{ _field_block, "foot tracking", &foot_tracking_block },
@@ -1194,6 +1238,8 @@ namespace macaque
 		{ _field_real_vector_3d, "start facing", FIELD_FLAG_READ_ONLY },
 		{ _field_real_point_3d, "end offset", FIELD_FLAG_READ_ONLY },
 		{ _field_real, "time_until_hurt", FIELD_FLAG_READ_ONLY },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_real_point_3d, "apex offset", FIELD_FLAG_READ_ONLY },
 		{ _field_terminator }
 	};
@@ -1291,7 +1337,10 @@ namespace macaque
 		{ _field_block, "node map", FIELD_FLAG_READ_ONLY, &inherited_animation_node_map_block },
 		{ _field_block, "node map flags", FIELD_FLAG_READ_ONLY, &inherited_animation_node_map_flag_block },
 		{ _field_long_integer, "inheritance_flags", FIELD_FLAG_READ_ONLY },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_real, "uniform translation scale", FIELD_FLAG_READ_ONLY },
+
 		{ _field_terminator }
 	};
 
@@ -1500,9 +1549,12 @@ namespace macaque
 		{ _field_short_integer, "animation codec pack", FIELD_FLAG_READ_ONLY },
 		{ _field_enum, "force compression setting", FIELD_FLAG_READ_ONLY, &compression_force_settings },
 		{ _field_word_flags, "misc graph flags", &animation_graph_misc_flags },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 3 },
 		{ _field_long_integer, "skeleton checksum" },
 		{ _field_long_integer, "skeleton checksum lite" },
 		{ _field_tag_reference, "imported events", &global_frame_event_list_reference },
+
 		{ _field_block, "node usage", FIELD_FLAG_READ_ONLY, &animation_usage_block },
 		{ _field_block, "node masks", &animation_node_mask_block },
 		{ _field_block, "functions", &animation_function_block },
@@ -1512,6 +1564,10 @@ namespace macaque
 		{ _field_block, "effect references", "Legacy field - please edit in new frame event tag below", &animation_graph_effect_reference_block },
 		{ _field_block, "blend screens", "Legacy field - please edit in NEW blend screens tag below", &animation_blend_screen_block },
 		{ _field_block, "foot markers", &foot_tracking_member_block },
+
+		{ _field_legacy, _field_version_equal, _engine_type_haloreach },
+		{ _field_tag_reference, "imported events", &global_frame_event_list_reference },
+
 		{ _field_block, "animations", FIELD_FLAG_READ_ONLY, &animation_pool_block, _field_id_wide },
 		{ _field_block, "NEW blend screens", &new_animation_blend_screen_block },
 		{ _field_block, "NEW function overlays", &new_animation_function_overlay_block },
@@ -1521,8 +1577,11 @@ namespace macaque
 		{ _field_block, "ik data", &animation_ik_block },
 		{ _field_block, "ik sets", &animation_ik_set_block },
 		{ _field_block, "ik chains", &animation_ik_chain_block },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_block, "composites", &g_compositeTag_block },
 		{ _field_struct, "pca data", &PCAAnimationDataStruct },
+
 		{ _field_terminator }
 	};
 
