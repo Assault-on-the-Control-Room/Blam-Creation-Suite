@@ -11,6 +11,8 @@ namespace macaque
 	extern s_tag_block_definition model_block;
 	extern s_tag_struct_definition model; // model_block
 
+	extern s_tag_struct_definition model_object_data_block_struct;
+	extern s_tag_block_definition model_object_data_block_block;
 
 	extern s_tag_block_definition model_variant_block;
 	extern s_tag_struct_definition model_variant_block_struct_definition; // model_variant_block
