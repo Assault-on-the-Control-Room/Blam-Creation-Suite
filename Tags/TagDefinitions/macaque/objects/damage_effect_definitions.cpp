@@ -60,50 +60,84 @@ namespace macaque
 		TAG_MEMORY_ATTRIBUTES(MEMORY_ALLOCATION_NODE, TAG_MEMORY_USAGE_READ_ONLY),
 		DAMAGE_EFFECT_STRUCT_DEFINITION_ID)
 	{
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_tag_reference, "area of effect behavior equipment", "if a reference is here, area of effect damage will attach the equipment to the target", &behavior_object_reference },
+
 		{ _field_real_bounds, "radius", nullptr, "world units" },
 		{ _field_real_fraction, "cutoff scale", nullptr, nullptr, "[0,1]" },
 		{ _field_long_flags, "effect flags", &damage_effect_flags },
 		FIELD_EXPLANATION("damage", nullptr, FIELD_FLAG_NONE, ""),
 		{ _field_enum, "side effect", &damage_side_effects },
 		{ _field_enum, "category", &damage_categories },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_long_enum, "death vocalization", &damage_death_vocalizations },
+
 		{ _field_long_flags, "flags", &damage_flags },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_long_flags, "secondary flags", &damageSecondaryFlags },
 		{ _field_real, "headshot damage multiplier", "ignored if zero or if headshot flag is not set above; \notherwise, makes headshot not instantly lethal, but multiplies damage done to head by this much.  \n2 does 2x damage to head for headshot.  note that head still has different health than body." },
+
 		{ _field_real, "AOE core radius", "if >0 then higher fidelity obstruction collision checks are preformed. This field has no other ramifications.", "world units" },
 		{ _field_real, "damage lower bound" },
 		{ _field_real_bounds, "damage upper bound" },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_struct, "damage falloff function", &scalar_function_named_struct },
+
 		{ _field_angle, "dmg inner cone angle" },
+
+		{ _field_legacy, _field_version_less, _engine_type_haloreach },
+		{ _field_legacy, _field_angle, "dmg inner cone angle" },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_struct, "blah", &damage_outer_cone_angle_struct },
+
 		{ _field_real, "active camouflage damage", "how much more visible this damage makes a player who is active camouflaged", nullptr, "[0,1]" },
 		{ _field_real, "stun", "amount of stun added to damaged unit", nullptr, "[0,1]" },
 		{ _field_real, "maximum stun", "damaged unit's stun will never exceed this amount", nullptr, "[0,1]" },
 		{ _field_real, "stun time", "duration of stun due to this damage", "seconds" },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_long_integer, "damage stun", "how long we stun recovering current body damage", "ticks" },
+
 		{ _field_real, "instantaneous acceleration", nullptr, nullptr, "[0,+inf]" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_real, "alt instantaneous acceleration", "This field can be used for an alternative acceleration if the corresponding flags are set, e.g. check vehicle->flags.vehicle wants reduced weapon impulse when airborne", nullptr, "[0,+inf]" },
 		{ _field_real, "acceleration cap", "set to zero to disable cap" },
+
 		{ _field_useless_pad, "" },
 		{ _field_useless_pad, "" },
 		FIELD_EXPLANATION("DEPRECATED - rider damage scales", nullptr, FIELD_FLAG_NONE, ""),
 		{ _field_real, "rider direct damage scale" },
 		{ _field_real, "rider maximum transfer damage scale" },
 		{ _field_real, "rider minimum transfer damage scale" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_real, "vehicle damage multiplier" },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_real_fraction, "soft ping pain screen scale", "The maximum amount to apply the pain screen pose overlay", nullptr, "[0,1]" },
+
 		{ _field_useless_pad, "" },
 		{ _field_string_id, "general_damage" },
 		{ _field_string_id, "specific_damage" },
+
+		{ _field_legacy, _field_version_less, _engine_type_haloreach },
 		{ _field_block, "custom response labels", &custom_damage_response_label_block },
+
 		{ _field_real, "AI stun radius", nullptr, "world units" },
 		{ _field_real_bounds, "AI stun bounds", nullptr, "(0-1)" },
 		{ _field_real, "shake radius" },
 		{ _field_real, "EMP radius" },
 		{ _field_real, "aoe spike radius" },
 		{ _field_real, "aoe spike damage bump" },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_real, "shield render effects scale" },
+
 		{ _field_long_integer, "stasis time", "duration of stasis due to this damage, zero disables", "ticks" },
 		{ _field_real, "stasis time dilation" },
 		{ _field_real, "stasis max biped turning rate" },
@@ -121,11 +155,17 @@ namespace macaque
 		FIELD_EXPLANATION("Modifies TOL logic so that (above) unstun will only happen if (below) minimum stun time has passed", nullptr, FIELD_FLAG_NONE, ""),
 		{ _field_real, "shield minimum stun time", nullptr, "seconds" },
 		{ _field_real, "health minimum stun time", nullptr, "seconds" },
+
+		// reach moved a bunch of this into its own tag
 		FIELD_EXPLANATION("damage response", nullptr, FIELD_FLAG_NONE, ""),
 		{ _field_tag_reference, "damage response", &global_damage_response_definition_reference },
+
 		FIELD_EXPLANATION("sound", nullptr, FIELD_FLAG_NONE, ""),
 		{ _field_tag_reference, "old melee sound", MAKE_OLD_NAMES("sound"), &global_sound_reference },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_block, "damage sounds", &damage_effect_sound_block },
+
 		{ _field_useless_pad, "" },
 		FIELD_EXPLANATION("breaking effect", nullptr, FIELD_FLAG_NONE, "Controls particle velocities when a damage effect shatters a materal.\n\nAll particles created within \'forward radius\' will be kicked along the\ndamage direction with a speed equivalent to \'forward velocity\' at the\nepicenter of the damage and 0 at the outer radius.  \'Forward exponent\'\nis used to modify the velocity scale.  A low exponent (like 0.5) means that\nparticles between the epicenter and the radius will be kicked out with a speed\ncloser to \'forward velocity\' than if a higher exponent (like 2.0) was used\n\nThe outward fields work in a similar way, except instead of kicking along the\ndamage direction, they get kick away from the damage epicenter."),
 		{ _field_real, "forward velocity", nullptr, "world units per second" },
