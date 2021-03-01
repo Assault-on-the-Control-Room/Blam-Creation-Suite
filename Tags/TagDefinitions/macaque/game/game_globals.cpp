@@ -139,6 +139,19 @@ namespace macaque
 		{ _field_terminator }
 	};
 
+	TAG_REFERENCE(haloreach_unknown_globals_reference);
+
+	V5_TAG_BLOCK(grenade_globals_block, k_grenade_globals_count)
+	{
+		{ _field_legacy, _field_short_integer, "maximum count" },
+		{ _field_legacy, _field_pad, "pad@", 2 },
+		{ _field_legacy, _field_real, "unknown" },
+		{ _field_legacy, _field_tag_reference, "throwing effect", &global_effect_reference },
+		{ _field_legacy, _field_tag_reference, "equipment", &global_equipment_reference },
+		{ _field_legacy, _field_tag_reference, "projectile", &projectile_reference },
+		{ _field_legacy, _field_terminator }
+	};
+
 	#define GLOBALS_STRUCT_DEFINITION_ID { 0x08DE77CB, 0xA2CF4145, 0xBB807A30, 0xB2A866B3 }
 	TAG_STRUCT(
 		globals_struct_definition,
@@ -157,6 +170,10 @@ namespace macaque
 		{ _field_block, "DEPRECATED", MAKE_OLD_NAMES("ai globals"), FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY, &ai_globals_data_block, _field_id_slap },
 		{ _field_tag_reference, "ai globals ref", &ai_globals_reference },
 		{ _field_block, "damage table", &game_globals_damage_block },
+
+		{ _field_legacy, _field_version_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_tag_reference, "unknown@", &haloreach_unknown_globals_reference },
+
 		{ _field_block, "sounds", &sound_block$2_block },
 		{ _field_block, "camera", &camera_block },
 		{ _field_block, "controller input", &controller_input_block },
@@ -164,7 +181,14 @@ namespace macaque
 		{ _field_block, "default player traits", &game_engine_player_traits_block },
 		{ _field_block, "difficulty", &difficulty_block },
 		{ _field_block, "co-op difficulty", &coop_difficulty_block },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_block, "grenades", &grenade_globals_block_block },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },// probably an unused tagblock
 		{ _field_block, "soft ceilings", &soft_ceiling_globals_block },
+			// #TODO: definitions yeah this is fucking wrong
+		{ _field_legacy, _field_pad, "pad", 4 * 3 },
 		{ _field_block, "interface tags", &interface_tag_references_block },
 		{ _field_block, "@weapon list (update _weapon_list enum in game_globals.h)", &cheat_weapons_block },
 		{ _field_block, "@cheat powerups", &cheat_powerups_block },
@@ -179,16 +203,28 @@ namespace macaque
 		FIELD_CUSTOM("Elite specular colors", nullptr, FIELD_FLAG_NONE, _field_id_field_group_begin),
 		{ _field_struct, "elite specular color", &elite_specular_color_struct },
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_field_group_end),
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_tag_reference, "forge globals", &forge_globals_reference },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_block, "forge globals", &forge_color_block },
+
 		{ _field_tag_reference, "game engine globals", &game_engine_globals_reference },
 		{ _field_tag_reference, "multiplayer globals", &multiplayer_globals_reference },
 		{ _field_tag_reference, "survival_mode globals", &survival_mode_globals_reference },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_tag_reference, "firefight globals", &firefight_globals_reference },
+
 		{ _field_tag_reference, "global multiplayer object type list", &global_multiplayer_object_type_list_reference },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 4 },
 		{ _field_tag_reference, "custom app globals", &global_custom_app_globals_reference },
 		{ _field_tag_reference, "grenades", &Tag::Reference<struct GameGlobalsGrenadeList>::s_defaultDefinition },
 		{ _field_tag_reference, "ordnances", &Tag::Reference<struct GameGlobalsOrdnance>::s_defaultDefinition },
 		{ _field_tag_reference, "silent assist", &Tag::Reference<struct SilentAssistGlobals>::s_defaultDefinition },
+
 		{ _field_block, "cinematics globals", &cinematics_globals_block },
 		{ _field_block, "campaign metagame globals", &campaign_metagame_globals_block },
 		{ _field_tag_reference, "game medal globals", &game_medal_globals_reference },
@@ -205,6 +241,8 @@ namespace macaque
 		{ _field_struct, "language pack11", FIELD_FLAG_UNKNOWN0, &language_pack_definition },
 		{ _field_struct, "language pack12", FIELD_FLAG_UNKNOWN0, &language_pack_definition },
 		{ _field_struct, "language pack13", FIELD_FLAG_UNKNOWN0, &language_pack_definition },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 5 },
 		{ _field_struct, "language pack14", FIELD_FLAG_UNKNOWN0, &language_pack_definition },
 		{ _field_struct, "language pack15", FIELD_FLAG_UNKNOWN0, &language_pack_definition },
 		{ _field_struct, "language pack16", FIELD_FLAG_UNKNOWN0, &language_pack_definition },
@@ -231,7 +269,10 @@ namespace macaque
 		{ _field_block, "active camo", &active_camo_globals_block },
 		{ _field_tag_reference, "incident global properties", &incident_global_properties_definition_reference },
 		{ _field_tag_reference, "player grade globals", &player_grade_globals_definition_reference },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_tag_reference, "enlistment globals", &player_enlistment_globals_definition_reference },
+
 		{ _field_tag_reference, "player model customization globals", &global_player_model_customization_globals_reference },
 		{ _field_tag_reference, "loadout globals", &global_loadout_globals_reference },
 		{ _field_tag_reference, "challenge globals", &challenge_globals_definition_reference },
@@ -239,13 +280,22 @@ namespace macaque
 		{ _field_tag_reference, "game achievements", &achievements_reference },
 		{ _field_tag_reference, "game avatar awards", &avatar_awards_reference },
 		{ _field_tag_reference, "game performance thortles default", &game_performance_throttle_reference },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_tag_reference, "armormod globals", &armormod_globals_reference },
 		{ _field_tag_reference, "progression globals", &global_progression_reference },
+
 		{ _field_block, "garbage collection", &garbage_collection_block, _field_id_slap },
 		{ _field_block, "camera impulse", &global_camera_impulse_block },
 		{ _field_block, "runtime materials", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY, &runtime_materials_block },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_block, "Hologram Lighting", &hologramLightingGlobalsBlock_block },
 		{ _field_tag_reference, "Narrative globals", &NarrativeGlobalsReference },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_long_integer, "unknown@" },
+
 		{ _field_terminator }
 	};
 

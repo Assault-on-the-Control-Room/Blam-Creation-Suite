@@ -91,6 +91,7 @@ namespace blofeld
 
 		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },// probably an unused tagblock
 		{ _field_legacy, _field_block, "soft ceilings", &soft_ceiling_globals_block_block },
+
 		{ _field_legacy, _field_pad, "pad", 4 * 3 },
 		{ _field_legacy, _field_block, "interface tags", &interface_tag_references_block },
 		{ _field_legacy, _field_block, "@weapon list (update _weapon_list enum in game_globals.h)", &cheat_weapons_block_block },

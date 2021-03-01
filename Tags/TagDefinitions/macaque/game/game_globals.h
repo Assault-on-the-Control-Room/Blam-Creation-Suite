@@ -30,6 +30,9 @@ namespace macaque
 	extern s_tag_block_definition visor_color_block;
 	extern s_tag_struct_definition visor_color_block_struct_definition; // visor_color_block
 
+	extern s_tag_struct_definition grenade_globals_block_block_struct;
+	extern s_tag_block_definition grenade_globals_block_block;
+
 	extern s_tag_struct_definition globals_struct_definition; // tag group
 	extern s_tag_struct_definition patch_globals_struct_definition; // tag group
 	extern s_tag_struct_definition elite_specular_color_struct;
