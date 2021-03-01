@@ -24,9 +24,12 @@ namespace macaque
 		{ _field_real, "Broken constraints", nullptr, "seconds" },
 		{ _field_real, "Dead unit", nullptr, "seconds" },
 		{ _field_real, "Dead player", nullptr, "seconds" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 3 }, // #NOTE: Chose this point to shorten struct simply becaues all data appears to be zero
 		{ _field_real, "Dead MP Player", nullptr, "seconds" },
 		{ _field_real, "Dead MP Player overloaded", nullptr, "seconds" },
 		{ _field_long_integer, "Max dead body count ", "above this number, overloaded mp time is used to garbage collect dead bodies" },
+
 		{ _field_terminator }
 	};
 
