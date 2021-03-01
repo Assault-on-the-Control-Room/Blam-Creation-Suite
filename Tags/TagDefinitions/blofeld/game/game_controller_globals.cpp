@@ -82,9 +82,9 @@ namespace blofeld
 		{ _field_legacy, _field_real, "throw throwing max time:s#how long you can take to throw the stick to pegged on the other side" },
 		{ _field_legacy, _field_real, "flick peg jump max time:s#max time you can be pegged and then press jump to activate" },
 		{ _field_legacy, _field_real, "double tap interval time:s#to engage double-tap, user must press jump twice in this much time" },
-		{ _field_legacy, _field_explanation, "Jump Assist", "" },
 
-		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 54 },
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 55 },
+		{ _field_legacy, _field_explanation, "Jump Assist", "" },
 		{ _field_legacy, _field_real, "vault_speed_gain" },
 		{ _field_legacy, _field_real, "vaultSprint_speed_gain" },
 		{ _field_legacy, _field_real, "vault_height_high" },
