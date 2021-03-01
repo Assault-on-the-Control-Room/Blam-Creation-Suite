@@ -6,7 +6,7 @@ namespace blofeld
 
 	V5_TAG_GROUP(polyart_asset, POLYART_ASSET_TAG)
 	{
-		{ _field_legacy, _field_byte_flags, "runtime flags*!", &g_polyartAssetStateFlags },
+		{ _field_legacy, _field_char_enum, "runtime flags*!", &g_polyartAssetStateFlags }, // old _field_byte_flags
 		{ _field_legacy, _field_char_enum, "Polyart vertex type", &PolyartVertexFormatTypeEnum },
 		{ _field_legacy, _field_char_integer, "uvSet index" },
 		{ _field_legacy, _field_pad, "MERP", 1 },
