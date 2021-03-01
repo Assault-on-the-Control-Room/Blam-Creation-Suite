@@ -15,7 +15,7 @@ namespace blofeld
 
 	extern s_tag_group render_model_lightmap_atlas_group;
 
-	extern s_tag_struct_definition render_model_unknown_struct_unknown_block_block_struct;
+	//extern s_tag_struct_definition render_model_unknown_struct_unknown_block_block_struct;
 	extern s_tag_struct_definition render_model_unknown_sky_struct2_struct_definition;
 	extern s_tag_struct_definition render_model_unknown_struct_struct_definition;
 

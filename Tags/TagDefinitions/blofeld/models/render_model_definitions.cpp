@@ -7,12 +7,6 @@ namespace blofeld
 	V5_TAG_GROUP_FROM_BLOCK(imposter_model, IMPOSTER_MODEL_TAG, imposter_model_block_block );
 
 
-
-	V5_TAG_BLOCK(render_model_unknown_struct_unknown_block, 65536)
-	{
-		{ _field_legacy, _field_terminator }
-	};
-
 	V5_TAG_STRUCT(render_model_unknown_sky_struct2)
 	{
 		{ _field_legacy, _field_real, "unknown" }, 
@@ -36,7 +30,7 @@ namespace blofeld
 
 	V5_TAG_STRUCT(render_model_unknown_struct)
 	{
-		{ _field_legacy, _field_block, "sky light unknown", &render_model_unknown_struct_unknown_block_block },
+		{ _field_legacy, _field_block, "sky light unknown", &g_null_block_block },
 		{ _field_legacy, _field_struct, "sh sky red", &render_model_unknown_sky_struct2_struct_definition },
 		{ _field_legacy, _field_struct, "sh sky green", &render_model_unknown_sky_struct2_struct_definition },
 		{ _field_legacy, _field_struct, "sh sky blue", &render_model_unknown_sky_struct2_struct_definition },
