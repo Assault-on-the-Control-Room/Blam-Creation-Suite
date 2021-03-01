@@ -37,8 +37,11 @@ namespace macaque
 		{ _field_string_id, "hs script" },
 		{ _field_short_integer, "internal hs script index", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY | FIELD_FLAG_UNKNOWN3 },
 		FIELD_PAD("VHSLKJNE", nullptr, FIELD_FLAG_NONE, 2),
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_block, "fanfare", &specialized_incident_fanfare_block },
 		{ _field_tag_reference, "sound response", &sound_incident_response_group_reference },
+
 		{ _field_terminator }
 	};
 
