@@ -126,6 +126,9 @@ namespace macaque
 		{ _field_string_id, "specific_damage" },
 
 		{ _field_legacy, _field_version_less, _engine_type_haloreach },
+		{ _field_legacy, _field_string_id, "custom response label" },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_block, "custom response labels", &custom_damage_response_label_block },
 
 		{ _field_real, "AI stun radius", nullptr, "world units" },
@@ -138,6 +141,7 @@ namespace macaque
 		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_real, "shield render effects scale" },
 
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 17 },
 		{ _field_long_integer, "stasis time", "duration of stasis due to this damage, zero disables", "ticks" },
 		{ _field_real, "stasis time dilation" },
 		{ _field_real, "stasis max biped turning rate" },
