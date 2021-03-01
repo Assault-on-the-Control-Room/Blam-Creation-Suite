@@ -29,7 +29,10 @@ namespace blofeld
 	V5_TAG_BLOCK(squad_patrol_waypoint_block, k_max_squad_patrol_waypoints_per_transition)
 	{
 		{ _field_legacy, _field_real_point_3d, "position" },
-		{ _field_legacy, _field_struct, "scenario_bsp_nav", &scenario_bsp_nav_struct_definition }, // #CUSTOM
+		//{ _field_legacy, _field_struct, "scenario_bsp_nav", &scenario_bsp_nav_struct_definition }, // #CUSTOM
+		{ _field_custom_long_block_index, "packedKeyOffaceref" },
+		{ _field_custom_long_block_index, "navMeshUIDOffaceref" },
+
 		{ _field_legacy, _field_terminator }
 	};
 
