@@ -74,22 +74,34 @@ namespace macaque
 		{ _field_tag_reference, "primary weapon", &weapon_reference$5 },
 		{ _field_short_integer, "primaryrounds loaded", "-1 = weapon default" },
 		{ _field_short_integer, "primaryrounds total", "-1 = weapon default" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_real, "primaryage remaining", "0.0 = default, 1.0 = full" },
+
 		{ _field_tag_reference, "secondary weapon", &weapon_reference$5 },
 		{ _field_short_integer, "secondaryrounds loaded", "-1 = weapon default" },
 		{ _field_short_integer, "secondaryrounds total", "-1 = weapon default" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_real, "secondaryage remaining", "0.0 = default, 1.0 = full" },
+
 		{ _field_char_integer, "starting fragmentation grenade count" },
 		{ _field_char_integer, "starting plasma grenade count" },
 		{ _field_char_integer, "starting grenade 3 count" },
 		{ _field_char_integer, "starting grenade 4 count" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 4 },
 		{ _field_char_integer, "starting grenade 5 count" },
 		{ _field_char_integer, "starting grenade 6 count" },
 		{ _field_char_integer, "starting grenade 7 count" },
 		{ _field_char_integer, "starting grenade 8 count" },
+
 		{ _field_tag_reference, "starting equipment", &equipment_reference$2 },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_string_id, "starting tactical package" },
 		{ _field_string_id, "starting support upgrade" },
+
 		{ _field_short_block_index, "editor folder", FIELD_FLAG_UNKNOWN0, &g_scenario_editor_folder_block, _field_id_hide },
 		FIELD_PAD("AHDVHJE", nullptr, FIELD_FLAG_NONE, 2),
 		{ _field_terminator }
@@ -316,17 +328,31 @@ namespace macaque
 	{
 		{ _field_tag_reference, "structure bsp", FIELD_FLAG_INDEX, &structure_bsp_reference_non_resolving },
 		{ _field_tag_reference, "local structure bsp", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY | FIELD_FLAG_INDEX, &structure_bsp_reference_non_resolving },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_tag_reference, "structure bsp lighting^*!", &structure_lighting_bsp_reference },
+
 		{ _field_tag_reference, "structure metadata", FIELD_FLAG_READ_ONLY, &Tag::Reference<struct StructureMetadata>::s_defaultDefinition },
 		FIELD_EXPLANATION("Size Class", nullptr, FIELD_FLAG_NONE, "Tells lightmapper desired res for structure bitmaps.\nNumbers in parens are final sizes after compression"),
 		{ _field_long_enum, "size class", &scenario_structure_size_enum },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_long_enum, "refinement size class", &scenario_structure_refinement_size_enum },
+
 		{ _field_real, "hacky ambient min luminance" },
 		{ _field_real, "direct/draft ambient min luminance" },
 		{ _field_real, "structure vertex sink", "this is the most that we can sink a soft surface link snow in the structure_bsp via vertex painting." },
+
 		{ _field_word_flags, "flags", &scenario_structure_bsp_reference_flags_definition },
 		{ _field_short_block_index, "default sky", &scenario_sky_reference_block },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_real, "unknown@" },
+
 		{ _field_tag_reference, "bsp specific cubemap", &scenario_cubemap_bitmap_reference },
 		{ _field_tag_reference, "wind", &global_wind_reference },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 10 },
 		{ _field_tag_reference, "authored light probe", &AuthoredLightProbeReference },
 		{ _field_tag_reference, "vehicle authored light probe", &AuthoredLightProbeReference },
 		{ _field_real, "max shadow count scale", "scale up or down the max number of shadows as set in the throttle tag per bsp" },
@@ -337,6 +363,7 @@ namespace macaque
 		FIELD_CUSTOM("floating shadows", nullptr, FIELD_FLAG_NONE, _field_id_field_group_begin),
 		{ _field_struct, "floating shadow settings", &scenarioFloatingShadowSettingsStruct },
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_field_group_end),
+
 		FIELD_EXPLANATION("Clones", nullptr, FIELD_FLAG_NONE, "Describes which other bsps are physical \'clones\' of this bsp\nThis is used to determine how to attach \'position-only\' elements, like decorators, to the bsps:\nEach clone gets a separate copy of decorators that are in both.\nNon-cloned bsps cannot split decorators this way - the decorator will be given to the lowest numbered bsp\n"),
 		{ _field_long_block_flags, "cloned bsp flags", &scenario_structure_bsp_reference_block },
 		{ _field_struct, "lightmap setting", MAKE_OLD_NAMES("lightmap resolution buckets"), &scenario_lightmap_setting_struct },
@@ -360,8 +387,14 @@ namespace macaque
 		{ _field_real, "cloud direction", "cloud movement direction, 0-360 degree" },
 		{ _field_tag_reference, "cloud texture", "red channel is used", &global_bitmap_reference },
 		{ _field_short_block_index, "name", FIELD_FLAG_INDEX, &scenario_object_names_block, _field_id_name },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_word_block_flags, "active on bsps!" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		FIELD_PAD("post-name-pad", nullptr, FIELD_FLAG_NONE, 2),
 		{ _field_long_block_flags, "active on bsps", FIELD_FLAG_UNKNOWN0, &scenario_structure_bsp_reference_block },
+
 		{ _field_terminator }
 	};
 
@@ -457,6 +490,18 @@ namespace macaque
 		{ _field_terminator }
 	};
 
+	V5_TAG_BLOCK(cluster_sky_index_block, 65536)
+	{
+		{ _field_legacy, _field_char_block_index, "sky index" },
+		{ _field_legacy, _field_terminator }
+	};
+
+	V5_TAG_BLOCK(scenario_zone_set_bsp_pvs_unknown_block, 65536)
+	{
+		{ _field_legacy, _field_long_integer, "unknown" },
+		{ _field_legacy, _field_terminator }
+	};
+
 	#define SCENARIO_ZONE_SET_BSP_PVS_BLOCK_ID { 0xFF83875C, 0xA9F04229, 0xA769E3B0, 0xE36AB1A8 }
 	TAG_BLOCK(
 		scenario_zone_set_bsp_pvs_block,
@@ -469,6 +514,12 @@ namespace macaque
 	{
 		{ _field_block, "cluster pvs", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY, &scenario_zone_set_cluster_pvs_block },
 		{ _field_block, "cluster pvs doors closed", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY, &scenario_zone_set_cluster_pvs_block },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 3 },
+		{ _field_legacy, _field_block, "sky index", &cluster_sky_index_block_block },
+		{ _field_legacy, _field_block, "visible sky index", &cluster_sky_index_block_block },
+		{ _field_legacy, _field_block, "unknown", &scenario_zone_set_bsp_pvs_unknown_block_block },
+
 		{ _field_block, "bsp cluster mapings", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY, &scenario_zone_set_bsp_seam_cluster_mappings_block },
 		{ _field_terminator }
 	};
@@ -563,13 +614,18 @@ namespace macaque
 		{ _field_long_block_flags, "bsp zone flags", &scenario_structure_bsp_reference_block },
 		{ _field_long_block_flags, "structure design zone flags", &scenario_design_reference_block },
 		{ _field_long_block_flags, "runtime bsp zone flags", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY, &scenario_structure_bsp_reference_block },
-		{ _field_long_block_flags, "sruntime tructure design zone flags", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY, &scenario_design_reference_block },
-		{ _field_long_block_flags, "required designer zones", MAKE_OLD_NAMES("designer zone flags"), &scenario_designer_zone_block, _field_id_block_flags_32bit },
-		{ _field_qword_integer, "runtime designer zone flags", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY },
+		{ _field_long_block_flags, "sruntime tructure design zone flags", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY, &scenario_design_reference_block }, // dear person at 343 or Bungie, you originally named this field "sruntime tructure design zone flags" and I think you're stupid
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
+		{ _field_long_block_flags, "required designer zones", MAKE_OLD_NAMES("designer zone flags"), &scenario_designer_zone_block, _field_id_block_flags_32bit }, // #TODO: Research this. Not entirely what what flags are here or removed???
+
+		{ _field_qword_integer, "runtime designer zone flags", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY }, // could this just be 32bit in reach instead?
 		{ _field_long_block_flags, "cinematic zones", &scenario_cinematics_block },
 		{ _field_long_block_index, "hint previous zone set", &scenario_zone_set_block },
 		{ _field_long_block_index, "audibility index", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY, &game_audibility_block },
 		{ _field_block, "planar fog visibility", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY, &planar_fog_zone_set_visibility_definition_block },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 8 },
 		{ _field_block, "budget overrides", &scenario_zone_set_budget_override_block },
 		{ _field_tag_reference, "streaming_reference_tag", &streamingzoneset_reference },
 		{ _field_real_point_3d, "world bounds min", "Physics world will include this min point" },
@@ -578,6 +634,7 @@ namespace macaque
 		{ _field_tag_reference, "cinematic soundbank", "only for cinematics. If you try to use this for anything else without talking to me, i will stab you in the face", &global_soundbank_reference },
 		{ _field_real_rgb_color, "sky clear color", "linear color, must check override flag above to use" },
 		FIELD_PAD("pad4", nullptr, FIELD_FLAG_NONE, 4),
+
 		{ _field_terminator }
 	};
 
@@ -796,8 +853,11 @@ namespace macaque
 		SCENARIO_PLAYERS_BLOCK_ID)
 	{
 		{ _field_real_point_3d, "position" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_custom_long_block_index, "packedKeyOffaceref", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_UNKNOWN3 },
 		{ _field_custom_long_block_index, "navMeshUIDOffaceref", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_UNKNOWN3 },
+
 		{ _field_angle, "facing", nullptr, "degrees" },
 		{ _field_angle, "pitch", nullptr, "degrees" },
 		{ _field_short_integer, "insertion point index" },
@@ -930,13 +990,22 @@ namespace macaque
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_filter),
 		{ _field_short_block_index, "decal palette index", &scenario_decal_palette_block },
 		{ _field_byte_flags, "flags", &decal_placement_flags },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_char_integer, "unknown" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		FIELD_PAD("post-decal-palette-index-pad", nullptr, FIELD_FLAG_NONE, 1),
 		{ _field_struct, "manual bsp flags", FIELD_FLAG_READ_ONLY, &manualBspFlagsReferences },
+
 		{ _field_real_quaternion, "rotation", FIELD_FLAG_READ_ONLY },
 		{ _field_real_point_3d, "position", FIELD_FLAG_READ_ONLY },
 		{ _field_real, "scale x", MAKE_OLD_NAMES("scale") },
 		{ _field_real, "scale y" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_real, "cull angle" },
+
 		{ _field_terminator }
 	};
 
@@ -951,7 +1020,10 @@ namespace macaque
 		SCENARIO_DECAL_PALETTE_BLOCK_ID)
 	{
 		{ _field_tag_reference, "reference", FIELD_FLAG_INDEX, &decal_system_reference },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_long_integer, "max static bucket size", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY },
+
 		{ _field_terminator }
 	};
 
@@ -983,10 +1055,97 @@ namespace macaque
 		FIELD_PAD("MMNGQBXC", nullptr, FIELD_FLAG_NONE, 4),
 		{ _field_string_id, "name", FIELD_FLAG_INDEX },
 		{ _field_real_point_3d, "position" },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_real_euler_angles_2d, "facing" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_real_euler_angles_3d, "facing" },
+
 		{ _field_short_block_index, "editor folder", FIELD_FLAG_UNKNOWN0, &g_scenario_editor_folder_block, _field_id_hide },
 		{ _field_short_block_index, "source bsp", FIELD_FLAG_READ_ONLY, &scenario_structure_bsp_reference_block },
 		{ _field_terminator }
+	};
+
+	V5_TAG_BLOCK(scenario_unknown, 65536) // CUSTOM
+	{
+		{ _field_legacy, _field_real, "unknown" },
+		{ _field_legacy, _field_real, "unknown" },
+		{ _field_legacy, _field_real, "unknown" },
+		{ _field_legacy, _field_short_integer, "unknown" },
+		{ _field_legacy, _field_short_integer, "unknown" },
+		{ _field_legacy, _field_short_integer, "unknown" },
+		{ _field_legacy, _field_real, "unknown" },
+		{ _field_legacy, _field_real, "unknown" },
+		{ _field_legacy, _field_terminator }
+	};
+
+	TAG_REFERENCE(scenario_resources_reference_block_reference);
+
+	V5_TAG_BLOCK(scenario_resources_reference_block, NUMBER_OF_SCENARIO_RESOURCE_TYPES)
+	{
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_halo2 },
+		{ _field_legacy, _field_tag_reference, "reference*", &scenario_resources_reference_block_reference },
+
+		{ _field_legacy, _field_version_greater, _engine_type_halo2, 21 },
+		{ _field_legacy, _field_tag_reference, "scenery reference", &scenario_resources_reference_block_reference },
+		{ _field_legacy, _field_tag_reference, "bipeds reference", &scenario_resources_reference_block_reference },
+		{ _field_legacy, _field_tag_reference, "vehicles reference", &scenario_resources_reference_block_reference },
+		{ _field_legacy, _field_tag_reference, "equipment reference", &scenario_resources_reference_block_reference },
+		{ _field_legacy, _field_tag_reference, "weapons reference", &scenario_resources_reference_block_reference },
+		{ _field_legacy, _field_tag_reference, "sound scenery reference", &scenario_resources_reference_block_reference },
+		{ _field_legacy, _field_tag_reference, "lights reference", &scenario_resources_reference_block_reference },
+		{ _field_legacy, _field_tag_reference, "devices reference", &scenario_resources_reference_block_reference },
+		{ _field_legacy, _field_tag_reference, "effect scenery reference", &scenario_resources_reference_block_reference },
+		{ _field_legacy, _field_tag_reference, "decals reference", &scenario_resources_reference_block_reference },
+		{ _field_legacy, _field_tag_reference, "cinematics reference", &scenario_resources_reference_block_reference },
+		{ _field_legacy, _field_tag_reference, "trigger volumes reference", &scenario_resources_reference_block_reference },
+		{ _field_legacy, _field_tag_reference, "cluster data reference", &scenario_resources_reference_block_reference },
+		{ _field_legacy, _field_tag_reference, "comments reference", &scenario_resources_reference_block_reference },
+		{ _field_legacy, _field_tag_reference, "creature reference", &scenario_resources_reference_block_reference },
+		{ _field_legacy, _field_tag_reference, "structure lighing reference", &scenario_resources_reference_block_reference },
+		{ _field_legacy, _field_tag_reference, "decorators reference", &scenario_resources_reference_block_reference },
+		{ _field_legacy, _field_tag_reference, "sky references reference", &scenario_resources_reference_block_reference },
+		{ _field_legacy, _field_tag_reference, "cubemap reference", &scenario_resources_reference_block_reference },
+		{ _field_legacy, _field_tag_reference, "performances reference", &scenario_resources_reference_block_reference },
+		{ _field_legacy, _field_tag_reference, "dumplings reference", &scenario_resources_reference_block_reference },
+
+		{ _field_legacy, _field_terminator }
+	};
+
+	TAG_REFERENCE(scenario_hs_source_reference_block_block_reference, HSC_TAG);
+
+	V5_TAG_BLOCK(scenario_hs_source_reference_block, k_maximum_hs_source_files_per_scenario)
+	{
+		{ _field_legacy, _field_tag_reference, "reference*", & scenario_hs_source_reference_block_block_reference },
+		{ _field_legacy, _field_terminator }
+	};
+
+	TAG_REFERENCE(scenario_ai_resource_reference_block_reference);
+
+	V5_TAG_BLOCK(scenario_ai_resource_reference_block, k_number_of_scenario_ai_types)
+	{
+		{ _field_legacy, _field_tag_reference, "reference*", & scenario_ai_resource_reference_block_reference },
+		{ _field_legacy, _field_terminator }
+	};
+
+	V5_TAG_BLOCK(scenario_resources_block, 1)
+	{
+		{ _field_legacy, _field_version_greater, _engine_type_halo2, 2 },
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 1 },
+		{ _field_legacy, _field_long_integer, "unknown" },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_halo2 },
+		{ _field_legacy, _field_block, "references*", &scenario_resources_reference_block_block },
+
+		{ _field_legacy, _field_block, "Script Source*", &scenario_hs_source_reference_block_block },
+		{ _field_legacy, _field_block, "AI Resources*", &scenario_ai_resource_reference_block_block },
+
+		{ _field_legacy, _field_version_greater, _engine_type_halo2, 2 },
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 1 },
+		{ _field_legacy, _field_block, "references*", &scenario_resources_reference_block_block },
+
+		{ _field_legacy, _field_terminator }
 	};
 
 	#define SCENARIO_CUTSCENE_CAMERA_POINT_BLOCK_ID { 0xC38639D4, 0x24BA4407, 0xB58BCDD4, 0xF728D8DC }
@@ -1006,10 +1165,13 @@ namespace macaque
 		FIELD_PAD("pad", nullptr, FIELD_FLAG_NONE, 4),
 		{ _field_real_point_3d, "position" },
 		{ _field_real_euler_angles_3d, "orientation" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 4 },
 		{ _field_short_block_index, "zone set", &scenario_zone_set_block },
 		FIELD_PAD("padd", nullptr, FIELD_FLAG_NONE, 2),
 		{ _field_useless_pad, "" },
 		{ _field_useless_pad, "" },
+
 		{ _field_terminator }
 	};
 
@@ -1470,6 +1632,26 @@ namespace macaque
 		{ _field_terminator }
 	};
 
+	V5_TAG_BLOCK(scenario_structured_buffer_interops_block, 1)
+	{
+		{ _field_legacy, _field_api_interop, "effect", & structured_buffer_struct_definition },
+		{ _field_legacy, _field_api_interop, "beam", &structured_buffer_struct_definition },
+		{ _field_legacy, _field_api_interop, "contrail", &structured_buffer_struct_definition },
+		{ _field_legacy, _field_api_interop, "light volume", &structured_buffer_struct_definition },
+		{ _field_legacy, _field_terminator }
+	};
+
+	V5_TAG_BLOCK(scenario_unknown_object_reference, 65536) // CUSTOM
+	{
+		{ _field_legacy, _field_struct, "object ID*!", & scenario_object_id_struct_struct_definition },
+		{ _field_legacy, _field_char_integer, "unknown" }, // index?
+		{ _field_legacy, _field_pad, "pad", 1 },
+		{ _field_legacy, _field_short_integer, "unknown" },
+		{ _field_legacy, _field_short_integer, "unknown" },
+		{ _field_legacy, _field_short_integer, "unknown" },
+		{ _field_legacy, _field_terminator }
+	};
+
 	#define SCENARIO_STRUCT_DEFINITION_ID { 0xEFAE882E, 0x0DC94D1D, 0xA358CB6A, 0x34875D40 }
 	TAG_STRUCT(
 		scenario_struct_definition,
@@ -1480,7 +1662,9 @@ namespace macaque
 		TAG_MEMORY_ATTRIBUTES(MEMORY_ALLOCATION_NODE, TAG_MEMORY_USAGE_WRITEABLE),
 		SCENARIO_STRUCT_DEFINITION_ID)
 	{
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_block, "child scenarios", &scenario_child_references_block },
+
 		FIELD_CUSTOM("link to scenario lightmap", nullptr, FIELD_FLAG_NONE, _field_id_unknown_compile),
 		{ _field_enum, "type", &scenario_type_enum },
 		{ _field_word_flags, "flags", &scenario_flags },
@@ -1488,12 +1672,15 @@ namespace macaque
 		{ _field_long_integer, "campaign id" },
 		{ _field_long_integer, "map id" },
 		{ _field_string_id, "map name", "Used to associate external resources with this map - e.g. PDA camera setting block names." },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 6 },
 		{ _field_tag_reference, "Scenario sound bank", "Scenario-specific sound bank.", &global_soundbank_reference },
 		{ _field_tag_reference, "Scenario sound bank Number 2", "Another scenario-specific sound bank. All will be loaded.", &global_soundbank_reference },
 		{ _field_tag_reference, "Scenario sound bank Number 3", "Another scenario-specific sound bank. All will be loaded.", &global_soundbank_reference },
 		{ _field_tag_reference, "Scenario sound bank Number 4", "Another scenario-specific sound bank. All will be loaded.", &global_soundbank_reference },
 		{ _field_string_id, "Inside reverb name", "This reverb will be used for inside areas when the listener is outside." },
 		{ _field_long_integer, "Inside reverb hash ID", FIELD_FLAG_UNKNOWN0 },
+
 		{ _field_short_integer, "sound permutation mission id" },
 		FIELD_PAD("pad", nullptr, FIELD_FLAG_NONE, 2),
 		{ _field_long_integer, "minimum structure bsp importer version", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY },
@@ -1536,8 +1723,11 @@ namespace macaque
 		{ _field_block, "terminal palette", &scenario_terminal_palette_block, _field_id_sort },
 		{ _field_block, "controls", &scenario_control_block },
 		{ _field_block, "control palette", &scenario_control_palette_block, _field_id_sort },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_block, "dispensers", &ScenarioDispenserBlock_block },
 		{ _field_block, "dispenser palette", &ScenarioDispenserPaletteBlock_block, _field_id_sort },
+
 		{ _field_block, "sound scenery", &scenario_sound_scenery_block },
 		{ _field_block, "sound scenery palette", &scenario_sound_scenery_palette_block, _field_id_sort },
 		{ _field_block, "giants", &scenario_giant_block },
@@ -1546,15 +1736,23 @@ namespace macaque
 		{ _field_block, "effect scenery palette", &scenario_effect_scenery_palette_block, _field_id_sort },
 		{ _field_block, "spawners", &scenario_spawner_block },
 		{ _field_block, "spawner palette", &scenario_spawner_palette_block, _field_id_sort },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 4 },
 		{ _field_block, "bink palette", &binkPaletteBlock_block, _field_id_sort },
 		{ _field_block, "scenario attached effects", &scenarioAttachedEffectsBlock_block },
 		{ _field_block, "scenario attached lens flares", &scenarioAttachedLensFlaresBlock_block },
 		{ _field_block, "scenario attached light cones", &scenarioAttachedLightConesBlock_block },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
 		{ _field_block, "map variant palettes", &map_variant_palette_block },
+
 		{ _field_tag_reference, "multiplayer object types", &global_multiplayer_object_type_list_reference },
 		{ _field_char_enum, "multiplayer map size", &multiplayer_map_size_enum },
 		FIELD_PAD("mulmapsizepad", nullptr, FIELD_FLAG_NONE, 3),
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_block, "Playtest req palette", "requisition for SvE, activated via an init.txt option for playtest balance", &scenario_requisition_palette_block, _field_id_sort },
+
 		{ _field_real, "player requisition frequency", nullptr, "seconds" },
 		{ _field_long_integer, "initial game currency", nullptr, "SpaceBucks" },
 		{ _field_block, "soft ceilings", &scenario_soft_ceilings_block },
@@ -1570,12 +1768,28 @@ namespace macaque
 		{ _field_block, "named location volumes", &scenario_named_location_volume_block },
 		FIELD_EXPLANATION("SPAWN INFLUENCE OVERRIDES", nullptr, FIELD_FLAG_NONE, "You can use the following to override multiplayer global spawn influencers for the scenario.  Default settings are defined in multiplayer/multiplayer_globals.multiplayer_globals."),
 		{ _field_tag_reference, "Spawn Settings", &g_spawnSettingsReference },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 10 },
+		{ _field_legacy, _field_block, "unknown@", &g_null_block_block }, // assumed
+		{ _field_legacy, _field_block, "unknown", &scenario_unknown_block },
+		{ _field_legacy, _field_block, "unknown", &scenario_unknown_block },
+		{ _field_legacy, _field_block, "unknown", &scenario_unknown_block },
+		{ _field_legacy, _field_block, "unknown", &scenario_unknown_block },
+		{ _field_legacy, _field_block, "unknown@", &g_null_block }, // assumed
+		{ _field_legacy, _field_block, "unknown@", &g_null_block }, // assumed
+		{ _field_legacy, _field_block, "unknown@", &g_null_block }, // assumed
+		{ _field_legacy, _field_block, "unknown@", &g_null_block }, // assumed
+		{ _field_legacy, _field_block, "unknown@", &g_null_block }, // assumed
+
 		FIELD_EXPLANATION("RENDER FLUFF", nullptr, FIELD_FLAG_NONE, "Pretty"),
 		{ _field_block, "decals", &scenario_decals_block },
 		{ _field_block, "decal palette", &scenario_decal_palette_block, _field_id_sort },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 3 },
 		{ _field_long_integer, "largest zoneset static decal memory size", "this is memory for the largest possible zoneset - default (0) is 2048", "kilobytes" },
 		{ _field_data, "static decal memory data", FIELD_FLAG_READ_ONLY },
 		{ _field_real, "decal depth bias override (USE WITH CAUTION)", "you should not need to do this -- this is for a mission with strange collision geo" },
+
 		{ _field_block, "detail object collection palette", &scenario_detail_object_collection_palette_block },
 		{ _field_block, "style pallette", &style_palette_block, _field_id_sort },
 		{ _field_block, "squad groups", &squad_groups_block },
@@ -1587,26 +1801,53 @@ namespace macaque
 		{ _field_block, "quick cues", &ai_quick_cue_block },
 		{ _field_block, "mission scenes", &ai_scene_block },
 		{ _field_block, "character palette", &character_palette_block, _field_id_sort },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_tag_reference, "ai pathfinding data", &Tag::Reference<struct ai_pathfinding>::s_defaultDefinition },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_block, "unknown@", &g_null_block_block }, // assumed
+
 		{ _field_block, "ai user hint data", &user_hint_block },
 		{ _field_block, "ai recording references", &ai_recording_reference_block },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 5 },
+		{ _field_legacy, _field_data, "script data" },
+		{ _field_legacy, _field_block, "scripts*", &hs_scripts_block },
+		{ _field_legacy, _field_block, "globals*", &hs_globals_block },
+		{ _field_legacy, _field_block, "references*", &hs_references_block },
+		{ _field_legacy, _field_block, "unknown@", &g_null_block }, // assumed
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 3 },
 		{ _field_struct, "script data", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY, &hs_script_data_struct },
 		{ _field_block, "manual script file references", &hs_source_reference_block },
 		{ _field_tag_reference, "compiled global scripts", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY, &Tag::Reference<struct HSScriptContainer>::s_defaultDefinition },
+
 		{ _field_block, "scripting data", &cs_script_data_block },
 		{ _field_block, "cutscene flags", &scenario_cutscene_flag_block },
 		{ _field_block, "cutscene camera points", &scenario_cutscene_camera_point_block },
 		{ _field_block, "cutscene titles", &scenario_cutscene_title_block },
 		{ _field_tag_reference, "custom object names", &global_multilingual_unicode_string_list_reference },
 		{ _field_tag_reference, "chapter title text", &global_multilingual_unicode_string_list_reference },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 2 },
+		{ _field_legacy, _field_block, "scenario resources", &scenario_resources_block_block },
+		{ _field_legacy, _field_block, "hs unit seats!", &hs_unit_seat_block }, // gets moved into the new h4 tag group iirc
+
 		{ _field_block, "scenario kill triggers", &scenario_kill_trigger_volumes_block },
 		{ _field_block, "scenario safe zone triggers", &scenario_safe_zone_trigger_volumes_block },
 		{ _field_block, "scenario trigger volumes mopp code", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY, &trigger_volume_mopp_code_block },
 		{ _field_block, "scenario requisition triggers", &scenario_requisition_trigger_volumes_block },
 		{ _field_block, "scenario location name triggers", &scenario_location_name_trigger_volumes_block },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_block, "hs syntax datums", &hs_syntax_datum_block },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 3 },
 		{ _field_block, "scenario unsafe spawn trigger volumes", &scenarioUnsafeSpawnZoneTriggerVolumesBlock_block },
 		{ _field_short_block_index, "scenario ordnance bounds trigger volume", &scenario_trigger_volume_block },
 		FIELD_PAD("ordnandy", nullptr, FIELD_FLAG_NONE, 2),
+
 		{ _field_block, "Orders", &orders_block },
 		{ _field_block, "Triggers", &triggers_block },
 		{ _field_block, "acoustics palette", MAKE_OLD_NAMES("background sound palette"), &scenario_acoustics_palette_block_definition_block, _field_id_sort },
@@ -1622,32 +1863,61 @@ namespace macaque
 		{ _field_block, "flock palette", &flock_palette_block, _field_id_sort },
 		{ _field_block, "flocks", &flock_instance_block },
 		{ _field_tag_reference, "subtitles", &global_multilingual_unicode_string_list_reference },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 1 },
 		{ _field_block, "soundSubtitles", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY, &SoundSubtitleBlock_block },
+
 		{ _field_block, "creatures", &scenario_creature_block },
 		{ _field_block, "creature palette", &scenario_creature_palette_block, _field_id_sort },
 		{ _field_block, "big battle creature palette", &big_battle_creature_palette_block, _field_id_sort },
 		{ _field_block, "editor folders", FIELD_FLAG_UNKNOWN0, &g_scenario_editor_folder_block },
 		{ _field_tag_reference, "game engine strings", &global_multilingual_unicode_string_list_reference },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		FIELD_PAD("QVUC", nullptr, FIELD_FLAG_NONE, 8),
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		FIELD_PAD("QVUC", nullptr, FIELD_FLAG_NONE, 4),
+
 		{ _field_block, "mission dialogue", &ai_scenario_mission_dialogue_block },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_tag_reference, "voiceover", &Tag::Reference<struct MainMenuVoiceover>::s_defaultDefinition },
+
 		{ _field_tag_reference, "objectives", &global_multilingual_unicode_string_list_reference },
 		{ _field_tag_reference, "interpolators", &global_scenario_interpolator_reference },
 		{ _field_block, "shared references", &hs_references_block },
 		{ _field_tag_reference, "camera effects", &global_camera_fx_settings_reference },
 		{ _field_tag_reference, "global screen effect", "ignores the falloff curves", &global_area_screen_effect_reference },
 		{ _field_tag_reference, "global ssao", &global_ssao_definition_reference },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_tag_reference, "sky atmosphere parameters", &global_sky_atmosphere_definition_reference },
+
 		{ _field_tag_reference, "atmosphere globals", "settings that apply to the entire scenario", &global_atmosphere_globals_reference },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_tag_reference, "global lighting", &global_chocolate_mountain_reference },
+
 		{ _field_tag_reference, "new lightmaps", &scenario_lightmap_reference },
 		{ _field_tag_reference, "performance throttles", &global_performance_throttles_reference },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_block, "scenario unknown object", &scenario_unknown_object_reference_block }, // #TODO: ai related? (see ObjectReferenceFrames in tagtool for more information)
+
 		{ _field_block, "ai objectives", &objectives_block },
 		{ _field_block, "designer zones", &scenario_designer_zone_block },
 		{ _field_block, "zone debugger", FIELD_FLAG_UNKNOWN0, &scenario_zone_debugger_block_definition_block },
 		{ _field_block, "decorators", &scenario_decorator_block },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach, 2 },
 		{ _field_block, "neuticle palette", &scenario_cheap_particle_system_palette_block },
 		{ _field_block, "neuticles", &scenario_cheap_particle_systems_block },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		FIELD_EXPLANATION("Scriptable Light Rigs", nullptr, FIELD_FLAG_NONE, ""),
 		{ _field_block, "scriptable light rigs", &scriptableLightRigBlock_block },
+
 		{ _field_block, "cinematics", &scenario_cinematics_block },
 		{ _field_block, "cinematic lighting palette", &scenario_cinematic_lighting_palette_block },
 		{ _field_block, "override player representations", &player_representation_block },
@@ -1658,13 +1928,21 @@ namespace macaque
 		{ _field_block, "budget references", &scenario_budget_references_block },
 		{ _field_block, "model references", FIELD_FLAG_READ_ONLY, &model_references_block },
 		{ _field_block, "thespian", MAKE_OLD_NAMES("performances"), &scenario_performances_block },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_block, "puppetShows", &PuppetShowsBlock_block },
+
 		{ _field_tag_reference, "location name globals", &global_location_name_globals_reference },
 		FIELD_EXPLANATION("garbage collection", nullptr, FIELD_FLAG_NONE, "specify zero for values that should use the data in the globals tag."),
 		{ _field_block, "garbage collection", &garbage_collection_block, _field_id_slap },
 		{ _field_tag_reference, "hud screen reference", "appears for the player through the scenario", &Tag::Reference<struct CuiScreenDefinition>::s_defaultDefinition },
 		{ _field_tag_reference, "required resources", &scenario_required_resource_reference },
 		{ _field_tag_reference, "variant globals", &variant_globals_reference },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 1 },
+		{ _field_legacy, _field_block, "structured buffer interops", &scenario_structured_buffer_interops_block_block },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 21 },
 		{ _field_tag_reference, "ordnance map bitmap", &global_bitmap_reference },
 		{ _field_real_fraction_bounds, "ordnance map depth bounds" },
 		FIELD_EXPLANATION("Random ordnance", nullptr, FIELD_FLAG_NONE, "Drops randomly selected set of ordnance at positions marked by drop_point objects."),
@@ -1686,6 +1964,7 @@ namespace macaque
 		{ _field_tag_reference, "Scenario Ordnance List", &Tag::Reference<struct ScenarioOrdnance>::s_defaultDefinition },
 		{ _field_block, "Unit Recordings", &ScenarioUnitRecordingBlock_block },
 		{ _field_block, "Exit load screen", "for non-mainmenu, we always use the first one", &loadScreenReferenceBlock_block },
+
 		{ _field_terminator }
 	};
 
@@ -1797,8 +2076,11 @@ namespace macaque
 		{ _field_real_vector_3d, "forward", FIELD_FLAG_UNKNOWN0 },
 		{ _field_real_vector_3d, "up", FIELD_FLAG_UNKNOWN0 },
 		{ _field_real_point_3d, "position" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_custom_long_block_index, "packedKeyOffaceref", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_UNKNOWN3 },
 		{ _field_custom_long_block_index, "navMeshUIDOffaceref", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_UNKNOWN3 },
+
 		{ _field_real_point_3d, "extents" },
 		{ _field_real, "z sink", "this is only valid for sector type trigger volumes" },
 		{ _field_block, "sector points", &trigger_volume_point_block },
