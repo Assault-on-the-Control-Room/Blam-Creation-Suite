@@ -17,6 +17,9 @@ namespace macaque
 	constexpr unsigned long RENDER_MODEL_LIGHTMAP_ATLAS_TAG = 'rmla';
 	extern s_tag_group render_model_lightmap_atlas_group; // render_model_lightmap_atlas_block
 
+	extern s_tag_struct_definition render_model_unknown_struct_unknown_block_block_struct;
+	extern s_tag_struct_definition render_model_unknown_sky_struct2_struct_definition;
+	extern s_tag_struct_definition render_model_unknown_struct_struct_definition;
 
 	extern s_tag_block_definition imposter_model_block;
 	extern s_tag_block_definition render_model_lightmap_atlas_block;
