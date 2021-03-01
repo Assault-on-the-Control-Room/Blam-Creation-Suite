@@ -28,8 +28,15 @@ namespace macaque
 		{ _field_real, "easing in time", "seconds" },
 		{ _field_real, "easing out time", "seconds" },
 		{ _field_tag_reference, "transition settings", &cinematic_transition_reference },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_pad, "PADDING@", 32 },
+
 		{ _field_tag_reference, "bink movie", &bink_reference },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_string, "bink movie on disc" },
+
 		FIELD_CUSTOM("Header", nullptr, FIELD_FLAG_NONE, _field_id_field_group_begin),
 		{ _field_struct, "header", &cinematic_custom_script_block },
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_field_group_end),
@@ -122,7 +129,10 @@ namespace macaque
 		CINEMATIC_SCENE_REFERENCE_BLOCK_ID)
 	{
 		{ _field_tag_reference, "scene", &cinematic_scene_reference },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_tag_reference, "data", &cinematic_scene_data_reference },
+
 		{ _field_terminator }
 	};
 
@@ -151,12 +161,28 @@ namespace macaque
 		CINEMATIC_SCENE_OBJECT_BLOCK_STRUCT_ID)
 	{
 		{ _field_string_id, "name", FIELD_FLAG_READ_ONLY | FIELD_FLAG_INDEX },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 1 }, // from H4 cisd tag
+		{ _field_legacy, _field_string_id, "identifier*" },
+
 		{ _field_string_id, "variant name" },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 2 }, // from H4 cisd tag
+		{ _field_legacy, _field_tag_reference, "model animation graph*", &global_animation_graph_reference },
+		{ _field_legacy, _field_tag_reference, "object type*", &scene_object_attachment_block_attachment_type_reference },
+
 		{ _field_long_flags, "flags", &scene_object_flags },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 2 }, // from H4 cisd tag
+		{ _field_legacy, _field_custom, "shots active flags*" },
+		{ _field_legacy, _field_array, "shots active flags*", &g_cinematicShotFlagArray_array },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 4 },
 		FIELD_CUSTOM("lightmap shadow flags", nullptr, FIELD_FLAG_NONE, _field_id_cinematic_scene_flags),
 		{ _field_array, "lightmap shadow flags", &g_cinematicShotFlagArray_array, _field_id_cinematic_scene_flags },
 		FIELD_CUSTOM("high res flags", nullptr, FIELD_FLAG_NONE, _field_id_cinematic_scene_flags),
 		{ _field_array, "high res flags", &g_cinematicShotFlagArray_array, _field_id_cinematic_scene_flags },
+
 		{ _field_long_flags, "override creation flags", &cinematic_coop_type_flags },
 		FIELD_EXPLANATION("Custom override creation condition", nullptr, FIELD_FLAG_NONE, "Used in combination with the override creation flags above"),
 		{ _field_struct, "custom don't create condition", &cinematic_custom_script_block },
@@ -207,22 +233,51 @@ namespace macaque
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_field_group_end),
 		FIELD_CUSTOM("Settings", nullptr, FIELD_FLAG_NONE, _field_id_field_group_begin),
 		{ _field_long_flags, "settings flags", &sceneShotSettingsFlags },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_real, "Lightmap Direct Scalar" },
 		{ _field_real, "Lightmap Indirect Scalar" },
+
 		{ _field_real, "Sun Scalar" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 3 },
 		{ _field_tag_reference, "Atmosphere Fog", &global_atmosphere_definition_reference },
 		{ _field_tag_reference, "Camera Effects", &global_camera_fx_settings_reference },
 		{ _field_tag_reference, "Cubemap", &global_bitmap_reference },
+
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_field_group_end),
 		{ _field_block, "lighting", &cinematic_shot_lighting_block, _field_id_slap },
 		{ _field_block, "clip", &cinematic_shot_clip_block, _field_id_slap },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },// from H4 cisd
+		{ _field_legacy, _field_block, "dialogue", &cinematic_shot_dialogue_block },
+
 		{ _field_block, "music", &cinematic_shot_music_block, _field_id_slap },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },// from H4 cisd
+		{ _field_legacy, _field_block, "effects", &cinematic_shot_effect_block },
+
 		{ _field_block, "object functions", &cinematic_shot_object_function_block, _field_id_slap },
 		{ _field_block, "screen effects", &cinematic_shot_screen_effect_block, _field_id_slap },
+
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 1 },// from H4 cisd
+		{ _field_legacy, _field_block, "custom script", &cinematic_shot_custom_script_block },
+
 		{ _field_block, "user input constraints", &cinematic_shot_user_input_constraints_block, _field_id_slap },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_block, "texture movies", &cinematicShotTextureMovieBlock_block, _field_id_slap },
+
 		FIELD_CUSTOM("Footer", nullptr, FIELD_FLAG_NONE, _field_id_field_group_begin),
 		{ _field_struct, "footer", &cinematic_custom_script_block },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 4 },// from H4 cisd
+		{ _field_legacy, _field_long_integer, "frame count*" },
+		{ _field_legacy, _field_block, "frame data*", &cinematic_shot_frame_block },
+		{ _field_legacy, _field_block, "dynamic frame data*!", &cinematic_shot_frame_dynamic_block },
+		{ _field_legacy, _field_block, "constant frame data*!", &cinematic_shot_frame_constant_block },
+
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_field_group_end),
 		{ _field_terminator }
 	};
@@ -345,8 +400,11 @@ namespace macaque
 		{ _field_long_integer, "frame", _field_id_cinematic_frame_index },
 		FIELD_CUSTOM("stop frame", nullptr, FIELD_FLAG_NONE, _field_id_cinematic_frame_index),
 		{ _field_long_integer, "stop frame", _field_id_cinematic_frame_index },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_byte_flags, "flags", &cinematicShotScreenEffectFlags },
 		FIELD_PAD("BLAHWWW", nullptr, FIELD_FLAG_NONE, 3),
+
 		{ _field_terminator }
 	};
 
@@ -462,7 +520,10 @@ namespace macaque
 		{ _field_char_enum, "state", &sceneShotEffectState },
 		FIELD_PAD("CMVOIRLKSD", nullptr, FIELD_FLAG_NONE, 2),
 		{ _field_tag_reference, "effect", &global_effect_reference },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_real, "size scale" },
+
 		FIELD_CUSTOM("frame", nullptr, FIELD_FLAG_NONE, _field_id_cinematic_frame_index),
 		{ _field_long_integer, "frame", _field_id_cinematic_frame_index },
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_marker),
@@ -470,8 +531,11 @@ namespace macaque
 		{ _field_long_block_index, "marker parent", &cinematicSceneDataObjectBlock_block },
 		{ _field_string_id, "function a" },
 		{ _field_string_id, "function b" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_long_integer, "node id", FIELD_FLAG_UNKNOWN0 },
 		{ _field_long_integer, "sequence id", FIELD_FLAG_UNKNOWN0 },
+
 		{ _field_terminator }
 	};
 
@@ -677,7 +741,15 @@ namespace macaque
 		{ _field_real_fraction_bounds, "subtitle rect height", "0=default, 0.5=center of the screen" },
 		{ _field_real_rgb_color, "default subtitle color" },
 		{ _field_real_rgb_color, "default subtitle shadow color" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_block, "cinematic characters", &cinematic_characters_block },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 3 }, // possibly cinematic characters but unused
+		{ _field_legacy, _field_long_integer, "unknown@" },
+		{ _field_legacy, _field_long_integer, "unknown@" },
+		{ _field_legacy, _field_long_integer, "unknown@" },
+
 		{ _field_terminator }
 	};
 
@@ -748,15 +820,28 @@ namespace macaque
 		{ _field_string_id, "anchor" },
 		{ _field_enum, "reset object lighting", &scene_reset_object_lighting_enum },
 		FIELD_PAD("pad", nullptr, FIELD_FLAG_NONE, 2),
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_tag_reference, "data", FIELD_FLAG_READ_ONLY, &cinematic_scene_data_reference },
+
 		FIELD_CUSTOM("Header", nullptr, FIELD_FLAG_NONE, _field_id_field_group_begin),
 		{ _field_struct, "header", &cinematic_custom_script_block },
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_field_group_end),
 		{ _field_block, "objects", FIELD_FLAG_READ_ONLY, &cinematic_scene_object_block, _field_id_slap },
 		{ _field_block, "shots", &cinematic_shot_block },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_block, "lights", &cinematicStructureLightingBlock_block, _field_id_slap },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_block, "extra camera frame data", FIELD_FLAG_READ_ONLY, &cinematic_shot_extra_camera_block, _field_id_slap },
+
 		FIELD_CUSTOM("Footer", nullptr, FIELD_FLAG_NONE, _field_id_field_group_begin),
 		{ _field_struct, "footer", &cinematic_custom_script_block },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_long_integer, "version*" },
+
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_field_group_end),
 		{ _field_terminator }
 	};
@@ -790,7 +875,10 @@ namespace macaque
 		{ _field_long_block_flags, "scenes", FIELD_FLAG_UNKNOWN0, &cinematic_scene_reference_block },
 		{ _field_long_block_flags, "scenes expanded", FIELD_FLAG_UNKNOWN0, &cinematic_scene_reference_block },
 		{ _field_block, "shots", FIELD_FLAG_UNKNOWN0, &cinematic_shot_playback_data_block },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 1 },
 		{ _field_long_integer, "bsp zone flags", FIELD_FLAG_UNKNOWN0 },
+
 		{ _field_terminator }
 	};
 
@@ -803,7 +891,9 @@ namespace macaque
 		TAG_MEMORY_ATTRIBUTES(MEMORY_ALLOCATION_DEFAULT, TAG_MEMORY_USAGE_READ_ONLY),
 		SCENARIO_AND_ZONE_SET_STRUCT_ID)
 	{
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach }, //why?
 		FIELD_CUSTOM("custom ui", nullptr, FIELD_FLAG_NONE, _field_id_scenario_zone_set_index),
+
 		{ _field_tag_reference, "scenario", FIELD_FLAG_UNKNOWN0, &scenario_reference },
 		{ _field_long_integer, "zone set", FIELD_FLAG_UNKNOWN0 },
 		{ _field_terminator }
@@ -883,9 +973,15 @@ namespace macaque
 		{ _field_real, "near focal plane distance", FIELD_FLAG_READ_ONLY },
 		{ _field_real, "far focal plane distance", FIELD_FLAG_READ_ONLY },
 		{ _field_real, "near focal depth", FIELD_FLAG_READ_ONLY },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_real, "far focal depth", FIELD_FLAG_READ_ONLY },
+
 		{ _field_real, "near blur amount", FIELD_FLAG_READ_ONLY },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_real, "far blur amount", FIELD_FLAG_READ_ONLY },
+
 		{ _field_terminator }
 	};
 
