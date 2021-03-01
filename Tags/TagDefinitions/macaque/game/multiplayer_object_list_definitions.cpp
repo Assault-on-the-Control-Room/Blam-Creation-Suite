@@ -168,11 +168,17 @@ namespace macaque
 		FIELD_EXPLANATION("REMAPPING TABLES", nullptr, FIELD_FLAG_NONE, "Note - if a remap table has a single element whose \'from\' is NONE, then every object will be remapped to the \'to\' object"),
 		{ _field_block, "weapon remapping", &multiplayer_weapon_remap_table_block },
 		{ _field_block, "vehicle remapping", &multiplayer_vehicle_remap_table_block },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_block, "equipment remapping", &multiplayer_equipment_remap_table_block },
+
 		{ _field_long_integer, "random weapon menu sprite frame" },
 		{ _field_long_integer, "random equipment menu sprite frame" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_string_id, "random weapon icon string id" },
 		{ _field_string_id, "random equipment icon string id" },
+
 		{ _field_terminator }
 	};
 
@@ -186,12 +192,21 @@ namespace macaque
 		MULTIPLAYER_OBJECT_COLLECTION_STRUCT_ID)
 	{
 		{ _field_long_block_index, "object type", FIELD_FLAG_INDEX, &multiplayer_object_type_block },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 3 },
 		{ _field_string_id, "object description" },
 		{ _field_string_id, "object header text" },
 		{ _field_string_id, "object help text" },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_long_integer, "unknown" },
+
 		{ _field_real, "random weight" },
 		{ _field_long_integer, "loadout menu sprite frame" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_string_id, "icon string id" },
+
 		{ _field_terminator }
 	};
 
