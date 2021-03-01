@@ -18,13 +18,15 @@ namespace macaque
 		TAG_MEMORY_ATTRIBUTES(MEMORY_ALLOCATION_NODE, TAG_MEMORY_USAGE_WRITEABLE | TAG_MEMORY_USAGE_NON_ALIASED),
 		AREAS_BLOCK_STRUCT_ID)
 	{
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 7 },
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_default),
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_default),
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_default),
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_default),
-		{ _field_long_integer, "hkaiVolume vtable", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data },
+		{ _field_pointer, "hkaiVolume vtable", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data },
 		{ _field_short_integer, "size", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY | FIELD_FLAG_UNKNOWN3 },
 		{ _field_short_integer, "count", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY | FIELD_FLAG_UNKNOWN3 },
+
 		{ _field_string, "name", FIELD_FLAG_INDEX },
 		{ _field_long_flags, "area flags", &area_flags },
 		{ _field_real_point_3d, "runtime relative mean point", FIELD_FLAG_UNKNOWN0 },
@@ -33,19 +35,35 @@ namespace macaque
 		{ _field_real, "runtime standard deviation", FIELD_FLAG_UNKNOWN0 },
 		{ _field_short_integer, "runtime starting index", FIELD_FLAG_UNKNOWN0 },
 		{ _field_short_integer, "runtime count", FIELD_FLAG_UNKNOWN0 },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 2 }, // #TODO: commom pattern
+		{ _field_legacy, _field_short_integer, "unknown" },
+		{ _field_legacy, _field_short_integer, "unknown" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 1 },
 		{ _field_struct, "Nav Mesh Attachments", FIELD_FLAG_READ_ONLY, &NavMeshAttachmentsStruct },
+
 		{ _field_array, "cluster occupancy", FIELD_FLAG_UNKNOWN0, &area_cluster_occupancy_bitvector_array },
 		{ _field_block, "flight_hints", &flight_reference_block },
 		{ _field_block, "points", FIELD_FLAG_INDEX, &area_sector_point_block },
 		FIELD_EXPLANATION("Generation Properties", nullptr, FIELD_FLAG_NONE, ""),
 		{ _field_enum, "preset", &generate_preset_enum, _field_id_ugpc },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 1 },
+		{ _field_legacy, _field_pad, "pad", 2 },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 1 },
 		{ _field_short_integer, "runtimeCarverInversion", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY | FIELD_FLAG_UNKNOWN3 },
+
 		{ _field_long_flags, "flags", &generate_flags },
 		{ _field_real, "extrusion" },
 		{ _field_real, "sink" },
 		{ _field_angle, "firing point orientation" },
 		{ _field_angle, "grid orientation" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 1 },
 		{ _field_real, "nav volume cell size" },
+
 		{ _field_real, "spacing", FIELD_FLAG_READ_ONLY },
 		{ _field_real, "airborne spacing", FIELD_FLAG_READ_ONLY },
 		{ _field_real, "min cover length", FIELD_FLAG_READ_ONLY },
@@ -122,8 +140,15 @@ namespace macaque
 		{ _field_short_block_index, "editor folder index", FIELD_FLAG_UNKNOWN0, &g_scenario_editor_folder_block, _field_id_hide },
 		{ _field_block, "firing positions", &firing_positions_block },
 		{ _field_block, "areas", &areas_block },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 2 }, // #TODO: commom pattern
+		{ _field_legacy, _field_short_integer, "unknown" },
+		{ _field_legacy, _field_short_integer, "unknown" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_struct, "Nav Mesh Attachments", FIELD_FLAG_READ_ONLY, &NavMeshAttachmentsStruct },
 		{ _field_struct, "disallowed attachment bsps", &manualBspFlagsReferences },
+
 		{ _field_terminator }
 	};
 

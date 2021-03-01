@@ -22,7 +22,9 @@ namespace blofeld
 	V5_TAG_BLOCK(area_sector_point_block, k_maximum_points_per_sector)
 	{
 		{ _field_legacy, _field_real_point_3d, "point" },
-		{ _field_legacy, _field_struct, "scenario_bsp_nav", &scenario_bsp_nav_struct_definition }, // #CUSTOM
+		//{ _field_legacy, _field_struct, "scenario_bsp_nav", &scenario_bsp_nav_struct_definition }, // #CUSTOM
+		{ _field_custom_long_block_index, "packedKeyOffaceref" },
+		{ _field_custom_long_block_index, "navMeshUIDOffaceref" },
 		{ _field_legacy, _field_real_euler_angles_2d, "normal" },
 		{ _field_legacy, _field_terminator }
 	};
@@ -41,7 +43,8 @@ namespace blofeld
 		{ _field_legacy, _field_string, "name^`" },
 		{ _field_legacy, _field_long_flags, "area flags", &area_flags },
 		{ _field_legacy, _field_real_point_3d, "runtime relative mean point!" },
-		{ _field_legacy, _field_struct, "scenario_bsp_nav", &scenario_bsp_nav_struct_definition }, // #CUSTOM
+		{ _field_custom_long_block_index, "packedKeyOffaceref" }, //{ _field_legacy, _field_struct, "scenario_bsp_nav", &scenario_bsp_nav_struct_definition }, // #CUSTOM
+		{ _field_custom_long_block_index, "navMeshUIDOffaceref" },
 		{ _field_legacy, _field_real, "runtime standard deviation!" },
 		{ _field_legacy, _field_short_integer, "runtime starting index!" },
 		{ _field_legacy, _field_short_integer, "runtime count!" },
@@ -60,10 +63,10 @@ namespace blofeld
 		{ _field_legacy, _field_enum, "preset", &generate_preset_enum },
 
 		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 1 },
-		{ _field_legacy, _field_short_integer, "runtimeCarverInversion*~!" },
+		{ _field_legacy, _field_pad, "pad", 2 },
 
 		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 1 },
-		{ _field_legacy, _field_pad, "pad", 2 },
+		{ _field_legacy, _field_short_integer, "runtimeCarverInversion*~!" },
 
 		{ _field_legacy, _field_long_flags, "flags", &generate_flags },
 		{ _field_legacy, _field_real, "extrusion" },
