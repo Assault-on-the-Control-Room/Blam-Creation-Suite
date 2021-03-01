@@ -40,10 +40,16 @@ namespace macaque
 		{ _field_tag_reference, "rumble", MAKE_OLD_NAMES("rumble data"), &global_rumble_reference },
 		FIELD_EXPLANATION("camera shake and impulse data", nullptr, FIELD_FLAG_NONE, ""),
 		{ _field_tag_reference, "camera shake", MAKE_OLD_NAMES("camera shake data"), &global_camera_shake_reference },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_tag_reference, "camera shake zoomed", "falls back on camerashake if untuned", MAKE_OLD_NAMES("camera shake data"), &global_camera_shake_reference },
+
 		FIELD_EXPLANATION("simulated input", nullptr, FIELD_FLAG_NONE, ""),
 		{ _field_tag_reference, "simulated_input", &global_simulated_input_reference },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_tag_reference, "simulated_input zoomed ", "falls back on simulated input if untuned", &global_simulated_input_reference },
+
 		FIELD_EXPLANATION("global sound effect", nullptr, FIELD_FLAG_NONE, ""),
 		{ _field_block, "global sound effect", &damage_response_global_sound_effect_block },
 		{ _field_terminator }
@@ -114,7 +120,10 @@ namespace macaque
 		DAMAGE_RESPONSE_DIRECTIONAL_FLASH_STRUCT_ID)
 	{
 		{ _field_real, "indicator duration" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_real, "flash duration ", MAKE_OLD_NAMES("duration") },
+
 		{ _field_enum, "fade function", &global_reverse_transition_functions_enum },
 		FIELD_PAD("ZASSFACE", nullptr, FIELD_FLAG_NONE, 2),
 		{ _field_real, "center size" },
