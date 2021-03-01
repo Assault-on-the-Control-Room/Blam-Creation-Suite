@@ -9,7 +9,6 @@ namespace blofeld
 	V5_TAG_BLOCK(lens_flare_reflection_block, k_maximum_reflections_per_lens_flare)
 	{
 		// #TODO: Verify fields between beginning and unknown for Halo Reach
-
 		{ _field_legacy, _field_custom },
 
 		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 1 },
@@ -23,7 +22,6 @@ namespace blofeld
 
 		{ _field_legacy, _field_real, "rotation offset:degrees" },
 		{ _field_legacy, _field_real, "axis offset:percent#percent offset in screen space along corona axis - 0.0 is on the corona, 1.0 is primary side edge of the screen, -1.0 is opposite side" },
-
 		{ _field_legacy, _field_real_bounds, "offset bounds#the axis offset times corona offset is clamped between these values" },
 
 		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 2 },

@@ -31,21 +31,44 @@ namespace macaque
 		TAG_MEMORY_ATTRIBUTES(MEMORY_ALLOCATION_NODE, TAG_MEMORY_USAGE_READ_ONLY),
 		LENS_FLARE_REFLECTION_BLOCK_ID)
 	{
+		// #TODO: Verify fields between beginning and unknown for Halo Reach
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_unknown_begin),
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_string_id, "name", FIELD_FLAG_INDEX },
+
 		{ _field_word_flags, "flags", &lens_flare_reflection_flags_definition },
 		{ _field_short_integer, "bitmap index" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_tag_reference, "bitmap override", &Tag::Reference<struct bitmap_group>::s_defaultDefinition },
+
 		{ _field_real, "rotation offset", nullptr, "degrees" },
 		{ _field_real, "axis offset", "percent offset in screen space along corona axis - 0.0 is on the corona, 1.0 is primary side edge of the screen, -1.0 is opposite side", "percent" },
 		{ _field_real_bounds, "offset bounds", "the axis offset times corona offset is clamped between these values" },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 2 },
+		{ _field_legacy, _field_real_bounds, "brightness bounds" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, },
 		{ _field_struct, "radius curve", "interpolated by external input", &scalar_function_named_struct },
+
 		{ _field_struct, "scale curve X", "interpolated by external input", &scalar_function_named_struct },
 		{ _field_struct, "scale curve Y", "interpolated by external input", &scalar_function_named_struct },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_struct, "brightness curve", "interpolated by external input", &scalar_function_named_struct },
+
 		FIELD_EXPLANATION("TINT COLOR", nullptr, FIELD_FLAG_NONE, "Tinting and modulating are not the same; \'tinting\' a reflection will color the darker regions but leave the highlights, while \'modulating\' will color everything uniformly. The modulation factor controls how much the reflection is modulated as opposed to tinted (0 is tinted, 1 is modulated). The tint power affects the curve of how much of the color range to tint."),
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_struct, "color curve", "interpolated by external input", &color_function_named_struct },
+
 		{ _field_real_fraction, "modulation factor", nullptr, nullptr, "[0,1]" },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_real_rgb_color, "tint color" },
+
 		{ _field_real, "tint power", nullptr, nullptr, "[0.1, 16]" },
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_unknown_end),
 		{ _field_terminator }
@@ -95,7 +118,10 @@ namespace macaque
 		{ _field_angle, "falloff angle", nullptr, "degrees" },
 		{ _field_angle, "cutoff angle", nullptr, "degrees" },
 		FIELD_EXPLANATION("OCCLUSION", nullptr, FIELD_FLAG_NONE, "Occlusion factor affects overall lens flare brightness and can also affect scale. Occlusion never affects rotation."),
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_long_integer, "occlusion reflection index", "occlusion information will be generated against the size of this reflection" },
+
 		{ _field_real, "occlusion offset distance", "distance along offset direction used to test occlusion", "world units" },
 		{ _field_enum, "occlusion offset direction", &lens_flare_occlusion_offset_enum_definition },
 		FIELD_PAD("PANTS", nullptr, FIELD_FLAG_NONE, 2),
