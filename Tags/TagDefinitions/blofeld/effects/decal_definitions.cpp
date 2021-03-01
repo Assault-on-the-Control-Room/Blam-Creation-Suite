@@ -15,11 +15,10 @@ namespace blofeld
 		{ _field_legacy, _field_explanation, "Render Method" },
 		{ _field_legacy, _field_struct, "render method", &render_method_struct_definition_struct_definition },
 
-		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 3 },
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 4 },
 		{ _field_legacy, _field_custom, "material" },
 		{ _field_legacy, _field_custom },
 		{ _field_legacy, _field_struct, "actual material\?", &material_block_struct },
-
 		{ _field_legacy, _field_custom },
 
 		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
