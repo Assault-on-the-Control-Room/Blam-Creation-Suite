@@ -19,7 +19,14 @@ namespace macaque
 	{
 		{ _field_string_id, "name", MAKE_OLD_NAMES("incident"), FIELD_FLAG_INDEX },
 		{ _field_char_enum, "audience", FIELD_FLAG_INDEX, &game_engine_event_audience_enum_definition },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 2 },
+		{ _field_legacy, _field_char_integer, "unknown" },
+		{ _field_legacy, _field_pad, "pad0", 2 },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		FIELD_PAD("pad0", nullptr, FIELD_FLAG_NONE, 3),
+
 		{ _field_string_id, "display string", "This string can use a bunch of neat tokens for substitution of runtime data (e.g. player names).  See an engineer for more info." },
 		{ _field_char_enum, "required field", &game_engine_event_input_enum_definition },
 		{ _field_byte_flags, "excluded audience", &game_engine_event_input_enum_definition },
