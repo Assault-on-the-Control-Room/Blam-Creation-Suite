@@ -240,13 +240,14 @@ namespace macaque
 		{ _field_struct, "language pack10", FIELD_FLAG_UNKNOWN0, &language_pack_definition },
 		{ _field_struct, "language pack11", FIELD_FLAG_UNKNOWN0, &language_pack_definition },
 		{ _field_struct, "language pack12", FIELD_FLAG_UNKNOWN0, &language_pack_definition },
-		{ _field_struct, "language pack13", FIELD_FLAG_UNKNOWN0, &language_pack_definition },
 
 		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 5 },
+		{ _field_struct, "language pack13", FIELD_FLAG_UNKNOWN0, &language_pack_definition },
 		{ _field_struct, "language pack14", FIELD_FLAG_UNKNOWN0, &language_pack_definition },
 		{ _field_struct, "language pack15", FIELD_FLAG_UNKNOWN0, &language_pack_definition },
 		{ _field_struct, "language pack16", FIELD_FLAG_UNKNOWN0, &language_pack_definition },
 		{ _field_struct, "language pack17", FIELD_FLAG_UNKNOWN0, &language_pack_definition },
+
 		FIELD_EXPLANATION("Rasterizer globals", nullptr, FIELD_FLAG_NONE, ""),
 		{ _field_tag_reference, "rasterizer_globals_ref", &global_rasterizer_globals_reference },
 		FIELD_EXPLANATION("Default camera fx settings", nullptr, FIELD_FLAG_NONE, ""),
