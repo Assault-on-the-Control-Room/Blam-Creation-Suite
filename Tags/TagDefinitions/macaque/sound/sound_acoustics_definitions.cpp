@@ -27,8 +27,11 @@ namespace macaque
 		{ _field_block, "points", &acoustic_sector_point_block },
 		{ _field_real_plane_3d, "top plane", FIELD_FLAG_UNKNOWN0 },
 		{ _field_real_plane_3d, "bottom plane", FIELD_FLAG_UNKNOWN0 },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_long_flags, "flags", &acousticPaletteFlags },
 		{ _field_real, "occlusion value" },
+
 		{ _field_short_block_index, "acoustics", FIELD_FLAG_INDEX, &scenario_acoustics_palette_block_definition_block },
 		{ _field_short_block_index, "editor folder", FIELD_FLAG_UNKNOWN0, &g_scenario_editor_folder_block, _field_id_hide },
 		{ _field_real, "height" },
@@ -91,9 +94,12 @@ namespace macaque
 		{ _field_struct, "reverb", &scenario_acoustics_environment_definition },
 		FIELD_EXPLANATION("BACKGROUND SOUND", nullptr, FIELD_FLAG_NONE, ""),
 		{ _field_struct, "ambience", &scenario_acoustics_ambience_definition },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 3 },
 		FIELD_EXPLANATION("SOUND BANK", nullptr, FIELD_FLAG_NONE, ""),
 		{ _field_tag_reference, "Sound bank tag", &global_soundbank_reference },
 		{ _field_tag_reference, "DVD Only sound bank tag", &global_soundbank_reference },
+
 		{ _field_terminator }
 	};
 
@@ -107,7 +113,10 @@ namespace macaque
 		SCENARIO_ACOUSTICS_ENVIRONMENT_DEFINITION_ID)
 	{
 		{ _field_tag_reference, "sound environment", &global_sound_environment_reference },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_long_enum, "type", &sound_class_acoustics_string_definition },
+
 		{ _field_real, "cutoff distance" },
 		{ _field_real, "interpolation time", nullptr, "seconds", MAKE_OLD_NAMES("interpolation speed") },
 		{ _field_terminator }
@@ -124,14 +133,26 @@ namespace macaque
 	{
 		{ _field_tag_reference, "background sound", &global_looping_sound_reference },
 		{ _field_tag_reference, "weather sound", "plays when rain is active, weather rate gets applied to scale.", &global_looping_sound_reference },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach, 2 },
 		{ _field_tag_reference, "entry sound", "plays when entering this area", &global_sound_reference },
 		{ _field_tag_reference, "exit sound", "plays when leaving this area", &global_sound_reference },
+
 		{ _field_real, "cutoff distance" },
 		{ _field_real, "interpolation time", nullptr, "seconds", MAKE_OLD_NAMES("interpolation speed") },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 4 },
+		{ _field_long_flags, "scale flags", FIELD_FLAG_UNKNOWN0, &background_sound_scale_flags_definition },
+		{ _field_real_fraction, "interior scale", FIELD_FLAG_UNKNOWN0 },
+		{ _field_real_fraction, "portal scale", FIELD_FLAG_UNKNOWN0 },
+		{ _field_real_fraction, "exterior scale", FIELD_FLAG_UNKNOWN0 },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 4 },
 		{ _field_long_flags, "scale flags DEPRICATED", FIELD_FLAG_UNKNOWN0, &background_sound_scale_flags_definition },
 		{ _field_real_fraction, "interior scale DEPRICATED", FIELD_FLAG_UNKNOWN0 },
 		{ _field_real_fraction, "portal scale DEPRICATED", FIELD_FLAG_UNKNOWN0 },
 		{ _field_real_fraction, "exterior scale DEPRICATED", FIELD_FLAG_UNKNOWN0 },
+
 		{ _field_terminator }
 	};
 
