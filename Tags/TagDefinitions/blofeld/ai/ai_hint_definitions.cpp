@@ -8,9 +8,16 @@ namespace blofeld
 	{
 		{ _field_legacy, _field_long_flags, "Flags", &user_hint_geometry_flags },
 		{ _field_legacy, _field_real_point_3d, "Point 0" },
-		{ _field_legacy, _field_struct, "scenario_bsp_nav 0", &scenario_bsp_nav_struct_definition }, // #CUSTOM
+		
+		//{ _field_legacy, _field_struct, "scenario_bsp_nav 0", &scenario_bsp_nav_struct_definition }, // #CUSTOM
+		{ _field_custom_long_block_index, "packedKeyOffaceref0" },
+		{ _field_custom_long_block_index, "navMeshUIDOffaceref0" },
+
 		{ _field_legacy, _field_real_point_3d, "Point 1" },
-		{ _field_legacy, _field_struct, "scenario_bsp_nav 1", &scenario_bsp_nav_struct_definition }, // #CUSTOM
+		
+		//{ _field_legacy, _field_struct, "scenario_bsp_nav 1", &scenario_bsp_nav_struct_definition }, // #CUSTOM
+		{ _field_custom_long_block_index, "packedKeyOffaceref1" },
+		{ _field_custom_long_block_index, "navMeshUIDOffaceref1" },
 
 		{ _field_legacy, _field_terminator }
 	};
@@ -19,13 +26,25 @@ namespace blofeld
 	{
 		{ _field_legacy, _field_long_flags, "Flags", &user_hint_geometry_flags },
 		{ _field_legacy, _field_real_point_3d, "Point 0" },
-		{ _field_legacy, _field_struct, "scenario_bsp_nav 0", &scenario_bsp_nav_struct_definition }, // #CUSTOM
+		//{ _field_legacy, _field_struct, "scenario_bsp_nav 0", &scenario_bsp_nav_struct_definition }, // #CUSTOM
+		{ _field_custom_long_block_index, "packedKeyOffaceref0" },
+		{ _field_custom_long_block_index, "navMeshUIDOffaceref0" },
+
 		{ _field_legacy, _field_real_point_3d, "Point 1" },
-		{ _field_legacy, _field_struct, "scenario_bsp_nav 1", &scenario_bsp_nav_struct_definition }, // #CUSTOM
+		//{ _field_legacy, _field_struct, "scenario_bsp_nav 1", &scenario_bsp_nav_struct_definition }, // #CUSTOM
+		{ _field_custom_long_block_index, "packedKeyOffaceref1" },
+		{ _field_custom_long_block_index, "navMeshUIDOffaceref1" },
+
 		{ _field_legacy, _field_real_point_3d, "Point 2" },
-		{ _field_legacy, _field_struct, "scenario_bsp_nav 2", &scenario_bsp_nav_struct_definition }, // #CUSTOM
+		//{ _field_legacy, _field_struct, "scenario_bsp_nav 2", &scenario_bsp_nav_struct_definition }, // #CUSTOM
+		{ _field_custom_long_block_index, "packedKeyOffaceref2" },
+		{ _field_custom_long_block_index, "navMeshUIDOffaceref2" },
+
 		{ _field_legacy, _field_real_point_3d, "Point 3" },
-		{ _field_legacy, _field_struct, "scenario_bsp_nav 3", &scenario_bsp_nav_struct_definition }, // #CUSTOM
+		//{ _field_legacy, _field_struct, "scenario_bsp_nav 3", &scenario_bsp_nav_struct_definition }, // #CUSTOM
+		{ _field_custom_long_block_index, "packedKeyOffaceref3" },
+		{ _field_custom_long_block_index, "navMeshUIDOffaceref3" },
+
 		{ _field_legacy, _field_word_flags, "invalid_points*", &parallelogram_points_invalid_flags },
 		{ _field_legacy, _field_pad, "KJHIUF", 2 },
 		{ _field_legacy, _field_terminator }
@@ -78,7 +97,11 @@ namespace blofeld
 		{ _field_legacy, _field_enum, "type", &user_hint_well_point_type_enum },
 		{ _field_legacy, _field_pad, "CNXLP", 2 },
 		{ _field_legacy, _field_real_point_3d, "point" },
-		{ _field_legacy, _field_struct, "scenario_bsp_nav", &scenario_bsp_nav_struct_definition }, // #CUSTOM
+		
+		//{ _field_legacy, _field_struct, "scenario_bsp_nav", &scenario_bsp_nav_struct_definition }, // #CUSTOM
+		{ _field_custom_long_block_index, "packedKeyOffaceref" },
+		{ _field_custom_long_block_index, "navMeshUIDOffaceref" },
+
 		{ _field_legacy, _field_real_euler_angles_2d, "normal" },
 		{ _field_legacy, _field_terminator }
 	};
@@ -138,7 +161,11 @@ namespace blofeld
 	V5_TAG_BLOCK(user_hint_sector_point_block, k_maximum_points_per_sector)
 	{
 		{ _field_legacy, _field_real_point_3d, "point" },
-		{ _field_legacy, _field_struct, "scenario_bsp_nav", &scenario_bsp_nav_struct_definition }, // #CUSTOM
+		
+		//{ _field_legacy, _field_struct, "scenario_bsp_nav", &scenario_bsp_nav_struct_definition }, // #CUSTOM
+		{ _field_custom_long_block_index, "packedKeyOffaceref" },
+		{ _field_custom_long_block_index, "navMeshUIDOffaceref" },
+
 		{ _field_legacy, _field_real_euler_angles_2d, "normal" },
 		{ _field_legacy, _field_terminator }
 	};
