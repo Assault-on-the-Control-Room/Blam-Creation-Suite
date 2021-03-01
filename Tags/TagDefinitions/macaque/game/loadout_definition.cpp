@@ -118,7 +118,10 @@ namespace macaque
 		{ _field_block, "loadouts", &loadout_definition_block },
 		{ _field_block, "loadout palettes", &loadout_palette_definition_block },
 		{ _field_block, "loadout names", &loadout_name_block },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_block, "default custom loadouts", &custom_loadout_defaults_block },
+
 		{ _field_terminator }
 	};
 
@@ -132,12 +135,21 @@ namespace macaque
 		LOADOUT_DEFINITION_STRUCT_ID)
 	{
 		{ _field_string_id, "loadout name", FIELD_FLAG_INDEX },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_string_id, "app1", "name of an element from custom_app_globals/custom_apps.  Can be left empty." },
 		{ _field_string_id, "app2", "see above" },
+
 		{ _field_string_id, "initial primary weapon", "name of an element from global starting weapons block. Other values:\n(empty) - unchanged\nunchanged - unchanged\ndefault - take from starting profiles in scenario\nnone - no weapon\nrandom - use random item from valid starting weapons" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_string_id, "initial primary weapon variant name" },
+
 		{ _field_string_id, "initial secondary weapon", "see above" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_string_id, "initial secondary weapon variant name" },
+
 		{ _field_string_id, "initial equipment", "see above" },
 		{ _field_char_enum, "initial grenade count", &player_trait_initial_grenade_count_enum },
 		FIELD_PAD("SDJCESLRN", nullptr, FIELD_FLAG_NONE, 3),
