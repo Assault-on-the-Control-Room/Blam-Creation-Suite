@@ -505,7 +505,7 @@ namespace blofeld
 
 
 		{ _field_legacy, _field_version_less, _engine_type_haloreach, 1 },
-		{ _field_legacy, _field_block, "unknown@", &halo3_unit_camera_struct_unknown_block },
+		{ _field_legacy, _field_block, "unknown@", &g_null_block_block },
 
 		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach, 8 },
 		{ _field_legacy, _field_angle, "look acceleration:deg/s/s#if non-zero, limits the change in look velocity per second while the user is pushing the look stick in the current direction of looking" },
