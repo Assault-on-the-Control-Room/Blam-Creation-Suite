@@ -61,10 +61,10 @@ namespace blofeld
 		{ _field_legacy, _field_tag_reference, "off", &device_struct_definition_open_up_reference },
 		{ _field_legacy, _field_tag_reference, "deny", &device_struct_definition_open_up_reference },
 
-		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_legacy, _field_string_id, "script name" },
-		{ _field_legacy, _field_custom },
 
+		{ _field_legacy, _field_custom },
 		{ _field_legacy, _field_terminator }
 	};
 
@@ -92,9 +92,9 @@ namespace blofeld
 		{ _field_legacy, _field_useless_pad },
 		{ _field_legacy, _field_tag_reference, "delay effect", &device_struct_definition_open_up_reference },
 		{ _field_legacy, _field_real, "automatic activation radius:world units" },
-		{ _field_legacy, _field_custom },
 
-		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 7 },
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 8 },
+		{ _field_legacy, _field_custom },
 		{ _field_legacy, _field_string_id, "marker name" },
 		{ _field_legacy, _field_real, "marker radius#max distance between the unit and the marker" },
 		{ _field_legacy, _field_angle, "marker cone angle#angle from marker forward the unit must be" },

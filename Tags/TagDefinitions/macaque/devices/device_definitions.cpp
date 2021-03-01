@@ -105,6 +105,8 @@ namespace macaque
 		{ _field_enum, "triggers when", &control_triggers },
 		{ _field_real, "call value", nullptr, nullptr, "[0,1]" },
 		{ _field_string_id, "action string" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 14 },
 		{ _field_string_id, "secondary action string" },
 		{ _field_string_id, "action denied string", "A string to display when someone else is already using \"interaction held\"-type controls" },
 		{ _field_string_id, "action denied secondary string", "A string displayed when someone else is using \"interaction held\"-type controls and it's in secondary mode" },
@@ -119,10 +121,14 @@ namespace macaque
 		{ _field_useless_pad, "" },
 		{ _field_enum, "MP team use restriction", &teamUseRestrictionEnum },
 		FIELD_PAD("turd", nullptr, FIELD_FLAG_NONE, 2),
+
 		{ _field_tag_reference, "on", &device_struct_definition_open_up_reference },
 		{ _field_tag_reference, "off", &device_struct_definition_open_up_reference },
 		{ _field_tag_reference, "deny", &device_struct_definition_open_up_reference },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_string_id, "script name" },
+
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_field_group_end),
 		{ _field_terminator }
 	};
@@ -160,6 +166,8 @@ namespace macaque
 		{ _field_useless_pad, "" },
 		{ _field_tag_reference, "delay effect", &device_struct_definition_open_up_reference },
 		{ _field_real, "automatic activation radius", nullptr, "world units" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 8 },
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_marker),
 		{ _field_string_id, "marker name" },
 		{ _field_real, "marker radius", "max distance between the unit and the marker" },
@@ -168,6 +176,7 @@ namespace macaque
 		{ _field_real, "min targetable position threshold", "above this value and below the max, object becomes targetable" },
 		{ _field_real, "max targetable position threshold", "below this value and above the min, object becomes targetable" },
 		{ _field_useless_pad, "" },
+
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_field_group_end),
 		{ _field_terminator }
 	};
