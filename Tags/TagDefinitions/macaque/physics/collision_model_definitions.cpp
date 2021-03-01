@@ -26,7 +26,13 @@ namespace macaque
 		{ _field_block, "cookie cutters", FIELD_FLAG_READ_ONLY, &collision_model_region_block },
 		{ _field_block, "pathfinding spheres", FIELD_FLAG_READ_ONLY, &collision_model_pathfinding_sphere_block },
 		{ _field_block, "nodes", FIELD_FLAG_READ_ONLY, &collision_model_node_block },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_long_integer, "unknown@" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_pageable, "regions resource", &collision_model_resource_struct },
+			
 		{ _field_terminator }
 	};
 
@@ -77,8 +83,11 @@ namespace macaque
 		COLLISION_MODEL_PERMUTATION_BLOCK_ID)
 	{
 		{ _field_string_id, "name", FIELD_FLAG_READ_ONLY | FIELD_FLAG_INDEX },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		{ _field_short_integer, "resourceBspOffset", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY },
 		{ _field_short_integer, "resourceBspCount", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY },
+
 		{ _field_block, "bsps", FIELD_FLAG_READ_ONLY, &collision_model_bsp_block },
 		{ _field_block, "bsp_physics", FIELD_FLAG_READ_ONLY, &collision_bsp_physics_block },
 		{ _field_block, "mopp_codes", FIELD_FLAG_READ_ONLY, &mopp_code_definition_block },
