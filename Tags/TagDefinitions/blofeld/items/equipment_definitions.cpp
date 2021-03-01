@@ -691,13 +691,13 @@ namespace blofeld
 		{ _field_legacy, _field_string_id, "deactivate animation" },
 		{ _field_legacy, _field_string_id, "active animation stance" },
 
-		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 5 },
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 4 },
 		{ _field_legacy, _field_tag_reference, "unable to activate sound", &global_sound_reference },
 		{ _field_legacy, _field_tag_reference, "Player sound bank#High quality player sound bank to be prefetched. Can be empty.", &global_soundbank_reference },
 		{ _field_legacy, _field_block, "Sound RTPCs", &EquipmentSoundRTPCBlock_block },
 		{ _field_legacy, _field_block, "Sound Sweeteners", &EquipmentSoundSweetenerBlock_block },
-		{ _field_legacy, _field_custom },
 
+		{ _field_legacy, _field_custom },
 		{ _field_legacy, _field_terminator }
 	};
 
