@@ -51,10 +51,13 @@ namespace macaque
 		{ _field_tag_reference, "multiplayer text", &global_multilingual_unicode_string_list_reference },
 		{ _field_tag_reference, "sandbox text", &global_multilingual_unicode_string_list_reference },
 		{ _field_tag_reference, "sandbox object properties values", &g_sandbox_object_properties_interface_reference },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 4 },
 		{ _field_tag_reference, "effects", &global_multiplayer_effect_group_reference },
 		{ _field_block, "multiplayer roles", &global_team_role_block },
 		{ _field_block, "requisition constants", &requisition_constants_block },
 		{ _field_block, "player starting profile", &scenario_profiles_block },
+
 		{ _field_terminator }
 	};
 
@@ -68,6 +71,10 @@ namespace macaque
 		TAG_MEMORY_ATTRIBUTES(MEMORY_ALLOCATION_DEFAULT, TAG_MEMORY_USAGE_READ_ONLY),
 		TEAMDEFINITIONBLOCK_ID)
 	{
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_real_rgb_color, "color" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 12 },
 		{ _field_string_id, "name", FIELD_FLAG_INDEX },
 		{ _field_real_rgb_color, "primary color" },
 		{ _field_real_rgb_color, "secondary color" },
@@ -80,6 +87,7 @@ namespace macaque
 		{ _field_char_enum, "background color index", &playerColorEnum },
 		FIELD_PAD("pad", nullptr, FIELD_FLAG_NONE, 2),
 		FIELD_CUSTOM(nullptr, nullptr, FIELD_FLAG_NONE, _field_id_field_group_end),
+
 		{ _field_terminator }
 	};
 
@@ -142,6 +150,34 @@ namespace macaque
 		{ _field_terminator }
 	};
 
+	V5_TAG_BLOCK(multiplayer_unknown_block, 65536)
+	{
+		{ _field_legacy, _field_long_integer, "unknown" },
+		{ _field_legacy, _field_long_integer, "unknown" },
+		{ _field_legacy, _field_long_integer, "unknown" },
+		{ _field_legacy, _field_long_integer, "unknown" },
+		{ _field_legacy, _field_long_integer, "unknown" },
+		{ _field_legacy, _field_long_integer, "unknown" },
+		{ _field_legacy, _field_long_integer, "unknown" },
+		{ _field_legacy, _field_long_integer, "unknown" },
+		{ _field_legacy, _field_long_integer, "unknown" },
+		{ _field_legacy, _field_long_integer, "unknown" },
+		{ _field_legacy, _field_long_integer, "unknown" },
+		{ _field_legacy, _field_long_integer, "unknown" },
+		{ _field_legacy, _field_long_integer, "unknown" },
+		{ _field_legacy, _field_long_integer, "unknown" },
+		{ _field_legacy, _field_long_integer, "unknown" },
+		{ _field_legacy, _field_long_integer, "unknown" },
+		{ _field_legacy, _field_long_integer, "unknown" },
+		{ _field_legacy, _field_real, "unknown" },
+		{ _field_legacy, _field_real, "unknown" },
+		{ _field_legacy, _field_real, "unknown" },
+		{ _field_legacy, _field_long_integer, "unknown" },
+		{ _field_legacy, _field_long_integer, "unknown" },
+		{ _field_legacy, _field_long_integer, "unknown" },
+		{ _field_legacy, _field_terminator }
+	};
+
 	#define MULTIPLAYER_RUNTIME_BLOCK_ID { 0x6F17154D, 0x48564D05, 0xB362026A, 0x93F87F54 }
 	TAG_BLOCK(
 		multiplayer_runtime_block,
@@ -165,11 +201,23 @@ namespace macaque
 		{ _field_tag_reference, "communication sounds", MAKE_OLD_NAMES("comm english"), &global_communication_sound_group_reference },
 		{ _field_long_integer, "maximum frag count" },
 		{ _field_long_integer, "maximum plasma count" },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_block, "unknown", &multiplayer_unknown_block_block },
+
 		{ _field_block, "multiplayer constants", &multiplayer_constants_block },
 		{ _field_block, "state responses", &game_engine_status_response_block },
 		{ _field_tag_reference, "scoreboard emblem bitmap", &global_bitmap_reference },
 		{ _field_tag_reference, "scoreboard dead emblem bitmap", &global_bitmap_reference },
 		{ _field_tag_reference, "hill shader", &multiplayer_runtime_block_hill_shader_reference },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 5 }, // These will fucking break if you move macaque out of the blofeld namespace LMAO
+		{ _field_legacy, _field_tag_reference, "null intro hud", &chud_reference },
+		{ _field_legacy, _field_tag_reference, "sandbox intro hud", &chud_reference },
+		{ _field_legacy, _field_tag_reference, "megalo intro hud", &chud_reference },
+		{ _field_legacy, _field_tag_reference, "campaign intro hud", &chud_reference },
+		{ _field_legacy, _field_tag_reference, "survival intro hud", &chud_reference },
+
 		{ _field_tag_reference, "default_biped_simulation_interpolation", &global_simulation_interpolation_reference },
 		{ _field_tag_reference, "default_vehicle_simulation_interpolation", &global_simulation_interpolation_reference },
 		{ _field_tag_reference, "default_crate_simulation_interpolation", &global_simulation_interpolation_reference },
@@ -178,7 +226,10 @@ namespace macaque
 		{ _field_tag_reference, "default_object_simulation_interpolation", &global_simulation_interpolation_reference },
 		{ _field_tag_reference, "co-op spawning globals", &global_coop_spawning_globals_reference },
 		{ _field_tag_reference, "megalo string_id table", &global_megalo_string_id_table_reference },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_tag_reference, "killcam parameters", "Used for non projectile killcams.", &Tag::Reference<struct KillCamCameraParameterDefinition>::s_defaultDefinition },
+
 		{ _field_terminator }
 	};
 
@@ -210,6 +261,48 @@ namespace macaque
 		{ _field_terminator }
 	};
 
+	V5_TAG_STRUCT(multiplayer_constants_unknown_struct)
+	{
+		{ _field_legacy, _field_real, "unknown0" },
+		{ _field_legacy, _field_real, "unknown4" },
+		{ _field_legacy, _field_real, "unknown8" },
+		{ _field_legacy, _field_real, "unknownC" },
+		{ _field_legacy, _field_real, "unknown10" },
+		{ _field_legacy, _field_real, "unknown14" },
+		{ _field_legacy, _field_real, "unknown18" },
+		{ _field_legacy, _field_real, "unknown1C" },
+		{ _field_legacy, _field_terminator }
+	};
+
+	V5_TAG_BLOCK(multiplayer_constants_weapon_block, 65536)
+	{
+		{ _field_legacy, _field_tag_reference, "weapon", & weapon_reference },
+		{ _field_legacy, _field_real, "unknown0" },
+		{ _field_legacy, _field_real, "unknown4" },
+		{ _field_legacy, _field_real, "unknown8" },
+		{ _field_legacy, _field_real, "unknownC" },
+		{ _field_legacy, _field_terminator }
+	};
+
+	V5_TAG_BLOCK(multiplayer_constants_vehicle_block, 65536)
+	{
+		{ _field_legacy, _field_tag_reference, "vehicle", & vehicle_reference },
+		{ _field_legacy, _field_real, "unknown0" },
+		{ _field_legacy, _field_real, "unknown4" },
+		{ _field_legacy, _field_real, "unknown8" },
+		{ _field_legacy, _field_real, "unknownC" },
+		{ _field_legacy, _field_terminator }
+	};
+
+	V5_TAG_BLOCK(multiplayer_constants_projectile_block, 65536)
+	{
+		{ _field_legacy, _field_tag_reference, "projectile", & projectile_reference },
+		{ _field_legacy, _field_real, "unknown0" },
+		{ _field_legacy, _field_real, "unknown4" },
+		{ _field_legacy, _field_real, "unknown8" },
+		{ _field_legacy, _field_terminator }
+	};
+
 	#define MULTIPLAYER_CONSTANTS_BLOCK_ID { 0x8FFC2A96, 0xD8DF4203, 0xBBF5DD91, 0xE6C61E5A }
 	TAG_BLOCK(
 		multiplayer_constants_block,
@@ -220,8 +313,26 @@ namespace macaque
 		TAG_MEMORY_ATTRIBUTES(MEMORY_ALLOCATION_DEFAULT, TAG_MEMORY_USAGE_READ_ONLY),
 		MULTIPLAYER_CONSTANTS_BLOCK_ID)
 	{
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 14 },
+		{ _field_legacy, _field_struct, "unknown0", &multiplayer_constants_unknown_struct_struct_definition },
+		{ _field_legacy, _field_struct, "unknown1", &multiplayer_constants_unknown_struct_struct_definition },
+		{ _field_legacy, _field_struct, "unknown2", &multiplayer_constants_unknown_struct_struct_definition },
+		{ _field_legacy, _field_struct, "unknown3", &multiplayer_constants_unknown_struct_struct_definition },
+		{ _field_legacy, _field_struct, "unknown4", &multiplayer_constants_unknown_struct_struct_definition },
+		{ _field_legacy, _field_struct, "unknown5", &multiplayer_constants_unknown_struct_struct_definition },
+		{ _field_legacy, _field_real, "unknownC0" },
+		{ _field_legacy, _field_block, "weapons", &multiplayer_constants_weapon_block_block },
+		{ _field_legacy, _field_block, "vehicles", &multiplayer_constants_vehicle_block_block },
+		{ _field_legacy, _field_block, "projectiles", &multiplayer_constants_projectile_block_block },
+		{ _field_legacy, _field_real, "unknownE8" },
+		{ _field_legacy, _field_real, "unknownE4" },
+		{ _field_legacy, _field_real, "unknownE4" },
+		{ _field_legacy, _field_real, "unknownE4" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
 		FIELD_EXPLANATION("PLAYER SPAWN INFLUENCERS", nullptr, FIELD_FLAG_NONE, "These are the default spawn influencer settings which can be overridden by scenario tags"),
 		{ _field_tag_reference, "Default Spawn Settings", &g_spawnSettingsReference },
+
 		FIELD_EXPLANATION("MORE MP CONSTANTS", nullptr, FIELD_FLAG_NONE, "More old Halo2 stuff follows..."),
 		{ _field_real, "teleporter recharge time", nullptr, "seconds" },
 		{ _field_tag_reference, "sandbox effect", &global_effect_reference },

@@ -9,6 +9,11 @@ namespace macaque
 	constexpr unsigned long MULTIPLAYER_GLOBALS_TAG = 'mulg';
 	extern s_tag_group multiplayer_globals_group; // multiplayer_globals_block
 
+	extern s_tag_struct_definition multiplayer_unknown_block_block_struct;
+	extern s_tag_struct_definition multiplayer_constants_unknown_struct_struct_definition;
+	extern s_tag_struct_definition multiplayer_constants_weapon_block_block_struct;
+	extern s_tag_struct_definition multiplayer_constants_vehicle_block_block_struct;
+	extern s_tag_struct_definition multiplayer_constants_projectile_block_block_struct;
 
 	extern s_tag_block_definition multiplayer_globals_block;
 	extern s_tag_block_definition spawn_influence_weight_falloff_function_block;
