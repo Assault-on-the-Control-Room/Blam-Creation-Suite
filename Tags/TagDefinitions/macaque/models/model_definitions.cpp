@@ -575,6 +575,9 @@ namespace macaque
 		FIELD_EXPLANATION("lock-on fields", nullptr, FIELD_FLAG_NONE, ""),
 
 		{ _field_legacy, _field_version_less, _engine_type_haloreach },
+		{ _field_long_flags, "flags", &model_target_lock_on_flags_definition },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach, 2 },
 		{ _field_byte_flags, "flags", &model_target_lock_on_flags_definition },
 		FIELD_PAD("SVLKJERAF", nullptr, FIELD_FLAG_NONE, 3),
 
