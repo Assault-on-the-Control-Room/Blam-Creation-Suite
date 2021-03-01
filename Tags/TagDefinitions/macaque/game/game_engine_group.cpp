@@ -64,13 +64,25 @@ namespace macaque
 		TAG_MEMORY_ATTRIBUTES(MEMORY_ALLOCATION_DEFAULT, TAG_MEMORY_USAGE_READ_ONLY),
 		GAME_ENGINE_MISCELLANEOUS_OPTIONS_BLOCK_ID)
 	{
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_byte_flags, "flags", &game_engine_miscellaneous_options_flags },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_word_flags, "flags", &game_engine_miscellaneous_options_flags },
+
 		{ _field_char_integer, "early victory win count" },
 		{ _field_char_integer, "round time limit", nullptr, "minutes" },
 		{ _field_char_integer, "number of rounds" },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 2 },
+		{ _field_legacy, _field_short_integer, "sudden death" },
+		{ _field_legacy, _field_short_integer, "grace period" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 3 },
 		{ _field_char_enum, "mosh difficulty level", &mosh_difficulty },
 		{ _field_byte_integer, "overshield deplete time" },
 		FIELD_PAD("RXXH", nullptr, FIELD_FLAG_NONE, 1),
+
 		{ _field_terminator }
 	};
 
@@ -571,13 +583,19 @@ namespace macaque
 		{ _field_string_id, "localizable name", FIELD_FLAG_INDEX },
 		{ _field_string_id, "localizable description" },
 		{ _field_block, "miscellaneous options", &game_engine_miscellaneous_options_block },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_block, "prototype options", &game_engine_prototype_options_block },
+
 		{ _field_block, "respawn options", &game_engine_respawn_options_block },
 		{ _field_block, "social options", &game_engine_social_options_block },
 		{ _field_block, "map override options", &game_engine_map_override_options_block },
 		{ _field_block, "team options", &game_engine_team_options_block },
 		{ _field_block, "loadout options", &game_engine_loadout_options_block },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_block, "ordnance options", &gameEngineOrdnanceOptionsBlock_block },
+
 		{ _field_long_integer, "mission_id" },
 		{ _field_char_enum, "game difficulty", &global_campaign_difficulty_enum },
 		{ _field_byte_flags, "firefight variant flags", &GameEngineFirefightVariantFlags },
