@@ -34,6 +34,11 @@ namespace macaque
 		GLOBAL_RASTERIZER_CONSTANT_TABLE_STRUCT_ID)
 	{
 		{ _field_block, "constants", FIELD_FLAG_READ_ONLY, &rasterizer_constant_block },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 2 },
+		{ _field_legacy, _field_dword_integer, "unknown@" },
+		{ _field_legacy, _field_dword_integer, "unknown@" },
+
 		{ _field_char_enum, "type", FIELD_FLAG_READ_ONLY, &rasterizer_constant_table_type_enum },
 		FIELD_PAD("qersaui", nullptr, FIELD_FLAG_NONE, 3),
 		{ _field_terminator }
