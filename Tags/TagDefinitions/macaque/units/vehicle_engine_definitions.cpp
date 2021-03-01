@@ -6,6 +6,16 @@ namespace blofeld
 
 namespace macaque
 {
+	V5_TAG_STRUCT(old_torque_struct)
+	{
+		{ _field_legacy, _field_real, "min torque" },
+		{ _field_legacy, _field_real, "max torque" },
+		{ _field_legacy, _field_real, "peak torque scale" },
+		{ _field_legacy, _field_real, "past peak torque scale exponent" },
+		{ _field_legacy, _field_real, "torque at max angular velocity" },
+		{ _field_legacy, _field_real, "torque at 2x max angular velocity" },
+		{ _field_legacy, _field_terminator }
+	};
 
 	#define GEAR_BLOCK_ID { 0x43A70404, 0x7A0440D7, 0xA12F738C, 0x29E046A5 }
 	TAG_BLOCK(
@@ -20,26 +30,16 @@ namespace macaque
 	{
 		FIELD_EXPLANATION("loaded torque", nullptr, FIELD_FLAG_NONE, ""),
 
-		{ _field_legacy, _field_version_less, _engine_type_haloreach, 6 }, // Struct but linker time yo
-		{ _field_real, "min torque" },
-		{ _field_real, "max torque" },
-		{ _field_real, "peak torque scale" },
-		{ _field_real, "past peak torque scale exponent" },
-		{ _field_real, "torque at max angular velocity" },
-		{ _field_real, "torque at 2x max angular velocity" },
+		{ _field_legacy, _field_version_less, _engine_type_haloreach },
+		{ _field_legacy, _field_struct, "loaded torque", &old_torque_struct_struct_definition },
 
 		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
-		{ _field_struct, "loaded torque curve", &torque_curve_struct },
+		{ _field_legacy, _field_struct, "loaded torque curve", &torque_curve_struct },
 
 		FIELD_EXPLANATION("cruising torque", nullptr, FIELD_FLAG_NONE, ""),
 
-		{ _field_legacy, _field_version_less, _engine_type_haloreach, 6 }, // Struct but linker time yo
-		{ _field_real, "min torque" },
-		{ _field_real, "max torque" },
-		{ _field_real, "peak torque scale" },
-		{ _field_real, "past peak torque scale exponent" },
-		{ _field_real, "torque at max angular velocity" },
-		{ _field_real, "torque at 2x max angular velocity" },
+		{ _field_legacy, _field_version_less, _engine_type_haloreach },
+		{ _field_legacy, _field_struct, "cruising torque", &old_torque_struct_struct_definition },
 
 		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach },
 		{ _field_struct, "cruising torque curve", &torque_curve_struct },

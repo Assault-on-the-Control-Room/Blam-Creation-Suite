@@ -884,13 +884,16 @@ namespace blofeld
 	{
 		{ _field_legacy, _field_angle, "forward arc#outside of this arc the vehicle reverse direciton, around 110 degrees seems to be nice..." },
 		{ _field_legacy, _field_angle, "perpendicular forward arc#this is the value of forward arc when turned sideways.  We interpolate from forward arc to this value when camera becomes perpendicular to the vehicle" },
-		{ _field_legacy, _field_real, "flip window#seconds" },
+		
+		{ _field_legacy, _field_version_less, _engine_type_haloreach },
+		{ _field_angle, "reverse turning scale", "Think of this as oversteer, similar to the field above" }, // Assembly
 
 		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach, 4 },
+		{ _field_legacy, _field_real, "flip window#seconds" },
 		{ _field_legacy, _field_real, "pegged fraction#0-1" },
-
 		{ _field_legacy, _field_real, "forward turn scale#think of this as oversteer" },
 		{ _field_legacy, _field_real, "reverse turn scale#think of this as oversteer" },
+		
 		{ _field_legacy, _field_explanation, "forward differential", "how quickly the differential reaches it\'s target and what the ratio is" },
 		{ _field_legacy, _field_real, "maximum left differential" },
 		{ _field_legacy, _field_real, "maximum right differential" },
