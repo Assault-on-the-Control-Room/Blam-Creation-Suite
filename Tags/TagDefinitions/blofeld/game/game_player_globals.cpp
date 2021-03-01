@@ -63,9 +63,9 @@ namespace blofeld
 		{ _field_legacy, _field_real, "fire team objective range" },
 		{ _field_legacy, _field_real, "fire team sandbox range" },
 		{ _field_legacy, _field_real, "fire team cone angle: in degrees" },
-		{ _field_legacy, _field_explanation, "sprinting/momentum", "" },
 
-		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 2 },
+		{ _field_legacy, _field_explanation, "sprinting/momentum", "" },
 		{ _field_legacy, _field_block, "momentum and sprinting", &player_momentum_data_block_block },
 		
 		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 3 },
