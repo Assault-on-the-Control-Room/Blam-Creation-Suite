@@ -123,8 +123,8 @@ namespace macaque
 		TAG_MEMORY_ATTRIBUTES(MEMORY_ALLOCATION_DEFAULT, TAG_MEMORY_USAGE_WRITEABLE | TAG_MEMORY_USAGE_NON_ALIASED),
 		LANGUAGE_PACK_DEFINITION_ID)
 	{
-		{ _field_long_integer, "string reference pointer", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_POINTER, _field_id_zero_data },
-		{ _field_long_integer, "string data pointer", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_POINTER, _field_id_zero_data },
+		{ _field_pointer, "string reference pointer", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_POINTER, _field_id_zero_data },
+		{ _field_pointer, "string data pointer", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_POINTER, _field_id_zero_data },
 		{ _field_long_integer, "number of strings", FIELD_FLAG_UNKNOWN0 },
 		{ _field_long_integer, "string data size", FIELD_FLAG_UNKNOWN0 },
 		{ _field_long_integer, "string reference cache offset", FIELD_FLAG_UNKNOWN0 },
