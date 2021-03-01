@@ -1108,7 +1108,7 @@ namespace macaque
 		HAVOK_CONVEX_TRANSLATE_SHAPE_STRUCT_ID)
 	{
 		{ _field_struct, "convex", &havok_convex_shape_struct },
-		{ _field_long_integer, "field pointer skip", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data },
+		{ _field_pointer, "field pointer skip", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data },
 		{ _field_struct, "havok shape reference struct", &havok_shape_reference_struct },
 		{ _field_long_integer, "child shape size" },
 		{ _field_real_vector_3d, "translation", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY },
@@ -1126,10 +1126,14 @@ namespace macaque
 		HAVOK_SHAPE_COLLECTION_STRUCT_2010_2_ID)
 	{
 		{ _field_struct, "base", &havok_shape_struct_2010_2 },
-		{ _field_long_integer, "field pointer skip", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data },
+		{ _field_pointer, "field pointer skip", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data },
 		{ _field_char_integer, "disable welding", FIELD_FLAG_READ_ONLY | FIELD_FLAG_UNKNOWN3 },
 		{ _field_char_integer, "collection type", FIELD_FLAG_READ_ONLY | FIELD_FLAG_UNKNOWN3 },
 		FIELD_PAD("VDVAPBSS", nullptr, FIELD_FLAG_NONE, 2),
+
+		{ _field_legacy, _field_version_platform_include, _platform_type_pc },
+		{ _field_legacy, _field_pad, "hkReferencedObjectClass 8byte alignment", 4 },
+
 		{ _field_terminator }
 	};
 
@@ -1142,11 +1146,23 @@ namespace macaque
 		TAG_MEMORY_ATTRIBUTES(MEMORY_ALLOCATION_DEFAULT, TAG_MEMORY_USAGE_WRITEABLE | TAG_MEMORY_USAGE_NON_ALIASED),
 		HAVOK_SHAPE_STRUCT_2010_2_ID)
 	{
-		{ _field_long_integer, "field pointer skip", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data },
+		// hkBaseObject
+		{ _field_pointer, "field pointer skip", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data },
+
+		// hkReferencedObject
 		{ _field_short_integer, "size", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY | FIELD_FLAG_UNKNOWN3 },
 		{ _field_short_integer, "count", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY | FIELD_FLAG_UNKNOWN3 },
-		{ _field_long_integer, "user data", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY | FIELD_FLAG_UNKNOWN3 },
+
+		{ _field_legacy, _field_version_platform_include, _platform_type_pc },
+		{ _field_legacy, _field_pad, "hkReferencedObject 8byte alignment", 4 },
+
+		// hkpShape
+		{ _field_pointer, "user data", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY | FIELD_FLAG_UNKNOWN3 }, // TYPE_ULONG
 		{ _field_long_integer, "type", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY | FIELD_FLAG_UNKNOWN3 },
+
+		{ _field_legacy, _field_version_platform_include, _platform_type_pc },
+		{ _field_legacy, _field_pad, "hkpShape 8byte alignment", 4 },
+
 		{ _field_terminator }
 	};
 
