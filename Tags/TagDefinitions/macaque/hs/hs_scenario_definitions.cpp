@@ -56,10 +56,18 @@ namespace macaque
 	{
 		{ _field_string_id, "name", FIELD_FLAG_READ_ONLY | FIELD_FLAG_INDEX },
 		{ _field_enum, "script type", FIELD_FLAG_READ_ONLY, &hs_script_types_enum },
+
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 3 },
+		{ _field_legacy, _field_enum, "return type*", &hs_types_enum },
+		{ _field_legacy, _field_short_integer, "root expression index*" },
+		{ _field_legacy, _field_short_integer, "locals stack space" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 4 },
 		{ _field_word_flags, "script flags", FIELD_FLAG_READ_ONLY, &scriptFlagsEnumDefinition },
 		{ _field_long_enum, "return type", FIELD_FLAG_READ_ONLY, &hs_types_enum },
 		{ _field_long_integer, "root expression index", FIELD_FLAG_READ_ONLY },
 		{ _field_long_integer, "locals stack space" },
+
 		{ _field_block, "parameters", &hs_script_parameters_block },
 		{ _field_terminator }
 	};
@@ -89,7 +97,12 @@ namespace macaque
 		TAG_MEMORY_ATTRIBUTES(MEMORY_ALLOCATION_DEFAULT, TAG_MEMORY_USAGE_READ_ONLY),
 		HS_GLOBALS_BLOCK_ID)
 	{
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach },
+		{ _field_legacy, _field_string, "name" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach },
 		{ _field_string_id, "name", FIELD_FLAG_READ_ONLY },
+
 		{ _field_long_enum, "type", FIELD_FLAG_READ_ONLY, &hs_types_enum },
 		{ _field_long_integer, "initialization expression index", FIELD_FLAG_READ_ONLY },
 		{ _field_terminator }
@@ -137,6 +150,17 @@ namespace macaque
 		TAG_MEMORY_ATTRIBUTES(MEMORY_ALLOCATION_DEFAULT, TAG_MEMORY_USAGE_WRITEABLE),
 		HS_SYNTAX_DATUM_BLOCK_ID)
 	{
+		{ _field_legacy, _field_version_less_or_equal, _engine_type_haloreach, 8 },
+		{ _field_legacy, _field_short_integer, "datum header~" },
+		{ _field_legacy, _field_short_integer, "script index/function index/constant type union" },
+		{ _field_legacy, _field_enum, "node expression type", &hs_types_enum },
+		{ _field_legacy, _field_short_integer, "flags" },
+		{ _field_legacy, _field_long_integer, "next node" },
+		{ _field_legacy, _field_long_integer, "source data" }, // offset into script string data (check halo 2)
+		{ _field_legacy, _field_long_integer, "source offset location" }, // reinterpreted value
+		{ _field_legacy, _field_long_integer, "source file offset" },
+
+		{ _field_legacy, _field_version_greater, _engine_type_haloreach, 9 },
 		{ _field_short_integer, "datum header", FIELD_FLAG_UNKNOWN3 },
 		{ _field_short_integer, "script index/function index/constant type union" },
 		{ _field_long_integer, "next node" },
