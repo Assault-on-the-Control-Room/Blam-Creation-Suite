@@ -19,7 +19,7 @@ namespace macaque
 		4)
 	{
 		// hkBaseObject
-		{ _field_long_integer, "field pointer skip", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data }, // vftbl
+		{ _field_pointer, "field pointer skip", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data }, // vftbl
 
 		// hkReferencedObject
 		{ _field_short_integer, "size", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY },
@@ -51,7 +51,7 @@ namespace macaque
 		{ _field_legacy, _field_long_integer, "@unknown" },
 		{ _field_legacy, _field_pad, "padding", 4 },
 
-		{ _field_long_integer, "m_data pointer", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data },  // T* m_data
+		{ _field_pointer, "m_data pointer", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_UNKNOWN3 | FIELD_FLAG_POINTER, _field_id_zero_data },  // T* m_data
 		{ _field_long_integer, "int m_size", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY }, // int m_size
 		{ _field_long_integer, "int m_capacityAndFlags", FIELD_FLAG_UNKNOWN0 | FIELD_FLAG_READ_ONLY }, // int m_capacityAndFlags highest 2 bits indicate any special considerations about the allocation for the array
 
