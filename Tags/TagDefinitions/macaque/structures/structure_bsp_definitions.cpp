@@ -1283,7 +1283,10 @@ namespace macaque
 		STRUCTURE_BSP_RESOURCE_INTERFACE_ID)
 	{
 		{ _field_block, "raw_resources", &structure_bsp_raw_resources_block },
+
+		{ _field_legacy, _field_version_greater_or_equal, _engine_type_haloreach, 1 },
 		{ _field_pageable, "tag_resources", &structure_bsp_tag_resources_struct },
+
 		{ _field_pageable, "cache_file_resources", &structure_bsp_cache_file_tag_resources_struct },
 		{ _field_long_integer, "use resource items", FIELD_FLAG_READ_ONLY },
 		{ _field_terminator }
