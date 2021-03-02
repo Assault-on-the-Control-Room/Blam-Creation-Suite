@@ -82,6 +82,7 @@ const s_tag_group* tag_groups[] =
 	&flock_group,
 	&fluid_dynamics_group,
 	&atmosphere_fog_group,
+	&sky_atm_parameters_group,
 	&material_effects_group,
 	&forge_globals_group,
 	&formation_group,
@@ -259,6 +260,8 @@ const s_tag_group* tag_groups[] =
 	&vision_mode_group,
 	&variant_globals_group,
 	&vertex_shader_group,
+	&compute_shader_group,
+	&compute_shader2_group,
 	&wave_template_group,
 	&weapon_group,
 	&scenario_wetness_bsp_data_group,
@@ -270,6 +273,20 @@ const s_tag_group* tag_groups[] =
 	&water_physics_drag_properties_group,
 	&weather_globals_group,
 	&cache_file_resource_gestalt_group,
+	// manual
+	&beam_system_group,
+	&contrail_system_group,
+	&sound_mix_mastering_group,
+	&chud_widget_animation_data_group,
+	&chud_widget_placement_data_group,
+	&chud_widget_render_data_group,
+	&chud_widget_state_data_group,
+	&chud_animation_group,
+	&chud_group,
+	&chud_globals_group,
+	&chocolate_mountain_new_group,
+	&shader_beam_group,
+	&shader_contrail_group,
 	nullptr
 };
 
