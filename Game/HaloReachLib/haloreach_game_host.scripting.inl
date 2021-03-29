@@ -105,7 +105,7 @@ uintptr_t haloreach_spawn_ai_with_scripts_and_effects_in_multiplayer_patch_offse
 	//OFFSET(_engine_type_haloreach, _build_mcc_1_1930_0_0, 0x1805BCFD0+??);
 	//OFFSET(_engine_type_haloreach, _build_mcc_1_1955_0_0, 0x1805BCF70+??);
 	//OFFSET(_engine_type_haloreach, _build_mcc_1_2028_0_0, 0x1805BCFA0+??);
-	//OFFSET(_engine_type_haloreach, _build_mcc_1_2094_0_0, 0x1805BCFA0+??);
+	OFFSET(_engine_type_haloreach, _build_mcc_1_2094_0_0, 0x1805BCFC4);
 	return ~uintptr_t();
 }
 
@@ -119,9 +119,20 @@ c_data_patch<haloreach_spawn_ai_with_scripts_and_effects_in_multiplayer_patch_of
 		return;
 	}
 
-	UINT8 jmp[1] = { 0xEB };
-	packet = MAKE_DATAPATCHPACKET(data, sizeof(jmp));
-	copy_to_address(data, jmp, sizeof(jmp));
+	switch (build)
+	{
+	case _build_mcc_1_2094_0_0:
+		packet = MAKE_DATAPATCHPACKET(data, 6);
+		nop_address(data, 6);
+		break;
+	default:
+		UINT8 jmp[1] = { 0xEB };
+		packet = MAKE_DATAPATCHPACKET(data, sizeof(jmp));
+		copy_to_address(data, jmp, sizeof(jmp));
+		break;
+	}
+	
+
 } };
 
 uintptr_t allow_night_vision_in_multiplayer_patch_offset(e_engine_type engine_type, e_build build)
@@ -144,10 +155,11 @@ uintptr_t allow_night_vision_in_multiplayer_patch_offset(e_engine_type engine_ty
 	#pragma region crashes
 	OFFSET(_engine_type_haloreach, _build_mcc_1_1955_0_0, 0x18004B4A5);
 	OFFSET(_engine_type_haloreach, _build_mcc_1_2028_0_0, 0x18004B4A5);
-	OFFSET(_engine_type_haloreach, _build_mcc_1_2094_0_0, 0x18004B4A5);
 	#pragma endregion
+	OFFSET(_engine_type_haloreach, _build_mcc_1_2094_0_0, 0x1804705E7);
 	return ~uintptr_t();
 }
+
 // Allow the use of night vision in multiplayer, props to Zeddikins
 c_data_patch<allow_night_vision_in_multiplayer_patch_offset> allow_night_vision_in_multiplayer_patch = {
 [](e_engine_type engine_type, e_build build, char* data, DataPatchPacket& packet)
@@ -157,10 +169,6 @@ c_data_patch<allow_night_vision_in_multiplayer_patch_offset> allow_night_vision_
 	case _build_mcc_1_1930_0_0:
 	case _build_mcc_1_1955_0_0:
 	case _build_mcc_1_2028_0_0:
-	case _build_mcc_1_2094_0_0:
-		packet = MAKE_DATAPATCHPACKET(data, 2);
-		nop_address(data, 2);
-		break;
 	default:
 		packet = MAKE_DATAPATCHPACKET(data, 6);
 		nop_address(data, 6);
